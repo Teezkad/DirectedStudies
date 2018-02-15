@@ -1,0 +1,37 @@
+<ActionBar title="Create a Question">
+        <NavigationButton text="Back" ios.position="left"></NavigationButton>
+    </ActionBar>
+
+<GridLayout>
+    <ScrollView sdkExampleTitle sdkToggleNavButton margin="10" verticalAlignment="center">
+        <StackLayout>
+            <StackLayout class="input-field">
+                    <TextField required hint="Enter Question"class="input" [(ngModel)]="question.name" rowSpan="3"></TextField>
+                    <Label class="validation" [visibility]="elementModel.valid ? 'collapse' : 'visible'" text="Field is required" ></Label>
+                </StackLayout>
+
+                <StackLayout class="input-field">
+                        <TextField required hint="Enter Option 1"class="input" [(ngModel)]="option1.name" rowSpan="3"></TextField>
+                        <Label class="validation" [visibility]="elementModel.valid ? 'collapse' : 'visible'" text="Field is required" ></Label>
+                    </StackLayout>
+
+                    <StackLayout class="input-field">
+                            <TextField required hint="Enter Option 2"class="input" [(ngModel)]="option2.name" rowSpan="3"></TextField>
+                            <Label class="validation" [visibility]="elementModel.valid ? 'collapse' : 'visible'" text="Field is required" ></Label>
+                    </StackLayout>
+
+                    <StackLayout class="input-field">
+                            <TextField required hint="Enter Option 3"class="input" [(ngModel)]="option3.name" rowSpan="3"></TextField>
+                            <Label class="validation" [visibility]="elementModel.valid ? 'collapse' : 'visible'" text="Field is required" ></Label>
+                    </StackLayout>
+
+                    <StackLayout class="input-field">
+                            <TextField required hint="Enter Option 4"class="input" [(ngModel)]="option4.name" rowSpan="3"></TextField>
+                            <Label class="validation" [visibility]="elementModel.valid ? 'collapse' : 'visible'" text="Field is required" ></Label>
+                    </StackLayout>
+                    <Button [visibility]="elementModel.valid ? 'visible' : 'collapse'" text="Save" class="btn btn-primary"></Button>
+
+                </StackLayout>
+
+
+</GridLayout>
