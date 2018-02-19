@@ -48,25 +48,19 @@ export class HomeComponent implements OnInit {
     *************************************************************/
     ngOnInit(): void {
         this._sideDrawerTransition = new SlideInOnTopTransition();
-        this.classrooms$ = <any>this.firebaseService.getMyClassList();
-        this.myclassrooms$ = <any>this.firebaseService.getCreatedClasses();
+        this.classrooms$ = <any>this.firebaseService.getAllClassList();
+        this.myclassrooms$ = <any>this.firebaseService.getMyClassList();
         // this.users$ = <any>this.firebaseService.getMyUserList();
-        var persona = firebase.getCurrentUser();
-        var humana = JSON.stringify(persona);
-        var name = JSON.parse(humana);
-        var email = JSON.stringify(name.__zone_symbol__value.email);
-        this.users$ = <any>this.firebaseService.getMyUserList()
+        this.users$ = <any>this.firebaseService.getMyUserList();
+        this.users$.subscribe(val => console.log(BackendService.Uid = JSON.parse( JSON.stringify(val[0].id)))); 
+        console.log("My uid is"+ BackendService.Uid);
+
 
 
     //     console.log("cureent user is "+ JSON.stringify(persona));
-    //    this.users$.subscribe(val =>console.log("emails of current user is "+ val)); 
         // console.log(JSON.stringify(name.__zone_symbol__value));
-// var ref = firebase.firestore.collection("Users").where("Email", "==", email).get();
 
 // console.log("Firebase user = "+ JSON.stringify(ref));
-
-        // var ref = firebase.getValue("/Users/Teezkad");
-        // console.log("value of users "+JSON.stringify(ref));
 
     }
 
@@ -105,15 +99,15 @@ export class HomeComponent implements OnInit {
            this.routerExtensions.navigate(["/classroom"]);
       }
 
-    inClass(classroom: Classroom, uid: string){
+    inClass(classroom: Classroom, id: string, Cname: string, Prof: string, Year: string){
          //update the classroom node to include users who registered
-          this.firebaseService.registerClassroom(classroom, uid)
+          this.firebaseService.registerClassroom(classroom)
       .then((message:any) => {
       
         alert(message);
 
         //update the user's node to include a list of classes
-        this.firebaseService.userRegister(classroom)
+        this.firebaseService.userRegister(id, Cname, Prof, Year)
    
         console.log("Classroom successfully registered");
       }) 

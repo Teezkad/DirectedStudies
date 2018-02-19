@@ -7,7 +7,7 @@ import {Injectable, NgZone} from "@angular/core";
 
 //stores UID
 const tokenKey = "token";
-
+const Uid = "Uid";
 const Uname = "name";
 //stores class ID
 const CID = "CID";
@@ -43,6 +43,10 @@ export class BackendService {
     return getString("Cname");
   }
 
+  static get Uid(): string{
+    return getString("Uid");
+  }
+
   static set token(theToken: string) {
     setString("token", theToken);
   }
@@ -59,5 +63,8 @@ export class BackendService {
     setString("Cname", theCname);
   }
 
+  static set Uid(theUid: string){
+    setString("Uid", theUid);
+  }
    
 }

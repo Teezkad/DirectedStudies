@@ -4,6 +4,7 @@ import { LoginModule } from "./login/login.module";
 import { AppRoutingModule, authProviders, approutes } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { classroomComponent } from "./Classrooms/classroom.component";
+import { questionComponent } from "./Question/question.component";
 import { BackendService, FirebaseService, UtilsService } from "./services";
 
 

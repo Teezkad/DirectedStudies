@@ -44,16 +44,14 @@ it shouldn't have any other siblings other than the <ActionBar> component.
             <ListView [items]="classrooms$ | async"  height="300">
                 <ng-template let-item="item">                  
                     <GridLayout columns="auto,*,auto">
-                            <button text=" Register in class" class="btnIcon" (tap) = "inClass(item)"></button>
+                            <button text=" Register in class" class="btnIcon" (tap) = "inClass(item, item.id, item.Name, item.Professor, item.Year)"></button>
                             <Label class="h3 header"  col="1" [text]='item.Name'></Label>
                         <Image *ngIf = "item.UID == currentUser" class="m-5" col="2" horizontalAlignment="right" width="40" height="40" (tap)="deleteCl(item)" [src]="'~/assets/trash.png'"></Image>
                     
                         </GridLayout>                 
                 </ng-template>
             </ListView>
-            <Button class="btn btn-primary" text="Create Class" (tap)="navclass()"></Button>
         </StackLayout>
-        
 
         <StackLayout *tabItem = "{title: 'My Classes'}"  class="form">
                 
@@ -63,10 +61,11 @@ it shouldn't have any other siblings other than the <ActionBar> component.
                                 <GridLayout columns="auto,*,auto">
                                         <button text=" Set active class" class="btnIcon" (tap) = "activateClass(item.id, item.Name)"></button>
                                         <Label class="h3 header"  col="1" [text]='item.Name'></Label>
-                                    <Image class="m-5" col="2" horizontalAlignment="right" width="40" height="40" (tap)="delete(item)" [src]="'~/assets/trash.png'"></Image>
                                 </GridLayout>                 
                             </ng-template>
-                        </ListView>
+                        </ListView> 
+            <Button class="btn btn-primary" text="Create Class" (tap)="navclass()"></Button>
+
         </StackLayout>
         </TabView>
 
