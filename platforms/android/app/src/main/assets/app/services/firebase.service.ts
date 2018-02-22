@@ -87,13 +87,14 @@ export class FirebaseService {
   }
 
   //updates classes in users
-  userRegister(id: string, Cname: string, Prof: string, Year: string){
+  userRegister(id: string, Cname: string, Prof: string, Year: string, UID: string){
    
     return firebase.push("/Users/"+BackendService.Uid+"/MyClasses", {
       "ClassName": Cname,
       "CID": id,
       "Professor": Prof,
-      "Year": Year
+      "Year": Year,
+      "UID": UID
     }) .then(
       function (result:any) {
         return 'You have successfully added this class to your classes';
@@ -178,7 +179,7 @@ export class FirebaseService {
       { "Name": name, "ClassID": cid}
     ).then(
       function(result:any){
-        return 'Classroom Created';
+        return 'Topic '+ name+' successfully Created';
       },
       function (errorMessage:any){
         console.log(errorMessage);

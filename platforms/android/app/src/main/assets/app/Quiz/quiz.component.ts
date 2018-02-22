@@ -27,10 +27,14 @@ export class QuizComponent implements OnInit {
     public myclassrooms$: Observable<any>;
     public tid; 
     public tname;
+    public questions;
+    public options = [];
     public question;
     public option = [];
     public no = 0;
     public length;
+    public selectedIndex;
+    public score = 0;
  
     @ViewChild("drawer") drawerComponent: RadSideDrawerComponent;
 
@@ -55,14 +59,17 @@ export class QuizComponent implements OnInit {
         //     console.log("Question is "+ this.question);
         // }
         // );
-        this.getquestion();
+        this.getquestion(this.no);
     }
 
-    getquestion(): void{
+    getquestion(num: number): void{
         this.quiz$.subscribe(val => {
             this.length = val.length;
-            this.question = JSON.parse(JSON.stringify(val[this.no].Name));
-            this.option = JSON.parse(JSON.stringify(val[this.no].Option));
+            this.questions = val;
+            // this.options = JSON.parse(JSON.stringify(val));
+            this.question = JSON.parse(JSON.stringify(this.questions[num].Name));
+            this.option = JSON.parse(JSON.stringify(this.questions[num].Option));
+            console.log("Questions are "+ JSON.stringify(this.questions));
             console.log("Question is "+ this.question);
             console.log("Option is "+ this.option);
             console.log("length is "+ this.length);
@@ -74,8 +81,17 @@ export class QuizComponent implements OnInit {
     }
 
     nextQuestion(){
-        this.no = this.no + 1;
-        this.getquestion();
+        this.no ++;
+            // this.options = JSON.parse(JSON.stringify(val));
+            this.question = JSON.parse(JSON.stringify(this.questions[this.no].Name));
+            this.option = JSON.parse(JSON.stringify(this.questions[this.no].Option));
+            console.log("Questions are "+ JSON.stringify(this.questions));
+            console.log("Question is "+ this.question);
+            console.log("Option is "+ this.option);
+            console.log("length is "+ this.length);
+            this.selectedIndex = null;
+
+        
     }
 
     get sideDrawerTransition(): DrawerTransitionBase {
@@ -83,5 +99,18 @@ export class QuizComponent implements OnInit {
     }
     onDrawerButtonTap(): void {
         this.drawerComponent.sideDrawer.showDrawer();
+    }
+
+    selectMenu(i) {
+        this.selectedIndex=i;
+        console.log(this.option[i].name);
+        if(this.option[i].isAnswer == true){
+            this.score++;
+        }
+    }
+
+    submit(){
+        alert("Your score is " + this.score + "/"+ this.length)
+        this.routerExtensions.navigate(["search"]);
     }
 }

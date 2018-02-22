@@ -8,6 +8,7 @@ import {FirebaseService} from '../services';
 import firebase = require("nativescript-plugin-firebase");
 import { BackendService } from "../services/backend.service";
 import { RouterExtensions } from 'nativescript-angular/router/router-extensions';
+import { ActivatedRoute} from "@angular/router";
 
 @Component({
     selector: "Browse",
@@ -15,11 +16,8 @@ import { RouterExtensions } from 'nativescript-angular/router/router-extensions'
     templateUrl: "./browse.component.html"
 })
 export class BrowseComponent implements OnInit {
-    constructor(private routerExtensions: RouterExtensions,
-        private firebaseService: FirebaseService
-        
-        ) {   
-        }
+    currentUser = BackendService.token;
+   
     /* ***********************************************************
     * Use the @ViewChild decorator to get a reference to the drawer component.
     * It is used in the "onDrawerButtonTap" function below to manipulate the drawer.
@@ -30,7 +28,17 @@ export class BrowseComponent implements OnInit {
     public myclassrooms$: Observable<any>;
     public tags$: Observable<any>;
     private _sideDrawerTransition: DrawerTransitionBase;
+    public creatorId;
 
+    constructor(private routerExtensions: RouterExtensions,
+        private firebaseService: FirebaseService, private route: ActivatedRoute
+
+        
+        ) {
+            this.route.queryParams.subscribe(params => {
+                this.creatorId = params["uid"];
+            })   
+        }
     /* ***********************************************************
     * Use the sideDrawerTransition property to change the open/close animation of the drawer.
     *************************************************************/
@@ -39,6 +47,9 @@ export class BrowseComponent implements OnInit {
         this.myclassrooms$ = <any>this.firebaseService.getCreatedClasses();
         this.users$ = <any>this.firebaseService.getMyUserList();
         this.tags$ = <any>this.firebaseService.getMyTagList();
+        console.log("Creatot id is "+this.creatorId);
+        console.log("token is "+this.currentUser);
+
     }
 
     get sideDrawerTransition(): DrawerTransitionBase {
@@ -58,7 +69,7 @@ export class BrowseComponent implements OnInit {
     }
 
     activateTag(id: string, name: string){
-        BackendService.CID = id;
+        BackendService.TID = id;
         console.log(name + " is Activated");
         alert(name + " is Activated");
     }

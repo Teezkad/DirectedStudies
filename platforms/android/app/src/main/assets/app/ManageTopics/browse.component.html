@@ -9,7 +9,7 @@
     <ActionItem icon="res://navigation/menu" android:visibility="collapsed" (tap)="onDrawerButtonTap()"
         ios.position="left">
     </ActionItem>
-    <Label class="action-bar-title" text="Topics"></Label>
+    <Label class="action-bar-title" text="Classroom"></Label>
 </ActionBar>
 
 <!--
@@ -32,19 +32,20 @@ it shouldn't have any other siblings other than the <ActionBar> component.
     -->
     <GridLayout class="page page-content" tkMainContent>
            
-            <Label class="h2 header" text="My Classes"></Label>
-            <StackLayout class="form">
-             <Label class="page-placeholder" ></Label>
-
-                <ListView [items]="myclassrooms$ | async"  height="300">
+            <Label class="h2 header" text="My Topics"></Label>
+             <StackLayout *ngIf = "(tags$ | async)?.length==0"  class="page page-content">
+                    <label text = "There are no Topics for this class yet, Click the button to create"></label>
+            </StackLayout>
+            <StackLayout>
+                <ListView row = "5" [items]="tags$ | async"  height="300">
                     <ng-template let-item="item">                  
                         <GridLayout columns="auto,*,auto">
-                                <button text=" Create Topics" class="btnIcon" (tap) = "navTag()"></button>
                                 <Label class="h3 header"  col="1" [text]='item.Name'></Label>
                             <Image class="m-5" col="2" horizontalAlignment="right" width="40" height="40" (tap)="delete(item)" [src]="'~/assets/trash.png'"></Image>
                         </GridLayout>                 
                     </ng-template>
                 </ListView>
+                <button *ngIf = "creatorId == currentUser" text=" Create Topics" class="btnIcon" (tap) = "navTag()"></button>
             </StackLayout>
         </GridLayout>
 </RadSideDrawer>

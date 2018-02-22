@@ -7,13 +7,15 @@
 
 
 <StackLayout>
-        <Label class = "h2" [text]='no +". "+ question'></Label>
+        <Label class = "h2" [text]='no+1 +". "+ question'></Label>
 <ListView [items]="option" class = "list-group">
     <ng-template let-item="item" let-i = "index">                  
-        <StackLayout columns="auto,*,auto" >
-                <Label  class = "h3 header" row = "1" [text]='item.name'></Label>
+        <StackLayout columns="auto,*,auto" class = "list-group">
+                <Label [class.Selected]="i===selectedIndex" class = "h3 header Unselected" row = "1" [text]='item.name' (tap)="selectMenu(i)"></Label>
         </StackLayout>                 
     </ng-template>
 </ListView> 
-<button col = "5" text = "NEXT" (tap) = "nextQuestion()"></button>
+<button *ngIf = "no != length-1" col = "5" text = "NEXT" (tap) = "nextQuestion()"></button>
+<button *ngIf = "no == length-1" text = "SUBMIT" (tap) = "submit()"></button>
+
 </StackLayout>

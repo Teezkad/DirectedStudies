@@ -15,25 +15,6 @@
     <Label class="action-bar-title" text="Home"></Label>
 </ActionBar>
 
-<!--
-RadSideDrawer is a UI component part of the Progress NativeScript UI set of components.
-Learn more about the RadSideDrawer UI component and how it can be customized in this documentation article:
-http://docs.telerik.com/devtools/nativescript-ui/Controls/Angular/SideDrawer/getting-started
-The RadSideDrawer component is designed to be used as a root element and
-it shouldn't have any other siblings other than the <ActionBar> component.
--->
-<RadSideDrawer #drawer showOverNavigation="true" [drawerTransition]="sideDrawerTransition">
-    <!--
-    Use the tkDrawerContent directive to display the content of the app drawer on this page.
-    -->
-    <StackLayout tkDrawerContent>
-        <MyDrawer [selectedPage]="'Home'"></MyDrawer>
-    </StackLayout>
-    
-    <!--
-    Use the tkMainContent directive to display the content of the page when you have an app drawer.
-    -->
-   
     <GridLayout class="page page-content" tkMainContent>
         <Label class="page-placeholder" ></Label>            
        
@@ -43,24 +24,26 @@ it shouldn't have any other siblings other than the <ActionBar> component.
 
             <ListView [items]="classrooms$ | async"  height="300">
                 <ng-template let-item="item">                  
-                    <GridLayout columns="auto,*,auto" >
-                            <button text=" Register in class" class="btnIcon" (tap) = "inClass(item, item.id, item.Name, item.Professor, item.Year)"></button>
+                    <GridLayout columns="auto,*,auto">
+                            <button text=" Register in class" class="btnIcon" (tap) = "inClass(item, item.id, item.Name, item.Professor, item.Year, item.UID)"></button>
                             <Label class="h3 header"  col="1" [text]='item.Name'></Label>
                         <Image *ngIf = "item.UID == currentUser" class="m-5" col="2" horizontalAlignment="right" width="40" height="40" (tap)="deleteCl(item)" [src]="'~/assets/trash.png'"></Image>
+                    
                         </GridLayout>                 
                 </ng-template>
             </ListView>
         </StackLayout>
 
-        <StackLayout *tabItem = "{title: 'My Classes'}"  class="form">
+        <StackLayout *tabItem = "{title: 'Registered Classes'}"  class="form">
                 
                             <Label class="h2 header" text="My Class List"></Label>
                         <ListView [items]="myclassrooms$ | async"  height="300">
                             <ng-template let-item="item">                  
-                                <GridLayout columns="auto,*,auto">
-                                        <button text=" Set active class" class="btnIcon" (tap) = "activateClass(item.id, item.Name)"></button>
-                                        <Label class="h3 header"  col="1" [text]='item.ClassName'></Label>
-                                </GridLayout>                 
+                                <StackLayout columns="auto,*,auto">
+                                        <Label class="h3 header"  col="1" [text]='item.ClassName + " Year: "+ item.Year'></Label>
+                                        <label Class = "h3 header" [text] = '"Created by: "+ item.Professor'></label>
+                                        <button text="View Class" class="btnIcon" (tap) = "activateClass(item.CID, item.ClassName, item.UID)"></button>
+                                </StackLayout>                 
                             </ng-template>
                         </ListView> 
             <Button class="btn btn-primary" text="Create Class" (tap)="navclass()"></Button>
@@ -70,4 +53,3 @@ it shouldn't have any other siblings other than the <ActionBar> component.
 
 
     </GridLayout>
-</RadSideDrawer>

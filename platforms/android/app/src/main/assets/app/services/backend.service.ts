@@ -13,6 +13,9 @@ const Uname = "name";
 const CID = "CID";
 //stores class name
 const Cname = "Cname";
+//stores topic id
+const TID = "TID";
+
 
 @Injectable()
 export class BackendService {
@@ -39,6 +42,10 @@ export class BackendService {
     return getString("CID");
   }
 
+  static get TID(): string{
+    return getString("TID");
+  }
+
   static get Cname(): string{
     return getString("Cname");
   }
@@ -57,6 +64,10 @@ export class BackendService {
 
   static set CID(theCID: string){
     setString("CID", theCID);
+  }
+
+  static set TID(theTID: string){
+    setString("TID", theTID);
   }
 
   static set Cname(theCname: string){
