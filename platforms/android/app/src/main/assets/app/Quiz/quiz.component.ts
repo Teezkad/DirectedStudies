@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { DrawerTransitionBase, SlideInOnTopTransition } from "nativescript-pro-ui/sidedrawer";
 import { RadSideDrawerComponent } from "nativescript-pro-ui/sidedrawer/angular";
-import {User, Classroom, Options} from "../models";
+import {User, Classroom, Options, Question} from "../models";
 import {Tag} from '../Tags/tag.component';
 import {Observable} from 'rxjs/Observable';
 import {FirebaseService} from '../services';
@@ -25,8 +25,12 @@ export class QuizComponent implements OnInit {
     public users$: Observable<any>;
     public quiz$: Observable<any>;
     public myclassrooms$: Observable<any>;
-    public tid;
+    public tid; 
     public tname;
+    public question;
+    public option = [];
+    public no = 0;
+    public length;
  
     @ViewChild("drawer") drawerComponent: RadSideDrawerComponent;
 
@@ -46,8 +50,32 @@ export class QuizComponent implements OnInit {
      
 
     ngOnInit(): void {
-        this._sideDrawerTransition = new SlideInOnTopTransition();
         this.quiz$ = <any>this.firebaseService.getTopicQuestions(this.tid);
+        // this.quiz$.subscribe(val => {this.question = JSON.stringify(val);
+        //     console.log("Question is "+ this.question);
+        // }
+        // );
+        this.getquestion();
+    }
+
+    getquestion(): void{
+        this.quiz$.subscribe(val => {
+            this.length = val.length;
+            this.question = JSON.parse(JSON.stringify(val[this.no].Name));
+            this.option = JSON.parse(JSON.stringify(val[this.no].Option));
+            console.log("Question is "+ this.question);
+            console.log("Option is "+ this.option);
+            console.log("length is "+ this.length);
+
+
+        }
+        );
+       
+    }
+
+    nextQuestion(){
+        this.no = this.no + 1;
+        this.getquestion();
     }
 
     get sideDrawerTransition(): DrawerTransitionBase {

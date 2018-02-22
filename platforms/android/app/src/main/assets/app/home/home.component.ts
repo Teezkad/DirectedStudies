@@ -34,6 +34,9 @@ export class HomeComponent implements OnInit {
     public users$: Observable<any>;
     public classrooms$: Observable<any>;
     public myclassrooms$: Observable<any>;
+    public length: number;
+    public myclass;
+    public exist = false;
 
     /* ***********************************************************
     * Use the @ViewChild decorator to get a reference to the drawer component.
@@ -52,15 +55,12 @@ export class HomeComponent implements OnInit {
         this.myclassrooms$ = <any>this.firebaseService.getMyClassList();
         // this.users$ = <any>this.firebaseService.getMyUserList();
         this.users$ = <any>this.firebaseService.getMyUserList();
-        this.users$.subscribe(val => console.log(BackendService.Uid = JSON.parse( JSON.stringify(val[0].id)))); 
+        this.users$.subscribe(val => {
+            console.log(BackendService.Uid = JSON.parse( JSON.stringify(val[0].id)));
+            this.length = val.length;
+        }
+        ); 
         console.log("My uid is"+ BackendService.Uid);
-
-
-
-    //     console.log("cureent user is "+ JSON.stringify(persona));
-        // console.log(JSON.stringify(name.__zone_symbol__value));
-
-// console.log("Firebase user = "+ JSON.stringify(ref));
 
     }
 
@@ -68,17 +68,9 @@ export class HomeComponent implements OnInit {
         return this._sideDrawerTransition;
     }
 
-    /* ***********************************************************
-    * According to guidelines, if you have a drawer on your page, you should always
-    * have a button that opens it. Use the showDrawer() function to open the app drawer section.
-    *************************************************************/
     onDrawerButtonTap(): void {
         this.drawerComponent.sideDrawer.showDrawer();
     }
-
-   
-    create: Classroom;
- 
 
     logOut() {
         this.firebaseService.logout();
@@ -100,17 +92,37 @@ export class HomeComponent implements OnInit {
       }
 
     inClass(classroom: Classroom, id: string, Cname: string, Prof: string, Year: string){
-         //update the classroom node to include users who registered
-          this.firebaseService.registerClassroom(classroom)
-      .then((message:any) => {
-      
-        alert(message);
 
-        //update the user's node to include a list of classes
-        this.firebaseService.userRegister(id, Cname, Prof, Year)
-   
-        console.log("Classroom successfully registered");
-      }) 
+     
+        this.myclassrooms$.subscribe(cl => {
+            this.length = cl.length;
+          this.myclass = JSON.stringify(cl);
+            console.log("my class" + this.myclass);
+            for(var i; i<= this.length; i++){
+                var clid = cl[i].id;
+                if(clid === id){
+                    alert("You are already registered in this class");
+                }else{
+                    this.signup(classroom, id, Cname, Prof, Year);
+                }
+            }
+        });
+         //update the classroom node to include users who registered
+     
+    
+    }
+
+    signup(classroom: Classroom, id: string, Cname: string, Prof: string, Year: string){
+        this.firebaseService.registerClassroom(classroom)
+        .then((message:any) => {
+        
+          alert(message);
+  
+          //update the user's node to include a list of classes
+          this.firebaseService.userRegister(id, Cname, Prof, Year)
+     
+          console.log("Classroom successfully registered");
+        }) 
     }
       //to store all available data for each user, use backend service to store the value of each attrinute 
       //for every users

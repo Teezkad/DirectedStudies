@@ -43,11 +43,10 @@ it shouldn't have any other siblings other than the <ActionBar> component.
 
             <ListView [items]="classrooms$ | async"  height="300">
                 <ng-template let-item="item">                  
-                    <GridLayout columns="auto,*,auto">
+                    <GridLayout columns="auto,*,auto" >
                             <button text=" Register in class" class="btnIcon" (tap) = "inClass(item, item.id, item.Name, item.Professor, item.Year)"></button>
                             <Label class="h3 header"  col="1" [text]='item.Name'></Label>
                         <Image *ngIf = "item.UID == currentUser" class="m-5" col="2" horizontalAlignment="right" width="40" height="40" (tap)="deleteCl(item)" [src]="'~/assets/trash.png'"></Image>
-                    
                         </GridLayout>                 
                 </ng-template>
             </ListView>
@@ -60,7 +59,7 @@ it shouldn't have any other siblings other than the <ActionBar> component.
                             <ng-template let-item="item">                  
                                 <GridLayout columns="auto,*,auto">
                                         <button text=" Set active class" class="btnIcon" (tap) = "activateClass(item.id, item.Name)"></button>
-                                        <Label class="h3 header"  col="1" [text]='item.Name'></Label>
+                                        <Label class="h3 header"  col="1" [text]='item.ClassName'></Label>
                                 </GridLayout>                 
                             </ng-template>
                         </ListView> 

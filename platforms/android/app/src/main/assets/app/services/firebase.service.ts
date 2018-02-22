@@ -282,7 +282,7 @@ export class FirebaseService {
   //get all classes im registered in 
   getMyClassList(): Observable<any> {
     return new Observable((observer: any) => {
-      let path = 'Classroom';
+      let path = "Users/"+ BackendService.Uid+"/MyClasses";
       
         let onValueEvent = (snapshot: any) => {
           this.ngZone.run(() => {
