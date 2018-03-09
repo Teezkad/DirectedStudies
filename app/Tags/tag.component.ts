@@ -54,7 +54,7 @@ export class tagComponent{
 
 
 addTag(){
-    this.firebaseService.addTag(this.tag.name, this.tag.CID).then((message:any) => {
+    this.firebaseService.addTag(this.tag.name, this.tag.CID, BackendService.Uid).then((message:any) => {
       
             alert(message);
        

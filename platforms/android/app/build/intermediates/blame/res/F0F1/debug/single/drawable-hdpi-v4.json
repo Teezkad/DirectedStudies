@@ -36,12 +36,12 @@
         "source": "C:\\Users\\kadir\\.android\\build-cache\\448f79bf4dfc689733c2cc52dcc5d25dd8bdeb7f\\output\\res\\drawable-hdpi-v4\\notification_bg_normal.9.png"
     },
     {
-        "merged": "C:\\Users\\kadir\\dirproto5\\platforms\\android\\app\\build\\intermediates\\res\\merged\\F0F1\\debug\\drawable-hdpi-v4\\abc_btn_radio_to_on_mtrl_000.png",
-        "source": "C:\\Users\\kadir\\.android\\build-cache\\448f79bf4dfc689733c2cc52dcc5d25dd8bdeb7f\\output\\res\\drawable-hdpi-v4\\abc_btn_radio_to_on_mtrl_000.png"
-    },
-    {
         "merged": "C:\\Users\\kadir\\dirproto5\\platforms\\android\\app\\build\\intermediates\\res\\merged\\F0F1\\debug\\drawable-hdpi-v4\\ic_collapse.png",
         "source": "C:\\Users\\kadir\\.android\\build-cache\\86fb8e90ce6237a771a53967f7f62a21bcec0fbc\\output\\res\\drawable-hdpi-v4\\ic_collapse.png"
+    },
+    {
+        "merged": "C:\\Users\\kadir\\dirproto5\\platforms\\android\\app\\build\\intermediates\\res\\merged\\F0F1\\debug\\drawable-hdpi-v4\\abc_btn_radio_to_on_mtrl_000.png",
+        "source": "C:\\Users\\kadir\\.android\\build-cache\\448f79bf4dfc689733c2cc52dcc5d25dd8bdeb7f\\output\\res\\drawable-hdpi-v4\\abc_btn_radio_to_on_mtrl_000.png"
     },
     {
         "merged": "C:\\Users\\kadir\\dirproto5\\platforms\\android\\app\\build\\intermediates\\res\\merged\\F0F1\\debug\\drawable-hdpi-v4\\common_google_signin_btn_icon_light_normal_background.9.png",

@@ -28,12 +28,12 @@
         "source": "C:\\Users\\kadir\\.android\\build-cache\\448f79bf4dfc689733c2cc52dcc5d25dd8bdeb7f\\output\\res\\drawable\\abc_ic_ab_back_material.xml"
     },
     {
-        "merged": "C:\\Users\\kadir\\dirproto5\\platforms\\android\\app\\build\\intermediates\\res\\merged\\F0F1\\debug\\drawable\\autocomplete_focusable_bg.xml",
-        "source": "C:\\Users\\kadir\\.android\\build-cache\\844e5344d6fcc89c1d411ec2cede201db3c44efd\\output\\res\\drawable\\autocomplete_focusable_bg.xml"
-    },
-    {
         "merged": "C:\\Users\\kadir\\dirproto5\\platforms\\android\\app\\build\\intermediates\\res\\merged\\F0F1\\debug\\drawable\\data_form_list_item_states.xml",
         "source": "C:\\Users\\kadir\\.android\\build-cache\\844e5344d6fcc89c1d411ec2cede201db3c44efd\\output\\res\\drawable\\data_form_list_item_states.xml"
+    },
+    {
+        "merged": "C:\\Users\\kadir\\dirproto5\\platforms\\android\\app\\build\\intermediates\\res\\merged\\F0F1\\debug\\drawable\\autocomplete_focusable_bg.xml",
+        "source": "C:\\Users\\kadir\\.android\\build-cache\\844e5344d6fcc89c1d411ec2cede201db3c44efd\\output\\res\\drawable\\autocomplete_focusable_bg.xml"
     },
     {
         "merged": "C:\\Users\\kadir\\dirproto5\\platforms\\android\\app\\build\\intermediates\\res\\merged\\F0F1\\debug\\drawable\\common_google_signin_btn_text_disabled.xml",

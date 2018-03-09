@@ -71,18 +71,6 @@ register(){
       });
   }
 
-  // signUp() {
-  //   this.firebaseService.register(this.user)
-  //     .then(() => {
-  //       this.isAuthenticating = false;
-  //       this.toggleDisplay();
-  //     })
-  //     .catch((message:any) => {
-  //       alert(message);
-  //       this.isAuthenticating = false;
-  //     });
-  // }
-
 //   forgotPassword() {
 
 //     prompt({

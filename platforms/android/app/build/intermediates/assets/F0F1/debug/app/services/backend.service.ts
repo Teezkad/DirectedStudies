@@ -1,14 +1,25 @@
-import { getString, setString } from "application-settings";
+import { getString, setString, getBoolean, setBoolean } from "application-settings";
 import { User, Classroom } from "../models";
 import firebase = require("nativescript-plugin-firebase");
 import {Observable} from 'rxjs/Observable';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Injectable, NgZone} from "@angular/core";
 
-
+//stores UID
 const tokenKey = "token";
+const Uid = "Uid";
 const Uname = "name";
+//stores class ID
 const CID = "CID";
+//stores class name
+const Cname = "Cname";
+//stores topic id
+const TID = "TID";
+//check if user is creator of classroom
+const instructor = "instructor";
+//store user student number
+const studentNum = "studentNum";
+
 
 @Injectable()
 export class BackendService {
@@ -35,6 +46,26 @@ export class BackendService {
     return getString("CID");
   }
 
+  static get TID(): string{
+    return getString("TID");
+  }
+
+  static get Cname(): string{
+    return getString("Cname");
+  }
+
+  static get Uid(): string{
+    return getString("Uid");
+  }
+
+  static get instructor(): boolean{
+    return getBoolean("instructor");
+  }
+
+  static get studentNum(): string{
+    return getString("studentNum");
+  }
+
   static set token(theToken: string) {
     setString("token", theToken);
   }
@@ -47,37 +78,24 @@ export class BackendService {
     setString("CID", theCID);
   }
 
-   //display all users
-   getcurrentUserList(): Observable<any> {
-    return new Observable((observer: any) => {
-      let path = 'Users/'+ BackendService.token+ "";
-      
-        let onValueEvent = (snapshot: any) => {
-          this.ngZone.run(() => {
-                //     let result = (<any>Object).assign({id: id}, data[id]);
-
-            let results = this.userSnapshot(snapshot.value);
-            console.log( "From Backendservice"+ JSON.stringify(results))
-             observer.next(results);
-          });
-        };
-        firebase.addValueEventListener(onValueEvent, `/${path}`);
-    }).share();              
+  static set TID(theTID: string){
+    setString("TID", theTID);
   }
 
-  userSnapshot(data: any) {
-    //empty array, then refill and filter
-    this._allItems = [];
-    if (data) {
-      for (let id in data) {        
-        let result = (<any>Object).assign({id: id}, data[id]);
-          this._allItems.push(result);
-
-              
-      }
-      // this.publishUpdates();
-    }
-    return this._allItems;
-
+  static set Cname(theCname: string){
+    setString("Cname", theCname);
   }
+
+  static set Uid(theUid: string){
+    setString("Uid", theUid);
+  }
+
+  static set instructor(theinstructor: boolean){
+    setBoolean("instructor", theinstructor);
+  }
+
+  static set studentNum(theStudentNum: string) {
+    setString("studentNum", theStudentNum);
+  }
+   
 }

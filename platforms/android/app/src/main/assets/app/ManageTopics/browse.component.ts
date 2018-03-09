@@ -1,14 +1,14 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { DrawerTransitionBase, SlideInOnTopTransition } from "nativescript-pro-ui/sidedrawer";
 import { RadSideDrawerComponent } from "nativescript-pro-ui/sidedrawer/angular";
-import {User, Classroom, Options} from "../models";
+import {User, Classroom, Options, Question} from "../models";
 import {Observable} from 'rxjs/Observable';
 import {Tag} from '../Tags/tag.component';
 import {FirebaseService} from '../services';
 import firebase = require("nativescript-plugin-firebase");
 import { BackendService } from "../services/backend.service";
 import { RouterExtensions } from 'nativescript-angular/router/router-extensions';
-import { ActivatedRoute} from "@angular/router";
+import { ActivatedRoute, NavigationExtras} from "@angular/router";
 
 @Component({
     selector: "Browse",
@@ -17,6 +17,7 @@ import { ActivatedRoute} from "@angular/router";
 })
 export class BrowseComponent implements OnInit {
     currentUser = BackendService.token;
+    Cname = BackendService.Cname;
    
     /* ***********************************************************
     * Use the @ViewChild decorator to get a reference to the drawer component.
@@ -27,17 +28,16 @@ export class BrowseComponent implements OnInit {
     public users$: Observable<any>;
     public myclassrooms$: Observable<any>;
     public tags$: Observable<any>;
+    public requests$: Observable<any>;
     private _sideDrawerTransition: DrawerTransitionBase;
-    public creatorId;
+    public creatorId = BackendService.instructor;
 
     constructor(private routerExtensions: RouterExtensions,
         private firebaseService: FirebaseService, private route: ActivatedRoute
 
         
         ) {
-            this.route.queryParams.subscribe(params => {
-                this.creatorId = params["uid"];
-            })   
+            
         }
     /* ***********************************************************
     * Use the sideDrawerTransition property to change the open/close animation of the drawer.
@@ -45,10 +45,10 @@ export class BrowseComponent implements OnInit {
     ngOnInit(): void {
         this._sideDrawerTransition = new SlideInOnTopTransition();
         this.myclassrooms$ = <any>this.firebaseService.getCreatedClasses();
-        this.users$ = <any>this.firebaseService.getMyUserList();
+        this.users$ = <any>this.firebaseService.getRegisteredUsers(BackendService.CID);
         this.tags$ = <any>this.firebaseService.getMyTagList();
-        console.log("Creatot id is "+this.creatorId);
-        console.log("token is "+this.currentUser);
+        this.requests$ = <any>this.firebaseService.getQuestionRequests();
+        
 
     }
 
@@ -68,6 +68,15 @@ export class BrowseComponent implements OnInit {
         this.routerExtensions.navigate(["/tag"]);
     }
 
+    addQuestion(question: Question, name: string, Tag:string, questionTypeId: string, options: Options[], UID: string){
+        this.firebaseService.addQuestion(name, Tag, questionTypeId, options, UID).then((message:any) => {
+                alert(message);
+                console.log("Question created ");
+                this.routerExtensions.navigate(["browse"]);
+              });
+        this.firebaseService.deleteQuestionRequest(question);
+    }
+
     activateTag(id: string, name: string){
         BackendService.TID = id;
         console.log(name + " is Activated");
@@ -78,5 +87,16 @@ export class BrowseComponent implements OnInit {
       .catch(() => {
         alert("An error occurred while deleting an item from your list.");
       });
-  } 
+  }
+  
+  viewUser(uid: string, firstname: string, lastname: string){
+    let navigationExtras: NavigationExtras = {
+        queryParams: {
+            "uid": uid,
+            "fname": firstname,
+            "lname": lastname
+        }
+      };
+      this.routerExtensions.navigate(["UserTopic"], navigationExtras);
+  }
 }

@@ -3,7 +3,9 @@ import { NativeScriptModule } from "nativescript-angular/nativescript.module";
 import { LoginModule } from "./login/login.module";
 import { AppRoutingModule, authProviders, approutes } from "./app-routing.module";
 import { AppComponent } from "./app.component";
+import { CommonModule } from "@angular/common";
 import { classroomComponent } from "./Classrooms/classroom.component";
+import { questionComponent } from "./Question/question.component";
 import { BackendService, FirebaseService, UtilsService } from "./services";
 
 
@@ -21,6 +23,7 @@ import { BackendService, FirebaseService, UtilsService } from "./services";
         NativeScriptModule,
         AppRoutingModule,
         LoginModule,
+        CommonModule
     ],
     declarations: [
         AppComponent

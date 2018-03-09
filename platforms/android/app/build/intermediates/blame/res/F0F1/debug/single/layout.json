@@ -28,20 +28,20 @@
         "source": "C:\\Users\\kadir\\.android\\build-cache\\5b0d414533c697b518d0e327b864f5324c2ab91b\\output\\res\\layout\\trackball_container.xml"
     },
     {
-        "merged": "C:\\Users\\kadir\\dirproto5\\platforms\\android\\app\\build\\intermediates\\res\\merged\\F0F1\\debug\\layout\\data_form_switch_editor.xml",
-        "source": "C:\\Users\\kadir\\.android\\build-cache\\844e5344d6fcc89c1d411ec2cede201db3c44efd\\output\\res\\layout\\data_form_switch_editor.xml"
-    },
-    {
         "merged": "C:\\Users\\kadir\\dirproto5\\platforms\\android\\app\\build\\intermediates\\res\\merged\\F0F1\\debug\\layout\\feedback_indicator.xml",
         "source": "C:\\Users\\kadir\\.android\\build-cache\\83c4943475b8e38d6fb8233b5f0bd040780f7f8d\\output\\res\\layout\\feedback_indicator.xml"
     },
     {
-        "merged": "C:\\Users\\kadir\\dirproto5\\platforms\\android\\app\\build\\intermediates\\res\\merged\\F0F1\\debug\\layout\\data_form_editor_validation_layout_1.xml",
-        "source": "C:\\Users\\kadir\\.android\\build-cache\\844e5344d6fcc89c1d411ec2cede201db3c44efd\\output\\res\\layout\\data_form_editor_validation_layout_1.xml"
+        "merged": "C:\\Users\\kadir\\dirproto5\\platforms\\android\\app\\build\\intermediates\\res\\merged\\F0F1\\debug\\layout\\data_form_switch_editor.xml",
+        "source": "C:\\Users\\kadir\\.android\\build-cache\\844e5344d6fcc89c1d411ec2cede201db3c44efd\\output\\res\\layout\\data_form_switch_editor.xml"
     },
     {
         "merged": "C:\\Users\\kadir\\dirproto5\\platforms\\android\\app\\build\\intermediates\\res\\merged\\F0F1\\debug\\layout\\on_demand_automatic.xml",
         "source": "C:\\Users\\kadir\\.android\\build-cache\\86fb8e90ce6237a771a53967f7f62a21bcec0fbc\\output\\res\\layout\\on_demand_automatic.xml"
+    },
+    {
+        "merged": "C:\\Users\\kadir\\dirproto5\\platforms\\android\\app\\build\\intermediates\\res\\merged\\F0F1\\debug\\layout\\data_form_editor_validation_layout_1.xml",
+        "source": "C:\\Users\\kadir\\.android\\build-cache\\844e5344d6fcc89c1d411ec2cede201db3c44efd\\output\\res\\layout\\data_form_editor_validation_layout_1.xml"
     },
     {
         "merged": "C:\\Users\\kadir\\dirproto5\\platforms\\android\\app\\build\\intermediates\\res\\merged\\F0F1\\debug\\layout\\data_form_decimal_editor.xml",
@@ -72,12 +72,12 @@
         "source": "C:\\Users\\kadir\\.android\\build-cache\\c96484561ef8c4fd74d86d217a56072dba384d8f\\output\\res\\layout\\drawer_blur_fade_layer.xml"
     },
     {
-        "merged": "C:\\Users\\kadir\\dirproto5\\platforms\\android\\app\\build\\intermediates\\res\\merged\\F0F1\\debug\\layout\\data_form_toggle_button_editor.xml",
-        "source": "C:\\Users\\kadir\\.android\\build-cache\\844e5344d6fcc89c1d411ec2cede201db3c44efd\\output\\res\\layout\\data_form_toggle_button_editor.xml"
-    },
-    {
         "merged": "C:\\Users\\kadir\\dirproto5\\platforms\\android\\app\\build\\intermediates\\res\\merged\\F0F1\\debug\\layout\\data_form_radio_group_editor.xml",
         "source": "C:\\Users\\kadir\\.android\\build-cache\\844e5344d6fcc89c1d411ec2cede201db3c44efd\\output\\res\\layout\\data_form_radio_group_editor.xml"
+    },
+    {
+        "merged": "C:\\Users\\kadir\\dirproto5\\platforms\\android\\app\\build\\intermediates\\res\\merged\\F0F1\\debug\\layout\\data_form_toggle_button_editor.xml",
+        "source": "C:\\Users\\kadir\\.android\\build-cache\\844e5344d6fcc89c1d411ec2cede201db3c44efd\\output\\res\\layout\\data_form_toggle_button_editor.xml"
     },
     {
         "merged": "C:\\Users\\kadir\\dirproto5\\platforms\\android\\app\\build\\intermediates\\res\\merged\\F0F1\\debug\\layout\\abc_activity_chooser_view_list_item.xml",
@@ -100,16 +100,16 @@
         "source": "C:\\Users\\kadir\\.android\\build-cache\\844e5344d6fcc89c1d411ec2cede201db3c44efd\\output\\res\\layout\\data_form_autocomplete_editor.xml"
     },
     {
-        "merged": "C:\\Users\\kadir\\dirproto5\\platforms\\android\\app\\build\\intermediates\\res\\merged\\F0F1\\debug\\layout\\design_navigation_menu.xml",
-        "source": "C:\\Users\\kadir\\.android\\build-cache\\ef3de4c84f18510c93685de9caa4bd006252f258\\output\\res\\layout\\design_navigation_menu.xml"
+        "merged": "C:\\Users\\kadir\\dirproto5\\platforms\\android\\app\\build\\intermediates\\res\\merged\\F0F1\\debug\\layout\\notification_template_icon_group.xml",
+        "source": "C:\\Users\\kadir\\.android\\build-cache\\448f79bf4dfc689733c2cc52dcc5d25dd8bdeb7f\\output\\res\\layout\\notification_template_icon_group.xml"
     },
     {
         "merged": "C:\\Users\\kadir\\dirproto5\\platforms\\android\\app\\build\\intermediates\\res\\merged\\F0F1\\debug\\layout\\design_menu_item_action_area.xml",
         "source": "C:\\Users\\kadir\\.android\\build-cache\\ef3de4c84f18510c93685de9caa4bd006252f258\\output\\res\\layout\\design_menu_item_action_area.xml"
     },
     {
-        "merged": "C:\\Users\\kadir\\dirproto5\\platforms\\android\\app\\build\\intermediates\\res\\merged\\F0F1\\debug\\layout\\notification_template_icon_group.xml",
-        "source": "C:\\Users\\kadir\\.android\\build-cache\\448f79bf4dfc689733c2cc52dcc5d25dd8bdeb7f\\output\\res\\layout\\notification_template_icon_group.xml"
+        "merged": "C:\\Users\\kadir\\dirproto5\\platforms\\android\\app\\build\\intermediates\\res\\merged\\F0F1\\debug\\layout\\design_navigation_menu.xml",
+        "source": "C:\\Users\\kadir\\.android\\build-cache\\ef3de4c84f18510c93685de9caa4bd006252f258\\output\\res\\layout\\design_navigation_menu.xml"
     },
     {
         "merged": "C:\\Users\\kadir\\dirproto5\\platforms\\android\\app\\build\\intermediates\\res\\merged\\F0F1\\debug\\layout\\data_form_rad_autocomplete_editor.xml",

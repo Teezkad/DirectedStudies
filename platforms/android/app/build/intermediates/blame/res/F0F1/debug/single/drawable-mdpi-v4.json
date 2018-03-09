@@ -4,12 +4,12 @@
         "source": "C:\\Users\\kadir\\.android\\build-cache\\448f79bf4dfc689733c2cc52dcc5d25dd8bdeb7f\\output\\res\\drawable-mdpi-v4\\abc_btn_switch_to_on_mtrl_00012.9.png"
     },
     {
-        "merged": "C:\\Users\\kadir\\dirproto5\\platforms\\android\\app\\build\\intermediates\\res\\merged\\F0F1\\debug\\drawable-mdpi-v4\\abc_list_focused_holo.9.png",
-        "source": "C:\\Users\\kadir\\.android\\build-cache\\448f79bf4dfc689733c2cc52dcc5d25dd8bdeb7f\\output\\res\\drawable-mdpi-v4\\abc_list_focused_holo.9.png"
-    },
-    {
         "merged": "C:\\Users\\kadir\\dirproto5\\platforms\\android\\app\\build\\intermediates\\res\\merged\\F0F1\\debug\\drawable-mdpi-v4\\abc_scrubber_control_off_mtrl_alpha.png",
         "source": "C:\\Users\\kadir\\.android\\build-cache\\448f79bf4dfc689733c2cc52dcc5d25dd8bdeb7f\\output\\res\\drawable-mdpi-v4\\abc_scrubber_control_off_mtrl_alpha.png"
+    },
+    {
+        "merged": "C:\\Users\\kadir\\dirproto5\\platforms\\android\\app\\build\\intermediates\\res\\merged\\F0F1\\debug\\drawable-mdpi-v4\\abc_list_focused_holo.9.png",
+        "source": "C:\\Users\\kadir\\.android\\build-cache\\448f79bf4dfc689733c2cc52dcc5d25dd8bdeb7f\\output\\res\\drawable-mdpi-v4\\abc_list_focused_holo.9.png"
     },
     {
         "merged": "C:\\Users\\kadir\\dirproto5\\platforms\\android\\app\\build\\intermediates\\res\\merged\\F0F1\\debug\\drawable-mdpi-v4\\abc_ic_star_half_black_36dp.png",

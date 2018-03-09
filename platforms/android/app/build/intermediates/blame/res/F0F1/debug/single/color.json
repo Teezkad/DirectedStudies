@@ -24,20 +24,20 @@
         "source": "C:\\Users\\kadir\\.android\\build-cache\\448f79bf4dfc689733c2cc52dcc5d25dd8bdeb7f\\output\\res\\color\\abc_tint_spinner.xml"
     },
     {
-        "merged": "C:\\Users\\kadir\\dirproto5\\platforms\\android\\app\\build\\intermediates\\res\\merged\\F0F1\\debug\\color\\abc_primary_text_disable_only_material_light.xml",
-        "source": "C:\\Users\\kadir\\.android\\build-cache\\448f79bf4dfc689733c2cc52dcc5d25dd8bdeb7f\\output\\res\\color\\abc_primary_text_disable_only_material_light.xml"
-    },
-    {
         "merged": "C:\\Users\\kadir\\dirproto5\\platforms\\android\\app\\build\\intermediates\\res\\merged\\F0F1\\debug\\color\\abc_secondary_text_material_dark.xml",
         "source": "C:\\Users\\kadir\\.android\\build-cache\\448f79bf4dfc689733c2cc52dcc5d25dd8bdeb7f\\output\\res\\color\\abc_secondary_text_material_dark.xml"
     },
     {
-        "merged": "C:\\Users\\kadir\\dirproto5\\platforms\\android\\app\\build\\intermediates\\res\\merged\\F0F1\\debug\\color\\abc_btn_colored_text_material.xml",
-        "source": "C:\\Users\\kadir\\.android\\build-cache\\448f79bf4dfc689733c2cc52dcc5d25dd8bdeb7f\\output\\res\\color\\abc_btn_colored_text_material.xml"
+        "merged": "C:\\Users\\kadir\\dirproto5\\platforms\\android\\app\\build\\intermediates\\res\\merged\\F0F1\\debug\\color\\abc_primary_text_disable_only_material_light.xml",
+        "source": "C:\\Users\\kadir\\.android\\build-cache\\448f79bf4dfc689733c2cc52dcc5d25dd8bdeb7f\\output\\res\\color\\abc_primary_text_disable_only_material_light.xml"
     },
     {
         "merged": "C:\\Users\\kadir\\dirproto5\\platforms\\android\\app\\build\\intermediates\\res\\merged\\F0F1\\debug\\color\\abc_tint_switch_track.xml",
         "source": "C:\\Users\\kadir\\.android\\build-cache\\448f79bf4dfc689733c2cc52dcc5d25dd8bdeb7f\\output\\res\\color\\abc_tint_switch_track.xml"
+    },
+    {
+        "merged": "C:\\Users\\kadir\\dirproto5\\platforms\\android\\app\\build\\intermediates\\res\\merged\\F0F1\\debug\\color\\abc_btn_colored_text_material.xml",
+        "source": "C:\\Users\\kadir\\.android\\build-cache\\448f79bf4dfc689733c2cc52dcc5d25dd8bdeb7f\\output\\res\\color\\abc_btn_colored_text_material.xml"
     },
     {
         "merged": "C:\\Users\\kadir\\dirproto5\\platforms\\android\\app\\build\\intermediates\\res\\merged\\F0F1\\debug\\color\\abc_hint_foreground_material_dark.xml",

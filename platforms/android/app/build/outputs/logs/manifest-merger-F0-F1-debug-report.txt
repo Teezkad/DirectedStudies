@@ -76,7 +76,7 @@ MERGED from [com.android.support:support-fragment:26.0.0-alpha1] C:\Users\kadir\
 MERGED from [com.android.support:support-core-ui:26.0.0-alpha1] C:\Users\kadir\.android\build-cache\d8903bb17788934f63f146ccf3e0c3d3f8a2a667\output\AndroidManifest.xml:21:5-23:58
 MERGED from [com.android.support:support-core-utils:26.0.0-alpha1] C:\Users\kadir\.android\build-cache\d5f41a1871ae37cd6414f0adbe22629e04975386\output\AndroidManifest.xml:21:5-23:61
 MERGED from [com.android.support:support-compat:26.0.0-alpha1] C:\Users\kadir\.android\build-cache\a7e1cd321ae33706031148cf114ee31db00bc075\output\AndroidManifest.xml:21:5-23:58
-MERGED from [:nativescript-optimized:] C:\Users\kadir\.android\build-cache\d7c15b1098894113d67c614e1a715767a831b703\output\AndroidManifest.xml:7:5-9:41
+MERGED from [:nativescript-optimized:] C:\Users\kadir\.android\build-cache\829c22403da75661748325a4d79c36576ee50061\output\AndroidManifest.xml:7:5-9:41
 MERGED from [:firebase-release:] C:\Users\kadir\.android\build-cache\8c3c2b2b2b63919049258a3f0a78fdc155469d0f\output\AndroidManifest.xml:7:5-9:41
 MERGED from [:Chart-2017.1.1221-dev-release:] C:\Users\kadir\.android\build-cache\5b0d414533c697b518d0e327b864f5324c2ab91b\output\AndroidManifest.xml:7:5-9:41
 MERGED from [:Common-2017.1.1221-dev-release:] C:\Users\kadir\.android\build-cache\1a990e32af01507c4d49ec541a8e6f382179be10\output\AndroidManifest.xml:7:5-9:41

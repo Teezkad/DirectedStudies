@@ -98,14 +98,24 @@ export class questionComponent{
                 }
 
     public submitQuestion(){
+
+        if (BackendService.instructor == true){
         this.firebaseService.addQuestion(this.question.name,this.question.Tag, this.question.questionTypeId,
         this.question.options, this.question.UID).then((message:any) => {
       
             alert(message);
-       
             console.log("Question created ");
             this.router.navigate(["home"]);
-          }) 
+          }) }else{
+            this.firebaseService.addQuestionRequest(this.question.name,this.question.Tag, this.question.questionTypeId,
+                this.question.options, this.question.UID, BackendService.studentNum).then((message:any) => {
+              
+                    alert(message);
+               
+                    console.log("Question created ");
+                    this.router.navigate(["home"]);
+                  })
+          }
         // console.log(this.option1.isAnswer);
         // console.log(this.option2.isAnswer);
         // console.log(this.option3.isAnswer);

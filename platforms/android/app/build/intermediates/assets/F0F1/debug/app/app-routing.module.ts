@@ -10,14 +10,16 @@ export const authProviders = [
 export const approutes: Routes = [
     { path: "", redirectTo: "/login", pathMatch: "full" },
     { path: "home", loadChildren: "./home/home.module#HomeModule" },
-    { path: "browse", loadChildren: "./browse/browse.module#BrowseModule" },
-    { path: "search", loadChildren: "./search/search.module#SearchModule" },
-    { path: "featured", loadChildren: "./featured/featured.module#FeaturedModule" },
-    { path: "settings", loadChildren: "./settings/settings.module#SettingsModule" },
+    { path: "browse", loadChildren: "./ManageTopics/browse.module#BrowseModule" },
+    { path: "search", loadChildren: "./ManageQuestions/search.module#SearchModule" },
+    { path: "quiz", loadChildren: "./Quiz/quiz.module#QuizModule" },
     { path: "login", loadChildren: "./login/login.module#LoginModule" },
     { path: "register", loadChildren: "./register/register.module#RegisterModule"},
     {path: "classroom", loadChildren: "./Classrooms/classroom.module#classroomModule"},
-    {path: "tag", loadChildren: "./Tags/tag.module#tagModule"}
+    {path: "tag", loadChildren: "./Tags/tag.module#tagModule"},
+    {path: "question", loadChildren: "./Question/question.module#questionModule"},
+    {path: "UserTopic", loadChildren: "./UserTopic/UserTopic.module#UserTopicModule"},
+    {path: "Score", loadChildren: "./Score/Score.module#ScoreModule"}
 
 ];
 

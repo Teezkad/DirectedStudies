@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {User} from '../models/User.model';
 import {FirebaseService} from '../services';
+import { ScrollView, ScrollEventData } from "tns-core-modules/ui/scroll-view";
 import {prompt} from "ui/dialogs";
 import firebase = require("nativescript-plugin-firebase");
 import { RouterExtensions } from 'nativescript-angular/router/router-extensions';
@@ -59,7 +60,7 @@ import { RouterExtensions } from 'nativescript-angular/router/router-extensions'
         
       //      })   
      
-      this.routerExtensions.navigate(['/login']);
+      this.routerExtensions.navigate(['/home']);
   }
 
 

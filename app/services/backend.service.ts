@@ -1,4 +1,4 @@
-import { getString, setString } from "application-settings";
+import { getString, setString, getBoolean, setBoolean } from "application-settings";
 import { User, Classroom } from "../models";
 import firebase = require("nativescript-plugin-firebase");
 import {Observable} from 'rxjs/Observable';
@@ -15,6 +15,10 @@ const CID = "CID";
 const Cname = "Cname";
 //stores topic id
 const TID = "TID";
+//check if user is creator of classroom
+const instructor = "instructor";
+//store user student number
+const studentNum = "studentNum";
 
 
 @Injectable()
@@ -54,6 +58,14 @@ export class BackendService {
     return getString("Uid");
   }
 
+  static get instructor(): boolean{
+    return getBoolean("instructor");
+  }
+
+  static get studentNum(): string{
+    return getString("studentNum");
+  }
+
   static set token(theToken: string) {
     setString("token", theToken);
   }
@@ -76,6 +88,14 @@ export class BackendService {
 
   static set Uid(theUid: string){
     setString("Uid", theUid);
+  }
+
+  static set instructor(theinstructor: boolean){
+    setBoolean("instructor", theinstructor);
+  }
+
+  static set studentNum(theStudentNum: string) {
+    setString("studentNum", theStudentNum);
   }
    
 }

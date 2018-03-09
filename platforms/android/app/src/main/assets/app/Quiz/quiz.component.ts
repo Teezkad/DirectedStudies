@@ -18,7 +18,8 @@ import {ActivatedRoute} from "@angular/router";
 @Component({
     selector: "quiz",
     moduleId: module.id,
-    templateUrl: "./quiz.component.html"
+    templateUrl: "./quiz.component.html",
+    styleUrls: ['./quiz.component.css'] 
 })
 export class QuizComponent implements OnInit {
 
@@ -35,6 +36,8 @@ export class QuizComponent implements OnInit {
     public length;
     public selectedIndex;
     public score = 0;
+    public mark = [];
+    public topic;
  
     @ViewChild("drawer") drawerComponent: RadSideDrawerComponent;
 
@@ -55,11 +58,16 @@ export class QuizComponent implements OnInit {
 
     ngOnInit(): void {
         this.quiz$ = <any>this.firebaseService.getTopicQuestions(this.tid);
-        // this.quiz$.subscribe(val => {this.question = JSON.stringify(val);
-        //     console.log("Question is "+ this.question);
-        // }
-        // );
+
+        this.quiz$.subscribe(val => 
+            {this.topic= JSON.parse(JSON.stringify(val[0
+            ].Tags));
+            console.log("Question is "+ this.topic);
+        }
+        );
         this.getquestion(this.no);
+
+        BackendService.TID = this.tid;
     }
 
     getquestion(num: number): void{
@@ -100,17 +108,31 @@ export class QuizComponent implements OnInit {
     onDrawerButtonTap(): void {
         this.drawerComponent.sideDrawer.showDrawer();
     }
-
+//to grade create an array and store true or false for each index and count the number of true values for score
     selectMenu(i) {
         this.selectedIndex=i;
-        console.log(this.option[i].name);
-        if(this.option[i].isAnswer == true){
-            this.score++;
-        }
+        this.mark[this.no] = this.option[i].isAnswer;
+        console.log("answer is "+ this.mark[this.no]);
+        console.log("answer after is "+ this.mark[this.no+1]);
+
+
+        
     }
 
     submit(){
-        alert("Your score is " + this.score + "/"+ this.length)
+for(var i  = 0; i <this.mark.length; i++)
+{
+    if(this.mark[i] == true){
+        this.score++;
+                            }                         
+}
+
+this.score = this.score/this.length * 100;
+        alert("Your score is " + this.score + "%");
         this.routerExtensions.navigate(["search"]);
+
+        this.firebaseService.addUserScore(BackendService.CID, BackendService.TID, this.topic, this.score);
     }
+
+    
 }

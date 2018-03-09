@@ -53,6 +53,24 @@ addClass(){
        
             console.log("Classroom " + this.create.name);
           }) 
+
+          
+
           this.routerExtensions.navigate(["/home"]);
-}    
+}
+
+inClass(classroom: Classroom, id: string, Cname: string, Prof: string, Year: string, uid: string){
+    //update the classroom node to include users who registered
+     this.firebaseService.registerClassroom(classroom, BackendService.Uid, BackendService.Uname, BackendService.studentNum)
+ .then((message:any) => {
+ 
+   alert(message);
+
+   //update the user's node to include a list of classes
+//    this.firebaseService.userRegister(id, Cname, Prof, Year, uid)
+
+   console.log("Classroom successfully registered");
+ }) 
+}
+
 }
