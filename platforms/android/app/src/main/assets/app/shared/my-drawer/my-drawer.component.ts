@@ -20,6 +20,8 @@ import { RouterExtensions } from 'nativescript-angular/router/router-extensions'
 })
 export class MyDrawerComponent implements OnInit {
     public Cname = BackendService.Cname;
+    public instructor = BackendService.instructor;
+    public fname = BackendService.Uname;
 
     /* ***********************************************************
     * The "selectedPage" is a component input property.

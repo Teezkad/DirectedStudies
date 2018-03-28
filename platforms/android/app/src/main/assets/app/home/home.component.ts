@@ -35,7 +35,9 @@ export class HomeComponent implements OnInit {
     public myclassrooms$: Observable<any>;
     public myClass;
     public allClass;
+    public allClass1;
     public len;
+    public leng;
     public show = [];
 
     /* ***********************************************************
@@ -52,12 +54,10 @@ export class HomeComponent implements OnInit {
     ngOnInit(): void {
         this.users$ = <any>this.firebaseService.getMyUserList();
         this.users$.subscribe(val => {
-            console.log(BackendService.Uid = JSON.parse( JSON.stringify(val[0].id)));
             BackendService.Uname = JSON.parse(JSON.stringify(val[0].FirstName));
             BackendService.studentNum = JSON.parse(JSON.stringify(val[0].studentNum));
         }); 
         
-        console.log("My uid is"+ BackendService.Uid);
         BackendService.instructor = false;
         this._sideDrawerTransition = new SlideInOnTopTransition();
         this.classrooms$ = <any>this.firebaseService.getAllClassList();
@@ -70,28 +70,26 @@ export class HomeComponent implements OnInit {
 
         this.classrooms$.subscribe(clas => {
             this.allClass = clas;
+            this.allClass1 = clas;
+            this.leng = clas.length;
             this.showclasses();
         })
-       
-        // console.log(JSON.stringify(name.__zone_symbol__value));
 
-// console.log("Firebase user = "+ JSON.stringify(ref));
 
     }
 
     showclasses(){
-
-        var count = 0;
-        for (var i; i < this.len; i++){
-            // var index = this.allClass.index(this.myClass[i].id) ;
-            if(this.allClass[0].id == this.myClass[i].id){
-                this.show.push(this.allClass[0]);
-                count++;
-            }
+        console.log("all classes size is  "+ this.leng);
+        console.log("my class length is "+ this.len );
+        for (var i = 0; i< this.leng; i++){
+            var all = JSON.parse(JSON.stringify(this.allClass1[i].ID));
+            for (var j = 0; j < this.len; j++){
+                var my = JSON.parse(JSON.stringify(this.myClass[j].ID));
+                if (all == my){
+                    this.allClass[i].registered = true;
+                }
+                }
         }
-
-        console.log("Classes i havent joined are  "+ JSON.stringify(this.show));
-
     }
 
 
@@ -125,8 +123,6 @@ export class HomeComponent implements OnInit {
       
         alert(message);
 
-        //update the user's node to include a list of classes
-        this.firebaseService.userRegister(id, Cname, Prof, Year, uid)
    
         console.log("Classroom successfully registered");
       }) 
@@ -146,8 +142,7 @@ export class HomeComponent implements OnInit {
         BackendService.CID = id;
         BackendService.Cname = name;
         console.log(name + " is now active class");
-        alert(name + " is now active class");
-
+        // alert(name + " is now active class");
         if(uid == BackendService.token){
             BackendService.instructor = true;
         

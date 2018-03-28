@@ -97,6 +97,24 @@ export class BrowseComponent implements OnInit {
             "lname": lastname
         }
       };
-      this.routerExtensions.navigate(["UserTopic"], navigationExtras);
+      this.routerExtensions.navigate(["Score"], navigationExtras);
+  }
+
+  upgradeUser(firstname: string, lastname: string, userId: string, UID: string){
+
+    this.firebaseService.registerTA(BackendService.CID, firstname, lastname,UID, userId).then((message:any) => {
+        alert(message);
+        console.log("TA created ");
+        this.routerExtensions.navigate(["browse"]);
+      });
+  }
+
+  downgradeUSer(){
+      
+  }
+  removeUser(uid: string){
+      this.firebaseService.deleteRegisteredUsers(uid) .catch(() => {
+        alert("An error occurred while deleting user from this class.");
+      });
   }
 }

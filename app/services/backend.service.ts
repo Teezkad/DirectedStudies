@@ -20,6 +20,8 @@ const instructor = "instructor";
 //store user student number
 const studentNum = "studentNum";
 
+const TA = "TA";
+
 
 @Injectable()
 export class BackendService {
@@ -62,6 +64,10 @@ export class BackendService {
     return getBoolean("instructor");
   }
 
+  static get TA(): boolean{
+    return getBoolean("TA");
+  }
+
   static get studentNum(): string{
     return getString("studentNum");
   }
@@ -92,6 +98,10 @@ export class BackendService {
 
   static set instructor(theinstructor: boolean){
     setBoolean("instructor", theinstructor);
+  }
+
+  static set TA(theTA: boolean){
+    setBoolean("TA", theTA);
   }
 
   static set studentNum(theStudentNum: string) {

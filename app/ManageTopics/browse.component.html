@@ -58,14 +58,14 @@
                             <ng-template let-item="item">  
                                 <StackLayout>             
                                 <GridLayout columns="auto,*,auto">
-                                    <Label textWrap = "true" class="h3 header"  col="1" [text]='item.FirstName '></Label>
-                                    <Label textWrap = "true" class="h3 header"   [text]='item.LastName'></Label>
+                                    <Label textWrap = "true" class="h3 header"  col="1" [text]='item.FirstName + " " + item.LastName '></Label>
                                     <!-- <Label class="h3 header"  col="1" [text]='item.FirstName'></Label> -->
                             <!-- <Image class="m-5" col="2" horizontalAlignment="right" width="40" height="40" (tap)="delete(item)" [src]="'~/assets/trash.png'"></Image> -->
                                 </GridLayout>  
                                 <StackLayout>
-                                        <button col = "1" text = "View User" (tap) = "viewUser(item.UID, item.FirstName, item.LastName)"></button>
-                                        <button text = "Remove User" ></button>
+                                        <button col = "1" text = "View User" (tap) = "viewUser(item.KEY, item.FirstName, item.LastName)"></button>
+                                        <button text = "Remove User" (tap) = "removeUser(item.id)"></button>
+                                        <button text = "Upgrade User" (tap) = "upgradeUser(item.FirstName, item.LastName, item.id, item.UID)"></button>
 
 
                                 </StackLayout> 
@@ -82,17 +82,17 @@
                 </StackLayout>
 
                 <StackLayout>
-                    <Label class="h2 header" text="Review Questions"></Label>
+                    <Label class="h2 header" col = "2" text="Review Questions"></Label>
                         <ListView row = "5" [items]="requests$ | async"  height="800">
                             <ng-template let-item="item">                  
                                 <StackLayout columns="auto,*,auto">
-                                    <Label textWrap = "true" class="h3 header"  col="1" [text]='item.Name'></Label>
+                                    <Label textWrap = "true" class="h2 header"  col="1" [text]="'Question: ' + item.Name"></Label>
                                     <GridLayout *ngFor = "let option of item.Option" columns="auto,*,auto" >
-                                            <Label textWrap = "true"col = "1" [text] = "option.name "></Label>
-                                            <Label col = "3" [text] = "option.isAnswer"></Label>
+                                            <Label class = "h4" textWrap = "true" col = "1" [text] = "'- '+option.name "></Label>
+                                            <Label col = "3" class = "bold" [text] = "option.isAnswer"></Label>
                                     </GridLayout>
-                                    <Label [text] = "'For Topic' + item.Tags"></Label>
-                                    <Label [text] = "'Created by ' + item.By + item.StudentNum"></Label>
+                                    <Label [text] = "'For Topic ' + item.Tags"></Label>
+                                    <Label textWrap = "true" [text] = "'Created by: ' + item.By+ ', Student Number: ' + item.StudentNum"></Label>
                                     <!-- <Label class="h3 header"  col="1" [text]='item.FirstName'></Label> -->
                             <!-- <Image class="m-5" col="2" horizontalAlignment="right" width="40" height="40" (tap)="delete(item)" [src]="'~/assets/trash.png'"></Image> -->
                             <Stacklayout>

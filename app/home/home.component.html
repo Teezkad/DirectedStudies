@@ -12,13 +12,13 @@
         <StackLayout class="form" *tabItem="{title: 'Available Classes'}">
                 <Label class="h2 header" text="List of Classes"></Label>
 
-            <ListView [items]="classrooms$ | async"  height="300">
+            <ListView [items]="allClass"  height="300">
                 <ng-template let-item="item">                  
                     <GridLayout columns="auto,*,auto">
-                            <button text=" Register in class" class="btnIcon" (tap) = "inClass(item, item.id, item.Name, item.Professor, item.Year, item.UID)"></button>
+                            <button *ngIf = "item.registered != true" text=" Register in class" class="btnIcon" (tap) = "inClass(item, item.id, item.Name, item.Professor, item.Year, item.UID)"></button>
+                            <button *ngIf = "item.registered == true" text="View Class" class="btnIcon" (tap) = "activateClass(item.id, item.Name, item.UID)"></button>
                             <Label class="h3 header"  col="1" [text]='item.Name'></Label>
                         <Image *ngIf = "item.UID == currentUser" class="m-5" col="2" horizontalAlignment="right" width="40" height="40" (tap)="deleteCl(item)" [src]="'~/assets/trash.png'"></Image>
-                    
                         </GridLayout>                 
                 </ng-template>
             </ListView>

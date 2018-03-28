@@ -35,7 +35,7 @@ export class QuizComponent implements OnInit {
     public no = 0;
     public length;
     public selectedIndex;
-    public score = 0;
+    public score;
     public mark = [];
     public topic;
  
@@ -60,8 +60,7 @@ export class QuizComponent implements OnInit {
         this.quiz$ = <any>this.firebaseService.getTopicQuestions(this.tid);
 
         this.quiz$.subscribe(val => 
-            {this.topic= JSON.parse(JSON.stringify(val[0
-            ].Tags));
+            {this.topic= JSON.parse(JSON.stringify(val[0].Tags));
             console.log("Question is "+ this.topic);
         }
         );
@@ -73,6 +72,9 @@ export class QuizComponent implements OnInit {
     getquestion(num: number): void{
         this.quiz$.subscribe(val => {
             this.length = val.length;
+            if(this.length == 0){
+                this.question = "There a no questions for this topic";
+            }
             this.questions = val;
             // this.options = JSON.parse(JSON.stringify(val));
             this.question = JSON.parse(JSON.stringify(this.questions[num].Name));
@@ -127,7 +129,7 @@ for(var i  = 0; i <this.mark.length; i++)
                             }                         
 }
 
-this.score = this.score/this.length * 100;
+this.score = (this.score/this.length * 100).toFixed(2);
         alert("Your score is " + this.score + "%");
         this.routerExtensions.navigate(["search"]);
 
