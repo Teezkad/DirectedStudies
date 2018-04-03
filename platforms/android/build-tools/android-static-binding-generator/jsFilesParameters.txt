@@ -22,6 +22,11 @@ C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\ManageQuestio
 C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\ManageTopics\browse-routing.module.js
 C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\ManageTopics\browse.component.js
 C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\ManageTopics\browse.module.js
+C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\ManageTopics\topicQuestion-routing.module.js
+C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\ManageTopics\topicQuestion.component.js
+C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\ManageTopics\topicQuestion.component.module.js
+C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\ManageTopics\topicQuestion.js
+C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\ManageTopics\topicQuestion.module.js
 C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\models\Classroom.model.js
 C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\models\index.js
 C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\models\Options.model.js
@@ -37,6 +42,9 @@ C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\register\inde
 C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\register\register.component.js
 C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\register\register.module.js
 C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\register\register.routes.js
+C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\Score\Score.component.js
+C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\Score\Score.module.js
+C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\Score\Score.routing.js
 C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\services\alert.service.js
 C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\services\backend.service.js
 C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\services\firebase.service.js

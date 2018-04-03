@@ -26,6 +26,7 @@ export class LoginComponent implements OnInit{
   user: User;
   isLoggingIn = true;
   isAuthenticating = false;
+  public users$: Observable<any>;
 
   
   constructor(private firebaseService: FirebaseService,
@@ -61,8 +62,16 @@ register(){
      this.firebaseService.login(this.user)
       .then(() => {
         this.isAuthenticating = false;
+
+        this.users$ = <any>this.firebaseService.getMyUserList();
+        this.users$.subscribe(val => {
+            console.log(BackendService.Uid = JSON.parse( JSON.stringify(val[0].id)));
+            BackendService.Uname = JSON.parse(JSON.stringify(val[0].FirstName));
+            BackendService.studentNum = JSON.parse(JSON.stringify(val[0].studentNum));
+        }); 
+        console.log("My uid is"+ BackendService.Uid);
         console.log("Login successful");
-        console.log(id);
+        console.log("Login id is" + id);
         this.routerExtensions.navigate(["/home"], { clearHistory: true });
 
       })

@@ -35,7 +35,7 @@ export class QuizComponent implements OnInit {
     public no = 0;
     public length;
     public selectedIndex;
-    public score;
+    public score = 0;
     public mark = [];
     public topic;
  
@@ -129,7 +129,7 @@ for(var i  = 0; i <this.mark.length; i++)
                             }                         
 }
 
-this.score = (this.score/this.length * 100).toFixed(2);
+this.score = (this.score/this.length * 100);
         alert("Your score is " + this.score + "%");
         this.routerExtensions.navigate(["search"]);
 

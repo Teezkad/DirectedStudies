@@ -611,6 +611,11 @@ export class FirebaseService {
       .catch(this.handleErrors);
   } 
 
+  deleteQuestion(question: Question){
+    return firebase.remove("/Questions/"+question.id+"")
+    .catch(this.handleErrors);
+  }
+
   deleteRegisteredUsers(uid: string){
     return firebase.remove("/Classroom/"+BackendService.CID+"/Members/"+uid)
     .catch(this.handleErrors);

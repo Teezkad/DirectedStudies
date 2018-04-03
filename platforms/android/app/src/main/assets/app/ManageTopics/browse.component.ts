@@ -28,9 +28,11 @@ export class BrowseComponent implements OnInit {
     public users$: Observable<any>;
     public myclassrooms$: Observable<any>;
     public tags$: Observable<any>;
+    public questions$: Observable<any>;
     public requests$: Observable<any>;
     private _sideDrawerTransition: DrawerTransitionBase;
     public creatorId = BackendService.instructor;
+    public i = 'a';
 
     constructor(private routerExtensions: RouterExtensions,
         private firebaseService: FirebaseService, private route: ActivatedRoute
@@ -48,8 +50,8 @@ export class BrowseComponent implements OnInit {
         this.users$ = <any>this.firebaseService.getRegisteredUsers(BackendService.CID);
         this.tags$ = <any>this.firebaseService.getMyTagList();
         this.requests$ = <any>this.firebaseService.getQuestionRequests();
-        
-
+        this.questions$ = <any>this.firebaseService.getClassroomQuestion(); 
+       
     }
 
     get sideDrawerTransition(): DrawerTransitionBase {
@@ -88,6 +90,18 @@ export class BrowseComponent implements OnInit {
         alert("An error occurred while deleting an item from your list.");
       });
   }
+
+  viewQuestions(tid: string, topicname: string){
+    let navigationExtras: NavigationExtras = {
+        queryParams: {
+            "tid": tid,
+            "topicname": topicname
+        }
+      };
+      console.log("TIS sent is "+ tid);
+      this.routerExtensions.navigate(["topicQuestion"], navigationExtras);
+  }
+  
   
   viewUser(uid: string, firstname: string, lastname: string){
     let navigationExtras: NavigationExtras = {
@@ -110,7 +124,7 @@ export class BrowseComponent implements OnInit {
   }
 
   downgradeUSer(){
-      
+
   }
   removeUser(uid: string){
       this.firebaseService.deleteRegisteredUsers(uid) .catch(() => {

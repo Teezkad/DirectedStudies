@@ -104,7 +104,6 @@ export class questionComponent{
         this.question.options, this.question.UID).then((message:any) => {
       
             alert(message);
-       
             console.log("Question created ");
             this.router.navigate(["home"]);
           }) }else{

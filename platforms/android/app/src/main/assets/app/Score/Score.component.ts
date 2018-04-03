@@ -9,6 +9,11 @@ import firebase = require("nativescript-plugin-firebase");
 import { BackendService } from "../services/backend.service";
 import { RouterExtensions } from 'nativescript-angular/router/router-extensions';
 import { ActivatedRoute} from "@angular/router";
+import * as moment from 'moment';
+
+
+let now = moment().format('LLLL');
+
 
 @Component({
     selector: "Score",
@@ -50,10 +55,14 @@ export class ScoreComponent implements OnInit {
         this._sideDrawerTransition = new SlideInOnTopTransition();
         this.score$ = <any>this.firebaseService.getUserScore(this.uid);
         // this.users$ = <any>this.firebaseService.getRegisteredUsers(BackendService.CID);
-        
-
+        this.score$.subscribe(val => {
+            var date = JSON.parse(JSON.stringify(val[0].Date));
+            var timestamp = moment(date);
+            console.log("Date is "+ date + "Timestamp is "+ timestamp);
+        })
     }
 
+    
     get sideDrawerTransition(): DrawerTransitionBase {
         return this._sideDrawerTransition;
     }

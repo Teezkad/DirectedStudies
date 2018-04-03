@@ -23,6 +23,7 @@
     "@angular/platform-browser-dynamic": "~5.2.0",
     "@angular/router": "~5.2.0",
     "babel": "^6.23.0",
+    "moment": "^2.22.0",
     "nativescript-angular": "~5.2.0",
     "nativescript-plugin-firebase": "^5.1.4",
     "nativescript-pro-ui": "~3.3.0",

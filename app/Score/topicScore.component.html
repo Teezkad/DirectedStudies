@@ -1,0 +1,18 @@
+<StackLayout *ngIf = "(tags$ | async)?.length==0"  class="page page-content">
+        <label text = "There are no Topics for this class yet, Click the button to create"></label>
+     </StackLayout>
+ <StackLayout>
+    <Label class="h2 header" text="All Topics"></Label>
+<ListView row = "5" [items]="tags$ | async"  height="380">
+    <ng-template let-item="item">                  
+        <GridLayout columns="auto,*,auto">
+                <Label class="h3 header"  col="1" [text]='item.Name'></Label>
+                <button class="m-5" col="1" text = "View Questions" horizontalAlignment="right" width="90" height="40" (tap)= "viewQuestions(item.id, item.Name)"></button>
+            <Image class="m-5" col="2" horizontalAlignment="right" width="40" height="40" (tap)="delete(item)" [src]="'~/assets/trash.png'"></Image>
+        </GridLayout>                 
+    </ng-template>
+</ListView>
+<button *ngIf = "creatorId == true" text=" Create Topics" class="btnIcon" (tap) = "navTag()"></button>
+</StackLayout>
+
+</StackLayout>

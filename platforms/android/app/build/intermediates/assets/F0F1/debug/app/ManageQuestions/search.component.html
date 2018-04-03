@@ -30,12 +30,13 @@ it shouldn't have any other siblings other than the <ActionBar> component.
     <!--
     Use the tkMainContent directive to display the content of the page when you have an app drawer.
     -->
-    <GridLayout class="page page-content" tkMainContent >
-        <StackLayout *ngIf = "(tags$ | async)?.length==0"  class="page page-content">
-                <label text = "There are no Topics for this class yet, Contact the Instructor"></label>
 
-        </StackLayout>
-        <Label class = "h3" text = "Create a question for {{Cname}} question based on a Topic"></Label>
+    <GridLayout class="page page-content" tkMainContent >
+        <StackLayout *ngIf = "(tags$ | async)?.length==0" >
+        <Label  text = "There are no Topics for this class yet, Contact the Instructor"></Label>
+    </StackLayout>
+    <StackLayout>
+        <Label textWrap = "true" class = "h3" text = "Create a question for {{Cname}} question based on a Topic or start a quiz"></Label>
             <ListView  [items]="tags$ | async"  height="420">
                     <ng-template let-item="item">                  
                         <StackLayout columns="auto,*,auto" >
@@ -45,5 +46,6 @@ it shouldn't have any other siblings other than the <ActionBar> component.
                         </StackLayout>                 
                     </ng-template>
                 </ListView>
+            </StackLayout>
     </GridLayout>
 </RadSideDrawer>

@@ -9,6 +9,7 @@
     "@angular/platform-browser-dynamic": true,
     "@angular/router": true,
     "babel": true,
+    "moment": true,
     "nativescript-angular": true,
     "nativescript-plugin-firebase": true,
     "nativescript-pro-ui": true,

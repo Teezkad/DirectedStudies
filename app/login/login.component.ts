@@ -62,14 +62,7 @@ register(){
      this.firebaseService.login(this.user)
       .then(() => {
         this.isAuthenticating = false;
-
-        this.users$ = <any>this.firebaseService.getMyUserList();
-        this.users$.subscribe(val => {
-            console.log(BackendService.Uid = JSON.parse( JSON.stringify(val[0].id)));
-            BackendService.Uname = JSON.parse(JSON.stringify(val[0].FirstName));
-            BackendService.studentNum = JSON.parse(JSON.stringify(val[0].studentNum));
-        }); 
-        console.log("My uid is"+ BackendService.Uid);
+        console.log("My uid is"+ BackendService.token);
         console.log("Login successful");
         console.log("Login id is" + id);
         this.routerExtensions.navigate(["/home"], { clearHistory: true });
