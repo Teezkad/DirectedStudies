@@ -10,7 +10,7 @@
         <ng-template let-item="item">                  
             <StackLayout columns="auto,*,auto" >
                 <label textWrap = "true" class = "h2 heavy" [text]= '"Topic: " + item.Topic + ", Score: " + item.Score.toFixed(2) + "%" '></label>
-                <label class = "h3" [text] ='"Date: " + item.Date'></label>
+                <label class = "h3" [text] ='"Date: " + item.Datetime'></label>
             </StackLayout>                 
         </ng-template>
     </ListView>

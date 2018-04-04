@@ -18,7 +18,7 @@ let now = moment().format('LLLL');
 @Component({
     selector: "Score",
     moduleId: module.id,
-    templateUrl: "./Score.component.html"
+    templateUrl: "./Score.component.xml"
 })
 export class ScoreComponent implements OnInit {
     currentUser = BackendService.token;
@@ -31,10 +31,12 @@ export class ScoreComponent implements OnInit {
     @ViewChild("drawer") drawerComponent: RadSideDrawerComponent;
 
     public score$: Observable<any>;
-    public myclassrooms$: Observable<any>;
+    public graph$: Observable<any>;
     public uid;
+    public tid;
     public fname;
     public lname;
+    public tname;
 
     private _sideDrawerTransition: DrawerTransitionBase;
     public creatorId = BackendService.instructor;
@@ -44,8 +46,10 @@ export class ScoreComponent implements OnInit {
         {
             this.route.queryParams.subscribe(params => {
                 this.uid = params["uid"];
+                this.tname = params["name"]; 
                 this.fname = params["fname"];
                 this.lname = params["lname"];
+                this.tid = params["tid"];
             })    
         }
     /* ***********************************************************
@@ -53,16 +57,29 @@ export class ScoreComponent implements OnInit {
     *************************************************************/
     ngOnInit(): void {
         this._sideDrawerTransition = new SlideInOnTopTransition();
-        this.score$ = <any>this.firebaseService.getUserScore(this.uid);
+        this.score$ = <any>this.firebaseService.getUserScore(this.uid, this.tid);
         // this.users$ = <any>this.firebaseService.getRegisteredUsers(BackendService.CID);
         this.score$.subscribe(val => {
-            var date = JSON.parse(JSON.stringify(val[0].Date));
-            var timestamp = moment(date);
-            console.log("Date is "+ date + "Timestamp is "+ timestamp);
-        })
-    }
+            this.graph$ = val;
+            var dated = JSON.stringify(val[0].Date);
+            var timestamp = moment(parseInt(dated));
 
-    
+            for(var i = 0; i< val.length; i++){
+                var a = new Date(JSON.parse(JSON.stringify(this.graph$[i].Date))); 
+                var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+                var year = a.getFullYear();
+                var month = months[a.getMonth()];
+                var date = a.getDate();
+                var hour = a.getHours();
+                var min = a.getMinutes();
+                var sec = a.getSeconds();
+                var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ; 
+                console.log("Date is "+ time + " Timestamp is "+ this.graph$[i].Date );
+                this.graph$[i].Datetime = time;
+            }
+        })
+}
+
     get sideDrawerTransition(): DrawerTransitionBase {
         return this._sideDrawerTransition;
     }

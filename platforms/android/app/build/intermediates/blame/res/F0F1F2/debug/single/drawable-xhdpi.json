@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "C:\\Users\\kadir\\dirproto5\\platforms\\android\\app\\build\\intermediates\\res\\merged\\F0F1F2\\debug\\drawable-xhdpi\\icon.png",
+        "source": "C:\\Users\\kadir\\dirproto5\\platforms\\android\\app\\src\\main\\res\\drawable-xhdpi\\icon.png"
+    },
+    {
+        "merged": "C:\\Users\\kadir\\dirproto5\\platforms\\android\\app\\build\\intermediates\\res\\merged\\F0F1F2\\debug\\drawable-xhdpi\\background.png",
+        "source": "C:\\Users\\kadir\\dirproto5\\platforms\\android\\app\\src\\main\\res\\drawable-xhdpi\\background.png"
+    },
+    {
+        "merged": "C:\\Users\\kadir\\dirproto5\\platforms\\android\\app\\build\\intermediates\\res\\merged\\F0F1F2\\debug\\drawable-xhdpi\\menu.png",
+        "source": "C:\\Users\\kadir\\dirproto5\\platforms\\android\\app\\src\\main\\res\\drawable-xhdpi\\menu.png"
+    },
+    {
+        "merged": "C:\\Users\\kadir\\dirproto5\\platforms\\android\\app\\build\\intermediates\\res\\merged\\F0F1F2\\debug\\drawable-xhdpi\\logo.png",
+        "source": "C:\\Users\\kadir\\dirproto5\\platforms\\android\\app\\src\\main\\res\\drawable-xhdpi\\logo.png"
+    }
+]

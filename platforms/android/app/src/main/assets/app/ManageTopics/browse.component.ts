@@ -111,7 +111,7 @@ export class BrowseComponent implements OnInit {
             "lname": lastname
         }
       };
-      this.routerExtensions.navigate(["Score"], navigationExtras);
+      this.routerExtensions.navigate(["topicScore"], navigationExtras);
   }
 
   upgradeUser(firstname: string, lastname: string, userId: string, UID: string){
@@ -123,7 +123,7 @@ export class BrowseComponent implements OnInit {
       });
   }
 
-  downgradeUSer(){
+  downgradeUser(){
 
   }
   removeUser(uid: string){

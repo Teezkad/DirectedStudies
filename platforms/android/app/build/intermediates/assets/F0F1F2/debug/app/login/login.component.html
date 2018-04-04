@@ -1,0 +1,33 @@
+<ActionBar class="action-bar" title="Login"></ActionBar>
+    <!-- <StackLayout class="card">
+        <StackLayout [class]="isLoggingIn ? 'form white' : 'form gold'">
+            <TextField #email class="input input-border" hint="Email Address" keyboardType="email" [(ngModel)]="user.email" autocorrect="false"
+                autocapitalizationType="none"></TextField>
+            <TextField #password class="input input-border" hint="Password" secure="true" [(ngModel)]="user.password"></TextField>
+            <Button [text]="isLoggingIn ? 'Login' : 'Register'" class="btn btn-primary" (tap)="submit()" ></Button>
+            <Button [text]="isLoggingIn ? 'Register' : 'Back to login'" (tap)="toggleDisplay()" class="btn"   ></Button>
+            <Button horizontalAlignment="center" class="btn" text="Forgot password"  [opacity]="isLoggingIn ? 1 : 0" (tap)="forgotPassword()"></Button>
+        </StackLayout>
+   </StackLayout> -->
+
+   <GridLayout backgroundColor="#CCCCCC">
+    <ScrollView>
+        <StackLayout margin="10" verticalAlignment="center">
+            <StackLayout class="form" padding="15" backgroundColor="#FFFFFF">
+                <StackLayout class="input-field">
+                    <Label text="Email" class="label font-weight-bold m-b-5"></Label>
+                    <TextField class="input" [(ngModel)]="user.email"></TextField>
+                    <StackLayout class="hr-light"></StackLayout>
+                </StackLayout>
+                <StackLayout class="input-field">
+                    <Label text="Password" class="label font-weight-bold m-b-5"></Label>
+                    <TextField secure = "true" class="input" [(ngModel)]="user.password"></TextField>
+                    <StackLayout class="hr-light"></StackLayout>
+                </StackLayout>
+                <Button class="btn btn-primary w-full" text="Login" (tap)="submit()"></Button>
+                <Button class="btn btn-primary w-full" text="Register" (tap)="register()"></Button>
+                <!-- <Label (tap)="goBack()" text="Already a member? Login here." class="text-center footnote"></Label> -->
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+</GridLayout>

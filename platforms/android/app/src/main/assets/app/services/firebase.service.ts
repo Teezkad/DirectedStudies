@@ -386,13 +386,28 @@ export class FirebaseService {
     }).share();              
   }
 
-  getUserScore(uid: string): Observable<any>{
+  getScore(uid: string): Observable<any>{
     return new Observable((observer: any)=>{
       let path = 'Users/'+uid+'/MyScores';
       let onValueEvent = (snapshot: any) => {
         this.ngZone.run(() => {
               let result = (<any>Object);
-          let results = this.scoreSnapshot(snapshot.value);
+          let results = this.handleSnapshot(snapshot.value);
+          console.log("From firebaseservice user score is" +JSON.stringify(results))
+           observer.next(results);
+        });
+      };
+      firebase.addValueEventListener(onValueEvent, `/${path}`);
+  }).share();      
+  }
+
+  getUserScore(uid: string, tid: string): Observable<any>{
+    return new Observable((observer: any)=>{
+      let path = 'Users/'+uid+'/MyScores';
+      let onValueEvent = (snapshot: any) => {
+        this.ngZone.run(() => {
+              let result = (<any>Object);
+          let results = this.scoreSnapshot(snapshot.value, tid);
           console.log("From firebaseservice user score is" +JSON.stringify(results))
            observer.next(results);
         });
@@ -558,7 +573,7 @@ export class FirebaseService {
       "CID": CID,
       "Score": score,
       "TID": TID,
-      "Date": 0 - Date.now()
+      "Date": Date.now()
     }) .then(
       function (result:any) {
         return 'User Score updated';
@@ -581,14 +596,16 @@ export class FirebaseService {
     return this._allItems;
   }
 
-  scoreSnapshot(data: any) {
+  scoreSnapshot(data: any, tid:string) {
     //empty array, then refill and filter
     this._allItems = [];
     if (data) {
       for (let id in data) {        
         let result = (<any>Object).assign({id: id}, data[id]);
+
+        if(tid == result.TID){
           this._allItems.push(result);
-              
+        }
       }
 
       this.publishUpdates();

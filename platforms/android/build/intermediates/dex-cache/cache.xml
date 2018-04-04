@@ -3,6 +3,24 @@
 
     <item
         is-multidex="false"
+        jar="C:\Users\kadir\.android\build-cache\a0288442d6013c05f18108b0eedc0c1fe71c6395\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="43034f858e44e3c324bf41600877b2d1efe1d106">
+        <dex dex="C:\Users\kadir\dirproto5\platforms\android\app\build\intermediates\pre-dexed\F0F1F2\debug\classes_af2e3b4f82b294cf6ecd748b1d78b076aaf2bb10.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\kadir\.android\build-cache\f3b36ccb48f5190d334c005998c2f68f231b9074\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="83f711d70ef9ce041ead02bc16e944130c58d05a">
+        <dex dex="C:\Users\kadir\dirproto5\platforms\android\app\build\intermediates\pre-dexed\F0F1F2\debug\classes_21b834b181887f80f6b067a1b85d042faa3dcc0b.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="C:\Users\kadir\.android\build-cache\829c22403da75661748325a4d79c36576ee50061\output\jars\classes.jar"
         jumboMode="false"
         optimize="true"
