@@ -74,7 +74,6 @@ register(){
   }
 
 //   forgotPassword() {
-
 //     prompt({
 //       title: "Forgot Password",
 //       message: "Enter the email address you used to register for Giftler to reset your password.",

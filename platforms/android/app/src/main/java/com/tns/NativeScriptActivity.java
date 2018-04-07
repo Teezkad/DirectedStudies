@@ -20,6 +20,12 @@ public class NativeScriptActivity extends android.app.Activity implements com.tn
 		com.tns.Runtime.callJSMethod(this, "onCreate", void.class, args);
 	}
 
+	protected void onNewIntent(android.content.Intent param_0)  {
+		java.lang.Object[] args = new java.lang.Object[1];
+		args[0] = param_0;
+		com.tns.Runtime.callJSMethod(this, "onNewIntent", void.class, args);
+	}
+
 	protected void onSaveInstanceState(android.os.Bundle param_0)  {
 		java.lang.Object[] args = new java.lang.Object[1];
 		args[0] = param_0;

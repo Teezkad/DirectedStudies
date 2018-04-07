@@ -175,6 +175,9 @@ var Label = (function (_super) {
             left: text_base_1.layout.toDeviceIndependentPixels(this.effectivePaddingLeft)
         };
     };
+    Label = __decorate([
+        text_base_1.CSSType("Label")
+    ], Label);
     return Label;
 }(text_base_1.TextBase));
 exports.Label = Label;

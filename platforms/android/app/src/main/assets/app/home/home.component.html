@@ -8,31 +8,38 @@
     <GridLayout class="page page-content" tkMainContent>
         <Label class="page-placeholder" ></Label>            
        
-        <TabView #tabview>
+        <TabView #tabview> 
         <StackLayout class="form" *tabItem="{title: 'Available Classes'}">
-                <Label class="h2 header" text="List of Classes"></Label>
+                <Label class="h2 header" horizontalAlignment = "center" text="List of Classes"></Label>
 
-            <ListView [items]="allClass"  height="300">
+            <ListView [items]="allClass"  height="500" rowHeight="150">
                 <ng-template let-item="item">                  
-                    <GridLayout columns="auto,*,auto">
-                            <button *ngIf = "item.registered != true" text=" Register in class" class="btnIcon" (tap) = "inClass(item, item.id, item.Name, item.Professor, item.Year, item.UID)"></button>
-                            <button *ngIf = "item.registered == true" text="View Class" class="btnIcon" (tap) = "activateClass(item.id, item.Name, item.UID)"></button>
-                            <Label class="h3 header"  col="1" [text]='item.Name'></Label>
-                        <Image *ngIf = "item.UID == currentUser" class="m-5" col="2" horizontalAlignment="right" width="40" height="40" (tap)="deleteCl(item)" [src]="'~/assets/trash.png'"></Image>
-                        </GridLayout>                 
+                    <StackLayout  rows = "300" columns="auto,*,auto" class = "listview" >
+                            <Label class="classname"  col="1" [text]='"Class Name: " + item.Name'></Label>
+                            <!-- <Label textWrap = "true" class = "classDescription" [text] = '"Description: " + item.Description'></Label>-->
+                           <Label class = "classDescription" [text] = '"Instructor: " + item.Professor'></Label> 
+                            <Label class = "classDescription" [text] = '"Institution: " + item.Institution'></Label>
+                            <Label class = "classDescription" [text] = '"Year: " + item.Year'></Label>   
+                        <GridLayout>                 
+                            <button class = "button-register" horizontalAlignment = "center" *ngIf = "item.registered != true" text=" Register in class" (tap) = "inClass(item, item.id, item.Name, item.Professor, item.Year, item.UID, item.ID)"></button>
+                            <button *ngIf = "item.registered == true" text="ENTER CLASSROOM" class="button-view" (tap) = "activateClass(item.id, item.Name, item.UID, item.TAs)"></button>
+                        </GridLayout>       
+                            <Image *ngIf = "item.UID == currentUser" class="m-5" col="2" horizontalAlignment="right" width="40" height="40" (tap)="deleteCl(item)" [src]="'~/assets/trash.png'"></Image>
+                        </StackLayout>                 
                 </ng-template>
             </ListView>
         </StackLayout>
 
         <StackLayout *tabItem = "{title: 'Registered Classes'}"  class="form">
-                
-                            <Label class="h2 header" text="My Class List"></Label>
+                            <Label class="h2 header"  horizontalAlignment = "center" text="My Class List"></Label>
+                            <label class = "h4" *ngIf = "(myclassrooms$ | async)?.length==0" text = "You are not registered in any classes"></label>
+
                         <ListView [items]="myclassrooms$ | async"  height="300">
                             <ng-template let-item="item">                  
                                 <StackLayout columns="auto,*,auto">
-                                        <Label class="h3 header"  col="1" [text]='item.ClassName + " Year: "+ item.Year'></Label>
-                                        <label Class = "h3 header" [text] = '"Created by: "+ item.Professor'></label>
-                                        <button text="View Class" class="btnIcon" (tap) = "activateClass(item.CID, item.ClassName, item.UID)"></button>
+                                        <Label class="classDescription"  col="1" [text]='item.ClassName + " Year: "+ item.Year'></Label>
+                                        <label class = "classDescription" [text] = '"Created by: "+ item.Professor'></label>
+                                        <button class = "button-view" text="View Class" (tap) = "activateClass(item.CID, item.ClassName, item.UID)"></button>
                                 </StackLayout>                 
                             </ng-template>
                         </ListView> 

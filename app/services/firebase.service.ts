@@ -50,9 +50,6 @@ export class FirebaseService {
 
   //logs out user
   logout(){
-    BackendService.token = "";
-    BackendService.Uname= "";
-    BackendService.CID = "";
         firebase.logout();    
   }
   
@@ -87,7 +84,7 @@ export class FirebaseService {
 
 
     //display all users
-    getMyUserList(): Observable<any> {
+    getMyUserList(token: string): Observable<any> {
       return new Observable((observer: any) => {
         let path = 'Users';
         
@@ -95,7 +92,7 @@ export class FirebaseService {
             this.ngZone.run(() => {
                   //     let result = (<any>Object).assign({id: id}, data[id]);
                   let result = (<any>Object);
-              let results = this.userSnapshot(snapshot.value);
+              let results = this.userSnapshot(snapshot.value, token);
               console.log("From firebaseservice users" + JSON.stringify(results))
                observer.next(results);
             });
@@ -139,13 +136,13 @@ export class FirebaseService {
       }).share();              
     }
   
-    userSnapshot(data: any) {
+    userSnapshot(data: any, token: string) {
       //empty array, then fill with current user
       this._allItems = [];
       if (data) {
         for (let id in data) {        
           let result = (<any>Object).assign({id: id}, data[id]);
-          if(BackendService.token === result.UID){ 
+          if(token === result.UID){ 
             this._allItems.push(result);
           }
                 
@@ -226,7 +223,8 @@ export class FirebaseService {
       "UID": BackendService.token}
       ).then(result => {
         console.log("User key is"+ result.key);
-        this.userRegister(result.key, name, professor, year, BackendService.token, ID);    
+        this.userRegister(result.key, name, professor, year, BackendService.token, ID); 
+        return name + "Successfully Created";   
       },
       function (errorMessage:any) {
         alert(errorMessage);
@@ -286,22 +284,48 @@ export class FirebaseService {
       .then(result => {
         console.log("User key is"+ result.key);
         this.setTATrue(userkey, classroom, result.key);
+        return 'This user is now a TA';
       },
       function (errorMessage:any) {
         alert(errorMessage);
       }); 
     }
 
-    unregisterTA(classroom: string, firstName: string, lastName: string, UID: string, userkey: string, studentkey: string){
+    unregisterTA(classroom: string, firstName: string, lastName: string, userkey: string, studentkey: string){
       this.setTAFalse(userkey, classroom);
       return firebase.remove("/Classroom/"+classroom+"/TAs/"+studentkey)
       .then( 
         function (result:any) {
-          return 'You have successfully promoted this user';
+          return 'You have successfully demoted this user';
         },
         function (errorMessage:any) {
           console.log(errorMessage);
         });  
+    }
+
+    messageToReceiver(question: Question, message: string){
+      return firebase.push("Users/"+question.UID+ "/Messages" ,{
+        "Message": message,
+        "Request": question.id,
+        "Seen": false,
+        "ClassName": question.ClassName,
+        "Professor": question.Professor,
+        "Question": question.name
+      })
+
+    }
+
+    messageFromSender(question: Question, message: string){
+      return firebase.push("Users/"+BackendService.Uid+ "/Messages" ,{
+        "Message": message,
+        "Request": question.id,
+        "ClassName": question.ClassName,
+        "Professor": question.Professor,
+        "Question": question.name,
+        "FirstName": question.by,
+        "Topic": question.Tags
+      })
+
     }
 
     //update TA field for classroom member
@@ -333,7 +357,21 @@ export class FirebaseService {
         });  
     }
 
-    
+    getUserMessages(): Observable<any>{
+      return new Observable((observer: any ) => {
+        let path = "Users/"+BackendService.Uid+"/Messages";
+
+        let onValueEvent = (snapshot: any) => {
+          this.ngZone.run(() => {
+                let result = (<any>Object);
+            let results = this.myClassSnapshot(snapshot.value);
+            // console.log("From firebaseservice" +JSON.stringify(results))
+             observer.next(results);
+          });
+        };
+        firebase.addValueEventListener(onValueEvent, `/${path}`);
+      }).share();
+    }
 
 //display all classes
   getAllClassList(): Observable<any> {
@@ -454,7 +492,7 @@ export class FirebaseService {
       "/Requests",
     {"Name": name, "Tags": tags, "Option": options,"UID":BackendService.Uid, 
     "TopicID": TID, "ClassID": BackendService.CID,
-    "By" : BackendService.Uname, "StudentNum": studentNum
+    "By" : BackendService.Uname, "StudentNum": studentNum, "ClassName": BackendService.Cname
 
   
   })

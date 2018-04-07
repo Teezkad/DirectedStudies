@@ -69,7 +69,7 @@ export class questionComponent{
         this.question = new Question();
             this.question.name= "";
             this.question.questionTypeId = this.tid; //recieves tag id from tag page
-            this.question.Tag = this.tname; //recieve tag name from tag page
+            this.question.Tags = this.tname; //recieve tag name from tag page
             this.question.CID= BackendService.CID;
             this.question.UID= BackendService.token;
             this.question.options = [this.option1, this.option2, this.option3, this.option4];
@@ -100,20 +100,20 @@ export class questionComponent{
     public submitQuestion(){
 
         if (BackendService.instructor == true){
-        this.firebaseService.addQuestion(this.question.name,this.question.Tag, this.question.questionTypeId,
+        this.firebaseService.addQuestion(this.question.name,this.question.Tags, this.question.questionTypeId,
         this.question.options, this.question.UID).then((message:any) => {
       
             alert(message);
             console.log("Question created ");
-            this.router.navigate(["home"]);
+            this.router.navigate(["search"]);
           }) }else{
-            this.firebaseService.addQuestionRequest(this.question.name,this.question.Tag, this.question.questionTypeId,
+            this.firebaseService.addQuestionRequest(this.question.name,this.question.Tags, this.question.questionTypeId,
                 this.question.options, this.question.UID, BackendService.studentNum).then((message:any) => {
               
                     alert(message);
                
                     console.log("Question created ");
-                    this.router.navigate(["home"]);
+                    this.router.navigate(["search"]);
                   })
           }
         // console.log(this.option1.isAnswer);

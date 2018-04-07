@@ -38,7 +38,8 @@ function startMonitoring(connectionTypeChangedCallback) {
         var newConnectionType = getConnectionType();
         connectionTypeChangedCallback(newConnectionType);
     };
-    application_1.android.registerBroadcastReceiver(android.net.ConnectivityManager.CONNECTIVITY_ACTION, onReceiveCallback);
+    var zoneCallback = zonedCallback(onReceiveCallback);
+    application_1.android.registerBroadcastReceiver(android.net.ConnectivityManager.CONNECTIVITY_ACTION, zoneCallback);
 }
 exports.startMonitoring = startMonitoring;
 function stopMonitoring() {

@@ -16,10 +16,12 @@ let now = moment().format('LLLL');
 
 
 @Component({
-    selector: "Score",
+    selector: "Score.component",
     moduleId: module.id,
-    templateUrl: "./Score.component.xml"
+     templateUrl: "./Score.component.html"
 })
+
+
 export class ScoreComponent implements OnInit {
     currentUser = BackendService.token;
     Cname = BackendService.Cname;
@@ -33,10 +35,13 @@ export class ScoreComponent implements OnInit {
     public score$: Observable<any>;
     public graph$: Observable<any>;
     public uid;
+    public length;
     public tid;
     public fname;
     public lname;
     public tname;
+    public avg;
+    public max;
 
     private _sideDrawerTransition: DrawerTransitionBase;
     public creatorId = BackendService.instructor;
@@ -61,6 +66,7 @@ export class ScoreComponent implements OnInit {
         // this.users$ = <any>this.firebaseService.getRegisteredUsers(BackendService.CID);
         this.score$.subscribe(val => {
             this.graph$ = val;
+            this.length = val.length;
             var dated = JSON.stringify(val[0].Date);
             var timestamp = moment(parseInt(dated));
 
@@ -78,8 +84,25 @@ export class ScoreComponent implements OnInit {
                 this.graph$[i].Datetime = time;
             }
         })
+
+
 }
 
+
+    getAverage(){
+        var sum =0;
+        var maxi = 0;
+        for(var i =0; i<this.length; i++){
+            var score = JSON.parse(JSON.stringify(this.graph$[i].Score));
+            sum+=score;
+
+            if(score > maxi){
+                maxi = score
+            }
+        }
+        this.max = maxi;
+        this.avg = sum/this.length
+    }
     get sideDrawerTransition(): DrawerTransitionBase {
         return this._sideDrawerTransition;
     }
@@ -90,6 +113,11 @@ export class ScoreComponent implements OnInit {
     *************************************************************/
     onDrawerButtonTap(): void {
         this.drawerComponent.sideDrawer.showDrawer();
+    }
+
+    onPageLoaded(args){
+        var page = args.object;
+        page.bindingContext = this.graph$;
     }
  
 }

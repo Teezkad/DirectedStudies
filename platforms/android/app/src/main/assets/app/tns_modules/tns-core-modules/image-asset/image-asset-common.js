@@ -34,7 +34,7 @@ exports.ImageAsset = ImageAsset;
 function getAspectSafeDimensions(sourceWidth, sourceHeight, reqWidth, reqHeight) {
     var widthCoef = sourceWidth / reqWidth;
     var heightCoef = sourceHeight / reqHeight;
-    var aspectCoef = widthCoef > heightCoef ? widthCoef : heightCoef;
+    var aspectCoef = Math.min(widthCoef, heightCoef);
     return {
         width: Math.floor(sourceWidth / aspectCoef),
         height: Math.floor(sourceHeight / aspectCoef)
@@ -42,14 +42,9 @@ function getAspectSafeDimensions(sourceWidth, sourceHeight, reqWidth, reqHeight)
 }
 exports.getAspectSafeDimensions = getAspectSafeDimensions;
 function getRequestedImageSize(src, options) {
-    var reqWidth = platform.screen.mainScreen.widthDIPs;
-    var reqHeight = platform.screen.mainScreen.heightDIPs;
-    if (options && options.width) {
-        reqWidth = (options.width > 0 && options.width < reqWidth) ? options.width : reqWidth;
-    }
-    if (options && options.height) {
-        reqHeight = (options.height > 0 && options.height < reqHeight) ? options.height : reqHeight;
-    }
+    var screen = platform.screen.mainScreen;
+    var reqWidth = options.width || Math.min(src.width, screen.widthPixels);
+    var reqHeight = options.height || Math.min(src.height, screen.heightPixels);
     if (options && options.keepAspectRatio) {
         var safeAspectSize = getAspectSafeDimensions(src.width, src.height, reqWidth, reqHeight);
         reqWidth = safeAspectSize.width;

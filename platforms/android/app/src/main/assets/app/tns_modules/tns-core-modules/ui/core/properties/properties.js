@@ -76,6 +76,9 @@ var Property = (function () {
             var oldValue = key in this ? this[key] : defaultValue;
             var changed = equalityComparer ? !equalityComparer(oldValue, value) : oldValue !== value;
             if (wrapped || changed) {
+                if (affectsLayout) {
+                    this.requestLayout();
+                }
                 if (reset) {
                     delete this[key];
                     if (valueChanged) {
@@ -119,9 +122,6 @@ var Property = (function () {
                 }
                 if (this.hasListeners(eventName)) {
                     this.notify({ object: this, eventName: eventName, propertyName: propertyName, value: value, oldValue: oldValue });
-                }
-                if (affectsLayout) {
-                    this.requestLayout();
                 }
                 if (this.domNode) {
                     if (reset) {

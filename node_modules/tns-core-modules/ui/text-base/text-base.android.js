@@ -77,10 +77,10 @@ var TextBase = (function (_super) {
         this._maxHeight = this._maxLines = undefined;
     };
     TextBase.prototype[text_base_common_1.textProperty.getDefault] = function () {
-        return -1;
+        return text_base_common_1.resetSymbol;
     };
     TextBase.prototype[text_base_common_1.textProperty.setNative] = function (value) {
-        var reset = value === -1;
+        var reset = value === text_base_common_1.resetSymbol;
         if (!reset && this.formattedText) {
             return;
         }

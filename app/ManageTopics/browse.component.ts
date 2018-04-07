@@ -13,7 +13,8 @@ import { ActivatedRoute, NavigationExtras} from "@angular/router";
 @Component({
     selector: "Browse",
     moduleId: module.id,
-    templateUrl: "./browse.component.html"
+    templateUrl: "./browse.component.html",
+    styleUrls: ["./browse.component.css"]
 })
 export class BrowseComponent implements OnInit {
     currentUser = BackendService.token;
@@ -33,6 +34,7 @@ export class BrowseComponent implements OnInit {
     private _sideDrawerTransition: DrawerTransitionBase;
     public creatorId = BackendService.instructor;
     public i = 'a';
+    public TA = BackendService.TA;
 
     constructor(private routerExtensions: RouterExtensions,
         private firebaseService: FirebaseService, private route: ActivatedRoute
@@ -119,12 +121,20 @@ export class BrowseComponent implements OnInit {
     this.firebaseService.registerTA(BackendService.CID, firstname, lastname,UID, userId).then((message:any) => {
         alert(message);
         console.log("TA created ");
-        this.routerExtensions.navigate(["browse"]);
       });
   }
 
-  downgradeUser(){
+  
+  sendMessage(question: Question, message: string){
+      this.firebaseService.messageFromSender(question, message);
+      this.firebaseService.messageToReceiver(question, message);
+  }
 
+  downgradeUser(firstname: string, lastname: string, userId: string, id: string){
+    this.firebaseService.unregisterTA(BackendService.CID, firstname, lastname, userId, id).then((message:any) => {
+        alert(message);
+        console.log("TA downgraded ");
+      });
   }
   removeUser(uid: string){
       this.firebaseService.deleteRegisteredUsers(uid) .catch(() => {

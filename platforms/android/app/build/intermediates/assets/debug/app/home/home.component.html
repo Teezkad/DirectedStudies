@@ -1,0 +1,49 @@
+<ActionBar class="action-bar">
+    <ActionItem (tap)="logOut()">
+        <Button text="Logout" class="action-item"></Button>
+      </ActionItem>   
+    <Label class="action-bar-title" text="Home"></Label>
+</ActionBar>
+
+    <GridLayout class="page page-content" tkMainContent>
+        <Label class="page-placeholder" ></Label>            
+       
+        <TabView #tabview>
+        <StackLayout class="form" *tabItem="{title: 'Available Classes'}">
+                <Label class="h2 header" text="List of Classes"></Label>
+
+            <ListView [items]="allClass"  height="500" rowHeight="150">
+                <ng-template let-item="item">                  
+                    <StackLayout columns="auto,*,auto" >
+                            <Label class="classname"  col="1" [text]='"Class Name: " + item.Name'></Label>
+                            <Label textWrap = "true" class = "classDescription" [text] = '"Description: " + item.Description'></Label>
+                            <Label class = "classDescription" [text] = '"Instructor: " + item.Professor'></Label>
+                            <Label class = "classDescription" [text] = '"Institution: " + item.Institution'></Label>
+                            <Label class = "classDescription" [text] = '"Year: " + item.Year'></Label>                           
+                            <button class = "button-register" HorizontalAlignment = "center" *ngIf = "item.registered != true" text=" Register in class" (tap) = "inClass(item, item.id, item.Name, item.Professor, item.Year, item.UID, item.ID)"></button>
+                            <button *ngIf = "item.registered == true" text="View Class" class="button-view" (tap) = "activateClass(item.id, item.Name, item.UID)"></button>
+                        <Image *ngIf = "item.UID == currentUser" class="m-5" col="2" horizontalAlignment="right" width="40" height="40" (tap)="deleteCl(item)" [src]="'~/assets/trash.png'"></Image>
+                        </StackLayout>                 
+                </ng-template>
+            </ListView>
+        </StackLayout>
+
+        <StackLayout *tabItem = "{title: 'Registered Classes'}"  class="form">
+                
+                            <Label class="h2 header" text="My Class List"></Label>
+                        <ListView [items]="myclassrooms$ | async"  height="300">
+                            <ng-template let-item="item">                  
+                                <StackLayout columns="auto,*,auto">
+                                        <Label class="classDescription"  col="1" [text]='item.ClassName + " Year: "+ item.Year'></Label>
+                                        <label class = "classDescription" [text] = '"Created by: "+ item.Professor'></label>
+                                        <button class = "button-view" text="View Class" (tap) = "activateClass(item.CID, item.ClassName, item.UID)"></button>
+                                </StackLayout>                 
+                            </ng-template>
+                        </ListView> 
+            <Button class="btn btn-primary" text="Create Class" (tap)="navclass()"></Button>
+
+        </StackLayout>
+        </TabView>
+
+
+    </GridLayout>

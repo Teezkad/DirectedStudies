@@ -92,6 +92,7 @@ exports.android = androidApp;
 application_common_1.setApplication(androidApp);
 var mainEntry;
 var started = false;
+var createRootFrame = { value: true };
 function start(entry) {
     if (started) {
         throw new Error("Application is already started.");
@@ -104,10 +105,40 @@ function start(entry) {
     }
 }
 exports.start = start;
+function shouldCreateRootFrame() {
+    return createRootFrame.value;
+}
+exports.shouldCreateRootFrame = shouldCreateRootFrame;
+function run(entry) {
+    createRootFrame.value = false;
+    start(entry);
+}
+exports.run = run;
+var CALLBACKS = "_callbacks";
+function _resetRootView(entry) {
+    var activity = androidApp.foregroundActivity;
+    if (!activity) {
+        throw new Error("Cannot find android activity.");
+    }
+    createRootFrame.value = false;
+    mainEntry = typeof entry === "string" ? { moduleName: entry } : entry;
+    var callbacks = activity[CALLBACKS];
+    callbacks.resetActivityContent(activity);
+}
+exports._resetRootView = _resetRootView;
 function getMainEntry() {
     return mainEntry;
 }
 exports.getMainEntry = getMainEntry;
+function getRootView() {
+    var activity = androidApp.foregroundActivity || androidApp.startActivity;
+    if (!activity) {
+        return undefined;
+    }
+    var callbacks = activity[CALLBACKS];
+    return callbacks ? callbacks.getRootView() : undefined;
+}
+exports.getRootView = getRootView;
 function getNativeApplication() {
     var nativeApp = androidApp.nativeApp;
     if (!nativeApp) {

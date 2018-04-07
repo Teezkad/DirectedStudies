@@ -1,0 +1,35 @@
+.button-register{
+    width: 190em;
+    color: white;
+    background-color: blue;
+    height: 50em;
+    float: right;
+    margin-left: 35em;
+    margin-top: 15em;
+}
+
+.button-view{
+    width: 190em;
+    color: white;
+    background-color: rgb(8, 223, 62);
+    height: 50em;
+    margin-left: 35em;
+    margin-top: 15em;
+}
+
+.classname{
+    color: darkblue;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 20em;
+    text-align: center;
+    margin-left: 0em;
+
+}
+
+.classDescription{
+    color: darkblue;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 13em;
+    text-align: left;
+
+}

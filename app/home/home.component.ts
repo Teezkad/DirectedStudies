@@ -11,17 +11,14 @@ import { RouterExtensions } from 'nativescript-angular/router/router-extensions'
 import { firestore } from "nativescript-plugin-firebase";
 import * as tabViewModule from "tns-core-modules/ui/tab-view";
 import {ActivatedRoute, NavigationExtras} from "@angular/router";
-import * as moment from 'moment';
-
-
-let now = moment().format('LLLL');
 
 
 
 @Component({
     selector: "Home",
     moduleId: module.id,
-    templateUrl: "./home.component.html"
+    templateUrl: "./home.component.html",
+    styleUrls: ["./home.component.css"]
 })
 export class HomeComponent implements OnInit {
     currentUser = BackendService.token;
@@ -56,7 +53,8 @@ export class HomeComponent implements OnInit {
     * Use the sideDrawerTransition property to change the open/close animation of the drawer.
     *************************************************************/
     ngOnInit(): void {
-        this.users$ = <any>this.firebaseService.getMyUserList();
+        BackendService.TA == false;
+        this.users$ = <any>this.firebaseService.getMyUserList(BackendService.token);
         this.users$.subscribe(val => {
             console.log(BackendService.Uid = JSON.parse( JSON.stringify(val[0].id)));
             BackendService.Uname = JSON.parse(JSON.stringify(val[0].FirstName));
@@ -66,20 +64,7 @@ export class HomeComponent implements OnInit {
         }); 
         console.log("My uid is"+ BackendService.Uid);
         console.log("Login successful");
-        var a = new Date(1520547295821 * 1000);
-        var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-        var year = a.getFullYear();
-        var month = months[a.getMonth()];
-        var date = a.getDate();
-        var hour = a.getHours();
-        var min = a.getMinutes();
-        var sec = a.getSeconds();
-        var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ; 
-        console.log("Datetime is "+ time);
-        
-        var t = new Date(1520547295821 * 1000 );
-        var formatted = moment(t).format("dd.mm.yyyy hh:MM:ss");
-        console.log("2nd datetime is "+ formatted);
+       
         
         BackendService.instructor = false;
         this._sideDrawerTransition = new SlideInOnTopTransition();
@@ -102,8 +87,8 @@ export class HomeComponent implements OnInit {
     }
 
     showclasses(){
-        // console.log("all classes size is  "+ this.leng);
-        // console.log("my class length is "+ this.len );
+        console.log("all classes size is  "+ this.leng);
+        console.log("my class length is "+ this.len );
         for (var i = 0; i< this.leng; i++){
             var all = JSON.parse(JSON.stringify(this.allClass1[i].ID));
             for (var j = 0; j < this.len; j++){
@@ -155,12 +140,11 @@ export class HomeComponent implements OnInit {
       
 
       //this is to turn off the delete button 
-
       navTag(){
         this.routerExtensions.navigate(["/tag"]);
     }
 
-    activateClass(id: string, name: string, uid: string)
+    activateClass(id: string, name: string, uid: string, TA = [])
     {
         BackendService.CID = id;
         BackendService.Cname = name;
@@ -180,6 +164,15 @@ export class HomeComponent implements OnInit {
         this.routerExtensions.navigate(["/search"]);
 
     }
+
+    
+if(TA != null){
+    for(var i =0; i < TA.length; i++){
+        if (BackendService.token == JSON.stringify(TA[i].UID)){
+            BackendService.TA == true;
+        }
+    }
+}
 
  
         }

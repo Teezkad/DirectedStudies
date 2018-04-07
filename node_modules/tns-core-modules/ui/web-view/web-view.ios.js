@@ -55,9 +55,6 @@ var WKNavigationDelegateImpl = (function (_super) {
         }
         var owner = this._owner.get();
         if (owner) {
-            webView.evaluateJavaScriptCompletionHandler("document.body.height", function (val, err) {
-                console.log(val);
-            });
             var src = owner.src;
             if (webView.URL) {
                 src = webView.URL.absoluteString;
