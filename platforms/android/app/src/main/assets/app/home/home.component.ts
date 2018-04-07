@@ -53,23 +53,33 @@ export class HomeComponent implements OnInit {
     * Use the sideDrawerTransition property to change the open/close animation of the drawer.
     *************************************************************/
     ngOnInit(): void {
-        BackendService.TA == false;
+        BackendService.TA = false;
         this.users$ = <any>this.firebaseService.getMyUserList(BackendService.token);
-        this.users$.subscribe(val => {
-            console.log(BackendService.Uid = JSON.parse( JSON.stringify(val[0].id)));
-            BackendService.Uname = JSON.parse(JSON.stringify(val[0].FirstName));
-            BackendService.studentNum = JSON.parse(JSON.stringify(val[0].studentNum));
-            BackendService.Uname = JSON.parse(JSON.stringify(val[0].FirstName));
-            BackendService.studentNum = JSON.parse(JSON.stringify(val[0].studentNum));
-        }); 
-        console.log("My uid is"+ BackendService.Uid);
-        console.log("Login successful");
-       
-        
         BackendService.instructor = false;
         this._sideDrawerTransition = new SlideInOnTopTransition();
         this.classrooms$ = <any>this.firebaseService.getAllClassList();
         this.myclassrooms$ = <any>this.firebaseService.getMyClassList();
+       
+        this.users$.subscribe(val => {
+            console.log(BackendService.Uid = JSON.parse( JSON.stringify(val[0].id)));
+            BackendService.Uname = JSON.parse(JSON.stringify(val[0].FirstName));
+            BackendService.studentNum = JSON.parse(JSON.stringify(val[0].studentNum));
+            var first = JSON.parse(JSON.stringify(val[0].FirstName));
+            var last = JSON.parse(JSON.stringify(val[0].LastName));
+            BackendService.Uname = first + " " + last;
+
+            BackendService.studentNum = JSON.parse(JSON.stringify(val[0].studentNum));
+        }); 
+        console.log("My uid is"+ BackendService.Uid);
+       
+        if(this.classrooms$ == null){ 
+
+
+        console.log("Returning null observables for all classrooms");
+    }else if (this.myclassrooms$ == null){
+        console.log("Null observables for my classes");
+    }
+    else{
 
         this.myclassrooms$.subscribe( my =>{
             this.len = my.length;
@@ -82,7 +92,7 @@ export class HomeComponent implements OnInit {
             this.leng = clas.length;
             this.showclasses();
         })
-
+    }
 
     }
 
@@ -90,6 +100,7 @@ export class HomeComponent implements OnInit {
         console.log("all classes size is  "+ this.leng);
         console.log("my class length is "+ this.len );
         for (var i = 0; i< this.leng; i++){
+            this.allClass1 = this.allClass1;
             var all = JSON.parse(JSON.stringify(this.allClass1[i].ID));
             for (var j = 0; j < this.len; j++){
                 var my = JSON.parse(JSON.stringify(this.myClass[j].ID));
@@ -133,7 +144,8 @@ export class HomeComponent implements OnInit {
 
    
         console.log("Classroom successfully registered");
-      }) 
+      });
+      this.ngOnInit(); 
     }
       //to store all available data for each user, use backend service to store the value of each attrinute 
       //for every users
@@ -176,16 +188,7 @@ if(TA != null){
 
  
         }
-
-
-
-
-   delete(tag: Tag) {
-    this.firebaseService.deleteTag(tag)
-      .catch(() => {
-        alert("An error occurred while deleting an item from your list.");
-      });
-  } 
+ 
       
 
 }
