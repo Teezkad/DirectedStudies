@@ -17,6 +17,8 @@ export class FirebaseService {
   
   private _allItems: Array<Classroom> = [];
   private _items = [];
+  public users$: Observable<any>;
+
   
   //registers user's email anmd password only, this isstored in firebase authentications
   register(user: User, email: string, firstName: string, lastName: string, studentNum: string, instructor: boolean, professor: boolean) {
@@ -41,6 +43,18 @@ export class FirebaseService {
       email: user.email,
       password: user.password
     }).then((result: any) => {
+      this.users$ =  <any>this.getMyUserList(BackendService.token);
+
+      this.users$.subscribe(val => {
+        console.log(BackendService.Uid = JSON.parse( JSON.stringify(val[0].id)));
+        BackendService.Uname = JSON.parse(JSON.stringify(val[0].FirstName));
+        BackendService.studentNum = JSON.parse(JSON.stringify(val[0].studentNum));
+        var first = JSON.parse(JSON.stringify(val[0].FirstName));
+        var last = JSON.parse(JSON.stringify(val[0].LastName));
+        BackendService.Uname = first + " " + last;
+    }); 
+    console.log("My uid is"+ BackendService.Uid);
+
           BackendService.token = result.uid;
           return JSON.stringify(result);
       }, (errorMessage: any) => {
@@ -364,7 +378,7 @@ export class FirebaseService {
         let onValueEvent = (snapshot: any) => {
           this.ngZone.run(() => {
                 let result = (<any>Object);
-            let results = this.myClassSnapshot(snapshot.value);
+            let results = this.handleSnapshot(snapshot.value);
             // console.log("From firebaseservice" +JSON.stringify(results))
              observer.next(results);
           });
@@ -399,7 +413,7 @@ export class FirebaseService {
         let onValueEvent = (snapshot: any) => {
           this.ngZone.run(() => {
                 let result = (<any>Object);
-            let results = this.myClassSnapshot(snapshot.value);
+            let results = this.handleSnapshot(snapshot.value);
             console.log("From firebaseservice my registered classes" +JSON.stringify(results))
              observer.next(results);
           });
@@ -408,22 +422,6 @@ export class FirebaseService {
     }).share();              
   }
 
-  //get all classes user has created
-  getCreatedClasses(): Observable<any> {
-    return new Observable((observer: any) => {
-      let path = 'Classroom/';
-      
-        let onValueEvent = (snapshot: any) => {
-          this.ngZone.run(() => {
-                let result = (<any>Object);
-            let results = this.classSnapshots(snapshot.value);
-            // console.log("From firebaseservice" +JSON.stringify(results))
-             observer.next(results);
-          });
-        };
-        firebase.addValueEventListener(onValueEvent, `/${path}`);
-    }).share();              
-  }
 
   getScore(uid: string): Observable<any>{
     return new Observable((observer: any)=>{
@@ -464,22 +462,6 @@ export class FirebaseService {
         if(BackendService.token === result.UID){
           this._allItems.push(result);
         }        
-      }
-      // this.publishUpdates();
-    }
-    return this._allItems;
-
-  }
-
-  myClassSnapshot(data: any) {
-    //empty array, then refill and filter
-    this._allItems = [];
-    if (data) {
-      for (let id in data) {        
-        let result = (<any>Object).assign({id: id}, data[id]);
-       
-          this._allItems.push(result);
-           
       }
       // this.publishUpdates();
     }
@@ -667,24 +649,7 @@ export class FirebaseService {
       .catch(this.handleErrors);
   } 
 
-  deleteQuestion(question: Question){
-    return firebase.remove("/Questions/"+question.id+"")
-    .catch(this.handleErrors);
-  }
 
-  deleteRegisteredUsers(uid: string){
-    return firebase.remove("/Classroom/"+BackendService.CID+"/Members/"+uid)
-    .catch(this.handleErrors);
-  }
-
-  deleteQuestionRequest(question: Question){
-    return firebase.remove("/Requests/"+question.id+"").catch(this.handleErrors);
-  }
-
-  deleteTag(tag: Tag) {
-    return firebase.remove("/Tags/"+tag.id+"")
-      .catch(this.handleErrors);
-  } 
 
 
 

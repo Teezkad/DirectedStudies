@@ -34,6 +34,7 @@ export class BrowseComponent implements OnInit {
     private _sideDrawerTransition: DrawerTransitionBase;
     public creatorId = BackendService.instructor;
     public i = 'a';
+    public TA = BackendService.TA;
 
     constructor(private routerExtensions: RouterExtensions,
         private firebaseService: FirebaseService, private route: ActivatedRoute

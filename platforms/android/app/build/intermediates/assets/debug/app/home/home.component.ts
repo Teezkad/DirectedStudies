@@ -11,10 +11,6 @@ import { RouterExtensions } from 'nativescript-angular/router/router-extensions'
 import { firestore } from "nativescript-plugin-firebase";
 import * as tabViewModule from "tns-core-modules/ui/tab-view";
 import {ActivatedRoute, NavigationExtras} from "@angular/router";
-import * as moment from 'moment';
-
-
-let now = moment().format('LLLL');
 
 
 
@@ -22,7 +18,7 @@ let now = moment().format('LLLL');
     selector: "Home",
     moduleId: module.id,
     templateUrl: "./home.component.html",
-    styleUrls: ['./home.component.css']
+    styleUrls: ["./home.component.css"]
 })
 export class HomeComponent implements OnInit {
     currentUser = BackendService.token;
@@ -56,36 +52,34 @@ export class HomeComponent implements OnInit {
     /* ***********************************************************
     * Use the sideDrawerTransition property to change the open/close animation of the drawer.
     *************************************************************/
-    ngOnInit(): void {
-        this.users$ = <any>this.firebaseService.getMyUserList(BackendService.token);
+   async ngOnInit(){
+        BackendService.TA = false;
+        this.users$ = await <any>this.firebaseService.getMyUserList(BackendService.token);
+        BackendService.instructor = false;
+        this._sideDrawerTransition = new SlideInOnTopTransition();
+        this.classrooms$ = await <any>this.firebaseService.getAllClassList();
+        this.myclassrooms$ = await <any>this.firebaseService.getMyClassList();
+       
         this.users$.subscribe(val => {
             console.log(BackendService.Uid = JSON.parse( JSON.stringify(val[0].id)));
             BackendService.Uname = JSON.parse(JSON.stringify(val[0].FirstName));
             BackendService.studentNum = JSON.parse(JSON.stringify(val[0].studentNum));
-            BackendService.Uname = JSON.parse(JSON.stringify(val[0].FirstName)) + JSON.parse(JSON.stringify(val[0].LastName));
+            var first = JSON.parse(JSON.stringify(val[0].FirstName));
+            var last = JSON.parse(JSON.stringify(val[0].LastName));
+            BackendService.Uname = first + " " + last;
+
             BackendService.studentNum = JSON.parse(JSON.stringify(val[0].studentNum));
         }); 
         console.log("My uid is"+ BackendService.Uid);
-        console.log("Login successful");
-        // var a = new Date(1520547295821 * 1000);
-        // var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-        // var year = a.getFullYear();
-        // var month = months[a.getMonth()];
-        // var date = a.getDate();
-        // var hour = a.getHours();
-        // var min = a.getMinutes();
-        // var sec = a.getSeconds();
-        // var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ; 
-        // console.log("Datetime is "+ time);
-        
-        // var t = new Date(1520547295821 * 1000 );
-        // var formatted = moment(t).format("dd.mm.yyyy hh:MM:ss");
-        // console.log("2nd datetime is "+ formatted);
-        
-        BackendService.instructor = false;
-        this._sideDrawerTransition = new SlideInOnTopTransition();
-        this.classrooms$ = <any>this.firebaseService.getAllClassList();
-        this.myclassrooms$ = <any>this.firebaseService.getMyClassList();
+       
+        if(this.classrooms$ == null){ 
+
+
+        console.log("Returning null observables for all classrooms");
+    }else if (this.myclassrooms$ == null){
+        console.log("Null observables for my classes");
+    }
+    else{
 
         this.myclassrooms$.subscribe( my =>{
             this.len = my.length;
@@ -98,6 +92,7 @@ export class HomeComponent implements OnInit {
             this.leng = clas.length;
             this.showclasses();
         })
+    }
 
     }
 
@@ -105,6 +100,7 @@ export class HomeComponent implements OnInit {
         console.log("all classes size is  "+ this.leng);
         console.log("my class length is "+ this.len );
         for (var i = 0; i< this.leng; i++){
+            this.allClass1 = this.allClass1;
             var all = JSON.parse(JSON.stringify(this.allClass1[i].ID));
             for (var j = 0; j < this.len; j++){
                 var my = JSON.parse(JSON.stringify(this.myClass[j].ID));
@@ -139,31 +135,28 @@ export class HomeComponent implements OnInit {
         this.routerExtensions.navigate(["/search"]);
    }
 
-    inClass(classroom: Classroom, id: string, Cname: string, Prof: string, Year: string, uid: string, ID: number){
+    inClass(classroom: Classroom, id: string, Cname: string, Prof: string, Year: string, uid: string){
          //update the classroom node to include users who registered
           this.firebaseService.registerClassroom(classroom, BackendService.Uid, BackendService.Uname, BackendService.studentNum)
       .then((message:any) => {
-          alert(message);
-      }); 
-      this.firebaseService.userRegister(id, Cname, Prof, Year, uid, ID).then((message:any) => {
+      
         alert(message);
-      console.log("Classroom successfully registered");
-      this.ngOnInit();
-    });
 
    
+        console.log("Classroom successfully registered");
+      });
+      this.ngOnInit(); 
     }
       //to store all available data for each user, use backend service to store the value of each attrinute 
       //for every users
       
 
       //this is to turn off the delete button 
-
       navTag(){
         this.routerExtensions.navigate(["/tag"]);
     }
 
-    activateClass(id: string, name: string, uid: string)
+    activateClass(id: string, name: string, uid: string, TA = [])
     {
         BackendService.CID = id;
         BackendService.Cname = name;
@@ -184,15 +177,18 @@ export class HomeComponent implements OnInit {
 
     }
 
+    
+if(TA != null){
+    for(var i =0; i < TA.length; i++){
+        if (BackendService.token == JSON.stringify(TA[i].UID)){
+            BackendService.TA == true;
+        }
+    }
+}
+
  
         }
-
-   delete(tag: Tag) {
-    this.firebaseService.deleteTag(tag)
-      .catch(() => {
-        alert("An error occurred while deleting an item from your list.");
-      });
-  } 
+ 
       
 
 }

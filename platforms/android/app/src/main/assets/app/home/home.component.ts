@@ -31,7 +31,6 @@ export class HomeComponent implements OnInit {
         ) {   
         }
 
-    public users$: Observable<any>;
     public classrooms$: Observable<any>;
     public myclassrooms$: Observable<any>;
     public myClass;
@@ -52,25 +51,11 @@ export class HomeComponent implements OnInit {
     /* ***********************************************************
     * Use the sideDrawerTransition property to change the open/close animation of the drawer.
     *************************************************************/
-    ngOnInit(): void {
+   async ngOnInit(){
         BackendService.TA = false;
-        this.users$ = <any>this.firebaseService.getMyUserList(BackendService.token);
         BackendService.instructor = false;
         this._sideDrawerTransition = new SlideInOnTopTransition();
-        this.classrooms$ = <any>this.firebaseService.getAllClassList();
-        this.myclassrooms$ = <any>this.firebaseService.getMyClassList();
-       
-        this.users$.subscribe(val => {
-            console.log(BackendService.Uid = JSON.parse( JSON.stringify(val[0].id)));
-            BackendService.Uname = JSON.parse(JSON.stringify(val[0].FirstName));
-            BackendService.studentNum = JSON.parse(JSON.stringify(val[0].studentNum));
-            var first = JSON.parse(JSON.stringify(val[0].FirstName));
-            var last = JSON.parse(JSON.stringify(val[0].LastName));
-            BackendService.Uname = first + " " + last;
-
-            BackendService.studentNum = JSON.parse(JSON.stringify(val[0].studentNum));
-        }); 
-        console.log("My uid is"+ BackendService.Uid);
+        this.classrooms$ = await <any>this.firebaseService.getAllClassList();
        
         if(this.classrooms$ == null){ 
 
@@ -80,6 +65,7 @@ export class HomeComponent implements OnInit {
         console.log("Null observables for my classes");
     }
     else{
+        this.myclassrooms$ = await <any>this.firebaseService.getMyClassList();
 
         this.myclassrooms$.subscribe( my =>{
             this.len = my.length;

@@ -50,9 +50,6 @@ export class FirebaseService {
 
   //logs out user
   logout(){
-    BackendService.token = "";
-    BackendService.Uname= "";
-    BackendService.CID = "";
         firebase.logout();    
   }
   
@@ -226,7 +223,8 @@ export class FirebaseService {
       "UID": BackendService.token}
       ).then(result => {
         console.log("User key is"+ result.key);
-        this.userRegister(result.key, name, professor, year, BackendService.token, ID);    
+        this.userRegister(result.key, name, professor, year, BackendService.token, ID); 
+        return name + "Successfully Created";   
       },
       function (errorMessage:any) {
         alert(errorMessage);
@@ -384,13 +382,14 @@ export class FirebaseService {
           this.ngZone.run(() => {
                 let result = (<any>Object);
             let results = this.handleSnapshot(snapshot.value);
-            // console.log("From firebaseservice" +JSON.stringify(results))
+            console.log("From firebaseservice all classes" +JSON.stringify(results))
              observer.next(results);
           });
         };
         firebase.addValueEventListener(onValueEvent, `/${path}`);
     }).share();              
   }
+  
 
   //get all classes im registered in 
   getMyClassList(): Observable<any> {
@@ -401,7 +400,7 @@ export class FirebaseService {
           this.ngZone.run(() => {
                 let result = (<any>Object);
             let results = this.myClassSnapshot(snapshot.value);
-            // console.log("From firebaseservice my registered classes" +JSON.stringify(results))
+            console.log("From firebaseservice my registered classes" +JSON.stringify(results))
              observer.next(results);
           });
         };
