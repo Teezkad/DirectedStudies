@@ -5,6 +5,7 @@ import {User, Classroom, Options, Question} from "../models";
 import {Observable} from 'rxjs/Observable';
 import {Tag} from '../Tags/tag.component';
 import {FirebaseService} from '../services';
+import {FirebaseService1} from "../services/firebase.service.1"
 import firebase = require("nativescript-plugin-firebase");
 import { BackendService } from "../services/backend.service";
 import { RouterExtensions } from 'nativescript-angular/router/router-extensions';
@@ -34,11 +35,12 @@ export class BrowseComponent implements OnInit {
     private _sideDrawerTransition: DrawerTransitionBase;
     public creatorId = BackendService.instructor;
     public i = 'a';
+    public TA = BackendService.TA;
+    public message = "";
 
     constructor(private routerExtensions: RouterExtensions,
-        private firebaseService: FirebaseService, private route: ActivatedRoute
-
-        
+        private firebaseService: FirebaseService,      private firebaseService1: FirebaseService1,
+        private route: ActivatedRoute
         ) {
             
         }
@@ -50,9 +52,7 @@ export class BrowseComponent implements OnInit {
         this.myclassrooms$ = <any>this.firebaseService.getCreatedClasses();
         this.users$ = <any>this.firebaseService.getRegisteredUsers(BackendService.CID);
         this.tags$ = <any>this.firebaseService.getMyTagList();
-        this.requests$ = <any>this.firebaseService.getQuestionRequests();
-        this.questions$ = <any>this.firebaseService.getClassroomQuestion(); 
-       
+        this.requests$ = <any>this.firebaseService.getQuestionRequests();       
     }
 
     get sideDrawerTransition(): DrawerTransitionBase {
@@ -77,7 +77,7 @@ export class BrowseComponent implements OnInit {
                 console.log("Question created ");
                 this.routerExtensions.navigate(["browse"]);
               });
-        this.firebaseService.deleteQuestionRequest(question);
+        this.firebaseService1.deleteQuestionRequest(question);
     }
 
     activateTag(id: string, name: string){
@@ -86,7 +86,7 @@ export class BrowseComponent implements OnInit {
         alert(name + " is Activated");
     }
    delete(tag: Tag) {
-    this.firebaseService.deleteTag(tag)
+    this.firebaseService1.deleteTag(tag)
       .catch(() => {
         alert("An error occurred while deleting an item from your list.");
       });
@@ -123,12 +123,6 @@ export class BrowseComponent implements OnInit {
       });
   }
 
-  
-  sendMessage(question: Question, message: string){
-      this.firebaseService.messageFromSender(question, message);
-      this.firebaseService.messageToReceiver(question, message);
-  }
-
   downgradeUser(firstname: string, lastname: string, userId: string, id: string){
     this.firebaseService.unregisterTA(BackendService.CID, firstname, lastname, userId, id).then((message:any) => {
         alert(message);
@@ -136,8 +130,20 @@ export class BrowseComponent implements OnInit {
       });
   }
   removeUser(uid: string){
-      this.firebaseService.deleteRegisteredUsers(uid) .catch(() => {
+      this.firebaseService1.deleteRegisteredUsers(uid) .catch(() => {
         alert("An error occurred while deleting user from this class.");
       });
+  }
+
+  promptMessage(question: Question){
+     var msg = prompt("Enter Message", this.message);
+
+     if(msg == null || msg == ""){
+         console.log("No Message");
+     }else{
+         this.firebaseService.messageToReceiver(question, msg);
+         this.firebaseService.messageFromSender(question, msg);
+         this.firebaseService1.updateQuestionRequest(question);
+     }
   }
 }

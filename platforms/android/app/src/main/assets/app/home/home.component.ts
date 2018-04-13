@@ -4,7 +4,7 @@ import { RadSideDrawerComponent } from "nativescript-pro-ui/sidedrawer/angular";
 import {User, Classroom, Options} from "../models";
 import {Tag} from '../Tags/tag.component';
 import {Observable} from 'rxjs/Observable';
-import {FirebaseService} from '../services';
+import {FirebaseService, FirebaseService1} from '../services';
 import firebase = require("nativescript-plugin-firebase");
 import { BackendService } from "../services/backend.service";
 import { RouterExtensions } from 'nativescript-angular/router/router-extensions';
@@ -26,7 +26,8 @@ export class HomeComponent implements OnInit {
     human = JSON.stringify(this.person);
 
     constructor(private routerExtensions: RouterExtensions,
-        private firebaseService: FirebaseService, private backendService: BackendService
+        private firebaseService: FirebaseService, private backendService: BackendService,
+        private firebaseService1: FirebaseService1
         
         ) {   
         }
@@ -54,22 +55,20 @@ export class HomeComponent implements OnInit {
     *************************************************************/
     ngOnInit(): void {
         BackendService.TA == false;
+        BackendService.instructor = false;
+        this._sideDrawerTransition = new SlideInOnTopTransition();
+        this.classrooms$ = <any>this.firebaseService.getAllClassList();
+        this.myclassrooms$ = <any>this.firebaseService.getMyClassList();
         this.users$ = <any>this.firebaseService.getMyUserList(BackendService.token);
         this.users$.subscribe(val => {
             console.log(BackendService.Uid = JSON.parse( JSON.stringify(val[0].id)));
-            BackendService.Uname = JSON.parse(JSON.stringify(val[0].FirstName));
             BackendService.studentNum = JSON.parse(JSON.stringify(val[0].studentNum));
-            BackendService.Uname = JSON.parse(JSON.stringify(val[0].FirstName));
+            BackendService.Uname = JSON.parse(JSON.stringify(val[0].FirstName)) + " " + JSON.parse(JSON.stringify(val[0].LastName)) ;
             BackendService.studentNum = JSON.parse(JSON.stringify(val[0].studentNum));
         }); 
         console.log("My uid is"+ BackendService.Uid);
         console.log("Login successful");
        
-        
-        BackendService.instructor = false;
-        this._sideDrawerTransition = new SlideInOnTopTransition();
-        this.classrooms$ = <any>this.firebaseService.getAllClassList();
-        this.myclassrooms$ = <any>this.firebaseService.getMyClassList();
 
         this.myclassrooms$.subscribe( my =>{
             this.len = my.length;
@@ -84,6 +83,7 @@ export class HomeComponent implements OnInit {
         })
 
 
+
     }
 
     showclasses(){
@@ -95,7 +95,7 @@ export class HomeComponent implements OnInit {
                 var my = JSON.parse(JSON.stringify(this.myClass[j].ID));
                 if (all == my){
                     this.allClass[i].registered = true;
-                }
+                } 
                 }
         }
     }
@@ -109,7 +109,7 @@ export class HomeComponent implements OnInit {
       //delete classroo
       deleteCl(classroom: Classroom) {
           console.log("deleting");
-        this.firebaseService.delete(classroom)
+        this.firebaseService1.delete(classroom)
           .catch(() => {
             alert("An error occurred while deleting an item from your list.");
           });
@@ -124,7 +124,7 @@ export class HomeComponent implements OnInit {
         this.routerExtensions.navigate(["/search"]);
    }
 
-    inClass(classroom: Classroom, id: string, Cname: string, Prof: string, Year: string, uid: string){
+    inClass(classroom: Classroom, id: string, Cname: string, Prof: string, Year: string, uid: string, ID: number){
          //update the classroom node to include users who registered
           this.firebaseService.registerClassroom(classroom, BackendService.Uid, BackendService.Uname, BackendService.studentNum)
       .then((message:any) => {
@@ -133,7 +133,11 @@ export class HomeComponent implements OnInit {
 
    
         console.log("Classroom successfully registered");
-      }) 
+      });
+
+      this.firebaseService.userRegister(id, Cname, Prof, Year, uid, ID);
+
+      this.ngOnInit();
     }
       //to store all available data for each user, use backend service to store the value of each attrinute 
       //for every users
@@ -148,8 +152,9 @@ export class HomeComponent implements OnInit {
     {
         BackendService.CID = id;
         BackendService.Cname = name;
+        console.log(id + " is now active class ID");
         console.log(name + " is now active class");
-        // alert(name + " is now active class");
+        alert(name + " is now active class");
         if(uid == BackendService.token){
             BackendService.instructor = true;
         
@@ -181,7 +186,7 @@ if(TA != null){
 
 
    delete(tag: Tag) {
-    this.firebaseService.deleteTag(tag)
+    this.firebaseService1.deleteTag(tag)
       .catch(() => {
         alert("An error occurred while deleting an item from your list.");
       });

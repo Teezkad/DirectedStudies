@@ -6,12 +6,13 @@ import { AppComponent } from "./app.component";
 import { CommonModule } from "@angular/common";
 import { classroomComponent } from "./Classrooms/classroom.component";
 import { questionComponent } from "./Question/question.component";
-import { BackendService, FirebaseService, UtilsService } from "./services";
+import { BackendService, FirebaseService, FirebaseService1, UtilsService } from "./services";
 
 
 @NgModule({
     providers: [
         BackendService,
+        FirebaseService1,
         FirebaseService,
         UtilsService,
         authProviders

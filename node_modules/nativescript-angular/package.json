@@ -1,27 +1,32 @@
 {
-  "_from": "nativescript-angular@~5.2.0",
+  "_args": [
+    [
+      "nativescript-angular@5.2.0",
+      "C:\\Users\\kadir\\dirproto5"
+    ]
+  ],
+  "_from": "nativescript-angular@5.2.0",
   "_id": "nativescript-angular@5.2.0",
   "_inBundle": false,
   "_integrity": "sha512-oNdUmXTxjShaSJShEVtTfCwF7Aq+iqlr3xhS66qeNTeoLDtRbcZcQ6Zg4ehfviG9VmVERdG9nIddmY6yjmFScw==",
   "_location": "/nativescript-angular",
   "_phantomChildren": {},
   "_requested": {
-    "type": "range",
+    "type": "version",
     "registry": true,
-    "raw": "nativescript-angular@~5.2.0",
+    "raw": "nativescript-angular@5.2.0",
     "name": "nativescript-angular",
     "escapedName": "nativescript-angular",
-    "rawSpec": "~5.2.0",
+    "rawSpec": "5.2.0",
     "saveSpec": null,
-    "fetchSpec": "~5.2.0"
+    "fetchSpec": "5.2.0"
   },
   "_requiredBy": [
-    "/tns-template-drawer-navigation-ng"
+    "/"
   ],
   "_resolved": "https://registry.npmjs.org/nativescript-angular/-/nativescript-angular-5.2.0.tgz",
-  "_shasum": "448d561f0663e7c5064b355c94d83a9146041f31",
-  "_spec": "nativescript-angular@~5.2.0",
-  "_where": "C:\\Users\\kadir\\dirproto4\\dirproto5\\node_modules\\tns-template-drawer-navigation-ng",
+  "_spec": "5.2.0",
+  "_where": "C:\\Users\\kadir\\dirproto5",
   "author": {
     "name": "NativeScript Team"
   },
@@ -31,7 +36,6 @@
   "bugs": {
     "url": "https://github.com/NativeScript/nativescript-angular/issues"
   },
-  "bundleDependencies": false,
   "contributors": [
     {
       "name": "Hristo Deshev",
@@ -50,7 +54,6 @@
     "nativescript-intl": "^3.0.0",
     "reflect-metadata": "^0.1.8"
   },
-  "deprecated": false,
   "description": "An Angular renderer that lets you build mobile apps with NativeScript.",
   "devDependencies": {
     "@angular/animations": "~5.2.0",

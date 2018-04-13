@@ -1,39 +1,42 @@
 {
-  "_from": "@angular/router@~5.2.0",
+  "_args": [
+    [
+      "@angular/router@5.2.2",
+      "C:\\Users\\kadir\\dirproto5"
+    ]
+  ],
+  "_from": "@angular/router@5.2.2",
   "_id": "@angular/router@5.2.2",
   "_inBundle": false,
   "_integrity": "sha512-Yn71rFMMyIjwairBWGcUFbdiAVuTp7y5yEin8vJK3DAWgTyk0FYfhKHY3r9NofNH9M7Id53WafC02+3SseFBlA==",
   "_location": "/@angular/router",
   "_phantomChildren": {},
   "_requested": {
-    "type": "range",
+    "type": "version",
     "registry": true,
-    "raw": "@angular/router@~5.2.0",
+    "raw": "@angular/router@5.2.2",
     "name": "@angular/router",
     "escapedName": "@angular%2frouter",
     "scope": "@angular",
-    "rawSpec": "~5.2.0",
+    "rawSpec": "5.2.2",
     "saveSpec": null,
-    "fetchSpec": "~5.2.0"
+    "fetchSpec": "5.2.2"
   },
   "_requiredBy": [
-    "/tns-template-drawer-navigation-ng"
+    "/"
   ],
   "_resolved": "https://registry.npmjs.org/@angular/router/-/router-5.2.2.tgz",
-  "_shasum": "b0ffd7121290e8c01f20862b4a2638ebcebc61cf",
-  "_spec": "@angular/router@~5.2.0",
-  "_where": "C:\\Users\\kadir\\dirproto4\\dirproto5\\node_modules\\tns-template-drawer-navigation-ng",
+  "_spec": "5.2.2",
+  "_where": "C:\\Users\\kadir\\dirproto5",
   "author": {
     "name": "angular"
   },
   "bugs": {
     "url": "https://github.com/angular/angular/issues"
   },
-  "bundleDependencies": false,
   "dependencies": {
     "tslib": "^1.7.1"
   },
-  "deprecated": false,
   "description": "Angular - the routing library",
   "es2015": "./esm2015/router.js",
   "homepage": "https://github.com/angular/angular/tree/master/packages/router",

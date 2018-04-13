@@ -4,7 +4,9 @@ var platform = require("../platform");
 var ImageAsset = (function (_super) {
     __extends(ImageAsset, _super);
     function ImageAsset() {
-        return _super !== null && _super.apply(this, arguments) || this;
+        var _this = _super.call(this) || this;
+        _this._options = { keepAspectRatio: true };
+        return _this;
     }
     Object.defineProperty(ImageAsset.prototype, "options", {
         get: function () {

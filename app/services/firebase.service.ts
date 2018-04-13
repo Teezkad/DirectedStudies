@@ -17,6 +17,8 @@ export class FirebaseService {
   
   private _allItems: Array<Classroom> = [];
   private _items = [];
+  public users$: Observable<any>;
+
   
   //registers user's email anmd password only, this isstored in firebase authentications
   register(user: User, email: string, firstName: string, lastName: string, studentNum: string, instructor: boolean, professor: boolean) {
@@ -26,6 +28,7 @@ export class FirebaseService {
       password: user.password,
     }).then(result => {
             console.log("User key is"+ result.key);
+            BackendService.Uid = result.key;
            this.addUser( result.key, email, firstName, lastName, studentNum, instructor, professor);
           },
           function (errorMessage:any) {
@@ -41,7 +44,20 @@ export class FirebaseService {
       email: user.email,
       password: user.password
     }).then((result: any) => {
+      this.users$ = <any>this.getMyUserList(BackendService.token);
           BackendService.token = result.uid;
+          this.users$.subscribe(val => {
+            console.log(BackendService.Uid = JSON.parse( JSON.stringify(val[0].id)));
+            console.log("My uid from firebaseservice is"+ BackendService.Uid);
+
+            BackendService.Uname = JSON.parse(JSON.stringify(val[0].FirstName));
+            BackendService.studentNum = JSON.parse(JSON.stringify(val[0].studentNum));
+            var first = JSON.parse(JSON.stringify(val[0].FirstName));
+            var last = JSON.parse(JSON.stringify(val[0].LastName));
+            BackendService.Uname = first + " " + last;
+
+            BackendService.studentNum = JSON.parse(JSON.stringify(val[0].studentNum));
+        }); 
           return JSON.stringify(result);
       }, (errorMessage: any) => {
         alert(errorMessage);
@@ -50,7 +66,9 @@ export class FirebaseService {
 
   //logs out user
   logout(){
-        firebase.logout();    
+        firebase.logout();   
+        BackendService.token = "";
+        BackendService.Uid = ""; 
   }
   
   //user can reset their password
@@ -100,22 +118,107 @@ export class FirebaseService {
           firebase.addValueEventListener(onValueEvent, `/${path}`);
       }).share();              
     }
+
+    getTAList(token: string): Observable<any> {
+      return new Observable((observer: any) => {
+        let path = 'TAs';
+        
+          let onValueEvent = (snapshot: any) => {
+            this.ngZone.run(() => {
+                  //     let result = (<any>Object).assign({id: id}, data[id]);
+                  let result = (<any>Object);
+              let results = this.TASnapshot(snapshot.value, token);
+              console.log("From firebaseservice TAs" + JSON.stringify(results))
+               observer.next(results);
+            });
+          };
+          firebase.addValueEventListener(onValueEvent, `/${path}`);
+      }).share();              
+    }
+
+    TASnapshot(data: any, token: string) {
+      //empty array, then fill with current user
+      this._allItems = [];
+      if (data) {
+        for (let id in data) {        
+          let result = (<any>Object).assign({id: id}, data[id]);
+          if(BackendService.CID === result.classroom){ 
+            this._allItems.push(result);
+          }
+                
+        }
+        // this.publishUpdates();
+      }
+      return this._allItems;
   
+    }
+
+    getMembersList(token: string): Observable<any> {
+      return new Observable((observer: any) => {
+        let path = 'Members';
+        
+          let onValueEvent = (snapshot: any) => {
+            this.ngZone.run(() => {
+                  //     let result = (<any>Object).assign({id: id}, data[id]);
+                  let result = (<any>Object);
+              let results = this.MembersSnapshot(snapshot.value, token);
+              console.log("From firebaseservice TAs" + JSON.stringify(results))
+               observer.next(results);
+            });
+          };
+          firebase.addValueEventListener(onValueEvent, `/${path}`);
+      }).share();              
+    }
+  
+    MembersSnapshot(data: any, token: string) {
+      //empty array, then fill with current user
+      this._allItems = [];
+      if (data) {
+        for (let id in data) {        
+          let result = (<any>Object).assign({id: id}, data[id]);
+          if(BackendService.CID === result.CID){ 
+            this._allItems.push(result);
+          }
+                
+        }
+        // this.publishUpdates();
+      }
+      return this._allItems;
+  
+    }
+
     getRegisteredUsers(ClassKey: string): Observable<any> {
       return new Observable((observer: any) => {
-        let path = 'Classroom/'+BackendService.CID+'/Members';
+        let path = 'Members';
         
           let onValueEvent = (snapshot: any) => { 
             this.ngZone.run(() => {
                   //     let result = (<any>Object).assign({id: id}, data[id]);
                   let result = (<any>Object);
-              let results = this.handleSnapshot(snapshot.value);
+              let results = this.handleClassSnapshot(snapshot.value, ClassKey);
               console.log( "Users in class"+ JSON.stringify(results))
                observer.next(results);
             });
           };
           firebase.addValueEventListener(onValueEvent, `/${path}`);
       }).share();              
+    }
+
+    handleClassSnapshot(data: any, token: string) {
+      //empty array, then fill with current user
+      this._allItems = [];
+      if (data) {
+        for (let id in data) {        
+          let result = (<any>Object).assign({id: id}, data[id]);
+          if(token === result.CID){ 
+            this._allItems.push(result);
+          }
+                
+        }
+        // this.publishUpdates();
+      }
+      return this._allItems;
+  
     }
 
     //display current user
@@ -254,10 +357,11 @@ export class FirebaseService {
 
     //students can register in classes
     registerClassroom(classroom: Classroom, key: string, name: string, number: string){
-      return firebase.push("/Classroom/"+classroom.id+"/Members",{
+      return firebase.push("Members",{
         "FirstName": BackendService.Uname,
         "LastName": BackendService.Uname,
         "Number": number,
+        "CID": classroom.id,
         "TA": false,
         "KEY": key,
         "UID": BackendService.token
@@ -274,7 +378,7 @@ export class FirebaseService {
     //this takes in users token key as UID and stroes it in a tree
     //classroom is classid, UID is users token, userkey is the key for the user in the Members list for
     registerTA(classroom: string, firstName: string, lastName: string, UID: string, userkey: string){
-      return firebase.push("/Classroom/"+classroom+"/TAs",{
+      return firebase.push("TAs",{
 
         "FirstName": firstName,
         "LastName": lastName,
@@ -293,7 +397,7 @@ export class FirebaseService {
 
     unregisterTA(classroom: string, firstName: string, lastName: string, userkey: string, studentkey: string){
       this.setTAFalse(userkey, classroom);
-      return firebase.remove("/Classroom/"+classroom+"/TAs/"+studentkey)
+      return firebase.remove("TAs/"+studentkey)
       .then( 
         function (result:any) {
           return 'You have successfully demoted this user';
@@ -303,34 +407,34 @@ export class FirebaseService {
         });  
     }
 
-    messageToReceiver(question: Question, message: string){
-      return firebase.push("Users/"+question.UID+ "/Messages" ,{
+
+    messageToReceiver(question: string,  topic: string, creator: string, UID:string, message: string){
+      return firebase.push("Messages" ,{
         "Message": message,
-        "Request": question.id,
+        "Request": question,
         "Seen": false,
-        "ClassName": question.ClassName,
-        "Professor": question.Professor,
-        "Question": question.name
+        "ClassName": BackendService.Cname,
+        "Topic": topic, 
+        "ReceiverID": UID
       })
 
     }
 
-    messageFromSender(question: Question, message: string){
-      return firebase.push("Users/"+BackendService.Uid+ "/Messages" ,{
+    messageFromSender(question: string, topic: string, creator: string, UID:string, message: string){
+      return firebase.push("Messages" ,{
         "Message": message,
-        "Request": question.id,
-        "ClassName": question.ClassName,
-        "Professor": question.Professor,
-        "Question": question.name,
-        "FirstName": question.by,
-        "Topic": question.Tags
+        "Request": question,
+        "ClassName": BackendService.Cname,
+        "CreatorName": creator,
+        "Topic": topic,
+        "SenderID": BackendService.Uid
       })
 
     }
 
     //update TA field for classroom member
     setTATrue(fieldKey: string, classroom: string, key: string){
-      return firebase.update("/Classroom/"+classroom+"/Members/"+fieldKey, 
+      return firebase.update("Members/"+fieldKey, 
       {
         "TA": true,
         "TAKey": key
@@ -345,7 +449,7 @@ export class FirebaseService {
 
     setTAFalse(fieldKey: string, classroom: string){
 
-      return firebase.update("/Classroom/"+classroom+"/Members/"+fieldKey, 
+      return firebase.update("Members/"+fieldKey, 
       {
         "TA": false
       }).then( 
@@ -359,18 +463,33 @@ export class FirebaseService {
 
     getUserMessages(): Observable<any>{
       return new Observable((observer: any ) => {
-        let path = "Users/"+BackendService.Uid+"/Messages";
+        let path = "Messages";
 
         let onValueEvent = (snapshot: any) => {
           this.ngZone.run(() => {
                 let result = (<any>Object);
-            let results = this.myClassSnapshot(snapshot.value);
+            let results = this.messageSnapshot(snapshot.value);
             // console.log("From firebaseservice" +JSON.stringify(results))
              observer.next(results);
           });
         };
         firebase.addValueEventListener(onValueEvent, `/${path}`);
       }).share();
+    }
+    messageSnapshot(data: any) {
+      //empty array, then refill and filter
+      this._allItems = [];
+      if (data) {
+        for (let id in data) {        
+          let result = (<any>Object).assign({id: id}, data[id]);
+         if(result.SenderID == BackendService.Uid || result.ReceiverID == BackendService.Uid){
+            this._allItems.push(result); }
+             
+        }
+        // this.publishUpdates();
+      }
+      return this._allItems;
+  
     }
 
 //display all classes
@@ -382,13 +501,14 @@ export class FirebaseService {
           this.ngZone.run(() => {
                 let result = (<any>Object);
             let results = this.handleSnapshot(snapshot.value);
-            // console.log("From firebaseservice" +JSON.stringify(results))
+            console.log("From firebaseservice all classes" +JSON.stringify(results))
              observer.next(results);
           });
         };
         firebase.addValueEventListener(onValueEvent, `/${path}`);
     }).share();              
   }
+  
 
   //get all classes im registered in 
   getMyClassList(): Observable<any> {
@@ -399,7 +519,7 @@ export class FirebaseService {
           this.ngZone.run(() => {
                 let result = (<any>Object);
             let results = this.myClassSnapshot(snapshot.value);
-            // console.log("From firebaseservice my registered classes" +JSON.stringify(results))
+            console.log("From firebaseservice my registered classes" +JSON.stringify(results))
              observer.next(results);
           });
         };
@@ -441,17 +561,34 @@ export class FirebaseService {
 
   getUserScore(uid: string, tid: string): Observable<any>{
     return new Observable((observer: any)=>{
-      let path = 'Users/'+uid+'/MyScores';
+      let path ="Scores";
       let onValueEvent = (snapshot: any) => {
         this.ngZone.run(() => {
               let result = (<any>Object);
-          let results = this.scoreSnapshot(snapshot.value, tid);
+          let results = this.scoreSnapshot(snapshot.value, tid, uid);
           console.log("From firebaseservice user score is" +JSON.stringify(results))
            observer.next(results);
         });
       };
       firebase.addValueEventListener(onValueEvent, `/${path}`);
   }).share();      
+  }
+
+  scoreSnapshot(data: any, tid:string, uid:string) {
+    //empty array, then refill and filter
+    this._allItems = [];
+    if (data) {
+      for (let id in data) {        
+        let result = (<any>Object).assign({id: id}, data[id]);
+
+        if(tid == result.TID && uid == result.UID){
+          this._allItems.push(result);
+        }
+      }
+
+      this.publishUpdates();
+    }
+    return this._allItems;
   }
 
   classSnapshots(data: any) {
@@ -570,47 +707,14 @@ export class FirebaseService {
     return this._allItems;
 
   }
-
-  getTopicQuestions(tid: string){
-    return new Observable((observer: any) => {
-      let path = 'Questions/';
-      
-        let onValueEvent = (snapshot: any) => {
-          this.ngZone.run(() => {
-                let result = (<any>Object);
-            let results = this.questionSnapshots(snapshot.value, tid);
-            console.log("From firebaseservice" +JSON.stringify(results))
-             observer.next(results);
-          });
-        };
-        firebase.addValueEventListener(onValueEvent, `/${path}`);
-    }).share(); 
-
-  }
-
-  questionSnapshots(data: any, tid: string) {
-    //empty array, then refill and filter
-    this._allItems = [];
-    if (data) {
-      for (let id in data) {        
-        let result = (<any>Object).assign({id: id}, data[id]);
-        if(tid === result.TopicID){
-          this._allItems.push(result);
-        }        
-      }
-      // this.publishUpdates();
-    }
-    return this._allItems;
-
-  }
-
   //add scores for quizzes users have taken for each
   addUserScore(CID: string, TID: string, Topic: string, score: number){
-    return firebase.push("/Users/"+BackendService.Uid+"/MyScores", {
+    return firebase.push("Scores", {
       "Topic": Topic,
       "CID": CID,
       "Score": score,
       "TID": TID,
+      "UID": BackendService.Uid,
       "Date": Date.now()
     }) .then(
       function (result:any) {
@@ -634,22 +738,7 @@ export class FirebaseService {
     return this._allItems;
   }
 
-  scoreSnapshot(data: any, tid:string) {
-    //empty array, then refill and filter
-    this._allItems = [];
-    if (data) {
-      for (let id in data) {        
-        let result = (<any>Object).assign({id: id}, data[id]);
 
-        if(tid == result.TID){
-          this._allItems.push(result);
-        }
-      }
-
-      this.publishUpdates();
-    }
-    return this._allItems;
-  }
 
   publishUpdates() {
     // here, we sort must emit a *new* value (immutability!)
@@ -661,32 +750,7 @@ export class FirebaseService {
     this.items.next([...this._items]);
   }
 
-  delete(classroom: Classroom) {
-    return firebase.remove("/Classroom/"+classroom.id+"")
-      .catch(this.handleErrors);
-  } 
-
-  deleteQuestion(question: Question){
-    return firebase.remove("/Questions/"+question.id+"")
-    .catch(this.handleErrors);
-  }
-
-  deleteRegisteredUsers(uid: string){
-    return firebase.remove("/Classroom/"+BackendService.CID+"/Members/"+uid)
-    .catch(this.handleErrors);
-  }
-
-  deleteQuestionRequest(question: Question){
-    return firebase.remove("/Requests/"+question.id+"").catch(this.handleErrors);
-  }
-
-  deleteTag(tag: Tag) {
-    return firebase.remove("/Tags/"+tag.id+"")
-      .catch(this.handleErrors);
-  } 
-
-
-
+ 
   /*
   getMyClassroom(id: string): Observable<any> {
     return new Observable((observer: any) => {

@@ -3,8 +3,7 @@
         <NavigationButton text="Back" ios.position="left"></NavigationButton>
     </ActionBar>
 
-<ScrollView>
-        <StackLayout>
+        <StackLayout> 
                 <label text = "*Use switch to select correct answer*"></label>
             <StackLayout class="input-field">
                     <TextField required hint="Enter Question"class="input" [(ngModel)]="question.name" rowSpan="3"></TextField>
@@ -33,7 +32,5 @@
                             <Switch HorizontalAlignment = "right" #sw4 [checked]="option4.isAnswer" (checkedChange)="onChange4(option4.isAnswer)"></Switch>
                     </StackLayout>
                     <Button text="Save" class="btn btn-primary" (tap)="submitQuestion()"></Button>
-
                 </StackLayout>
 
-            </ScrollView>

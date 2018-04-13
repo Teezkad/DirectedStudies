@@ -4,7 +4,7 @@ import { RadSideDrawerComponent } from "nativescript-pro-ui/sidedrawer/angular";
 import {User, Classroom, Options, Question} from "../models";
 import {Tag} from '../Tags/tag.component';
 import {Observable} from 'rxjs/Observable';
-import {FirebaseService} from '../services';
+import {FirebaseService, FirebaseService1} from '../services';
 import firebase = require("nativescript-plugin-firebase");
 import { BackendService } from "../services/backend.service";
 import { RouterExtensions } from 'nativescript-angular/router/router-extensions';
@@ -45,7 +45,7 @@ export class QuizComponent implements OnInit {
 
     constructor(private routerExtensions: RouterExtensions,
         private firebaseService: FirebaseService, private backendService: BackendService,
-         private route: ActivatedRoute
+         private route: ActivatedRoute, private firebaseService1: FirebaseService1
         
         ) {   
             this.route.queryParams.subscribe(params => {
@@ -57,7 +57,7 @@ export class QuizComponent implements OnInit {
      
 
     ngOnInit(): void {
-        this.quiz$ = <any>this.firebaseService.getTopicQuestions(this.tid);
+        this.quiz$ = <any>this.firebaseService1.getTopicQuestions(this.tid);
 
         this.quiz$.subscribe(val => 
             {this.topic= JSON.parse(JSON.stringify(val[0].Tags));

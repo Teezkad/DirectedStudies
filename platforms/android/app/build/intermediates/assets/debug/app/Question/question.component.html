@@ -1,37 +1,41 @@
-<ActionBar title="Create a Question">
+<ActionBar class = "action-bar" >
+    <label class="action-bar-title" [text] = "'CREATE QUESTION FOR ' + tname"></label>
         <NavigationButton text="Back" ios.position="left"></NavigationButton>
     </ActionBar>
 
-
-    <ScrollView sdkExampleTitle sdkToggleNavButton margin="10" verticalAlignment="center">
-            <label text = "Use switch to select correct answer"></label>
         <StackLayout>
+                <ScrollView>
+
+                <label text = "*Use switch to select correct answer*"></label>
             <StackLayout class="input-field">
                     <TextField required hint="Enter Question"class="input" [(ngModel)]="question.name" rowSpan="3"></TextField>
                     <Label class="validation" text="Field is required" ></Label>
                 </StackLayout>
 
-                <GridLayout class="input-field">
-                        <TextField required hint="Enter Option 1"class="input" [(ngModel)]="option1.name" rowSpan="3"></TextField>
+                <StackLayout class="input-field" >
+                        <TextField  required hint="Enter Option 1"class="input" [(ngModel)]="option1.name" rowSpan="3"></TextField>
                         <Switch HorizontalAlignment = "right" #sw1 [checked]="option1.isAnswer" (checkedChange)="onChange1(option1.isAnswer)"></Switch>
 
-                </GridLayout>
+                </StackLayout>
 
-                    <GridLayout class="input-field">
-                            <TextField required hint="Enter Option 2"class="input" [(ngModel)]="option2.name" rowSpan="3"></TextField>
+                    <StackLayout class="input-field" >
+                            <TextField  required hint="Enter Option 2"class="input" [(ngModel)]="option2.name" rowSpan="3"></TextField>
                             <Switch HorizontalAlignment = "right" #sw2 [checked]="option2.isAnswer" (checkedChange)="onChange2(option2.isAnswer)"></Switch>
 
-                        </GridLayout>
+                        </StackLayout>
 
-                    <GridLayout class="input-field">
-                            <TextField required hint="Enter Option 3"class="input" [(ngModel)]="option3.name" rowSpan="3"></TextField>
+                    <StackLayout class="input-field" >
+                            <TextField  required hint="Enter Option 3"class="input" [(ngModel)]="option3.name" rowSpan="3"></TextField>
                             <Switch HorizontalAlignment = "right" #sw3 [checked]="option3.isAnswer" (checkedChange)="onChange3(option3.isAnswer)"></Switch>
-                        </GridLayout>
+                        </StackLayout>
 
-                    <GridLayout class="input-field">
-                            <TextField required hint="Enter Option 4"class="input" [(ngModel)]="option4.name" rowSpan="3"></TextField>
+                    <StackLayout class="input-field" >
+                            <TextField  required hint="Enter Option 4"class="input" [(ngModel)]="option4.name" rowSpan="3"></TextField>
                             <Switch HorizontalAlignment = "right" #sw4 [checked]="option4.isAnswer" (checkedChange)="onChange4(option4.isAnswer)"></Switch>
-                    </GridLayout>
+                    </StackLayout>
                     <Button text="Save" class="btn btn-primary" (tap)="submitQuestion()"></Button>
 
+                </ScrollView>
+
                 </StackLayout>
+

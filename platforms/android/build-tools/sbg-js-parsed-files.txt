@@ -48,6 +48,7 @@ C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\Score\topicSc
 C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\Score\topicScore.routing.js
 C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\services\alert.service.js
 C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\services\backend.service.js
+C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\services\firebase.service.1.js
 C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\services\firebase.service.js
 C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\services\index.js
 C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\services\utils.service.js

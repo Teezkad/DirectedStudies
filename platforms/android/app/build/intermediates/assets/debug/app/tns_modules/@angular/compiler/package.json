@@ -1,39 +1,42 @@
 {
-  "_from": "@angular/compiler@~5.2.0",
+  "_args": [
+    [
+      "@angular/compiler@5.2.2",
+      "C:\\Users\\kadir\\dirproto5"
+    ]
+  ],
+  "_from": "@angular/compiler@5.2.2",
   "_id": "@angular/compiler@5.2.2",
   "_inBundle": false,
   "_integrity": "sha512-QkliIJJb9J2y4Y1yiSweP1eOStClOOOj46awVQ5wT+WzyvmIVAccx2u+r5TPRu676GlqrFfn6FD+zV6Zw7G+Tw==",
   "_location": "/@angular/compiler",
   "_phantomChildren": {},
   "_requested": {
-    "type": "range",
+    "type": "version",
     "registry": true,
-    "raw": "@angular/compiler@~5.2.0",
+    "raw": "@angular/compiler@5.2.2",
     "name": "@angular/compiler",
     "escapedName": "@angular%2fcompiler",
     "scope": "@angular",
-    "rawSpec": "~5.2.0",
+    "rawSpec": "5.2.2",
     "saveSpec": null,
-    "fetchSpec": "~5.2.0"
+    "fetchSpec": "5.2.2"
   },
   "_requiredBy": [
-    "/tns-template-drawer-navigation-ng"
+    "/"
   ],
   "_resolved": "https://registry.npmjs.org/@angular/compiler/-/compiler-5.2.2.tgz",
-  "_shasum": "cf6ef310c5ca2fdae9551af62d10ab24d4feb51a",
-  "_spec": "@angular/compiler@~5.2.0",
-  "_where": "C:\\Users\\kadir\\dirproto4\\dirproto5\\node_modules\\tns-template-drawer-navigation-ng",
+  "_spec": "5.2.2",
+  "_where": "C:\\Users\\kadir\\dirproto5",
   "author": {
     "name": "angular"
   },
   "bugs": {
     "url": "https://github.com/angular/angular/issues"
   },
-  "bundleDependencies": false,
   "dependencies": {
     "tslib": "^1.7.1"
   },
-  "deprecated": false,
   "description": "Angular - the compiler library",
   "es2015": "./esm2015/compiler.js",
   "homepage": "https://github.com/angular/angular#readme",

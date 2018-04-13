@@ -4,17 +4,13 @@ import { RadSideDrawerComponent } from "nativescript-pro-ui/sidedrawer/angular";
 import {User, Classroom, Options} from "../models";
 import {Tag} from '../Tags/tag.component';
 import {Observable} from 'rxjs/Observable';
-import {FirebaseService} from '../services';
+import {FirebaseService, FirebaseService1} from '../services';
 import firebase = require("nativescript-plugin-firebase");
 import { BackendService } from "../services/backend.service";
 import { RouterExtensions } from 'nativescript-angular/router/router-extensions';
 import { firestore } from "nativescript-plugin-firebase";
 import * as tabViewModule from "tns-core-modules/ui/tab-view";
 import {ActivatedRoute, NavigationExtras} from "@angular/router";
-import * as moment from 'moment';
-
-
-let now = moment().format('LLLL');
 
 
 
@@ -22,7 +18,7 @@ let now = moment().format('LLLL');
     selector: "Home",
     moduleId: module.id,
     templateUrl: "./home.component.html",
-    styleUrls: ['./home.component.css']
+    styleUrls: ["./home.component.css"]
 })
 export class HomeComponent implements OnInit {
     currentUser = BackendService.token;
@@ -30,7 +26,8 @@ export class HomeComponent implements OnInit {
     human = JSON.stringify(this.person);
 
     constructor(private routerExtensions: RouterExtensions,
-        private firebaseService: FirebaseService, private backendService: BackendService
+        private firebaseService: FirebaseService, private backendService: BackendService,
+        private firebaseService1: FirebaseService1
         
         ) {   
         }
@@ -57,35 +54,21 @@ export class HomeComponent implements OnInit {
     * Use the sideDrawerTransition property to change the open/close animation of the drawer.
     *************************************************************/
     ngOnInit(): void {
-        this.users$ = <any>this.firebaseService.getMyUserList(BackendService.token);
-        this.users$.subscribe(val => {
-            console.log(BackendService.Uid = JSON.parse( JSON.stringify(val[0].id)));
-            BackendService.Uname = JSON.parse(JSON.stringify(val[0].FirstName));
-            BackendService.studentNum = JSON.parse(JSON.stringify(val[0].studentNum));
-            BackendService.Uname = JSON.parse(JSON.stringify(val[0].FirstName)) + JSON.parse(JSON.stringify(val[0].LastName));
-            BackendService.studentNum = JSON.parse(JSON.stringify(val[0].studentNum));
-        }); 
-        console.log("My uid is"+ BackendService.Uid);
-        console.log("Login successful");
-        // var a = new Date(1520547295821 * 1000);
-        // var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-        // var year = a.getFullYear();
-        // var month = months[a.getMonth()];
-        // var date = a.getDate();
-        // var hour = a.getHours();
-        // var min = a.getMinutes();
-        // var sec = a.getSeconds();
-        // var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ; 
-        // console.log("Datetime is "+ time);
-        
-        // var t = new Date(1520547295821 * 1000 );
-        // var formatted = moment(t).format("dd.mm.yyyy hh:MM:ss");
-        // console.log("2nd datetime is "+ formatted);
-        
+        BackendService.TA == false;
         BackendService.instructor = false;
         this._sideDrawerTransition = new SlideInOnTopTransition();
         this.classrooms$ = <any>this.firebaseService.getAllClassList();
         this.myclassrooms$ = <any>this.firebaseService.getMyClassList();
+        this.users$ = <any>this.firebaseService.getMyUserList(BackendService.token);
+        this.users$.subscribe(val => {
+            console.log(BackendService.Uid = JSON.parse( JSON.stringify(val[0].id)));
+            BackendService.studentNum = JSON.parse(JSON.stringify(val[0].studentNum));
+            BackendService.Uname = JSON.parse(JSON.stringify(val[0].FirstName)) + " " + JSON.parse(JSON.stringify(val[0].LastName)) ;
+            BackendService.studentNum = JSON.parse(JSON.stringify(val[0].studentNum));
+        }); 
+        console.log("My uid is"+ BackendService.Uid);
+        console.log("Login successful");
+       
 
         this.myclassrooms$.subscribe( my =>{
             this.len = my.length;
@@ -99,6 +82,8 @@ export class HomeComponent implements OnInit {
             this.showclasses();
         })
 
+
+
     }
 
     showclasses(){
@@ -110,7 +95,7 @@ export class HomeComponent implements OnInit {
                 var my = JSON.parse(JSON.stringify(this.myClass[j].ID));
                 if (all == my){
                     this.allClass[i].registered = true;
-                }
+                } 
                 }
         }
     }
@@ -124,7 +109,7 @@ export class HomeComponent implements OnInit {
       //delete classroo
       deleteCl(classroom: Classroom) {
           console.log("deleting");
-        this.firebaseService.delete(classroom)
+        this.firebaseService1.delete(classroom)
           .catch(() => {
             alert("An error occurred while deleting an item from your list.");
           });
@@ -143,32 +128,33 @@ export class HomeComponent implements OnInit {
          //update the classroom node to include users who registered
           this.firebaseService.registerClassroom(classroom, BackendService.Uid, BackendService.Uname, BackendService.studentNum)
       .then((message:any) => {
-          alert(message);
-      }); 
-      this.firebaseService.userRegister(id, Cname, Prof, Year, uid, ID).then((message:any) => {
+      
         alert(message);
-      console.log("Classroom successfully registered");
-      this.ngOnInit();
-    });
 
    
+        console.log("Classroom successfully registered");
+      });
+
+      this.firebaseService.userRegister(id, Cname, Prof, Year, uid, ID);
+
+      this.ngOnInit();
     }
       //to store all available data for each user, use backend service to store the value of each attrinute 
       //for every users
       
 
       //this is to turn off the delete button 
-
       navTag(){
         this.routerExtensions.navigate(["/tag"]);
     }
 
-    activateClass(id: string, name: string, uid: string)
+    activateClass(id: string, name: string, uid: string, TA = [])
     {
         BackendService.CID = id;
         BackendService.Cname = name;
+        console.log(id + " is now active class ID");
         console.log(name + " is now active class");
-        // alert(name + " is now active class");
+        alert(name + " is now active class");
         if(uid == BackendService.token){
             BackendService.instructor = true;
         
@@ -184,11 +170,23 @@ export class HomeComponent implements OnInit {
 
     }
 
+    
+if(TA != null){
+    for(var i =0; i < TA.length; i++){
+        if (BackendService.token == JSON.stringify(TA[i].UID)){
+            BackendService.TA == true;
+        }
+    }
+}
+
  
         }
 
+
+
+
    delete(tag: Tag) {
-    this.firebaseService.deleteTag(tag)
+    this.firebaseService1.deleteTag(tag)
       .catch(() => {
         alert("An error occurred while deleting an item from your list.");
       });

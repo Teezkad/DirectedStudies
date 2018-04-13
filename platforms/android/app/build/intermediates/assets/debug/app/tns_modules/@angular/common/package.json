@@ -1,39 +1,42 @@
 {
-  "_from": "@angular/common@~5.2.0",
+  "_args": [
+    [
+      "@angular/common@5.2.2",
+      "C:\\Users\\kadir\\dirproto5"
+    ]
+  ],
+  "_from": "@angular/common@5.2.2",
   "_id": "@angular/common@5.2.2",
   "_inBundle": false,
   "_integrity": "sha512-heon7Bdu6SUw/6ma9wEDxrxBJY2V+NSUv7ZVY7HaXESWvxKUGaser5vQIsWghvBg1injSxyw/3BqGFflua/3sQ==",
   "_location": "/@angular/common",
   "_phantomChildren": {},
   "_requested": {
-    "type": "range",
+    "type": "version",
     "registry": true,
-    "raw": "@angular/common@~5.2.0",
+    "raw": "@angular/common@5.2.2",
     "name": "@angular/common",
     "escapedName": "@angular%2fcommon",
     "scope": "@angular",
-    "rawSpec": "~5.2.0",
+    "rawSpec": "5.2.2",
     "saveSpec": null,
-    "fetchSpec": "~5.2.0"
+    "fetchSpec": "5.2.2"
   },
   "_requiredBy": [
-    "/tns-template-drawer-navigation-ng"
+    "/"
   ],
   "_resolved": "https://registry.npmjs.org/@angular/common/-/common-5.2.2.tgz",
-  "_shasum": "24f0f21dbc29a8b2dbfe93d19ec5a18defca9edf",
-  "_spec": "@angular/common@~5.2.0",
-  "_where": "C:\\Users\\kadir\\dirproto4\\dirproto5\\node_modules\\tns-template-drawer-navigation-ng",
+  "_spec": "5.2.2",
+  "_where": "C:\\Users\\kadir\\dirproto5",
   "author": {
     "name": "angular"
   },
   "bugs": {
     "url": "https://github.com/angular/angular/issues"
   },
-  "bundleDependencies": false,
   "dependencies": {
     "tslib": "^1.7.1"
   },
-  "deprecated": false,
   "description": "Angular - commonly needed directives and services",
   "es2015": "./esm2015/common.js",
   "homepage": "https://github.com/angular/angular#readme",

@@ -1,27 +1,31 @@
 {
-  "_from": "nativescript-plugin-firebase",
+  "_args": [
+    [
+      "nativescript-plugin-firebase@5.1.4",
+      "C:\\Users\\kadir\\dirproto5"
+    ]
+  ],
+  "_from": "nativescript-plugin-firebase@5.1.4",
   "_id": "nativescript-plugin-firebase@5.1.4",
   "_inBundle": false,
   "_integrity": "sha1-N4BJvz/Dijq3xZB+K2f0VCD05KI=",
   "_location": "/nativescript-plugin-firebase",
   "_phantomChildren": {},
   "_requested": {
-    "type": "tag",
+    "type": "version",
     "registry": true,
-    "raw": "nativescript-plugin-firebase",
+    "raw": "nativescript-plugin-firebase@5.1.4",
     "name": "nativescript-plugin-firebase",
     "escapedName": "nativescript-plugin-firebase",
-    "rawSpec": "",
+    "rawSpec": "5.1.4",
     "saveSpec": null,
-    "fetchSpec": "latest"
+    "fetchSpec": "5.1.4"
   },
   "_requiredBy": [
-    "#USER",
     "/"
   ],
   "_resolved": "https://registry.npmjs.org/nativescript-plugin-firebase/-/nativescript-plugin-firebase-5.1.4.tgz",
-  "_shasum": "378049bf3fc38a3ab7c5907e2b67f45420f4e4a2",
-  "_spec": "nativescript-plugin-firebase",
+  "_spec": "5.1.4",
   "_where": "C:\\Users\\kadir\\dirproto5",
   "author": {
     "name": "Eddy Verbruggen",
@@ -30,7 +34,6 @@
   "bugs": {
     "url": "https://github.com/eddyverbruggen/nativescript-plugin-firebase/issues"
   },
-  "bundleDependencies": false,
   "config": {
     "typingsproject": "demo-ng"
   },
@@ -38,7 +41,6 @@
     "nativescript-hook": "~0.2.0",
     "prompt-lite": "~0.1.0"
   },
-  "deprecated": false,
   "description": "Fire. Base. Firebase!",
   "devDependencies": {
     "tns-core-modules": "~3.3.0",

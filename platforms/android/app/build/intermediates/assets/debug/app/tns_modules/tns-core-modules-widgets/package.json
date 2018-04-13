@@ -1,26 +1,26 @@
 {
-  "_from": "tns-core-modules-widgets@next",
-  "_id": "tns-core-modules-widgets@4.0.0-2018-04-03-01",
+  "_from": "tns-core-modules-widgets@4.0.0",
+  "_id": "tns-core-modules-widgets@4.0.0",
   "_inBundle": false,
-  "_integrity": "sha1-tXGNU2JI1kdDu+asgbenzEAe3mQ=",
+  "_integrity": "sha512-8moobfg3GtdYkiH3UZyqTQVF7+zxuAAv29viXDR73x7KmQ6EMXuoiN/isytDr9C2m/aE2iPlzpKS4Dm8OkWBIA==",
   "_location": "/tns-core-modules-widgets",
   "_phantomChildren": {},
   "_requested": {
-    "type": "tag",
+    "type": "version",
     "registry": true,
-    "raw": "tns-core-modules-widgets@next",
+    "raw": "tns-core-modules-widgets@4.0.0",
     "name": "tns-core-modules-widgets",
     "escapedName": "tns-core-modules-widgets",
-    "rawSpec": "next",
+    "rawSpec": "4.0.0",
     "saveSpec": null,
-    "fetchSpec": "next"
+    "fetchSpec": "4.0.0"
   },
   "_requiredBy": [
     "/tns-core-modules"
   ],
-  "_resolved": "https://registry.npmjs.org/tns-core-modules-widgets/-/tns-core-modules-widgets-4.0.0-2018-04-03-01.tgz",
-  "_shasum": "b5718d536248d64743bbe6ac81b7a7cc401ede64",
-  "_spec": "tns-core-modules-widgets@next",
+  "_resolved": "https://registry.npmjs.org/tns-core-modules-widgets/-/tns-core-modules-widgets-4.0.0.tgz",
+  "_shasum": "25b3eecc67a5df2554d25aa17cb12b0f244eea82",
+  "_spec": "tns-core-modules-widgets@4.0.0",
   "_where": "C:\\Users\\kadir\\dirproto5\\node_modules\\tns-core-modules",
   "author": {
     "name": "NativeScript team"
@@ -47,5 +47,5 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "version": "4.0.0-2018-04-03-01"
+  "version": "4.0.0"
 }

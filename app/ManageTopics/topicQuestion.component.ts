@@ -4,7 +4,7 @@ import { RadSideDrawerComponent } from "nativescript-pro-ui/sidedrawer/angular";
 import {User, Classroom, Options, Question} from "../models";
 import {Observable} from 'rxjs/Observable';
 import {Tag} from '../Tags/tag.component';
-import {FirebaseService} from '../services';
+import {FirebaseService, FirebaseService1} from '../services';
 import firebase = require("nativescript-plugin-firebase");
 import { BackendService } from "../services/backend.service";
 import { RouterExtensions } from 'nativescript-angular/router/router-extensions';
@@ -36,7 +36,8 @@ export class topicQuestionComponent implements OnInit {
     public topicname;
 
     constructor(private routerExtensions: RouterExtensions,
-        private firebaseService: FirebaseService, private route: ActivatedRoute
+        private firebaseService: FirebaseService, private route: ActivatedRoute,
+        private firebaseService1: FirebaseService1
         ) {
 
             this.route.queryParams.subscribe(params => {
@@ -51,13 +52,13 @@ export class topicQuestionComponent implements OnInit {
     ngOnInit(): void {
         this._sideDrawerTransition = new SlideInOnTopTransition();
         console.log("Tid is "+ this.tid);
-        this.question$ = <any>this.firebaseService.getTopicQuestions(this.tid);
+        this.question$ = <any>this.firebaseService1.getTopicQuestions(this.tid);
 
        
     }
 
     deleteQuestion(question: Question){
-        this.firebaseService.deleteQuestion(question);
+        this.firebaseService1.deleteQuestion(question);
     }
 
 }

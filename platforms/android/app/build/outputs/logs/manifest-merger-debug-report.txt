@@ -37,7 +37,7 @@ MERGED from [com.android.support:support-core-ui:26.0.0-alpha1] C:\Users\kadir\.
 MERGED from [com.android.support:support-media-compat:26.0.0-alpha1] C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\support-media-compat-26.0.0-alpha1.aar\0e9b1f4df99d219f710f5889c06ef0ad\AndroidManifest.xml:17:1-31:12
 MERGED from [com.android.support:support-core-utils:26.0.0-alpha1] C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\support-core-utils-26.0.0-alpha1.aar\6a9bae838821fd74e268d5f2014cad2d\AndroidManifest.xml:17:1-31:12
 MERGED from [com.android.support:support-compat:26.0.0-alpha1] C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\support-compat-26.0.0-alpha1.aar\af10d6f21e9d316ee68e37268f32c2b1\AndroidManifest.xml:17:1-31:12
-MERGED from [:nativescript-optimized:] C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\nativescript-optimized.aar\a910b4e13157a5084916e2dad2e65c3d\AndroidManifest.xml:2:1-11:12
+MERGED from [:nativescript-optimized:] C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\nativescript-optimized.aar\d0b3744ba654e8fdc0d132c9fac1abee\AndroidManifest.xml:2:1-11:12
 MERGED from [:firebase-release:] C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\firebase-release.aar\9208a5f974f4d78d3690a20cfa6f597f\AndroidManifest.xml:2:1-24:12
 MERGED from [:Chart-2017.1.1221-dev-release:] C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\Chart-2017.1.1221-dev-release.aar\723d7edc184587f96209da914c1a73d2\AndroidManifest.xml:2:1-14:12
 MERGED from [:Common-2017.1.1221-dev-release:] C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\Common-2017.1.1221-dev-release.aar\8026204b60130cb486d4f08248b76a38\AndroidManifest.xml:2:1-14:12
@@ -47,7 +47,7 @@ MERGED from [:Gauges-2017.1.1221-dev-release:] C:\Users\kadir\.gradle\caches\tra
 MERGED from [:Input-2017.1.1221-dev-release:] C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\Input-2017.1.1221-dev-release.aar\ab78d4450a0f3c943d7826d77597f225\AndroidManifest.xml:2:1-14:12
 MERGED from [:List-2017.1.1221-dev-release:] C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\List-2017.1.1221-dev-release.aar\3885e7d3219c5fe24739d6e08dd4be60\AndroidManifest.xml:2:1-14:12
 MERGED from [:Primitives-2017.1.1221-dev-release:] C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\Primitives-2017.1.1221-dev-release.aar\a3172d01ce07b7f034c2e7ceffd0afbc\AndroidManifest.xml:2:1-14:12
-MERGED from [:widgets-release:] C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\widgets-release.aar\38bb11b7dfd18fb9d0f03b6a6786baa9\AndroidManifest.xml:2:1-14:12
+MERGED from [:widgets-release:] C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\widgets-release.aar\f27d59241d2f35c33d03fde6d893baa7\AndroidManifest.xml:2:1-14:12
 MERGED from [com.google.firebase:firebase-auth-license:11.8.0] C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\firebase-auth-license-11.8.0.aar\794fd5c047daac701256f2c4a4d89a73\AndroidManifest.xml:2:1-6:12
 MERGED from [com.google.android.gms:play-services-base-license:11.8.0] C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\play-services-base-license-11.8.0.aar\cd660351b269ed370ecb00ded38abeb2\AndroidManifest.xml:2:1-6:12
 MERGED from [com.google.firebase:firebase-database-license:11.8.0] C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\firebase-database-license-11.8.0.aar\5cd1486f4b89a65eb827f88c0cbcea98\AndroidManifest.xml:2:1-6:12
@@ -161,8 +161,8 @@ MERGED from [com.android.support:support-core-utils:26.0.0-alpha1] C:\Users\kadi
 MERGED from [com.android.support:support-core-utils:26.0.0-alpha1] C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\support-core-utils-26.0.0-alpha1.aar\6a9bae838821fd74e268d5f2014cad2d\AndroidManifest.xml:21:5-23:61
 MERGED from [com.android.support:support-compat:26.0.0-alpha1] C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\support-compat-26.0.0-alpha1.aar\af10d6f21e9d316ee68e37268f32c2b1\AndroidManifest.xml:21:5-23:58
 MERGED from [com.android.support:support-compat:26.0.0-alpha1] C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\support-compat-26.0.0-alpha1.aar\af10d6f21e9d316ee68e37268f32c2b1\AndroidManifest.xml:21:5-23:58
-MERGED from [:nativescript-optimized:] C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\nativescript-optimized.aar\a910b4e13157a5084916e2dad2e65c3d\AndroidManifest.xml:7:5-9:41
-MERGED from [:nativescript-optimized:] C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\nativescript-optimized.aar\a910b4e13157a5084916e2dad2e65c3d\AndroidManifest.xml:7:5-9:41
+MERGED from [:nativescript-optimized:] C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\nativescript-optimized.aar\d0b3744ba654e8fdc0d132c9fac1abee\AndroidManifest.xml:7:5-9:41
+MERGED from [:nativescript-optimized:] C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\nativescript-optimized.aar\d0b3744ba654e8fdc0d132c9fac1abee\AndroidManifest.xml:7:5-9:41
 MERGED from [:firebase-release:] C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\firebase-release.aar\9208a5f974f4d78d3690a20cfa6f597f\AndroidManifest.xml:7:5-9:41
 MERGED from [:firebase-release:] C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\firebase-release.aar\9208a5f974f4d78d3690a20cfa6f597f\AndroidManifest.xml:7:5-9:41
 MERGED from [:Chart-2017.1.1221-dev-release:] C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\Chart-2017.1.1221-dev-release.aar\723d7edc184587f96209da914c1a73d2\AndroidManifest.xml:7:5-9:41
@@ -181,8 +181,8 @@ MERGED from [:List-2017.1.1221-dev-release:] C:\Users\kadir\.gradle\caches\trans
 MERGED from [:List-2017.1.1221-dev-release:] C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\List-2017.1.1221-dev-release.aar\3885e7d3219c5fe24739d6e08dd4be60\AndroidManifest.xml:7:5-9:41
 MERGED from [:Primitives-2017.1.1221-dev-release:] C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\Primitives-2017.1.1221-dev-release.aar\a3172d01ce07b7f034c2e7ceffd0afbc\AndroidManifest.xml:7:5-9:41
 MERGED from [:Primitives-2017.1.1221-dev-release:] C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\Primitives-2017.1.1221-dev-release.aar\a3172d01ce07b7f034c2e7ceffd0afbc\AndroidManifest.xml:7:5-9:41
-MERGED from [:widgets-release:] C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\widgets-release.aar\38bb11b7dfd18fb9d0f03b6a6786baa9\AndroidManifest.xml:7:5-9:41
-MERGED from [:widgets-release:] C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\widgets-release.aar\38bb11b7dfd18fb9d0f03b6a6786baa9\AndroidManifest.xml:7:5-9:41
+MERGED from [:widgets-release:] C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\widgets-release.aar\f27d59241d2f35c33d03fde6d893baa7\AndroidManifest.xml:7:5-9:41
+MERGED from [:widgets-release:] C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\widgets-release.aar\f27d59241d2f35c33d03fde6d893baa7\AndroidManifest.xml:7:5-9:41
 MERGED from [com.google.firebase:firebase-auth-license:11.8.0] C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\firebase-auth-license-11.8.0.aar\794fd5c047daac701256f2c4a4d89a73\AndroidManifest.xml:4:5-43
 MERGED from [com.google.firebase:firebase-auth-license:11.8.0] C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\firebase-auth-license-11.8.0.aar\794fd5c047daac701256f2c4a4d89a73\AndroidManifest.xml:4:5-43
 MERGED from [com.google.android.gms:play-services-base-license:11.8.0] C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\play-services-base-license-11.8.0.aar\cd660351b269ed370ecb00ded38abeb2\AndroidManifest.xml:4:5-43
@@ -323,8 +323,8 @@ MERGED from [:List-2017.1.1221-dev-release:] C:\Users\kadir\.gradle\caches\trans
 MERGED from [:List-2017.1.1221-dev-release:] C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\List-2017.1.1221-dev-release.aar\3885e7d3219c5fe24739d6e08dd4be60\AndroidManifest.xml:11:5-12:19
 MERGED from [:Primitives-2017.1.1221-dev-release:] C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\Primitives-2017.1.1221-dev-release.aar\a3172d01ce07b7f034c2e7ceffd0afbc\AndroidManifest.xml:11:5-12:19
 MERGED from [:Primitives-2017.1.1221-dev-release:] C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\Primitives-2017.1.1221-dev-release.aar\a3172d01ce07b7f034c2e7ceffd0afbc\AndroidManifest.xml:11:5-12:19
-MERGED from [:widgets-release:] C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\widgets-release.aar\38bb11b7dfd18fb9d0f03b6a6786baa9\AndroidManifest.xml:11:5-12:19
-MERGED from [:widgets-release:] C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\widgets-release.aar\38bb11b7dfd18fb9d0f03b6a6786baa9\AndroidManifest.xml:11:5-12:19
+MERGED from [:widgets-release:] C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\widgets-release.aar\f27d59241d2f35c33d03fde6d893baa7\AndroidManifest.xml:11:5-12:19
+MERGED from [:widgets-release:] C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\widgets-release.aar\f27d59241d2f35c33d03fde6d893baa7\AndroidManifest.xml:11:5-12:19
 MERGED from [com.google.firebase:firebase-auth-license:11.8.0] C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\firebase-auth-license-11.8.0.aar\794fd5c047daac701256f2c4a4d89a73\AndroidManifest.xml:5:5-20
 MERGED from [com.google.firebase:firebase-auth-license:11.8.0] C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\firebase-auth-license-11.8.0.aar\794fd5c047daac701256f2c4a4d89a73\AndroidManifest.xml:5:5-20
 MERGED from [com.google.android.gms:play-services-base-license:11.8.0] C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\play-services-base-license-11.8.0.aar\cd660351b269ed370ecb00ded38abeb2\AndroidManifest.xml:5:5-20

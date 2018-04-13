@@ -1,39 +1,42 @@
 {
-  "_from": "@angular/platform-browser@~5.2.0",
+  "_args": [
+    [
+      "@angular/platform-browser@5.2.2",
+      "C:\\Users\\kadir\\dirproto5"
+    ]
+  ],
+  "_from": "@angular/platform-browser@5.2.2",
   "_id": "@angular/platform-browser@5.2.2",
   "_inBundle": false,
   "_integrity": "sha512-jiiEEUiv4oOWtBP96hOnxHOY3ckukfSOaxtw+ENjSPAyv/eRbL1B2LFwIg+HYAFxvK8JOLAYZm3Hg9lpenlBMw==",
   "_location": "/@angular/platform-browser",
   "_phantomChildren": {},
   "_requested": {
-    "type": "range",
+    "type": "version",
     "registry": true,
-    "raw": "@angular/platform-browser@~5.2.0",
+    "raw": "@angular/platform-browser@5.2.2",
     "name": "@angular/platform-browser",
     "escapedName": "@angular%2fplatform-browser",
     "scope": "@angular",
-    "rawSpec": "~5.2.0",
+    "rawSpec": "5.2.2",
     "saveSpec": null,
-    "fetchSpec": "~5.2.0"
+    "fetchSpec": "5.2.2"
   },
   "_requiredBy": [
-    "/tns-template-drawer-navigation-ng"
+    "/"
   ],
   "_resolved": "https://registry.npmjs.org/@angular/platform-browser/-/platform-browser-5.2.2.tgz",
-  "_shasum": "3eedcbbcc8c0e6c91eba7ed2b32de7c6679d9b62",
-  "_spec": "@angular/platform-browser@~5.2.0",
-  "_where": "C:\\Users\\kadir\\dirproto4\\dirproto5\\node_modules\\tns-template-drawer-navigation-ng",
+  "_spec": "5.2.2",
+  "_where": "C:\\Users\\kadir\\dirproto5",
   "author": {
     "name": "angular"
   },
   "bugs": {
     "url": "https://github.com/angular/angular/issues"
   },
-  "bundleDependencies": false,
   "dependencies": {
     "tslib": "^1.7.1"
   },
-  "deprecated": false,
   "description": "Angular - library for using Angular in a web browser",
   "es2015": "./esm2015/platform-browser.js",
   "homepage": "https://github.com/angular/angular#readme",

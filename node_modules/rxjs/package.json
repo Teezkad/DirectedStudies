@@ -1,27 +1,32 @@
 {
-  "_from": "rxjs@~5.5.5",
+  "_args": [
+    [
+      "rxjs@5.5.6",
+      "C:\\Users\\kadir\\dirproto5"
+    ]
+  ],
+  "_from": "rxjs@5.5.6",
   "_id": "rxjs@5.5.6",
   "_inBundle": false,
   "_integrity": "sha512-v4Q5HDC0FHAQ7zcBX7T2IL6O5ltl1a2GX4ENjPXg6SjDY69Cmx9v4113C99a4wGF16ClPv5Z8mghuYorVkg/kg==",
   "_location": "/rxjs",
   "_phantomChildren": {},
   "_requested": {
-    "type": "range",
+    "type": "version",
     "registry": true,
-    "raw": "rxjs@~5.5.5",
+    "raw": "rxjs@5.5.6",
     "name": "rxjs",
     "escapedName": "rxjs",
-    "rawSpec": "~5.5.5",
+    "rawSpec": "5.5.6",
     "saveSpec": null,
-    "fetchSpec": "~5.5.5"
+    "fetchSpec": "5.5.6"
   },
   "_requiredBy": [
-    "/tns-template-drawer-navigation-ng"
+    "/"
   ],
   "_resolved": "https://registry.npmjs.org/rxjs/-/rxjs-5.5.6.tgz",
-  "_shasum": "e31fb96d6fd2ff1fd84bcea8ae9c02d007179c02",
-  "_spec": "rxjs@~5.5.5",
-  "_where": "C:\\Users\\kadir\\dirproto4\\dirproto5\\node_modules\\tns-template-drawer-navigation-ng",
+  "_spec": "5.5.6",
+  "_where": "C:\\Users\\kadir\\dirproto5",
   "author": {
     "name": "Ben Lesh",
     "email": "ben@benlesh.com"
@@ -29,7 +34,6 @@
   "bugs": {
     "url": "https://github.com/ReactiveX/RxJS/issues"
   },
-  "bundleDependencies": false,
   "config": {
     "commitizen": {
       "path": "cz-conventional-changelog"
@@ -64,7 +68,6 @@
   "dependencies": {
     "symbol-observable": "1.0.1"
   },
-  "deprecated": false,
   "description": "Reactive Extensions for modern JavaScript",
   "devDependencies": {
     "@angular-devkit/build-optimizer": "0.0.24",

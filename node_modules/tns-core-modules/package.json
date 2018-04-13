@@ -1,31 +1,31 @@
 {
-  "_from": "tns-core-modules@next",
-  "_id": "tns-core-modules@4.0.0-2018-04-05-03",
+  "_from": "tns-core-modules",
+  "_id": "tns-core-modules@4.0.0",
   "_inBundle": false,
-  "_integrity": "sha1-c9tQOEkqiHAguT1/pP29WlDheOQ=",
+  "_integrity": "sha1-lBcSJOrIKqW1hzp4qjCa7NPmNGo=",
   "_location": "/tns-core-modules",
   "_phantomChildren": {},
   "_requested": {
     "type": "tag",
     "registry": true,
-    "raw": "tns-core-modules@next",
+    "raw": "tns-core-modules",
     "name": "tns-core-modules",
     "escapedName": "tns-core-modules",
-    "rawSpec": "next",
+    "rawSpec": "",
     "saveSpec": null,
-    "fetchSpec": "next"
+    "fetchSpec": "latest"
   },
   "_requiredBy": [
     "#USER",
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/tns-core-modules/-/tns-core-modules-4.0.0-2018-04-05-03.tgz",
-  "_shasum": "73db5038492a887020b93d7fa4fdbd5a50e178e4",
-  "_spec": "tns-core-modules@next",
+  "_resolved": "https://registry.npmjs.org/tns-core-modules/-/tns-core-modules-4.0.0.tgz",
+  "_shasum": "94171224eac82aa5b5873a78aa309aecd3e6346a",
+  "_spec": "tns-core-modules",
   "_where": "C:\\Users\\kadir\\dirproto5",
   "bundleDependencies": false,
   "dependencies": {
-    "tns-core-modules-widgets": "next"
+    "tns-core-modules-widgets": "4.0.0"
   },
   "deprecated": false,
   "description": "Telerik NativeScript Core Modules",
@@ -59,7 +59,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/NativeScript/NativeScript/commit/a316e53d547b1de797e6b7cd36fb07d1f37d2482"
+    "url": "https://github.com/NativeScript/NativeScript/commit/eff264eb21620cdde28928835980efc4fd99ff50"
   },
   "snapshot": {
     "android": {
@@ -72,5 +72,5 @@
     }
   },
   "typings": "tns-core-modules.d.ts",
-  "version": "4.0.0-2018-04-05-03"
+  "version": "4.0.0"
 }

@@ -59,7 +59,7 @@
                             <ng-template let-item="item" class = "listview">  
                                 <StackLayout>             
                                 <GridLayout columns="auto,*,auto">
-                                    <Label textWrap = "true" class="h3 header"  col="1" [text]='item.FirstName + " " + item.LastName '></Label>
+                                    <Label textWrap = "true" class="h3 header"  col="1" [text]='item.FirstName '></Label>
                                     <!-- <Label class="h3 header"  col="1" [text]='item.FirstName'></Label> -->
                             <!-- <Image class="m-5" col="2" horizontalAlignment="right" width="40" height="40" (tap)="delete(item)" [src]="'~/assets/trash.png'"></Image> -->
                                 </GridLayout> 
@@ -89,7 +89,7 @@
                         </StackLayout>
                         <ListView row = "5" [items]="requests$ | async"  height="800">
                             <ng-template let-item="item" class = "listview">                  
-                                <StackLayout columns="auto,*,auto">
+                                <StackLayout columns="auto,*,auto" >
                                     <Label textWrap = "true" class="h2 header"  col="1" [text]="'Question: ' + item.Name"></Label>
                                     <GridLayout *ngFor = "let option of item.Option; let in = index" columns="auto,*,auto" >
                                             <Label *ngIf = "option.isAnswer == false" class = "h4" textWrap = "true" col = "1" [text] = "in + '. '+option.name + '('+option.isAnswer+')' "></Label>
@@ -99,10 +99,9 @@
                                     <Label textWrap = "true" [text] = "'Created by: ' + item.By+ ', Student Number: ' + item.StudentNum"></Label>
                                     <!-- <Label class="h3 header"  col="1" [text]='item.FirstName'></Label> -->
                             <!-- <Image class="m-5" col="2" horizontalAlignment="right" width="40" height="40" (tap)="delete(item)" [src]="'~/assets/trash.png'"></Image> -->
-                            <StackLayout>
-                                    <button class = "add" width = "90" height = "70" text = "Add Question" (tap) = "addQuestion(item, item.name, item.Tags, item.TopicID, item.options, item.UID)"></button>
-                                    <button  width = "60" height = "70" text = "Suggest Fix"></button>
-                                </StackLayout>   
+                         
+                                    <button *ngIf = "item.Fixed != true" class = "add" width = "90" height = "70" text = "Add Question" (tap) = "addQuestion(item, item.Name, item.Tags, item.TopicID, item.Option, item.UID)"></button>
+                                    <button *ngIf = "item.Fixed != true" width = "100" height = "70" text = "Suggest Fix" (tap) = "promptMessage(item.id, itme.Tags, item.by, item.UID)"></button>                            
                                 
                                 
                         </StackLayout>

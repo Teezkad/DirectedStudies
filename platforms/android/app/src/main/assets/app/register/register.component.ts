@@ -60,7 +60,7 @@ import { RouterExtensions } from 'nativescript-angular/router/router-extensions'
         
       //      })   
      
-      this.routerExtensions.navigate(['home']);
+      this.routerExtensions.navigate(['/login']);
   }
 
 

@@ -7,8 +7,8 @@
     <StackLayout>
     <label *ngIf = "(score$ | async)?.length==0" text = "This user has not taken any quizzes yet"></label>
     <Label*ngIf = "(score$ | async)?.length!=0" class = "H2 header" HorizontalAlignment = "Center" [text] = "tname" ></Label>
-    <label *ngIf = "(score$ | async)?.length!=0" text = "'Average Score is :' + avg +'%'"></label>
-    <label *ngIf = "(score$ | async)?.length!=0" text = "'Maximum Score is :' + max +'%'"></label>
+    <label *ngIf = "(score$ | async)?.length!=0" [text] = "'Average Score is :' + avg +'%'"></label>
+    <label *ngIf = "(score$ | async)?.length!=0" [text] = "'Maximum Score is :' + max +'%'"></label>
 
 
 </StackLayout>

@@ -105,7 +105,7 @@ export class questionComponent{
       
             alert(message);
             console.log("Question created ");
-            this.router.navigate(["home"]);
+            this.router.navigate(["search"]);
           }) }else{
             this.firebaseService.addQuestionRequest(this.question.name,this.question.Tags, this.question.questionTypeId,
                 this.question.options, this.question.UID, BackendService.studentNum).then((message:any) => {
@@ -113,7 +113,7 @@ export class questionComponent{
                     alert(message);
                
                     console.log("Question created ");
-                    this.router.navigate(["home"]);
+                    this.router.navigate(["search"]);
                   })
           }
         // console.log(this.option1.isAnswer);
