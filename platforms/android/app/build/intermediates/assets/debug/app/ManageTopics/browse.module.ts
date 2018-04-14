@@ -4,10 +4,13 @@ import { FirebaseService1} from "../services/firebase.service.1"
 import { SharedModule } from "../shared/shared.module";
 import { BrowseRoutingModule } from "./browse-routing.module";
 import { BrowseComponent } from "./browse.component";
+import { ModalComponent } from "../modal";
+
 
 @NgModule({
     providers:[
-        FirebaseService1
+        FirebaseService1,
+        ModalComponent
     ],
     imports: [
         NativeScriptCommonModule,
@@ -15,6 +18,7 @@ import { BrowseComponent } from "./browse.component";
         SharedModule
     ],
     declarations: [
+        ModalComponent,
         BrowseComponent
     ],
     schemas: [

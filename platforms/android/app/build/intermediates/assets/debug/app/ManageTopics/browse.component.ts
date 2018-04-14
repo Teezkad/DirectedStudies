@@ -1,13 +1,14 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit, ViewChild, ViewContainerRef } from "@angular/core";
 import { DrawerTransitionBase, SlideInOnTopTransition } from "nativescript-pro-ui/sidedrawer";
 import { RadSideDrawerComponent } from "nativescript-pro-ui/sidedrawer/angular";
 import {User, Classroom, Options, Question} from "../models";
 import {Observable} from 'rxjs/Observable';
 import {Tag} from '../Tags/tag.component';
-import {FirebaseService} from '../services';
-import {FirebaseService1} from "../services/firebase.service.1"
+import { ModalComponent } from "../modal";
+import {FirebaseService, FirebaseService1} from '../services';
 import firebase = require("nativescript-plugin-firebase");
 import { BackendService } from "../services/backend.service";
+import { TextField } from "tns-core-modules/ui/text-field";
 import { RouterExtensions } from 'nativescript-angular/router/router-extensions';
 import { ActivatedRoute, NavigationExtras} from "@angular/router";
 
@@ -35,12 +36,15 @@ export class BrowseComponent implements OnInit {
     private _sideDrawerTransition: DrawerTransitionBase;
     public creatorId = BackendService.instructor;
     public i = 'a';
-    public TA = BackendService.TA;
     public message = "";
+    public TA = BackendService.TA;
 
     constructor(private routerExtensions: RouterExtensions,
-        private firebaseService: FirebaseService,      private firebaseService1: FirebaseService1,
-        private route: ActivatedRoute
+        private firebaseService: FirebaseService, private route: ActivatedRoute,
+        private firebaseService1: FirebaseService1, private modal: ModalComponent,
+         private vcRef: ViewContainerRef
+
+        
         ) {
             
         }
@@ -52,7 +56,9 @@ export class BrowseComponent implements OnInit {
         this.myclassrooms$ = <any>this.firebaseService.getCreatedClasses();
         this.users$ = <any>this.firebaseService.getRegisteredUsers(BackendService.CID);
         this.tags$ = <any>this.firebaseService.getMyTagList();
-        this.requests$ = <any>this.firebaseService.getQuestionRequests();       
+        this.requests$ = <any>this.firebaseService.getQuestionRequests();
+        this.questions$ = <any>this.firebaseService.getClassroomQuestion(); 
+       
     }
 
     get sideDrawerTransition(): DrawerTransitionBase {
@@ -123,6 +129,33 @@ export class BrowseComponent implements OnInit {
       });
   }
 
+  
+  sendMessage(question: string, Topic: string, by: string, UID: string){
+     // this.firebaseService.messageFromSender(question, Topic, by, UID, message);
+    //   this.firebaseService.messageToReceiver(question, Topic, by, UID, this.message);
+    console.log("Message is "+ this.message);
+  }
+
+  onTap() {
+    alert("clicked an item");
+}
+
+openModal() {
+    this.modal.show();
+}
+
+closeModal() {
+    this.modal.hide();
+}
+
+onOpenModal() {
+    console.log("opened modal");
+}
+
+onCloseModal() {
+    console.log("closed modal");
+}
+
   downgradeUser(firstname: string, lastname: string, userId: string, id: string){
     this.firebaseService.unregisterTA(BackendService.CID, firstname, lastname, userId, id).then((message:any) => {
         alert(message);
@@ -133,17 +166,5 @@ export class BrowseComponent implements OnInit {
       this.firebaseService1.deleteRegisteredUsers(uid) .catch(() => {
         alert("An error occurred while deleting user from this class.");
       });
-  }
-
-  promptMessage(questionId: string, topic: string, by: string, UID: string){
-     var msg = prompt("Enter Message", this.message);
-
-     if(msg == null || msg == ""){
-         console.log("No Message");
-     }else{
-         this.firebaseService.messageToReceiver(questionId, topic, by, UID, msg);
-         this.firebaseService.messageFromSender(questionId, topic, by, UID, msg);
-         this.firebaseService1.updateQuestionRequest(questionId);
-     }
   }
 }

@@ -36,12 +36,12 @@
             <Label  text = "There are no messages"></Label>
         </StackLayout>
         <StackLayout>
-            <Label textWrap = "true" class = "h3" text = "Create a question for {{Cname}} question based on a Topic or start a quiz"></Label>
                 <ListView  [items]="messages$ | async"  height="420">
                         <ng-template let-item="item">                  
                             <StackLayout columns="auto,*,auto" >
-                                <label class = "h3 heavy text-primary"[text]= '"From: " + item.ClassName'></label>
-                                <label class = "h2 text-primary"[text]= '"From: " + item.ClassName'></label>
+                                <label class = "h2 heavy text-primary"[text]= '"From: " + item.ClassName'></label>
+                                <label class = "h3 text-primary"[text]= '"Message: " + item.Message'></label>
+                                <label class = "h3 text-primary" [text] = '"For Topic: " + item.Topic' ></label>
                             </StackLayout>                 
                         </ng-template>
                     </ListView>

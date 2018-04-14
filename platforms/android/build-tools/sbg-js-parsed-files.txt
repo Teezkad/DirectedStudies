@@ -25,9 +25,14 @@ C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\ManageTopics\
 C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\ManageTopics\topicQuestion.component.module.js
 C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\ManageTopics\topicQuestion.js
 C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\ManageTopics\topicQuestion.module.js
+C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\MessageDetails\messageDetails.component.js
+C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\MessageDetails\messageDetails.module.js
+C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\MessageDetails\messageDetails.routes.js
 C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\Messages\message-routing.module.js
 C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\Messages\message.component.js
 C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\Messages\message.component.module.js
+C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\modal\index.js
+C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\modal\modal.component.js
 C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\models\Classroom.model.js
 C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\models\index.js
 C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\models\Options.model.js

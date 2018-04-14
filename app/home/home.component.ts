@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit {
         private firebaseService1: FirebaseService1
         
         ) {   
-        }
+        } 
 
     public users$: Observable<any>;
     public classrooms$: Observable<any>;

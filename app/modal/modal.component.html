@@ -1,0 +1,15 @@
+<!-- <GridLayout backgroundColor="white">
+        <ListView [items]="frameworks" class="list-group">
+            <ng-template let-framework="item">
+                <StackLayout class="list-group-item" (tap)="close(framework)">
+                    <Label text="{{ framework }}" class="label"></Label>
+                </StackLayout>
+            </ng-template>
+        </ListView>
+    </GridLayout> -->
+
+    <StackLayout [style.zIndex]="999" modal size="md" alignment="middle">
+                                            <TextView col = "0" width = "320" required hint="Enter Message" class="m-t-10 question" [(ngModel)]="frameworks" rowSpan="3"></TextView>
+                                            <button  width = "120" height = "70" text = "Send Message" (tap) = "sendMessage(item.id, item.Tags, item.by, item.UID)"></button>                            
+
+                                    </StackLayout>

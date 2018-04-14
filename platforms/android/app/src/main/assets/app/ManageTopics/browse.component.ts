@@ -1,15 +1,16 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit, ViewChild, ViewContainerRef } from "@angular/core";
 import { DrawerTransitionBase, SlideInOnTopTransition } from "nativescript-pro-ui/sidedrawer";
 import { RadSideDrawerComponent } from "nativescript-pro-ui/sidedrawer/angular";
 import {User, Classroom, Options, Question} from "../models";
+import { ModalDialogService } from "nativescript-angular/directives/dialogs";
 import {Observable} from 'rxjs/Observable';
 import {Tag} from '../Tags/tag.component';
-import {FirebaseService} from '../services';
-import {FirebaseService1} from "../services/firebase.service.1"
+import { ModalComponent } from "../modal";
+import {FirebaseService, FirebaseService1} from '../services';
 import firebase = require("nativescript-plugin-firebase");
 import { BackendService } from "../services/backend.service";
+import { TextField } from "tns-core-modules/ui/text-field";
 import { RouterExtensions } from 'nativescript-angular/router/router-extensions';
-import * as dialogs from "ui/dialogs";
 import { ActivatedRoute, NavigationExtras} from "@angular/router";
 
 @Component({
@@ -36,12 +37,15 @@ export class BrowseComponent implements OnInit {
     private _sideDrawerTransition: DrawerTransitionBase;
     public creatorId = BackendService.instructor;
     public i = 'a';
-    public TA = BackendService.TA;
     public message = "";
+    public TA = BackendService.TA;
 
     constructor(private routerExtensions: RouterExtensions,
-        private firebaseService: FirebaseService,      private firebaseService1: FirebaseService1,
-        private route: ActivatedRoute
+        private firebaseService: FirebaseService, private route: ActivatedRoute,
+        private firebaseService1: FirebaseService1, private modal: ModalDialogService,
+         private vcRef: ViewContainerRef
+
+        
         ) {
             
         }
@@ -53,7 +57,9 @@ export class BrowseComponent implements OnInit {
         this.myclassrooms$ = <any>this.firebaseService.getCreatedClasses();
         this.users$ = <any>this.firebaseService.getRegisteredUsers(BackendService.CID);
         this.tags$ = <any>this.firebaseService.getMyTagList();
-        this.requests$ = <any>this.firebaseService.getQuestionRequests();       
+        this.requests$ = <any>this.firebaseService.getQuestionRequests();
+        this.questions$ = <any>this.firebaseService.getClassroomQuestion(); 
+       
     }
 
     get sideDrawerTransition(): DrawerTransitionBase {
@@ -86,7 +92,6 @@ export class BrowseComponent implements OnInit {
         console.log(name + " is Activated");
         alert(name + " is Activated");
     }
-
    delete(tag: Tag) {
     this.firebaseService1.deleteTag(tag)
       .catch(() => {
@@ -125,28 +130,33 @@ export class BrowseComponent implements OnInit {
       });
   }
 
+  
+  sendMessage(question: string, Topic: string, by: string, UID: string){
+     // this.firebaseService.messageFromSender(question, Topic, by, UID, message);
+    //   this.firebaseService.messageToReceiver(question, Topic, by, UID, this.message);
+    console.log("Message is "+ this.message);
+  }
+
+  public showModal() {
+    let options = {
+        context: {},
+        fullscreen: true,
+        viewContainerRef: this.vcRef
+    };
+    this.modal.showModal(ModalComponent, options).then(res => {
+        console.log(res);
+    });
+}
+
   downgradeUser(firstname: string, lastname: string, userId: string, id: string){
     this.firebaseService.unregisterTA(BackendService.CID, firstname, lastname, userId, id).then((message:any) => {
         alert(message);
         console.log("TA downgraded ");
       });
   }
-
   removeUser(uid: string){
       this.firebaseService1.deleteRegisteredUsers(uid) .catch(() => {
         alert("An error occurred while deleting user from this class.");
       });
-  }
-
-  promptMessage(question: Question, questionName: string, questionOptions:Options, topic: string, by: string, UID: string){
-    let navigationExtras: NavigationExtras = {
-        queryParams: {
-            "QuestionName": questionName,
-            "QuestionId": question,
-            "QuestionOption": questionOptions,
-            "Sent": true
-        }
-      };
-      this.routerExtensions.navigate(["question"], navigationExtras);
   }
 }

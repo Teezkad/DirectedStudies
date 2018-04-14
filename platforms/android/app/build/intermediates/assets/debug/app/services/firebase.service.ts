@@ -408,13 +408,14 @@ export class FirebaseService {
     }
 
 
-    messageToReceiver(question: string,  topic: string, creator: string, UID:string, message: string){
+    messageToReceiver(question: string, topic: string, creator: string, UID:string, message: string){
       return firebase.push("Messages" ,{
         "Message": message,
-        "Request": question,
+        "QuestionId": question,
+        "QuestionTopic":topic,
         "Seen": false,
         "ClassName": BackendService.Cname,
-        "Topic": topic, 
+        "By": creator, 
         "ReceiverID": UID
       })
 
@@ -648,7 +649,8 @@ export class FirebaseService {
   addQuestion(name: string, tags: string, TID: string, options: Options[], UID: string){
     return firebase.push(
       "/Questions",
-    {"Name": name, "Tags": tags, "Option": options,"UID":BackendService.Uid, "TopicID": TID, "ClassID": BackendService.CID})
+    {"Name": name, "Tags": tags, "Option": options,"UID":BackendService.Uid, "TopicID": TID, 
+    "ClassID": BackendService.CID, "Fixed": false})
     .then(
       function(result:any){
         return 'Question Created and Uploaded';
@@ -697,7 +699,7 @@ export class FirebaseService {
     if (data) {
       for (let id in data) {        
         let result = (<any>Object).assign({id: id}, data[id]);
-       if(BackendService.CID == result.ClassID){ 
+       if(BackendService.CID == result.ClassID && result.Fixed == false){ 
           this._allItems.push(result);
        }
            

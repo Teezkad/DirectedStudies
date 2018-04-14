@@ -101,8 +101,14 @@
                             <!-- <Image class="m-5" col="2" horizontalAlignment="right" width="40" height="40" (tap)="delete(item)" [src]="'~/assets/trash.png'"></Image> -->
                                     <!-- <Label *ngIf = "item.Fixed != true" text = "Messaged Sent"></Label> -->
                                     <button  class = "add" width = "90" height = "70" text = "Add Question" (tap) = "addQuestion(item, item.Name, item.Tags, item.TopicID, item.Option, item.UID)"></button>
-                                    <button  width = "100" height = "70" text = "Suggest Fix" (tap) = "promptMessage(item, item.Name, item.Option, item.Tags, item.by, item.UID)"></button>                            
+                                    <button  width = "100" height = "70" text = "Suggest Fix" (tap) = "showModal()"></button>                            
                                 
+                                    <!-- <StackLayout [style.zIndex]="999" modal size="md" alignment="middle" [dismissable]="true" [duration]="100" (open)="onOpenModal()" (close)="onCloseModal()">
+                                            <TextView col = "0" width = "320" required hint="Enter Message" class="m-t-10 question" [(ngModel)]="message" rowSpan="3"></TextView>
+                                            <button  width = "120" height = "70" text = "Send Message" (tap) = "sendMessage(item.id, item.Tags, item.by, item.UID)"></button>                            
+
+                                    </StackLayout> -->
+
                         </StackLayout>
                             </ng-template>
                         </ListView>

@@ -22,7 +22,9 @@ export const approutes: Routes = [
     {path: "Score", loadChildren: "./Score/Score.module#ScoreModule"},
     {path: "topicScore", loadChildren: "./Score/topicScore.module#topicScoreModule"},
     {path: "topicQuestion", loadChildren: "./ManageTopics/topicQuestion.component.module#topicQuestionModule"},
-    {path: "message", loadChildren: "./Messages/message.component.module#messageModule"}
+    {path: "message", loadChildren: "./Messages/message.component.module#messageModule"},
+    {path: "profile", loadChildren: "./UserProfile/profile.component.module#profileModule"}
+
 
 
 
