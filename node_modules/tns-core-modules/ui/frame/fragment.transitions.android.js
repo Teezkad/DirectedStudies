@@ -110,7 +110,6 @@ function _setAndroidFragmentTransitions(animated, navigationTransition, currentE
             currentEntry.transition = transition;
         }
     }
-    initDefaultAnimations(manager);
     setupDefaultAnimations(newEntry, new DefaultTransition(0, null));
     printTransitions(currentEntry);
     printTransitions(newEntry);

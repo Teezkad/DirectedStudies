@@ -6,8 +6,11 @@ export class Question {
     options: Options[];
     answered: boolean;
     UID: string;
-    Tag: string;
+    Tags: string;
     CID: string;
+    ClassName: string
+    Professor: string;
+    by: string;
 
 //     constructor(data: any) {
 //         data = data || {};

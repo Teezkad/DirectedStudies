@@ -3,9 +3,9 @@ The MyDrawer custom component view is where you define what will be displayed in
 Feel free to customize layouts and components to change how your app drawer looks.
 -->
 <GridLayout rows="auto, *" class="sidedrawer sidedrawer-left">
-    <StackLayout row="0" class="sidedrawer-header">
+    <StackLayout class="sidedrawer-header">
         <!-- <Label class="sidedrawer-header-image fa" text="&#xf2bd;"></Label> -->
-        <Label class="sidedrawer-header-brand" text="User Name"></Label>
+        <Label class="sidedrawer-header-brand" [text]="fname"></Label>
         <Label class="footnote" text="username@mail.com"></Label>
     </StackLayout>
 
@@ -13,12 +13,17 @@ Feel free to customize layouts and components to change how your app drawer look
         <StackLayout class="sidedrawer-content">
             <MyDrawerItem title="Home" route="/home" icon="&#xf015;" [isSelected]="isPageSelected('Home')">
             </MyDrawerItem>
-            <MyDrawerItem title="Tags" route="/browse" icon="&#xf1ea;" [isSelected]="isPageSelected('Browse')">
+            <MyDrawerItem *ngIf = "instructor == true" title="Manage Classroom" route="/browse" icon="&#xf013;" [isSelected]="isPageSelected('Browse')">
             </MyDrawerItem>
-            <MyDrawerItem title="Questions" route="/search" icon="&#xf002;" [isSelected]="isPageSelected('Search')">
+            <MyDrawerItem title='Questions for {{Cname}}' route="/search" icon="&#xf303;" [isSelected]="isPageSelected('Search')">
             </MyDrawerItem>
-            <MyDrawerItem title="Quiz" route="/quiz" icon="&#xf005;" [isSelected]="isPageSelected('Featured')">
+            <MyDrawerItem title='My Profile (Developing)' icon="&#xf007;" [isSelected]="isPageSelected()">
             </MyDrawerItem>
+            <MyDrawerItem title='Messages (Developing)'  icon="&#xf0e0;" [isSelected]="isPageSelected()">
+            </MyDrawerItem>
+
+            <!-- <MyDrawerItem title="Quiz" route="/quiz" icon="&#xf005;" [isSelected]="isPageSelected('Featured')">
+            </MyDrawerItem> -->
 
             <StackLayout class="hr-light"></StackLayout>
 

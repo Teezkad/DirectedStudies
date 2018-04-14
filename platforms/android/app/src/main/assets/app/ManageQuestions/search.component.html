@@ -30,19 +30,22 @@ it shouldn't have any other siblings other than the <ActionBar> component.
     <!--
     Use the tkMainContent directive to display the content of the page when you have an app drawer.
     -->
-    <GridLayout tkMainContent *ngIf = "(tags$ | async)?.length==0"  class="page page-content" >
-            <label text = "There are no Topics for this class yet, Contact the Instructor"></label>
-    </GridLayout>
+
     <GridLayout class="page page-content" tkMainContent >
-        <Label class = "h3" text = "Create a for {{Cname}} question based on a Topic"></Label>
-            <ListView  [items]="tags$ | async"  height="300">
+        <StackLayout *ngIf = "(tags$ | async)?.length==0" >
+        <Label  text = "There are no Topics for this class yet, Contact the Instructor"></Label>
+    </StackLayout>
+    <StackLayout>
+        <Label textWrap = "true" class = "h3" text = "Create a question for {{Cname}} question based on a Topic or start a quiz"></Label>
+            <ListView  [items]="tags$ | async"  height="420">
                     <ng-template let-item="item">                  
-                        <GridLayout columns="auto,*,auto">
+                        <StackLayout columns="auto,*,auto" >
+                            <label class = "h3 heavy"[text]= '"Topic: " + item.Name'></label>
                             <button text = "Create a Question" class="btnIcon" (tap)="createQuestion(item.Name, item.id)"></button>
-                            <label [text]=" item.Name"></label>
                             <button text="Start Quiz" class="btnIcon" col = "4"(tap) = "navQuiz(item.Name, item.id)"></button>
-                        </GridLayout>                 
+                        </StackLayout>                 
                     </ng-template>
                 </ListView>
+            </StackLayout>
     </GridLayout>
 </RadSideDrawer>

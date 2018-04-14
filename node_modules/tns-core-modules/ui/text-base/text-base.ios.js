@@ -11,10 +11,10 @@ var TextBase = (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     TextBase.prototype[text_base_common_1.textProperty.getDefault] = function () {
-        return -1;
+        return text_base_common_1.resetSymbol;
     };
     TextBase.prototype[text_base_common_1.textProperty.setNative] = function (value) {
-        var reset = value === -1;
+        var reset = value === text_base_common_1.resetSymbol;
         if (!reset && this.formattedText) {
             return;
         }
@@ -116,6 +116,9 @@ var TextBase = (function (_super) {
             var paragraphStyle = NSMutableParagraphStyle.alloc().init();
             paragraphStyle.lineSpacing = this.lineHeight;
             paragraphStyle.alignment = this.nativeViewProtected.textAlignment;
+            if (this.nativeViewProtected instanceof UILabel) {
+                paragraphStyle.lineBreakMode = this.nativeViewProtected.lineBreakMode;
+            }
             attrText.addAttributeValueRange(NSParagraphStyleAttributeName, paragraphStyle, { location: 0, length: attrText.length });
         }
         if (this.nativeViewProtected instanceof UIButton) {
@@ -151,6 +154,9 @@ var TextBase = (function (_super) {
             var paragraphStyle = NSMutableParagraphStyle.alloc().init();
             paragraphStyle.lineSpacing = style.lineHeight;
             paragraphStyle.alignment = this.nativeViewProtected.textAlignment;
+            if (this.nativeViewProtected instanceof UILabel) {
+                paragraphStyle.lineBreakMode = this.nativeViewProtected.lineBreakMode;
+            }
             dict.set(NSParagraphStyleAttributeName, paragraphStyle);
         }
         var isTextView = this.nativeViewProtected instanceof UITextView;

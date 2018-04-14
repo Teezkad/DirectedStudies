@@ -216,8 +216,10 @@ var FlexboxLayout = (function (_super) {
     });
     FlexboxLayout.prototype._measureHorizontal = function (widthMeasureSpec, heightMeasureSpec) {
         var _this = this;
-        var widthMode = getMeasureSpecMode(widthMeasureSpec);
         var widthSize = getMeasureSpecSize(widthMeasureSpec);
+        var widthMode = getMeasureSpecMode(widthMeasureSpec);
+        var heightSize = getMeasureSpecSize(heightMeasureSpec);
+        var heightMode = getMeasureSpecMode(heightMeasureSpec);
         var childState = 0;
         this._flexLines.length = 0;
         (function () {
@@ -239,7 +241,7 @@ var FlexboxLayout = (function (_super) {
                     _this._addFlexLineIfLastFlexItem(i, childCount, flexLine);
                     continue;
                 }
-                child._updateEffectiveLayoutValues(_this);
+                child._updateEffectiveLayoutValues(widthSize, widthMode, heightSize, heightMode);
                 var lp = child;
                 if (FlexboxLayout.getAlignSelf(child) === "stretch") {
                     flexLine._indicesAlignSelfStretch.push(i);
@@ -311,8 +313,10 @@ var FlexboxLayout = (function (_super) {
         this._setMeasuredDimensionForFlex(this.flexDirection, widthMeasureSpec, heightMeasureSpec, childState);
     };
     FlexboxLayout.prototype._measureVertical = function (widthMeasureSpec, heightMeasureSpec) {
-        var heightMode = getMeasureSpecMode(heightMeasureSpec);
+        var widthSize = getMeasureSpecSize(widthMeasureSpec);
+        var widthMode = getMeasureSpecMode(widthMeasureSpec);
         var heightSize = getMeasureSpecSize(heightMeasureSpec);
+        var heightMode = getMeasureSpecMode(heightMeasureSpec);
         var childState = 0;
         this._flexLines.length = 0;
         var childCount = this.measureContext.childrenCount;
@@ -333,7 +337,7 @@ var FlexboxLayout = (function (_super) {
                 this._addFlexLineIfLastFlexItem(i, childCount, flexLine);
                 continue;
             }
-            child._updateEffectiveLayoutValues(this);
+            child._updateEffectiveLayoutValues(widthSize, widthMode, heightSize, heightMode);
             var lp = child;
             if (FlexboxLayout.getAlignSelf(child) === "stretch") {
                 flexLine._indicesAlignSelfStretch.push(i);

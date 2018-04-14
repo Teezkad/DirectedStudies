@@ -19,6 +19,10 @@ import { RouterExtensions } from 'nativescript-angular/router/router-extensions'
     styleUrls: ["./my-drawer.component.scss"]
 })
 export class MyDrawerComponent implements OnInit {
+    public Cname = BackendService.Cname;
+    public instructor = BackendService.instructor;
+    public fname = BackendService.Uname;
+
     /* ***********************************************************
     * The "selectedPage" is a component input property.
     * It is used to pass the current page title from the containing page component.

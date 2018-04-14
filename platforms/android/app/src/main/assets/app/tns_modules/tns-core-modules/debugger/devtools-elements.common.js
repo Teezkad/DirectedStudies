@@ -18,6 +18,9 @@ function getViewById(nodeId) {
 }
 function getDocument() {
     var topMostFrame = frameTopmost();
+    if (!topMostFrame) {
+        return undefined;
+    }
     try {
         topMostFrame.ensureDomNode();
     }

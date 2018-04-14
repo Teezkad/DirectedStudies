@@ -31,7 +31,6 @@ var ImageSource = (function () {
         return new Promise(function (resolve, reject) {
             asset.getImageAsync(function (image, err) {
                 if (image) {
-                    _this.setRotationAngleFromFile(asset.android);
                     _this.setNativeSource(image);
                     resolve(_this);
                 }
@@ -116,8 +115,10 @@ var ImageSource = (function () {
         });
     };
     ImageSource.prototype.setNativeSource = function (source) {
+        if (source && !(source instanceof android.graphics.Bitmap)) {
+            throw new Error("The method setNativeSource() expects android.graphics.Bitmap instance.");
+        }
         this.android = source;
-        return source != null;
     };
     ImageSource.prototype.saveToFile = function (path, format, quality) {
         if (quality === void 0) { quality = 100; }
@@ -211,8 +212,9 @@ function fromBase64(source) {
 }
 exports.fromBase64 = fromBase64;
 function fromNativeSource(source) {
-    var image = new ImageSource();
-    return image.setNativeSource(source) ? image : null;
+    var imageSource = new ImageSource();
+    imageSource.setNativeSource(source);
+    return imageSource;
 }
 exports.fromNativeSource = fromNativeSource;
 function fromUrl(url) {

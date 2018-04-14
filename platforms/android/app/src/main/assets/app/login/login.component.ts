@@ -26,6 +26,7 @@ export class LoginComponent implements OnInit{
   user: User;
   isLoggingIn = true;
   isAuthenticating = false;
+  public users$: Observable<any>;
 
   
   constructor(private firebaseService: FirebaseService,
@@ -61,8 +62,9 @@ register(){
      this.firebaseService.login(this.user)
       .then(() => {
         this.isAuthenticating = false;
+        console.log("My uid is"+ BackendService.token);
         console.log("Login successful");
-        console.log(id);
+        console.log("Login id is" + id);
         this.routerExtensions.navigate(["/home"], { clearHistory: true });
 
       })
@@ -71,20 +73,7 @@ register(){
       });
   }
 
-  // signUp() {
-  //   this.firebaseService.register(this.user)
-  //     .then(() => {
-  //       this.isAuthenticating = false;
-  //       this.toggleDisplay();
-  //     })
-  //     .catch((message:any) => {
-  //       alert(message);
-  //       this.isAuthenticating = false;
-  //     });
-  // }
-
 //   forgotPassword() {
-
 //     prompt({
 //       title: "Forgot Password",
 //       message: "Enter the email address you used to register for Giftler to reset your password.",

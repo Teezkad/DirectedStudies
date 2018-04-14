@@ -309,7 +309,7 @@ function parseAngle(value, start) {
     var angleResult = parseUnit(value, start);
     if (angleResult) {
         var start_2 = angleResult.start, end = angleResult.end, value_3 = angleResult.value;
-        return (angleUnitsToRadMap[value_3.unit] || (function () { return null; }))(start_2, end, value_3.value);
+        return (angleUnitsToRadMap[value_3.unit] || (function (_, __, ___) { return null; }))(start_2, end, value_3.value);
     }
     return null;
 }
@@ -714,6 +714,7 @@ function parseSelector(text, start) {
     var value = [];
     var combinator;
     var expectSimpleSelector = true;
+    var pair = [];
     do {
         var simpleSelectorSequence = parseSimpleSelectorSequence(text, end);
         if (!simpleSelectorSequence) {
@@ -726,16 +727,16 @@ function parseSelector(text, start) {
         }
         end = simpleSelectorSequence.end;
         if (combinator) {
-            value.push(combinator.value);
+            pair[1] = combinator.value;
         }
-        value.push(simpleSelectorSequence.value);
+        pair = [simpleSelectorSequence.value, undefined];
+        value.push(pair);
         combinator = parseCombinator(text, end);
         if (combinator) {
             end = combinator.end;
         }
         expectSimpleSelector = combinator && combinator.value !== " ";
     } while (combinator);
-    value.push(undefined);
     return { start: start, end: end, value: value };
 }
 exports.parseSelector = parseSelector;

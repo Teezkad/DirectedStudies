@@ -17,7 +17,11 @@ export const approutes: Routes = [
     { path: "register", loadChildren: "./register/register.module#RegisterModule"},
     {path: "classroom", loadChildren: "./Classrooms/classroom.module#classroomModule"},
     {path: "tag", loadChildren: "./Tags/tag.module#tagModule"},
-    {path: "question", loadChildren: "./Question/question.module#questionModule"}
+    {path: "question", loadChildren: "./Question/question.module#questionModule"},
+    {path: "UserTopic", loadChildren: "./UserTopic/UserTopic.module#UserTopicModule"},
+    {path: "Score", loadChildren: "./Score/Score.module#ScoreModule"},
+    {path: "topicScore", loadChildren: "./Score/topicScore.module#topicScoreModule"},
+    {path: "topicQuestion", loadChildren: "./ManageTopics/topicQuestion.component.module#topicQuestionModule"}
 
 
 ];

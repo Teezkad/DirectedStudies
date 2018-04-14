@@ -5,18 +5,17 @@
     <Label class="action-bar-title" text="Quiz"></Label>
 </ActionBar>
 
-<GridLayout>
-<Label class="h2 header" text="QUIZ"></Label>
-<ListView [items]="quiz$ | async"  height="300">
-    <ng-template let-item="item" let-i = "index">                  
-        <StackLayout columns="auto,*,auto">
-                <Label class="h3 header"  col="1" [text]='item.Name'></Label>
-                <Label row = "1" [text]='item.Option[0].name'></Label>
-                <Label  row = "2" [text]=' item.Option[1].name'></Label>
-                <Label  row = "3" [text]='item.Option[2].name'></Label>
-                <Label  row = "4" [text]='item.Option[3].name'></Label>
 
+<StackLayout>
+        <Label class = "h2" [text]='no+1 +". "+ question'></Label>
+<ListView [items]="option" class = "list-group">
+    <ng-template let-item="item" let-i = "index">                  
+        <StackLayout columns="auto,*,auto" class = "list-group">
+                <Label  [class.Selected]="i===selectedIndex" class = "h3 header Unselected" row = "1" [text]='item.name' (tap)="selectMenu(i)"></Label>
         </StackLayout>                 
     </ng-template>
 </ListView> 
-</GridLayout>
+<button *ngIf = "no != length-1" col = "5" text = "NEXT" (tap) = "nextQuestion()"></button>
+<button *ngIf = "no == length-1" text = "SUBMIT" (tap) = "submit()"></button>
+
+</StackLayout>

@@ -39,7 +39,6 @@ export class SearchComponent implements OnInit {
     ngOnInit(): void {
         this._sideDrawerTransition = new SlideInOnTopTransition();
         this.classrooms$ = <any>this.firebaseService.getMyClassList();
-        this.users$ = <any>this.firebaseService.getMyUserList();
         this.tags$ = <any>this.firebaseService.getMyTagList();
     }
 

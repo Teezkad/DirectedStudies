@@ -1,10 +1,9 @@
-<ActionBar title="Registration">
+<ActionBar class = "action-bar" title="Registration">
     <NavigationButton text="Back" ios.position="left"></NavigationButton>
 </ActionBar>
-<GridLayout backgroundColor="#CCCCCC">
-    <ScrollView sdkExampleTitle sdkToggleNavButton orientation="vertical" isEnabled="true">
        
             <StackLayout class="form" padding="15" backgroundColor="#FFFFFF">
+
                 <StackLayout class="input-field">
                     <Label text="First Name" class="label font-weight-bold m-b-5"></Label>
                     <TextField class="input" [(ngModel)]="register.firstName"></TextField>
@@ -32,7 +31,6 @@
                 </StackLayout>
                 <Button class="btn btn-primary w-full" text="Register" (tap)="signUp()"></Button>
                 <Label (tap)="goBack()" text="Already a member? Login here." class="text-center footnote"></Label>
+
             </StackLayout>
         
-    </ScrollView>
-</GridLayout>
