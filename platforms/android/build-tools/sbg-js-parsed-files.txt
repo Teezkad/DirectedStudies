@@ -25,6 +25,9 @@ C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\ManageTopics\
 C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\ManageTopics\topicQuestion.component.module.js
 C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\ManageTopics\topicQuestion.js
 C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\ManageTopics\topicQuestion.module.js
+C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\Messages\message-routing.module.js
+C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\Messages\message.component.js
+C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\Messages\message.component.module.js
 C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\models\Classroom.model.js
 C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\models\index.js
 C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\models\Options.model.js
@@ -289,5 +292,8 @@ C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\tns_modules\t
 C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\tns_modules\tns-core-modules\utils\utils.js
 C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\tns_modules\tns-core-modules\xhr\xhr.js
 C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\tns_modules\tns-core-modules\xml\xml.js
+C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\UserProfile\profile-routing.module.js
+C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\UserProfile\profile.component.js
+C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\UserProfile\profile.component.module.js
 C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\vendor-platform.js
 C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\vendor.js

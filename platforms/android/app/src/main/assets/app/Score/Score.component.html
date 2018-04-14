@@ -3,8 +3,8 @@
 </ActionBar>
 
     
-<GridLayout class="page page-content" tkMainContent rows = "2">
-    <StackLayout row = "1">
+<StackLayout class="page page-content" tkMainContent >
+    <StackLayout>
     <label *ngIf = "(score$ | async)?.length==0" text = "This user has not taken any quizzes yet"></label>
     <Label *ngIf = "(score$ | async)?.length!=0" class = "H2 header" HorizontalAlignment = "Center" [text] = "tname" ></Label>
     <label *ngIf = "(score$ | async)?.length!=0" [text] = "'Average Score is :' + avg +'%'"></label>
@@ -12,7 +12,7 @@
 
 
 </StackLayout>
-<ListView  [items]="score$ | async"  height="600" row = "2">
+<ListView  [items]="score$ | async"  height="600">
         <ng-template let-item="item">                  
             <StackLayout columns="auto,*,auto" >
                 <label textWrap = "true" class = "h2 heavy" [text]= '"Topic: " + item.Topic + ", Score: " + item.Score.toFixed(2) + "%" '></label>
@@ -20,9 +20,7 @@
             </StackLayout>                 
         </ng-template>
     </ListView>
-</GridLayout>
-
-
+</StackLayout>
 <!--
 <RadCartesianChart tkExampleTitle tkToggleNavButton>
         <CategoricalAxis tkCartesianHorizontalAxis></CategoricalAxis>

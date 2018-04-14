@@ -85,9 +85,9 @@ export class FirebaseService1 {
 
   }
 
-  updateQuestionRequest(question: Question){
-    return firebase.push(
-      "/Requests/"+question.id+"/",
+  updateQuestionRequest(question: string){
+    return firebase.update(
+      "/Requests/"+question+"/",
     {"Fixed": true
   })
     .then(

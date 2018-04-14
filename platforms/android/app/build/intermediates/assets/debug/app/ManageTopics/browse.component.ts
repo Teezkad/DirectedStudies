@@ -135,15 +135,15 @@ export class BrowseComponent implements OnInit {
       });
   }
 
-  promptMessage(question: Question){
+  promptMessage(questionId: string, topic: string, by: string, UID: string){
      var msg = prompt("Enter Message", this.message);
 
      if(msg == null || msg == ""){
          console.log("No Message");
      }else{
-         this.firebaseService.messageToReceiver(question, msg);
-         this.firebaseService.messageFromSender(question, msg);
-         this.firebaseService1.updateQuestionRequest(question);
+         this.firebaseService.messageToReceiver(questionId, topic, by, UID, msg);
+         this.firebaseService.messageFromSender(questionId, topic, by, UID, msg);
+         this.firebaseService1.updateQuestionRequest(questionId);
      }
   }
 }

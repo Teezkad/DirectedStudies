@@ -9,6 +9,7 @@ import {FirebaseService1} from "../services/firebase.service.1"
 import firebase = require("nativescript-plugin-firebase");
 import { BackendService } from "../services/backend.service";
 import { RouterExtensions } from 'nativescript-angular/router/router-extensions';
+import * as dialogs from "ui/dialogs";
 import { ActivatedRoute, NavigationExtras} from "@angular/router";
 
 @Component({
@@ -85,6 +86,7 @@ export class BrowseComponent implements OnInit {
         console.log(name + " is Activated");
         alert(name + " is Activated");
     }
+
    delete(tag: Tag) {
     this.firebaseService1.deleteTag(tag)
       .catch(() => {
@@ -129,21 +131,22 @@ export class BrowseComponent implements OnInit {
         console.log("TA downgraded ");
       });
   }
+
   removeUser(uid: string){
       this.firebaseService1.deleteRegisteredUsers(uid) .catch(() => {
         alert("An error occurred while deleting user from this class.");
       });
   }
 
-  promptMessage(questionId: string, topic: string, by: string, UID: string){
-     var msg = prompt("Enter Message", this.message);
-
-     if(msg == null || msg == ""){
-         console.log("No Message");
-     }else{
-         this.firebaseService.messageToReceiver(questionId, topic, by, UID, msg);
-         this.firebaseService.messageFromSender(questionId, topic, by, UID, msg);
-         this.firebaseService1.updateQuestionRequest(questionId);
-     }
+  promptMessage(question: Question, questionName: string, questionOptions:Options, topic: string, by: string, UID: string){
+    let navigationExtras: NavigationExtras = {
+        queryParams: {
+            "QuestionName": questionName,
+            "QuestionId": question,
+            "QuestionOption": questionOptions,
+            "Sent": true
+        }
+      };
+      this.routerExtensions.navigate(["question"], navigationExtras);
   }
 }

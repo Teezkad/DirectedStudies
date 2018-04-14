@@ -1,0 +1,76 @@
+<ActionBar class="action-bar">
+        <!-- 
+        Use the NavigationButton as a side-drawer button in Android because ActionItems are shown on the right side of the ActionBar
+        -->
+        <NavigationButton ios:visibility="collapsed" icon="res://menu" (tap)="onDrawerButtonTap()"></NavigationButton>
+        <!-- 
+        Use the ActionItem for IOS with position set to left. Using the NavigationButton as a side-drawer button in iOS is not possible, because its function is to always navigate back in the application.
+        -->
+        <ActionItem icon="res://navigation/menu" android:visibility="collapsed" (tap)="onDrawerButtonTap()"
+            ios.position="left">
+        </ActionItem>
+        <Label class="action-bar-title" text="Messages "></Label>
+    </ActionBar>
+    
+    <!--
+    RadSideDrawer is a UI component part of the Progress NativeScript UI set of components.
+    Learn more about the RadSideDrawer UI component and how it can be customized in this documentation article:
+    http://docs.telerik.com/devtools/nativescript-ui/Controls/Angular/SideDrawer/getting-started
+    The RadSideDrawer component is designed to be used as a root element and
+    it shouldn't have any other siblings other than the <ActionBar> component.
+    -->
+    <RadSideDrawer #drawer showOverNavigation="true" [drawerTransition]="sideDrawerTransition">
+        <!--
+        Use the tkDrawerContent directive to display the content of the app drawer on this page.
+        -->
+        <StackLayout tkDrawerContent>
+            <MyDrawer [selectedPage]="'Messages'"></MyDrawer>
+        </StackLayout>
+        
+        <!--
+        Use the tkMainContent directive to display the content of the page when you have an app drawer.
+        -->
+    
+        <GridLayout class="page page-content" tkMainContent >
+
+                <TabView #tabview>
+                        <StackLayout class="form" *tabItem="{title: 'Topics'}">
+        
+                            <StackLayout *ngIf = "(tags$ | async)?.length==0"  class="page page-content">
+                                <label text = "There are no Topics for this class yet, Click the button to create"></label>
+                             </StackLayout>
+                         <StackLayout>
+                            <Label class="h2 header" horizontalAlignment = "center" text="All Topics"></Label>
+                        <ListView row = "5" [items]="tags$ | async"  height="300">
+                            <ng-template let-item="item">                  
+                                <GridLayout columns="auto,*,auto">
+                                        <Label class="h3 header"  col="1" [text]='item.Name'></Label>
+                                        <button  col="1" text = "View Questions" horizontalAlignment="center" width="90" height="40" (tap)= "viewQuestions(item.id, item.Name)"></button>
+                                    <Image class="m-5" col="2" horizontalAlignment="right" width="40" height="40" (tap)="delete(item)" [src]="'~/assets/trash.png'"></Image>
+                                </GridLayout>                 
+                            </ng-template>
+                        </ListView>
+                        <button class = "button-primary"  *ngIf = "creatorId == true" text=" Create Topics" (tap) = "navTag()"></button>
+                    </StackLayout>
+                    </StackLayout>
+
+                    <StackLayout class="form" *tabItem="{title: 'Manage My Classes'}">
+            <StackLayout *ngIf = "(messages$ | async)?.length==0" >
+            <Label  text = "There are no messages"></Label>
+        </StackLayout>
+        <StackLayout>
+            <Label textWrap = "true" class = "h3" text = "Create a question for {{Cname}} question based on a Topic or start a quiz"></Label>
+                <ListView  [items]="messages$ | async"  height="420">
+                        <ng-template let-item="item">                  
+                            <StackLayout columns="auto,*,auto" >
+                                <label class = "h3 heavy text-primary"[text]= '"From: " + item.ClassName'></label>
+                                <label class = "h2 text-primary"[text]= '"From: " + item.ClassName'></label>
+                            </StackLayout>                 
+                        </ng-template>
+                    </ListView>
+                </StackLayout>
+                </StackLayout>
+
+                </TabView>
+        </GridLayout>
+    </RadSideDrawer>

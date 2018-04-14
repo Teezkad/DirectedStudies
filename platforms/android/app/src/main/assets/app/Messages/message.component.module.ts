@@ -3,8 +3,8 @@ import { NativeScriptCommonModule } from "nativescript-angular/common";
 import { FirebaseService1} from "../services/firebase.service.1"
 
 import { SharedModule } from "../shared/shared.module";
-import { topicQuestionRoutingModule } from "./message-routing.module";
-import { topicQuestionComponent } from "./message.component";
+import { messageRoutingModule } from "./message-routing.module";
+import { messageComponent } from "./message.component";
 
 @NgModule({
     providers: [
@@ -12,14 +12,14 @@ import { topicQuestionComponent } from "./message.component";
     ],
     imports: [
         NativeScriptCommonModule,
-        topicQuestionRoutingModule,
+        messageRoutingModule,
         SharedModule
     ],
     declarations: [
-        topicQuestionComponent
+        messageComponent
     ],
     schemas: [
         NO_ERRORS_SCHEMA
     ]
 })
-export class topicQuestionModule { }
+export class messageModule { }

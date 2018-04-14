@@ -408,10 +408,11 @@ export class FirebaseService {
     }
 
 
-    messageToReceiver(question: string,  topic: string, creator: string, UID:string, message: string){
+    messageToReceiver(questionName: string, questionOption: Options, topic: string, creator: string, UID:string, message: string){
       return firebase.push("Messages" ,{
         "Message": message,
-        "Request": question,
+        "QuestionName": questionName,
+        "QuestionTopic": questionOption,
         "Seen": false,
         "ClassName": BackendService.Cname,
         "Topic": topic, 
@@ -546,7 +547,7 @@ export class FirebaseService {
 
   getScore(uid: string): Observable<any>{
     return new Observable((observer: any)=>{
-      let path = 'Users/'+uid+'/MyScores';
+      let path = 'Scores';
       let onValueEvent = (snapshot: any) => {
         this.ngZone.run(() => {
               let result = (<any>Object);

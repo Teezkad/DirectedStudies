@@ -26,26 +26,26 @@
     <GridLayout class="page page-content" tkMainContent>
         
             <TabView #tabview>
-                <StackLayout class="form" *tabItem="{title: 'Topics'}">
+                    <StackLayout class="form" *tabItem="{title: 'Topics'}">
 
-                    <StackLayout *ngIf = "(tags$ | async)?.length==0"  class="page page-content">
-                        <label text = "There are no Topics for this class yet, Click the button to create"></label>
-                     </StackLayout>
-                 <StackLayout>
-                    <Label class="h2 header" horizontalAlignment = "center" text="All Topics"></Label>
-                <ListView row = "5" [items]="tags$ | async"  height="300">
-                    <ng-template let-item="item">                  
-                        <GridLayout columns="auto,*,auto">
-                                <Label class="h3 header"  col="1" [text]='item.Name'></Label>
-                                <button  col="1" text = "View Questions" horizontalAlignment="center" width="90" height="40" (tap)= "viewQuestions(item.id, item.Name)"></button>
-                            <Image class="m-5" col="2" horizontalAlignment="right" width="40" height="40" (tap)="delete(item)" [src]="'~/assets/trash.png'"></Image>
-                        </GridLayout>                 
-                    </ng-template>
-                </ListView>
-                <button class = "button-primary"  *ngIf = "creatorId == true" text=" Create Topics" (tap) = "navTag()"></button>
-            </StackLayout>
-
-            </StackLayout>
+                            <StackLayout *ngIf = "(tags$ | async)?.length==0"  class="page page-content">
+                                <label text = "There are no Topics for this class yet, Click the button to create"></label>
+                             </StackLayout>
+                         <StackLayout>
+                            <Label class="h2 header" horizontalAlignment = "center" text="All Topics"></Label>
+                        <ListView row = "5" [items]="tags$ | async"  height="300">
+                            <ng-template let-item="item">                  
+                                <GridLayout columns="auto,*,auto">
+                                        <Label class="h3 header"  col="1" [text]='item.Name'></Label>
+                                        <button  col="1" text = "View Questions" horizontalAlignment="center" width="90" height="40" (tap)= "viewQuestions(item.id, item.Name)"></button>
+                                    <Image class="m-5" col="2" horizontalAlignment="right" width="40" height="40" (tap)="delete(item)" [src]="'~/assets/trash.png'"></Image>
+                                </GridLayout>                 
+                            </ng-template>
+                        </ListView>
+                        <button class = "button-primary"  *ngIf = "creatorId == true" text=" Create Topics" (tap) = "navTag()"></button>
+                    </StackLayout>
+        
+                    </StackLayout>
 
             
             <StackLayout *tabItem = "{title:'Users'}"  class="form">        
@@ -99,10 +99,9 @@
                                     <Label textWrap = "true" [text] = "'Created by: ' + item.By+ ', Student Number: ' + item.StudentNum"></Label>
                                     <!-- <Label class="h3 header"  col="1" [text]='item.FirstName'></Label> -->
                             <!-- <Image class="m-5" col="2" horizontalAlignment="right" width="40" height="40" (tap)="delete(item)" [src]="'~/assets/trash.png'"></Image> -->
-                         
-                                    <button *ngIf = "item.Fixed != true" class = "add" width = "90" height = "70" text = "Add Question" (tap) = "addQuestion(item, item.Name, item.Tags, item.TopicID, item.Option, item.UID)"></button>
-                                    <button *ngIf = "item.Fixed != true" width = "100" height = "70" text = "Suggest Fix" (tap) = "promptMessage(item.id, itme.Tags, item.by, item.UID)"></button>                            
-                                
+                                    <!-- <Label *ngIf = "item.Fixed != true" text = "Messaged Sent"></Label> -->
+                                    <button  class = "add" width = "90" height = "70" text = "Add Question" (tap) = "addQuestion(item, item.Name, item.Tags, item.TopicID, item.Option, item.UID)"></button>
+                                    <button  width = "100" height = "70" text = "Suggest Fix" (tap) = "promptMessage(item, item.Name, item.Option, item.Tags, item.by, item.UID)"></button>                            
                                 
                         </StackLayout>
                             </ng-template>

@@ -89,6 +89,9 @@ export class HomeComponent implements OnInit {
     showclasses(){
         console.log("all classes size is  "+ this.leng);
         console.log("my class length is "+ this.len );
+        if(this.myclassrooms$ == null){
+            this.ngOnInit();
+        }
         for (var i = 0; i< this.leng; i++){
             var all = JSON.parse(JSON.stringify(this.allClass1[i].ID));
             for (var j = 0; j < this.len; j++){

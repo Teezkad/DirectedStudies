@@ -406,12 +406,13 @@ export class FirebaseService {
           console.log(errorMessage);
         });  
     }
-    
 
-    messageToReceiver(question: string,  topic: string, creator: string, UID:string, message: string){
+
+    messageToReceiver(questionName: string, questionOption: Options, topic: string, creator: string, UID:string, message: string){
       return firebase.push("Messages" ,{
         "Message": message,
-        "Request": question,
+        "QuestionName": questionName,
+        "QuestionTopic": questionOption,
         "Seen": false,
         "ClassName": BackendService.Cname,
         "Topic": topic, 
@@ -546,7 +547,7 @@ export class FirebaseService {
 
   getScore(uid: string): Observable<any>{
     return new Observable((observer: any)=>{
-      let path = 'Users/'+uid+'/MyScores';
+      let path = 'Scores';
       let onValueEvent = (snapshot: any) => {
         this.ngZone.run(() => {
               let result = (<any>Object);
@@ -561,17 +562,34 @@ export class FirebaseService {
 
   getUserScore(uid: string, tid: string): Observable<any>{
     return new Observable((observer: any)=>{
-      let path = 'Users/'+uid+'/MyScores';
+      let path ="Scores";
       let onValueEvent = (snapshot: any) => {
         this.ngZone.run(() => {
               let result = (<any>Object);
-          let results = this.scoreSnapshot(snapshot.value, tid);
+          let results = this.scoreSnapshot(snapshot.value, tid, uid);
           console.log("From firebaseservice user score is" +JSON.stringify(results))
            observer.next(results);
         });
       };
       firebase.addValueEventListener(onValueEvent, `/${path}`);
   }).share();      
+  }
+
+  scoreSnapshot(data: any, tid:string, uid:string) {
+    //empty array, then refill and filter
+    this._allItems = [];
+    if (data) {
+      for (let id in data) {        
+        let result = (<any>Object).assign({id: id}, data[id]);
+
+        if(tid == result.TID && uid == result.UID){
+          this._allItems.push(result);
+        }
+      }
+
+      this.publishUpdates();
+    }
+    return this._allItems;
   }
 
   classSnapshots(data: any) {
@@ -692,11 +710,12 @@ export class FirebaseService {
   }
   //add scores for quizzes users have taken for each
   addUserScore(CID: string, TID: string, Topic: string, score: number){
-    return firebase.push("/Users/"+BackendService.Uid+"/MyScores", {
+    return firebase.push("Scores", {
       "Topic": Topic,
       "CID": CID,
       "Score": score,
       "TID": TID,
+      "UID": BackendService.Uid,
       "Date": Date.now()
     }) .then(
       function (result:any) {
@@ -720,22 +739,7 @@ export class FirebaseService {
     return this._allItems;
   }
 
-  scoreSnapshot(data: any, tid:string) {
-    //empty array, then refill and filter
-    this._allItems = [];
-    if (data) {
-      for (let id in data) {        
-        let result = (<any>Object).assign({id: id}, data[id]);
 
-        if(tid == result.TID){
-          this._allItems.push(result);
-        }
-      }
-
-      this.publishUpdates();
-    }
-    return this._allItems;
-  }
 
   publishUpdates() {
     // here, we sort must emit a *new* value (immutability!)

@@ -15,7 +15,7 @@ import { ActivatedRoute, NavigationExtras} from "@angular/router";
     moduleId: module.id,
     templateUrl: "./message.component.html"
 })
-export class topicQuestionComponent implements OnInit {
+export class messageComponent implements OnInit {
     currentUser = BackendService.token;
     Cname = BackendService.Cname;
    
@@ -42,6 +42,18 @@ export class topicQuestionComponent implements OnInit {
         this.messages$ = this.firebaseService.getUserMessages();
         this._sideDrawerTransition = new SlideInOnTopTransition();
        
+    }
+
+    get sideDrawerTransition(): DrawerTransitionBase {
+        return this._sideDrawerTransition;
+    }
+
+    /* ***********************************************************
+    * According to guidelines, if you have a drawer on your page, you should always
+    * have a button that opens it. Use the showDrawer() function to open the app drawer section.
+    *************************************************************/
+    onDrawerButtonTap(): void {
+        this.drawerComponent.sideDrawer.showDrawer();
     }
 
 }

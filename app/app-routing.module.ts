@@ -21,7 +21,11 @@ export const approutes: Routes = [
     {path: "UserTopic", loadChildren: "./UserTopic/UserTopic.module#UserTopicModule"},
     {path: "Score", loadChildren: "./Score/Score.module#ScoreModule"},
     {path: "topicScore", loadChildren: "./Score/topicScore.module#topicScoreModule"},
-    {path: "topicQuestion", loadChildren: "./ManageTopics/topicQuestion.component.module#topicQuestionModule"}
+    {path: "topicQuestion", loadChildren: "./ManageTopics/topicQuestion.component.module#topicQuestionModule"},
+    {path: "message", loadChildren: "./Messages/message.component.module#messageModule"},
+    {path: "profile", loadChildren: "./UserProfile/profile.component.module#profileModule"}
+
+
 
 
 ];
