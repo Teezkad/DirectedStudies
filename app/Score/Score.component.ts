@@ -83,6 +83,7 @@ export class ScoreComponent implements OnInit {
                 console.log("Date is "+ time + " Timestamp is "+ this.graph$[i].Date );
                 this.graph$[i].Datetime = time;
             }
+            this.getAverage();
         })
 
 

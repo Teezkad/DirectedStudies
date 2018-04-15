@@ -7,7 +7,7 @@
 
 
 <StackLayout>
-        <Label class = "h2" [text]='no+1 +". "+ question'></Label>
+        <Label textWrap = "true" class = "h2" [text]='no+1 +". "+ question'></Label>
 <ListView [items]="option" class = "list-group">
     <ng-template let-item="item" let-i = "index">                  
         <StackLayout columns="auto,*,auto" class = "list-group">

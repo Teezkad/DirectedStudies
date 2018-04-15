@@ -58,5 +58,20 @@ export class profileComponent implements OnInit {
         this.drawerComponent.sideDrawer.showDrawer();
     }
 
+    viewScore(tid: string, tname: string){
+        let navigationExtras: NavigationExtras = {
+            queryParams: {
+                "uid": BackendService.Uid,
+                "fname": BackendService.Uname,
+                "lname": "",
+                "tid": tid,
+                "name":tname
+            }
+          };
+          this.routerExtensions.navigate(["Score"], navigationExtras);
+    }
 
+    deleteClass(){
+
+    }
 }

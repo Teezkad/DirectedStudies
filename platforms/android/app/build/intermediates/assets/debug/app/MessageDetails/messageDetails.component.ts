@@ -35,7 +35,7 @@ export class messageDetailsComponent{
    public option2 : Options;
    public option3 : Options;
    public option4 : Options;
-   public tid;
+   public rid;
    public tname;
 
    constructor(private routerExtensions: RouterExtensions,
@@ -43,8 +43,7 @@ export class messageDetailsComponent{
     private router: Router, private route: ActivatedRoute
     ) {
         this.route.queryParams.subscribe(params => {
-            this.tid = params["Tid"];
-            this.tname = params["Tname"];
+            this.rid = params["Rid"];
         })
 
         this.option1 = new Options();
@@ -69,7 +68,7 @@ export class messageDetailsComponent{
 
         this.question = new Question();
             this.question.name= "";
-            this.question.questionTypeId = this.tid; //recieves tag id from tag page
+            this.question.questionTypeId; //recieves tag id from tag page
             this.question.Tags = this.tname; //recieve tag name from tag page
             this.question.CID= BackendService.CID;
             this.question.UID= BackendService.token;
@@ -79,7 +78,7 @@ export class messageDetailsComponent{
     }
 
     
-    public users$: Observable<any>;
+    public request$: Observable<any>;
     public classrooms$: Observable<any>;
 
 
@@ -125,5 +124,12 @@ export class messageDetailsComponent{
 
 
     }
+
+    ngOnInit(): void {
+        this.request$ = this.firebaseService.getRequest(this.rid);
+
+    }
+
+
 
 }

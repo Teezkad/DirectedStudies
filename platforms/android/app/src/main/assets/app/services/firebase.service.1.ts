@@ -98,6 +98,38 @@ export class FirebaseService1 {
         console.log(errorMessage);
       });
   }
+
+  getTAList(): Observable<any>{
+    return new Observable((observer: any ) => {
+      let path = "Members";
+
+      let onValueEvent = (snapshot: any) => {
+        this.ngZone.run(() => {
+              let result = (<any>Object);
+          let results = this.TASnapshot(snapshot.value);
+          console.log("From firebaseservice TA is" +JSON.stringify(results))
+           observer.next(results);
+        });
+      };
+      firebase.addValueEventListener(onValueEvent, `/${path}`);
+    }).share();
+  }
+
+  TASnapshot(data: any) {
+    //empty array, then refill and filter
+    this._allItems = [];
+    if (data) {
+      for (let id in data) {        
+        let result = (<any>Object).assign({id: id}, data[id]);
+       if(result.UID == BackendService.token && result.CID == BackendService.CID){
+          this._allItems.push(result); }
+           
+      }
+      // this.publishUpdates();
+    }
+    return this._allItems;
+
+  }
  
   delete(classroom: Classroom) {
     return firebase.remove("/Classroom/"+classroom.id+"")

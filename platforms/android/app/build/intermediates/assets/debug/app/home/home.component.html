@@ -2,7 +2,7 @@
     <ActionItem (tap)="logOut()">
         <Button text="Logout" class="action-item"></Button>
       </ActionItem>   
-    <Label class="action-bar-title" text="Home"></Label>
+    <Label class="action-bar-title" text="Home" (tap) = "ngOnInit()"></Label>
 </ActionBar>
 
     <GridLayout class="page page-content" tkMainContent>
@@ -10,6 +10,7 @@
        
         <TabView #tabview> 
         <StackLayout class="form" *tabItem="{title: 'Available Classes'}">
+                <Label text = "*If any pages Malfunction click on the ActionBar*"></Label>
                 <Label class="h2 header" horizontalAlignment = "center" text="List of Classes"></Label>
 
             <ListView [items]="allClass"  height="500" rowHeight="150">

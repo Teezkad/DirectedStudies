@@ -421,6 +421,8 @@ export class FirebaseService {
 
     }
 
+
+
     messageFromSender(question: string, topic: string, creator: string, UID:string, message: string){
       return firebase.push("Messages" ,{
         "Message": message,
@@ -676,6 +678,22 @@ export class FirebaseService {
     }).share();              
   }
 
+  getRequest(Rid: string){
+    return new Observable((observer: any) => {
+      let path = 'Requests/';
+      
+        let onValueEvent = (snapshot: any) => {
+          this.ngZone.run(() => {
+                let result = (<any>Object);
+            let results = this.RequestSnapshot(snapshot.value, Rid);
+            // console.log("From firebaseservice" +JSON.stringify(results))
+             observer.next(results);
+          });
+        };
+        firebase.addValueEventListener(onValueEvent, `/${path}`);
+    }).share(); 
+  }
+
   getClassroomQuestion(): Observable<any> {
     return new Observable((observer: any) => {
       let path = 'Questions/';
@@ -692,6 +710,21 @@ export class FirebaseService {
     }).share();              
   }
 
+  RequestSnapshot(data: any, Rid: string) {
+    //empty array, then refill and filter
+    this._allItems = [];
+    if (data) {
+      for (let id in data) {        
+        let result = (<any>Object).assign({id: id}, data[id]);
+       if( result.id == Rid){ 
+          this._allItems.push(result);
+       }
+           
+      }
+    }
+    return this._allItems;
+
+  }
   
   myRequestSnapshot(data: any) {
     //empty array, then refill and filter

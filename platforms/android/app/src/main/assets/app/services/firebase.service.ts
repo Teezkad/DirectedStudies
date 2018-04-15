@@ -388,7 +388,7 @@ export class FirebaseService {
       .then(result => {
         console.log("User key is"+ result.key);
         this.setTATrue(userkey, classroom, result.key);
-        return 'This user is now a TA';
+        return firstName+ ' is now a TA';
       },
       function (errorMessage:any) {
         alert(errorMessage);
@@ -396,11 +396,10 @@ export class FirebaseService {
     }
 
     unregisterTA(classroom: string, firstName: string, lastName: string, userkey: string, studentkey: string){
-      this.setTAFalse(userkey, classroom);
-      return firebase.remove("TAs/"+studentkey)
+      return firebase.remove("/TAs/"+studentkey+"")
       .then( 
         function (result:any) {
-          return 'You have successfully demoted this user';
+          return firstName+ 'is no longer a TA';
         },
         function (errorMessage:any) {
           console.log(errorMessage);
@@ -420,6 +419,8 @@ export class FirebaseService {
       })
 
     }
+
+
 
     messageFromSender(question: string, topic: string, creator: string, UID:string, message: string){
       return firebase.push("Messages" ,{
@@ -452,7 +453,8 @@ export class FirebaseService {
 
       return firebase.update("Members/"+fieldKey, 
       {
-        "TA": false
+        "TA": false,
+        "TAKey": ""
       }).then( 
         function (result:any) {
         
@@ -629,7 +631,7 @@ export class FirebaseService {
     return firebase.push(
       "/Requests",
     {"Name": name, "Tags": tags, "Option": options,"UID":BackendService.Uid, 
-    "TopicID": TID, "ClassID": BackendService.CID,
+    "TopicID": TID, "ClassID": BackendService.CID, "Fixed": false,
     "By" : BackendService.Uname, "StudentNum": studentNum, "ClassName": BackendService.Cname
 
   
@@ -676,6 +678,22 @@ export class FirebaseService {
     }).share();              
   }
 
+  getRequest(Rid: string){
+    return new Observable((observer: any) => {
+      let path = 'Requests/';
+      
+        let onValueEvent = (snapshot: any) => {
+          this.ngZone.run(() => {
+                let result = (<any>Object);
+            let results = this.RequestSnapshot(snapshot.value, Rid);
+            // console.log("From firebaseservice" +JSON.stringify(results))
+             observer.next(results);
+          });
+        };
+        firebase.addValueEventListener(onValueEvent, `/${path}`);
+    }).share(); 
+  }
+
   getClassroomQuestion(): Observable<any> {
     return new Observable((observer: any) => {
       let path = 'Questions/';
@@ -692,6 +710,21 @@ export class FirebaseService {
     }).share();              
   }
 
+  RequestSnapshot(data: any, Rid: string) {
+    //empty array, then refill and filter
+    this._allItems = [];
+    if (data) {
+      for (let id in data) {        
+        let result = (<any>Object).assign({id: id}, data[id]);
+       if( result.id == Rid){ 
+          this._allItems.push(result);
+       }
+           
+      }
+    }
+    return this._allItems;
+
+  }
   
   myRequestSnapshot(data: any) {
     //empty array, then refill and filter

@@ -8,12 +8,16 @@ import { ModalDialogParams } from "nativescript-angular/directives/dialogs";
 })
 export class ModalComponent {
 
+    public qid: string;
     public frameworks: string;
 
     public constructor(private params: ModalDialogParams) {
         this.frameworks = "";
     }
 
+    public sendMessage(){
+        return this.frameworks;
+    }
     public close(res: string) {
         this.params.closeCallback(res);
     }

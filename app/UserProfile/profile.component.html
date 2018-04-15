@@ -9,7 +9,7 @@
         <ActionItem icon="res://navigation/menu" android:visibility="collapsed" (tap)="onDrawerButtonTap()"
             ios.position="left">
         </ActionItem>
-        <Label class="action-bar-title" text="Messages "></Label>
+        <Label class="action-bar-title" text="Profile "></Label>
     </ActionBar>
     
     <!--
@@ -24,7 +24,7 @@
         Use the tkDrawerContent directive to display the content of the app drawer on this page.
         -->
         <StackLayout tkDrawerContent>
-            <MyDrawer [selectedPage]="'Messages'"></MyDrawer>
+            <MyDrawer [selectedPage]="'My Profile'"></MyDrawer>
         </StackLayout>
         
         <!--
@@ -34,43 +34,42 @@
         <GridLayout class="page page-content" tkMainContent >
 
                 <TabView #tabview>
-                        <StackLayout class="form" *tabItem="{title: 'Topics'}">
+                        <StackLayout class="form" *tabItem="{title: 'Grades'}">
         
                             <StackLayout *ngIf = "(tags$ | async)?.length==0"  class="page page-content">
                                 <label text = "There are no Topics for this class yet, Click the button to create"></label>
                              </StackLayout>
                          <StackLayout>
-                            <Label class="h2 header" horizontalAlignment = "center" text="All Topics"></Label>
+                            <Label class="h2 header" horizontalAlignment = "center" text="Select Topics"></Label>
                         <ListView row = "5" [items]="tags$ | async"  height="300">
                             <ng-template let-item="item">                  
-                                <GridLayout columns="auto,*,auto">
+                                <StackLayout columns="auto,*,auto">
                                         <Label class="h3 header"  col="1" [text]='item.Name'></Label>
-                                        <button  col="1" text = "View Questions" horizontalAlignment="center" width="90" height="40" (tap)= "viewQuestions(item.id, item.Name)"></button>
-                                    <Image class="m-5" col="2" horizontalAlignment="right" width="40" height="40" (tap)="delete(item)" [src]="'~/assets/trash.png'"></Image>
-                                </GridLayout>                 
+                                        <GridLayout>
+                                        <button  col="1" text = "View Grades" horizontalAlignment="center" width="150" height="40" (tap)= "viewScore(item.id, item.Name)"></button>
+                                </GridLayout>
+                                </StackLayout>                 
                             </ng-template>
                         </ListView>
-                        <button class = "button-primary"  *ngIf = "creatorId == true" text=" Create Topics" (tap) = "navTag()"></button>
                     </StackLayout>
                     </StackLayout>
 
-                    <StackLayout class="form" *tabItem="{title: 'Manage My Classes'}">
-            <StackLayout *ngIf = "(messages$ | async)?.length==0" >
-            <Label  text = "There are no messages"></Label>
+
+                    <StackLayout *tabItem = "{title: 'Registered Classes'}"  class="form">
+                            <Label class="h2 header"  horizontalAlignment = "center" text="My Class List"></Label>
+                            <label class = "h4" *ngIf = "(myclassrooms$ | async)?.length==0" text = "You are not registered in any classes"></label>
+
+                        <ListView [items]="myclassrooms$ | async"  height="300">
+                            <ng-template let-item="item">                  
+                                <StackLayout columns="auto,*,auto">
+                                        <Label class="classDescription"  col="1" [text]='item.ClassName + " Year: "+ item.Year'></Label>
+                                        <label class = "classDescription" [text] = '"Created by: "+ item.Professor'></label>
+                                        <button  text="Unregister" (tap) = "deleteClass()"></button>
+
+                                </StackLayout>                 
+                            </ng-template>
+                        </ListView> 
         </StackLayout>
-        <StackLayout>
-            <Label textWrap = "true" class = "h3" text = "Create a question for {{Cname}} question based on a Topic or start a quiz"></Label>
-                <ListView  [items]="messages$ | async"  height="420">
-                        <ng-template let-item="item">                  
-                            <StackLayout columns="auto,*,auto" >
-                                <label class = "h3 heavy text-primary"[text]= '"From: " + item.ClassName'></label>
-                                <label class = "h2 text-primary"[text]= '"From: " + item.ClassName'></label>
-                            </StackLayout>                 
-                        </ng-template>
-                    </ListView>
-                </StackLayout>
-                </StackLayout>
-
                 </TabView>
         </GridLayout>
     </RadSideDrawer>

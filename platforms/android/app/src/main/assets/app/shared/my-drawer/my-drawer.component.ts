@@ -22,6 +22,7 @@ export class MyDrawerComponent implements OnInit {
     public Cname = BackendService.Cname;
     public instructor = BackendService.instructor;
     public fname = BackendService.Uname;
+    public TA = BackendService.TA;
 
     /* ***********************************************************
     * The "selectedPage" is a component input property.

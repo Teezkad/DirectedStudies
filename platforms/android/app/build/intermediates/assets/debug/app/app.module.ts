@@ -6,6 +6,7 @@ import { AppComponent } from "./app.component";
 import { CommonModule } from "@angular/common";
 import { classroomComponent } from "./Classrooms/classroom.component";
 import { questionComponent } from "./Question/question.component";
+import { ModalComponent } from "./modal";
 import { BackendService, FirebaseService, FirebaseService1, UtilsService } from "./services";
 
 
@@ -15,7 +16,8 @@ import { BackendService, FirebaseService, FirebaseService1, UtilsService } from 
         FirebaseService1,
         FirebaseService,
         UtilsService,
-        authProviders
+        authProviders,
+        ModalComponent
     ],
     bootstrap: [
         AppComponent
@@ -29,6 +31,7 @@ import { BackendService, FirebaseService, FirebaseService1, UtilsService } from 
     declarations: [
         AppComponent
     ],
+
     schemas: [
         NO_ERRORS_SCHEMA
     ]

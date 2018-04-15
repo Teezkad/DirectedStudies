@@ -6,6 +6,8 @@ import { ModalDialogService } from "nativescript-angular/modal-dialog";
 import { BrowseRoutingModule } from "./browse-routing.module";
 import { BrowseComponent } from "./browse.component";
 import { ModalComponent } from "../modal";
+import { ModalDialogParams } from "nativescript-angular/directives/dialogs";
+
 
 
 @NgModule({

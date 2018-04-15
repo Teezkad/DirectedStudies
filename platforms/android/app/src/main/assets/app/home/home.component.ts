@@ -36,6 +36,7 @@ export class HomeComponent implements OnInit {
     public classrooms$: Observable<any>;
     public myclassrooms$: Observable<any>;
     public myClass;
+    public TAs$: Observable <any>;
     public allClass;
     public allClass1;
     public len;
@@ -70,7 +71,7 @@ export class HomeComponent implements OnInit {
         console.log("Login successful");
        
 
-        this.myclassrooms$.subscribe( my =>{
+        this.myclassrooms$.subscribe( my =>{ 
             this.len = my.length;
             this.myClass = my;
         })
@@ -151,12 +152,14 @@ export class HomeComponent implements OnInit {
         this.routerExtensions.navigate(["/tag"]);
     }
 
-    activateClass(id: string, name: string, uid: string, TA = [])
+    activateClass(id: string, name: string, uid: string)
     {
         BackendService.CID = id;
         BackendService.Cname = name;
         console.log(id + " is now active class ID");
         console.log(name + " is now active class");
+       
+
         alert(name + " is now active class");
         if(uid == BackendService.token){
             BackendService.instructor = true;
@@ -169,18 +172,17 @@ export class HomeComponent implements OnInit {
             }
           this.routerExtensions.navigate(["browse"], navigationExtras);
     }else{
+        this.TAs$ = <any>this.firebaseService1.getTAList();   
+        this.TAs$.subscribe(vals => {
+            if(vals[0].TA !=null){
+            console.log(BackendService.TA = JSON.parse( JSON.stringify(vals[0].TA)));
+            }
+        }); 
         this.routerExtensions.navigate(["/search"]);
 
     }
 
-    
-if(TA != null){
-    for(var i =0; i < TA.length; i++){
-        if (BackendService.token == JSON.stringify(TA[i].UID)){
-            BackendService.TA == true;
-        }
-    }
-}
+
 
  
         }

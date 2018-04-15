@@ -36,13 +36,14 @@ it shouldn't have any other siblings other than the <ActionBar> component.
         <Label  text = "There are no Topics for this class yet, Contact the Instructor"></Label>
     </StackLayout>
     <StackLayout>
-        <Label textWrap = "true" class = "h3" text = "Create a question for {{Cname}} question based on a Topic or start a quiz"></Label>
             <ListView  [items]="tags$ | async"  height="420">
                     <ng-template let-item="item">                  
                         <StackLayout columns="auto,*,auto" >
                             <label class = "h3 heavy"[text]= '"Topic: " + item.Name'></label>
-                            <button text = "Create a Question" class="btnIcon" (tap)="createQuestion(item.Name, item.id)"></button>
-                            <button text="Start Quiz" class="btnIcon" col = "4"(tap) = "navQuiz(item.Name, item.id)"></button>
+                            <FlexboxLayout alignItems="center" justifyContent="space-between">
+                            <button height = "60" width = "150" style = "background-color : #00BCD4; color :white " text = "Create a Question" class="btnIcon" (tap)="createQuestion(item.Name, item.id)"></button>
+                            <button height = "60" width ="150" style = "background-color : #0091EA; color :white " text="Start Quiz" class="btnIcon" col = "4"(tap) = "navQuiz(item.Name, item.id)"></button>
+                        </FlexboxLayout>
                         </StackLayout>                 
                     </ng-template>
                 </ListView>

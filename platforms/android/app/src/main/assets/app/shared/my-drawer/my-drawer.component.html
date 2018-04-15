@@ -4,9 +4,9 @@ Feel free to customize layouts and components to change how your app drawer look
 -->
 <GridLayout rows="auto, *" class="sidedrawer sidedrawer-left">
     <StackLayout class="sidedrawer-header">
-        <!-- <Label class="sidedrawer-header-image fa" text="&#xf2bd;"></Label> -->
+        <Label class="sidedrawer-header-image fa" text="&#xf2bd;"></Label>
         <Label class="sidedrawer-header-brand" [text]="fname"></Label>
-        <Label class="footnote" text="username@mail.com"></Label>
+        <Label *ngIf = "TA == true" class="footnote" text="YOU ARE A TA"></Label>
     </StackLayout>
 
     <ScrollView row="1">
