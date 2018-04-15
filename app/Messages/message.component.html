@@ -40,8 +40,8 @@
                         <ng-template let-item="item">                  
                             <StackLayout columns="auto,*,auto" >
                                 <label class = "h2 heavy text-primary"[text]= '"From: " + item.ClassName'></label>
-                                <label class = "h3 text-primary"[text]= '"Message: " + item.Message'></label>
-                                <label class = "h3 text-primary" [text] = '"For Topic: " + item.Topic' ></label>
+                                <label textWrap = "true" class = "h3 text-primary"[text]= '"Message: " + item.Message'></label>
+                                <label class = "h3 text-primary" [text] = '"For Topic: " + item.questionTopic' ></label>
                             </StackLayout>                 
                         </ng-template>
                     </ListView>

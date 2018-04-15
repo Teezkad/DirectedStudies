@@ -84,8 +84,8 @@
                             <ng-template let-item="item" class = "listview">                  
                                 <StackLayout columns="auto,*,auto" >
                                     <Label textWrap = "true" class="h2 header"  col="1" [text]="'Question: ' + item.Name"></Label>
-                                    <GridLayout *ngFor = "let option of item.Option; let in = index +1" columns="auto,*,auto" >
-                                            <Label *ngIf = "option.isAnswer == false" class = "h4" textWrap = "true" col = "1" [text] = "'Option'+in + '. '+option.name + '('+option.isAnswer+')' "></Label>
+                                    <GridLayout *ngFor = "let option of item.Option; let in = index" columns="auto,*,auto" >
+                                            <Label *ngIf = "option.isAnswer == false" class = "h4" textWrap = "true" col = "1" [text] = "'Option'+in+1 + '. '+option.name + '('+option.isAnswer+')' "></Label>
                                             <Label *ngIf = "option.isAnswer == true; let tru = in" class = "h3" textWrap = "true" col = "1" [text] = "in + '. '+option.name + '('+option.isAnswer+')' "></Label>
                                     </GridLayout>
                                     <Label class = "h4" [text] = "'For Topic ' + item.Tags+ '. Answer is '+ tru"></Label>
