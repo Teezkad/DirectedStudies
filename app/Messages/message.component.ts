@@ -56,4 +56,17 @@ export class messageComponent implements OnInit {
         this.drawerComponent.sideDrawer.showDrawer();
     }
 
+
+    getMessage(mid: string, rid: string, message: string){
+        let navigationExtras: NavigationExtras = {
+            queryParams: {
+                "Rid": rid,
+                "Message": message,
+                "Mid": mid
+            }
+          };
+          console.log("Request id is: " + rid);
+          this.routerExtensions.navigate(["messageDetails"], navigationExtras);
+          this.firebaseService1.messageSeen(mid);
+    }
 }

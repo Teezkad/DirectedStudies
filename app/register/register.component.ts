@@ -18,6 +18,8 @@ import { RouterExtensions } from 'nativescript-angular/router/router-extensions'
     register: User;
     isLoggingIn = false;
     isAuthenticating = false;
+    public password1;
+    public message = "" ;
 
 
     constructor(private firebaseService: FirebaseService,
@@ -43,6 +45,8 @@ import { RouterExtensions } from 'nativescript-angular/router/router-extensions'
 
 
  signUp() {
+  if(this.password1 == this.register.password){
+
   this.firebaseService.register(this.user, this.user.email, this.register.firstName, this.register.lastName,
     this.register.studenNum, this.register.instructor, this.register.professor)
       .then(() => {
@@ -60,7 +64,11 @@ import { RouterExtensions } from 'nativescript-angular/router/router-extensions'
         
       //      })   
      
-      this.routerExtensions.navigate(['/login']);
+      this.routerExtensions.navigate(['login']);
+
+    }else{
+      this.message = "Passwords Do Not Match";
+    }
   }
 
 

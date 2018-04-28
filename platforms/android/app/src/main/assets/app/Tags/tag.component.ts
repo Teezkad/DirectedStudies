@@ -34,6 +34,7 @@ export class Tag {
 export class tagComponent{
 
    public tag : Tag;
+   public instructor: boolean;
 
    constructor(private routerExtensions: RouterExtensions,
     private firebaseService: FirebaseService,
@@ -54,7 +55,7 @@ export class tagComponent{
 
 
 addTag(){
-    this.firebaseService.addTag(this.tag.name, this.tag.CID, BackendService.Uid).then((message:any) => {
+    this.firebaseService.addTag(this.tag.name, this.tag.CID, BackendService.Uid,this.instructor ).then((message:any) => {
       
             alert(message);
        
@@ -62,4 +63,8 @@ addTag(){
           }) 
           this.routerExtensions.navigate(["/browse"]);
 }    
+
+public onChange(){
+    this.instructor = !this.instructor;
+            }
 }

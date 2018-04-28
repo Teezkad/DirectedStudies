@@ -9,6 +9,10 @@
                 <StackLayout class="input-field">
                     <Label text="Tag Name" class="label font-weight-bold m-b-5"></Label>
                     <TextField class="input" [(ngModel)]="tag.name"></TextField>
+                    <FlexboxLayout alignItems="center" justifyContent="space-between">
+                        <Label text = "Only instructors can create questions? "></Label>
+                        <Switch col = "2" width = "50" HorizontalAlignment = "right" #sw1 [checked]="instructor" (checkedChange)="onChange(instructor)"></Switch>
+                        </FlexboxLayout>
                     <StackLayout class="hr-light"></StackLayout>
                 </StackLayout>
                 <Button class="btn btn-primary w-full" text="create" (tap)="addTag()"></Button>

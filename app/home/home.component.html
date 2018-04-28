@@ -11,8 +11,8 @@
         <TabView #tabview> 
         <StackLayout class="form" *tabItem="{title: 'Available Classes'}">
                 <Label text = "*If any pages Malfunction click on the ActionBar*"></Label>
-                <Label class="h2 header" horizontalAlignment = "center" text="List of Classes"></Label>
-
+                <!-- <Label class="h2 header" horizontalAlignment = "center" text="List of Classes"></Label> -->
+                <SearchBar row="0" hint="Search Available Classes" (clear)="onClear($event)" (submit)="onSubmit($event)"></SearchBar>
             <ListView [items]="allClass"  height="500" rowHeight="150">
                 <ng-template let-item="item">                  
                     <StackLayout  rows = "300" columns="auto,*,auto" class = "listview" >

@@ -7,11 +7,11 @@
 
 
 <StackLayout>
-        <Label textWrap = "true" class = "h2" [text]='no+1 +". "+ question'></Label>
+        <Label textWrap = "true" class = "h2" [text]='no+1 +". of "+ leng + question'></Label>
 <ListView [items]="option" class = "list-group">
     <ng-template let-item="item" let-i = "index">                  
         <StackLayout columns="auto,*,auto" class = "list-group">
-                <Label  [class.Selected]="i===selectedIndex" class = "h3 header Unselected" row = "1" [text]='item.name' (tap)="selectMenu(i)"></Label>
+                <Label  [class.Selected]="i===selectedIndex" height = "40" class = "h3 header Unselected" row = "1" [text]='item.name' (tap)="selectMenu(i)"></Label>
         </StackLayout>                 
     </ng-template>
 </ListView> 

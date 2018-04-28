@@ -38,6 +38,7 @@ export class QuizComponent implements OnInit {
     public score = 0;
     public mark = [];
     public topic;
+    public leng;
  
     @ViewChild("drawer") drawerComponent: RadSideDrawerComponent;
 
@@ -60,8 +61,13 @@ export class QuizComponent implements OnInit {
         this.quiz$ = <any>this.firebaseService1.getTopicQuestions(this.tid);
 
         this.quiz$.subscribe(val => 
-            {this.topic= JSON.parse(JSON.stringify(val[0].Tags));
-            console.log("Question is "+ this.topic);
+            {
+                var len = val.length;
+                this.leng = val.length;
+                if(len != 0){
+                this.topic= JSON.parse(JSON.stringify(val[0].Tags));
+                }
+            // console.log("Question is "+ this.topic);
         }
         );
         this.getquestion(this.no);
@@ -79,10 +85,10 @@ export class QuizComponent implements OnInit {
             // this.options = JSON.parse(JSON.stringify(val));
             this.question = JSON.parse(JSON.stringify(this.questions[num].Name));
             this.option = JSON.parse(JSON.stringify(this.questions[num].Option));
-            console.log("Questions are "+ JSON.stringify(this.questions));
-            console.log("Question is "+ this.question);
-            console.log("Option is "+ this.option);
-            console.log("length is "+ this.length);
+            // console.log("Questions are "+ JSON.stringify(this.questions));
+            // console.log("Question is "+ this.question);
+            // console.log("Option is "+ this.option);
+            // console.log("length is "+ this.length);
 
 
         }

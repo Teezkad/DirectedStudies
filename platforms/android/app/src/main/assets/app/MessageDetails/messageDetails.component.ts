@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {User, Question, Options} from '../models/';
 import {Classroom} from '../models/Classroom.model'
-import {FirebaseService} from '../services';
+import {FirebaseService, FirebaseService1} from '../services';
 import {prompt} from "ui/dialogs";
 import { RouterExtensions } from 'nativescript-angular/router/router-extensions';
 import { EventData } from "data/observable";
@@ -37,13 +37,20 @@ export class messageDetailsComponent{
    public option4 : Options;
    public rid;
    public tname;
+   public message;
+   public qid;
+   public m;
+   public mid;
 
    constructor(private routerExtensions: RouterExtensions,
     private firebaseService: FirebaseService,
-    private router: Router, private route: ActivatedRoute
+    private router: Router, private route: ActivatedRoute,
+    private firebaseService1: FirebaseService1
     ) {
         this.route.queryParams.subscribe(params => {
             this.rid = params["Rid"];
+            this.m = params["Message"];
+            this.mid = params["Mid"];
         })
 
         this.option1 = new Options();
@@ -68,10 +75,6 @@ export class messageDetailsComponent{
 
         this.question = new Question();
             this.question.name= "";
-            this.question.questionTypeId; //recieves tag id from tag page
-            this.question.Tags = this.tname; //recieve tag name from tag page
-            this.question.CID= BackendService.CID;
-            this.question.UID= BackendService.token;
             this.question.options = [this.option1, this.option2, this.option3, this.option4];
            
 
@@ -80,6 +83,33 @@ export class messageDetailsComponent{
     
     public request$: Observable<any>;
     public classrooms$: Observable<any>;
+
+
+    ngOnInit(): void {
+        this.request$ = this.firebaseService.getRequest(this.rid);
+        this.request$.subscribe(val => {
+            this.qid = val[0].id;
+            this.question.name = val[0].Name;
+            this.option1.name = JSON.parse(JSON.stringify(val[0].Option[0].name));
+            this.option2.name = JSON.parse(JSON.stringify(val[0].Option[1].name));
+            this.option3.name = JSON.parse(JSON.stringify(val[0].Option[2].name));
+            this.option4.name = JSON.parse(JSON.stringify(val[0].Option[3].name));
+
+            this.option1.isAnswer = val[0].Option[0].isAnswer;
+            this.option2.isAnswer = val[0].Option[1].isAnswer;
+            this.option3.isAnswer = val[0].Option[2].isAnswer;
+            this.option4.isAnswer = val[0].Option[3].isAnswer;
+            this.message = this.m;
+         })
+    }
+
+    UpdateQuestion(){
+        this.firebaseService1.fixedQuestionRequest(this.qid, this.question.name, this.question.options)
+
+        this.routerExtensions.navigate(["message"]);
+        this.firebaseService1.deleteMessage(this.mid);
+        console.log("Question fixed");
+    }
 
 
     public onChange1(){
@@ -105,7 +135,7 @@ export class messageDetailsComponent{
       
             alert(message);
             console.log("Question created ");
-            this.router.navigate(["search"]);
+            this.router.navigate(["message"]);
           }) }else{
             this.firebaseService.addQuestionRequest(this.question.name,this.question.Tags, this.question.questionTypeId,
                 this.question.options, this.question.UID, BackendService.studentNum).then((message:any) => {
@@ -113,7 +143,7 @@ export class messageDetailsComponent{
                     alert(message);
                
                     console.log("Question created ");
-                    this.router.navigate(["search"]);
+                    this.router.navigate(["message"]);
                   })
           }
         // console.log(this.option1.isAnswer);
@@ -124,12 +154,5 @@ export class messageDetailsComponent{
 
 
     }
-
-    ngOnInit(): void {
-        this.request$ = this.firebaseService.getRequest(this.rid);
-
-    }
-
-
 
 }

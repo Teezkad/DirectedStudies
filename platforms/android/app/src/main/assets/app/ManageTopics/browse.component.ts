@@ -10,6 +10,7 @@ import firebase = require("nativescript-plugin-firebase");
 import { BackendService } from "../services/backend.service";
 import { RouterExtensions } from 'nativescript-angular/router/router-extensions';
 import * as dialogs from "ui/dialogs";
+import { SearchBar } from "ui/search-bar";
 import { ActivatedRoute, NavigationExtras} from "@angular/router";
 
 @Component({
@@ -40,6 +41,8 @@ export class BrowseComponent implements OnInit {
     public TA = BackendService.TA;
     public message = "";
 
+
+
     constructor(private routerExtensions: RouterExtensions,
         private firebaseService: FirebaseService,      private firebaseService1: FirebaseService1,
         private route: ActivatedRoute
@@ -63,6 +66,8 @@ export class BrowseComponent implements OnInit {
             }
         }); 
     }
+
+
         
     }
 
@@ -166,6 +171,7 @@ export class BrowseComponent implements OnInit {
          this.ngOnInit();
      }
 
-    } )
+    })
   }
+  
 }

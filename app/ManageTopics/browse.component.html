@@ -36,7 +36,7 @@
                                 <StackLayout>            
                                         <Label class="h3 header Georgia" row= "1" width = "" col="0" [text]='item.Name' testWrap = "true"></Label>   
                                     <FlexboxLayout alignItems="center" justifyContent="space-between">
-                                            <button width = "200" style =" background-color : blue; color:whitesmoke" col="1, 2" text = "Questions" horizontalAlignment="center" height="60" (tap)= "viewQuestions(item.id, item.Name)"></button>
+                                            <button width = "200" style =" background-color : blue; color:whitesmoke" col="1, 2" text = "Manage Questions" horizontalAlignment="center" height="40" (tap)= "viewQuestions(item.id, item.Name)"></button>
                                             <Image class="m-5" col="3" horizontalAlignment="right" width="40" height="40" (tap)="delete(item)" [src]="'~/assets/trash.png'"></Image>
                                         </FlexboxLayout>  
                                     </StackLayout>  
@@ -85,7 +85,7 @@
                                 <StackLayout columns="auto,*,auto" >
                                     <Label textWrap = "true" class="h2 header"  col="1" [text]="'Question: ' + item.Name"></Label>
                                     <GridLayout *ngFor = "let option of item.Option; let in = index" columns="auto,*,auto" >
-                                            <Label *ngIf = "option.isAnswer == false" class = "h4" textWrap = "true" col = "1" [text] = "'Option'+in+1 + '. '+option.name + '('+option.isAnswer+')' "></Label>
+                                            <Label *ngIf = "option.isAnswer == false" class = "h4" textWrap = "true" col = "1" [text] = "'Option'+in + '. '+option.name + '('+option.isAnswer+')' "></Label>
                                             <Label *ngIf = "option.isAnswer == true; let tru = in" class = "h3" textWrap = "true" col = "1" [text] = "in + '. '+option.name + '('+option.isAnswer+')' "></Label>
                                     </GridLayout>
                                     <Label class = "h4" [text] = "'For Topic ' + item.Tags+ '. Answer is '+ tru"></Label>

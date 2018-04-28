@@ -257,10 +257,10 @@ export class FirebaseService {
     }
 
   //add tags
-  addTag(name: string, cid: string, uid: string){
+  addTag(name: string, cid: string, uid: string, instructorOnly: boolean){
     return firebase.push(
       "/Tags",
-      { "Name": name, "ClassID": cid, "UID" : uid}
+      { "Name": name, "ClassID": cid, "UID" : uid, "instructorOnly": instructorOnly}
     ).then(
       function(result:any){
         return 'Topic '+ name+' successfully Created';
@@ -686,7 +686,7 @@ export class FirebaseService {
           this.ngZone.run(() => {
                 let result = (<any>Object);
             let results = this.RequestSnapshot(snapshot.value, Rid);
-            // console.log("From firebaseservice" +JSON.stringify(results))
+           console.log("From firebaseservice request is " +JSON.stringify(results))
              observer.next(results);
           });
         };

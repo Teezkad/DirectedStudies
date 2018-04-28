@@ -38,10 +38,10 @@
         <StackLayout>
                 <ListView  [items]="messages$ | async"  height="420">
                         <ng-template let-item="item">                  
-                            <StackLayout columns="auto,*,auto" >
+                            <StackLayout columns="auto,*,auto" (tap) = "getMessage(item.id, item.QuestionId, item.Message)">
                                 <label class = "h2 heavy text-primary"[text]= '"From: " + item.ClassName'></label>
                                 <label textWrap = "true" class = "h3 text-primary"[text]= '"Message: " + item.Message'></label>
-                                <label class = "h3 text-primary" [text] = '"For Topic: " + item.questionTopic' ></label>
+                                <label class = "h3 text-primary" [text] = '"For Topic: " + item.QuestionTopic' ></label>
                             </StackLayout>                 
                         </ng-template>
                     </ListView>

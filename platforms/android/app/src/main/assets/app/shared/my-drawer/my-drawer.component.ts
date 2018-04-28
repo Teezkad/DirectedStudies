@@ -4,6 +4,7 @@ import {User} from '../../models/User.model';
 import {FirebaseService} from '../../services';
 import firebase = require("nativescript-plugin-firebase");
 import { BackendService } from "../../services/backend.service";
+import {Observable} from 'rxjs/Observable';
 import { RouterExtensions } from 'nativescript-angular/router/router-extensions';
 
 
@@ -23,6 +24,9 @@ export class MyDrawerComponent implements OnInit {
     public instructor = BackendService.instructor;
     public fname = BackendService.Uname;
     public TA = BackendService.TA;
+    public msg;
+    public messages$: Observable<any>;
+
 
     /* ***********************************************************
     * The "selectedPage" is a component input property.
@@ -35,6 +39,20 @@ export class MyDrawerComponent implements OnInit {
         /* ***********************************************************
         * Use the MyDrawerComponent "onInit" event handler to initialize the properties data values.
         *************************************************************/
+       this.messages$ = <any>this.firebaseService.getUserMessages();
+       this.messages$.subscribe(msgs => {
+           var len = msgs.length;
+           var count = 0;
+           this.msg = 0;
+           if(msgs != null){
+           for(var i =0; i < len ; i++){
+               if(msgs[i].Seen == false){
+                   count ++;
+               }
+           }
+           this.msg = count;
+        }
+       })
     }
 
     /* ***********************************************************
@@ -60,4 +78,6 @@ export class MyDrawerComponent implements OnInit {
         this.firebaseService.logout();
         this.routerExtensions.navigate(["/login"], { clearHistory: true } );
       }
+
+
 }

@@ -10,6 +10,7 @@ import { BackendService } from "../services/backend.service";
 import { RouterExtensions } from 'nativescript-angular/router/router-extensions';
 import { firestore } from "nativescript-plugin-firebase";
 import * as tabViewModule from "tns-core-modules/ui/tab-view";
+import { SearchBar } from "ui/search-bar";
 import {ActivatedRoute, NavigationExtras} from "@angular/router";
 
 
@@ -39,6 +40,7 @@ export class HomeComponent implements OnInit {
     public TAs$: Observable <any>;
     public allClass;
     public allClass1;
+    public allClass2;
     public len;
     public leng;
     public show = [];
@@ -197,5 +199,42 @@ export class HomeComponent implements OnInit {
       });
   } 
       
+
+  public onSubmit(args) {
+    let searchBar = <SearchBar>args.object;
+    let searchValue = searchBar.text.toLowerCase();
+    console.log ("Search value is" + searchValue);
+
+    if (searchValue !== "") {
+        this.allClass2 = new Observable<any>();
+
+        var count =0;
+        for (let i = 0; i < this.leng; i++) {
+            
+            if (JSON.stringify(this.allClass1[i].Name).toLowerCase().indexOf(searchValue) !== -1) {
+                console.log("search result is " + JSON.stringify(this.allClass1[i].Name));
+               // this.allClass2.push(this.allClass1[i]);
+                this.allClass2[count] = this.allClass1[i];
+                console.log("All results are "+ JSON.stringify(this.allClass2[count]));
+                count++;
+
+            }
+        }
+        // this.allClass = this.allClass2;
+    }
+}
+
+public onClear(args) {
+    let searchBar = <SearchBar>args.object;
+    searchBar.text = "";
+    searchBar.hint = "Search Available classes";
+
+    this.allClass2 = new Observable<any>();
+    var i =0;
+    this.allClass1.forEach(item => {
+        this.allClass2[i] = item;
+        i++;
+    });
+}
 
 }

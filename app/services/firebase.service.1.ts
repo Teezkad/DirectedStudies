@@ -99,6 +99,40 @@ export class FirebaseService1 {
       });
   }
 
+  fixedQuestionRequest(question: string, questionName: string, options: Options[]){
+    return firebase.update(
+      "/Requests/"+question+"/",
+      {
+        "Option": options,
+        "Name": questionName,
+        "Fixed": false
+      })
+
+      .then(
+        function(result:any){
+          return 'Request Fix Uploaded';
+        },
+        function (errorMessage:any){
+          console.log(errorMessage);
+        });
+  }
+
+  messageSeen(mid: string){
+    return firebase.update(
+      "/Messages/"+mid+"/",
+      {
+        "Seen": false
+      })
+
+      .then(
+        function(result:any){
+          return 'Request Fix Uploaded';
+        },
+        function (errorMessage:any){
+          console.log(errorMessage);
+        });
+  }
+
   getTAList(): Observable<any>{
     return new Observable((observer: any ) => {
       let path = "Members";
@@ -148,6 +182,10 @@ export class FirebaseService1 {
 
   deleteQuestionRequest(question: Question){
     return firebase.remove("/Requests/"+question.id+"").catch(this.handleErrors);
+  }
+
+  deleteMessage(mid: string){
+    return firebase.remove("/Messages/"+mid+"").catch(this.handleErrors);
   }
 
   deleteTag(tag: Tag) {
