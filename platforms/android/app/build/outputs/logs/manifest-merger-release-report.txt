@@ -70,7 +70,7 @@ INJECTED from C:\Users\kadir\dirproto5\platforms\android\app\src\main\AndroidMan
 INJECTED from C:\Users\kadir\dirproto5\platforms\android\app\src\main\AndroidManifest.xml:2:1-43:12
 INJECTED from C:\Users\kadir\dirproto5\platforms\android\app\src\main\AndroidManifest.xml:2:1-43:12
 	package
-		ADDED from C:\Users\kadir\dirproto5\platforms\android\app\src\main\AndroidManifest.xml:3:2-33
+		ADDED from C:\Users\kadir\dirproto5\platforms\android\app\src\main\AndroidManifest.xml:3:2-37
 		INJECTED from C:\Users\kadir\dirproto5\platforms\android\app\src\main\AndroidManifest.xml
 		INJECTED from C:\Users\kadir\dirproto5\platforms\android\app\src\main\AndroidManifest.xml
 	android:versionName
@@ -547,7 +547,7 @@ ADDED from [com.google.firebase:firebase-iid:12.0.1] C:\Users\kadir\.gradle\cach
 		ADDED from [com.google.firebase:firebase-iid:12.0.1] C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\firebase-iid-12.0.1.aar\217871431626280f091ce66c814e2984\AndroidManifest.xml:30:9-44
 	android:name
 		ADDED from [com.google.firebase:firebase-iid:12.0.1] C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\firebase-iid-12.0.1.aar\217871431626280f091ce66c814e2984\AndroidManifest.xml:29:9-63
-permission#com.directed.quizroom.permission.C2D_MESSAGE
+permission#com.directed2018.quizroom.permission.C2D_MESSAGE
 ADDED from [com.google.firebase:firebase-iid:12.0.1] C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\firebase-iid-12.0.1.aar\217871431626280f091ce66c814e2984\AndroidManifest.xml:28:5-30:47
 	android:protectionLevel
 		ADDED from [com.google.firebase:firebase-iid:12.0.1] C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\firebase-iid-12.0.1.aar\217871431626280f091ce66c814e2984\AndroidManifest.xml:30:9-44
@@ -557,7 +557,7 @@ uses-permission#${applicationId}.permission.C2D_MESSAGE
 ADDED from [com.google.firebase:firebase-iid:12.0.1] C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\firebase-iid-12.0.1.aar\217871431626280f091ce66c814e2984\AndroidManifest.xml:32:5-79
 	android:name
 		ADDED from [com.google.firebase:firebase-iid:12.0.1] C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\firebase-iid-12.0.1.aar\217871431626280f091ce66c814e2984\AndroidManifest.xml:32:22-76
-uses-permission#com.directed.quizroom.permission.C2D_MESSAGE
+uses-permission#com.directed2018.quizroom.permission.C2D_MESSAGE
 ADDED from [com.google.firebase:firebase-iid:12.0.1] C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\firebase-iid-12.0.1.aar\217871431626280f091ce66c814e2984\AndroidManifest.xml:32:5-79
 	android:name
 		ADDED from [com.google.firebase:firebase-iid:12.0.1] C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\firebase-iid-12.0.1.aar\217871431626280f091ce66c814e2984\AndroidManifest.xml:32:22-76
@@ -571,7 +571,7 @@ ADDED from [com.google.firebase:firebase-iid:12.0.1] C:\Users\kadir\.gradle\cach
 		ADDED from [com.google.firebase:firebase-iid:12.0.1] C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\firebase-iid-12.0.1.aar\217871431626280f091ce66c814e2984\AndroidManifest.xml:36:13-78
 intent-filter#${applicationId}+com.google.android.c2dm.intent.RECEIVE
 ADDED from [com.google.firebase:firebase-iid:12.0.1] C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\firebase-iid-12.0.1.aar\217871431626280f091ce66c814e2984\AndroidManifest.xml:39:13-43:29
-intent-filter#com.directed.quizroom+com.google.android.c2dm.intent.RECEIVE
+intent-filter#com.directed2018.quizroom+com.google.android.c2dm.intent.RECEIVE
 ADDED from [com.google.firebase:firebase-iid:12.0.1] C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\firebase-iid-12.0.1.aar\217871431626280f091ce66c814e2984\AndroidManifest.xml:39:13-43:29
 action#com.google.android.c2dm.intent.RECEIVE
 ADDED from [com.google.firebase:firebase-iid:12.0.1] C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\firebase-iid-12.0.1.aar\217871431626280f091ce66c814e2984\AndroidManifest.xml:40:17-81
@@ -581,7 +581,7 @@ category#${applicationId}
 ADDED from [com.google.firebase:firebase-iid:12.0.1] C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\firebase-iid-12.0.1.aar\217871431626280f091ce66c814e2984\AndroidManifest.xml:42:17-61
 	android:name
 		ADDED from [com.google.firebase:firebase-iid:12.0.1] C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\firebase-iid-12.0.1.aar\217871431626280f091ce66c814e2984\AndroidManifest.xml:42:27-58
-category#com.directed.quizroom
+category#com.directed2018.quizroom
 ADDED from [com.google.firebase:firebase-iid:12.0.1] C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\firebase-iid-12.0.1.aar\217871431626280f091ce66c814e2984\AndroidManifest.xml:42:17-61
 	android:name
 		ADDED from [com.google.firebase:firebase-iid:12.0.1] C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\firebase-iid-12.0.1.aar\217871431626280f091ce66c814e2984\AndroidManifest.xml:42:27-58

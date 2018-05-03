@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.directed.quizroom"
+    package="com.directed2018.quizroom"
     android:versionCode="10000"
     android:versionName="1.0" >
 
@@ -27,10 +27,10 @@
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
     <permission
-        android:name="com.directed.quizroom.permission.C2D_MESSAGE"
+        android:name="com.directed2018.quizroom.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
 
-    <uses-permission android:name="com.directed.quizroom.permission.C2D_MESSAGE" />
+    <uses-permission android:name="com.directed2018.quizroom.permission.C2D_MESSAGE" />
 
     <application
         android:name="com.tns.NativeScriptApplication"
@@ -108,7 +108,7 @@
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
 
-                <category android:name="com.directed.quizroom" />
+                <category android:name="com.directed2018.quizroom" />
             </intent-filter>
         </receiver>
         <!--
@@ -125,7 +125,7 @@
 
         <provider
             android:name="com.google.firebase.provider.FirebaseInitProvider"
-            android:authorities="com.directed.quizroom.firebaseinitprovider"
+            android:authorities="com.directed2018.quizroom.firebaseinitprovider"
             android:exported="false"
             android:initOrder="100" />
 

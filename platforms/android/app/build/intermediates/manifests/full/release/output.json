@@ -1,1 +1,1 @@
-[{"outputType":{"type":"MERGED_MANIFESTS"},"apkInfo":{"type":"MAIN","splits":[],"versionCode":10000},"path":"AndroidManifest.xml","properties":{"packageId":"com.directed.quizroom","split":"","minSdkVersion":"17"}}]
+[{"outputType":{"type":"MERGED_MANIFESTS"},"apkInfo":{"type":"MAIN","splits":[],"versionCode":10000},"path":"AndroidManifest.xml","properties":{"packageId":"com.directed2018.quizroom","split":"","minSdkVersion":"17"}}]

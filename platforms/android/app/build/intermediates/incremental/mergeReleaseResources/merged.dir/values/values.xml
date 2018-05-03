@@ -809,7 +809,7 @@
     <string name="firebase_database_url" translatable="false">https://quizroom-4493b.firebaseio.com</string>
     <string name="gcm_defaultSenderId" translatable="false">322940339236</string>
     <string name="google_api_key" translatable="false">AIzaSyA1C6l-CfcDXjEgipJyu_jJcq0wz2zfPQU</string>
-    <string name="google_app_id" translatable="false">1:322940339236:android:98a1bcc0d2522bf3</string>
+    <string name="google_app_id" translatable="false">1:322940339236:android:16a960b00319200c</string>
     <string name="google_crash_reporting_api_key" translatable="false">AIzaSyA1C6l-CfcDXjEgipJyu_jJcq0wz2zfPQU</string>
     <string name="google_storage_bucket" translatable="false">quizroom-4493b.appspot.com</string>
     <string name="label_comments_cap">COMMENTS</string>

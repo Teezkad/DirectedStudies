@@ -8,9 +8,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:322940339236:android:98a1bcc0d2522bf3",
+        "mobilesdk_app_id": "1:322940339236:android:16a960b00319200c",
         "android_client_info": {
-          "package_name": "com.directed.quizroom"
+          "package_name": "com.directed2018.quizroom"
         }
       },
       "oauth_client": [
