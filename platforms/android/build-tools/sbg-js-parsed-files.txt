@@ -133,8 +133,11 @@ C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\tns_modules\n
 C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\tns_modules\nativescript-intl\index.js
 C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\tns_modules\nativescript-intl\nativescript-intl-common.js
 C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\tns_modules\nativescript-intl\nativescript-intl.js
+C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\tns_modules\nativescript-plugin-firebase\analytics\analytics.js
+C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\tns_modules\nativescript-plugin-firebase\analytics\index.js
 C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\tns_modules\nativescript-plugin-firebase\app\auth\index.js
 C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\tns_modules\nativescript-plugin-firebase\app\database\index.js
+C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\tns_modules\nativescript-plugin-firebase\app\database\util\NextPushId.js
 C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\tns_modules\nativescript-plugin-firebase\app\firestore\index.js
 C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\tns_modules\nativescript-plugin-firebase\app\index.js
 C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\tns_modules\nativescript-plugin-firebase\firebase-common.js

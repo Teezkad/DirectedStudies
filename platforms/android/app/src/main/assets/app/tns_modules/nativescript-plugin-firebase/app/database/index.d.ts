@@ -18,8 +18,16 @@ export declare module database {
         orderByValue(): Query;
     }
     class Reference extends Query {
+        then: (a?: any) => Promise<any>;
+        catch: (a?: Error) => Promise<any>;
+        getKey(): string | null;
+        readonly key: string | null;
         set(value: any, onComplete?: (a: Error | null) => any): Promise<any>;
+        child(path: string): database.Reference;
+        push(value?: any, onComplete?: (a: Error | null) => any): database.ThenableReference;
         remove(onComplete?: (a: Error | null) => any): Promise<any>;
+    }
+    interface ThenableReference extends Reference {
     }
     class Database {
         ref(path: string): Reference;

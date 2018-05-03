@@ -13,24 +13,24 @@ public final class R {
         public static final int fastScrollHorizontalTrackDrawable = 0x7f0300bd;
         public static final int fastScrollVerticalThumbDrawable = 0x7f0300be;
         public static final int fastScrollVerticalTrackDrawable = 0x7f0300bf;
-        public static final int layoutManager = 0x7f0300f1;
-        public static final int reverseLayout = 0x7f03014b;
-        public static final int spanCount = 0x7f030162;
-        public static final int stackFromEnd = 0x7f030168;
+        public static final int layoutManager = 0x7f0300fa;
+        public static final int reverseLayout = 0x7f030154;
+        public static final int spanCount = 0x7f03016b;
+        public static final int stackFromEnd = 0x7f030171;
     }
     public static final class dimen {
-        public static final int fastscroll_default_thickness = 0x7f060081;
-        public static final int fastscroll_margin = 0x7f060082;
-        public static final int fastscroll_minimum_range = 0x7f060083;
-        public static final int item_touch_helper_max_drag_scroll_per_frame = 0x7f06008c;
-        public static final int item_touch_helper_swipe_escape_max_velocity = 0x7f06008d;
-        public static final int item_touch_helper_swipe_escape_velocity = 0x7f06008e;
+        public static final int fastscroll_default_thickness = 0x7f060086;
+        public static final int fastscroll_margin = 0x7f060087;
+        public static final int fastscroll_minimum_range = 0x7f060088;
+        public static final int item_touch_helper_max_drag_scroll_per_frame = 0x7f060091;
+        public static final int item_touch_helper_swipe_escape_max_velocity = 0x7f060092;
+        public static final int item_touch_helper_swipe_escape_velocity = 0x7f060093;
     }
     public static final class id {
-        public static final int item_touch_helper_previous_elevation = 0x7f0800ac;
+        public static final int item_touch_helper_previous_elevation = 0x7f0800b0;
     }
     public static final class styleable {
-        public static final int[] RecyclerView = { 0x010100c4, 0x010100f1, 0x7f0300bb, 0x7f0300bc, 0x7f0300bd, 0x7f0300be, 0x7f0300bf, 0x7f0300f1, 0x7f03014b, 0x7f030162, 0x7f030168 };
+        public static final int[] RecyclerView = { 0x010100c4, 0x010100f1, 0x7f0300bb, 0x7f0300bc, 0x7f0300bd, 0x7f0300be, 0x7f0300bf, 0x7f0300fa, 0x7f030154, 0x7f03016b, 0x7f030171 };
         public static final int RecyclerView_android_orientation = 0;
         public static final int RecyclerView_android_descendantFocusability = 1;
         public static final int RecyclerView_fastScrollEnabled = 2;

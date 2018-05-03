@@ -1,58 +1,27 @@
 {
   "project_info": {
-    "project_number": "421120014004",
-    "firebase_url": "https://directed-studies.firebaseio.com",
-    "project_id": "directed-studies",
-    "storage_bucket": "directed-studies.appspot.com"
+    "project_number": "322940339236",
+    "firebase_url": "https://quizroom-4493b.firebaseio.com",
+    "project_id": "quizroom-4493b",
+    "storage_bucket": "quizroom-4493b.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:421120014004:android:0d8c1a0cfcaf45c5",
+        "mobilesdk_app_id": "1:322940339236:android:98a1bcc0d2522bf3",
         "android_client_info": {
-          "package_name": "org.nativescript.dirproto4"
+          "package_name": "com.directed.quizroom"
         }
       },
       "oauth_client": [
         {
-          "client_id": "421120014004-ijqnp84i52ho6kjv5spv56oidnik0fpg.apps.googleusercontent.com",
+          "client_id": "322940339236-11dr708fs5g14so7mbp4e7mu35oau87a.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyD8Xeb3nsE_4OehE2qXfBcr0ZsCdr9e7Zg"
-        }
-      ],
-      "services": {
-        "analytics_service": {
-          "status": 1
-        },
-        "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
-        },
-        "ads_service": {
-          "status": 2
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:421120014004:android:fb2349e7855a610e",
-        "android_client_info": {
-          "package_name": "org.nativescript.dirproto5"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "421120014004-ijqnp84i52ho6kjv5spv56oidnik0fpg.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyD8Xeb3nsE_4OehE2qXfBcr0ZsCdr9e7Zg"
+          "current_key": "AIzaSyA1C6l-CfcDXjEgipJyu_jJcq0wz2zfPQU"
         }
       ],
       "services": {

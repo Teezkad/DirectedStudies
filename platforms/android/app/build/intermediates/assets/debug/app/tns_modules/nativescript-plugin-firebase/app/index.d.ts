@@ -1,3 +1,7 @@
+/**
+ * This is the firebase.js (web) compatible API.
+ * Use 'const firebase = require("nativescript-plugin-firebase/app")'
+ */
 import * as firebase from "../firebase";
 import { auth as firebaseAuthModule } from "./auth";
 import { database as firebaseDatabaseModule } from "./database";

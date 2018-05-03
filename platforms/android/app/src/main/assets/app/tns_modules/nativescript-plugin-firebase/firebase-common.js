@@ -1,6 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var dialogs_1 = require("tns-core-modules/ui/dialogs");
+var analytics = require("./analytics/analytics");
+var applicationSettings = require("tns-core-modules/application-settings");
 exports.firebase = {
     initialized: false,
     instance: null,
@@ -9,7 +11,7 @@ exports.firebase = {
     authStateListeners: [],
     _receivedNotificationCallback: null,
     _dynamicLinkCallback: null,
-    analytics: {},
+    analytics: analytics,
     firestore: {},
     invites: {
         MATCH_TYPE: {
@@ -49,7 +51,8 @@ exports.firebase = {
         PHONE: "phone",
         CUSTOM: "custom",
         FACEBOOK: "facebook",
-        GOOGLE: "google"
+        GOOGLE: "google",
+        EMAIL_LINK: "emailLink"
     },
     QueryOrderByType: {
         KEY: "key",
@@ -100,6 +103,12 @@ exports.firebase = {
             }
         });
     },
+    rememberEmailForEmailLinkLogin: function (email) {
+        applicationSettings.setString("FirebasePlugin.EmailLinkLogin", email);
+    },
+    getRememberedEmailForEmailLinkLogin: function () {
+        return applicationSettings.getString("FirebasePlugin.EmailLinkLogin");
+    },
     strongTypeify: function (value) {
         if (value === "true") {
             value = true;
@@ -123,6 +132,7 @@ exports.firebase = {
             onUserResponse(promptResult.text);
         });
     },
+    // for backward compatibility, because plugin version 4.0.0 moved the params to per-logintype objects
     moveLoginOptionsToObjects: function (loginOptions) {
         if (loginOptions.email) {
             console.log("Please update your code: the 'email' property is deprecated and now expected at 'passwordOptions.email'");
@@ -171,17 +181,17 @@ exports.firebase = {
         }
     },
     merge: function (obj1, obj2) {
-        var result = {};
-        for (var i in obj1) {
+        var result = {}; // return result
+        for (var i in obj1) { // for every property in obj1
             if ((i in obj2) && (typeof obj1[i] === "object") && (i !== null)) {
-                result[i] = exports.firebase.merge(obj1[i], obj2[i]);
+                result[i] = exports.firebase.merge(obj1[i], obj2[i]); // if it's an object, merge
             }
             else {
-                result[i] = obj1[i];
+                result[i] = obj1[i]; // add it to result
             }
         }
-        for (var i in obj2) {
-            if (i in result) {
+        for (var i in obj2) { // add the remaining properties from object 2
+            if (i in result) { // conflict
                 continue;
             }
             result[i] = obj2[i];
@@ -189,16 +199,16 @@ exports.firebase = {
         return result;
     }
 };
-var DocumentSnapshot = (function () {
-    function DocumentSnapshot(id, exists, data) {
+var DocumentSnapshot = /** @class */ (function () {
+    function DocumentSnapshot(id, exists, documentData) {
         this.id = id;
         this.exists = exists;
-        this.data = data;
+        this.data = function () { return exists ? documentData : undefined; };
     }
     return DocumentSnapshot;
 }());
 exports.DocumentSnapshot = DocumentSnapshot;
-var QuerySnapshot = (function () {
+var QuerySnapshot = /** @class */ (function () {
     function QuerySnapshot() {
     }
     QuerySnapshot.prototype.forEach = function (callback, thisArg) {

@@ -9,7 +9,7 @@ package com.telerik.android.common;
 public final class R {
     public static final class attr {
         public static final int fillColor = 0x7f0300c0;
-        public static final int strokeColor = 0x7f030170;
+        public static final int strokeColor = 0x7f030179;
     }
     public static final class color {
         public static final int black = 0x7f050020;

@@ -1,31 +1,27 @@
 {
-  "_args": [
-    [
-      "nativescript-plugin-firebase@5.1.4",
-      "C:\\Users\\kadir\\dirproto5"
-    ]
-  ],
-  "_from": "nativescript-plugin-firebase@5.1.4",
-  "_id": "nativescript-plugin-firebase@5.1.4",
+  "_from": "nativescript-plugin-firebase",
+  "_id": "nativescript-plugin-firebase@5.3.1",
   "_inBundle": false,
-  "_integrity": "sha1-N4BJvz/Dijq3xZB+K2f0VCD05KI=",
+  "_integrity": "sha1-wAwkbgaKbg1rnulrzEKON/BFqaI=",
   "_location": "/nativescript-plugin-firebase",
   "_phantomChildren": {},
   "_requested": {
-    "type": "version",
+    "type": "tag",
     "registry": true,
-    "raw": "nativescript-plugin-firebase@5.1.4",
+    "raw": "nativescript-plugin-firebase",
     "name": "nativescript-plugin-firebase",
     "escapedName": "nativescript-plugin-firebase",
-    "rawSpec": "5.1.4",
+    "rawSpec": "",
     "saveSpec": null,
-    "fetchSpec": "5.1.4"
+    "fetchSpec": "latest"
   },
   "_requiredBy": [
+    "#USER",
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/nativescript-plugin-firebase/-/nativescript-plugin-firebase-5.1.4.tgz",
-  "_spec": "5.1.4",
+  "_resolved": "https://registry.npmjs.org/nativescript-plugin-firebase/-/nativescript-plugin-firebase-5.3.1.tgz",
+  "_shasum": "c00c246e068a6e0d6b9ee96bcc428e37f045a9a2",
+  "_spec": "nativescript-plugin-firebase",
   "_where": "C:\\Users\\kadir\\dirproto5",
   "author": {
     "name": "Eddy Verbruggen",
@@ -34,19 +30,24 @@
   "bugs": {
     "url": "https://github.com/eddyverbruggen/nativescript-plugin-firebase/issues"
   },
+  "bundleDependencies": false,
   "config": {
     "typingsproject": "demo-ng"
   },
   "dependencies": {
+    "fs-extra": "~2.1.0",
     "nativescript-hook": "~0.2.0",
-    "prompt-lite": "~0.1.0"
+    "prompt-lite": "~0.1.0",
+    "xcode": "~0.9.0"
   },
+  "deprecated": false,
   "description": "Fire. Base. Firebase!",
   "devDependencies": {
-    "tns-core-modules": "~3.3.0",
-    "tns-platform-declarations": "~3.3.0",
+    "rimraf": "^2.6.2",
+    "tns-core-modules": "~4.0.0",
+    "tns-platform-declarations": "~4.0.0",
     "tslint": "^5.1.0",
-    "typescript": "~2.4.0"
+    "typescript": "~2.8.0"
   },
   "homepage": "https://github.com/eddyverbruggen/nativescript-plugin-firebase",
   "keywords": [
@@ -74,8 +75,8 @@
   "name": "nativescript-plugin-firebase",
   "nativescript": {
     "platforms": {
-      "android": "2.3.0",
-      "ios": "2.3.0"
+      "android": "3.0.0",
+      "ios": "3.0.0"
     },
     "plugin": {
       "nan": "true",
@@ -103,12 +104,10 @@
   "scripts": {
     "ci.tslint": "npm run tslint && npm run tslint.demo",
     "config": "node scripts/postinstall.js config",
-    "demo-ng.android": "npm run preparedemo-ng && cd ../demo-ng && tns run android --justlaunch",
-    "demo-ng.ios": "npm run preparedemo-ng && cd ../demo-ng && tns run ios --emulator",
-    "demo-ng.ios.device": "npm run preparedemo-ng && cd ../demo-ng && tns platform remove ios && tns run ios",
-    "demo.android": "npm run preparedemo && cd ../demo && tns platform remove android && tns run android --justlaunch",
-    "demo.ios": "npm run preparedemo && cd ../demo && tns run ios --emulator",
-    "demo.ios.device": "npm run preparedemo && cd ../demo && tns platform remove ios && tns run ios",
+    "demo-ng.android": "npm run preparedemo-ng && cd ../demo-ng && tns run android",
+    "demo-ng.ios": "npm run preparedemo-ng && cd ../demo-ng && rimraf platforms/ios && tns run ios",
+    "demo.android": "npm run preparedemo && cd ../demo && rimraf platforms/android && tns run android",
+    "demo.ios": "npm run preparedemo && cd ../demo && rimraf platforms/ios && tns run ios",
     "development.setup": "npm run setup && npm link && cd ../demo && npm link nativescript-plugin-firebase && cd ../src",
     "generate.typings.android": "java -jar ../../android-dts-generator/dts-generator/build/libs/dts-generator.jar -input ../$npm_package_config_typingsproject/platforms/android/build/intermediates/exploded-aar/com.google.firebase/firebase-$npm_package_config_typings/**/jars/classes.jar -output platforms/android/typings/$npm_package_config_typings",
     "generate.typings.android.analytics": "npm run generate.typings.android --nativescript-plugin-firebase:typings=analytics-impl",
@@ -118,8 +117,8 @@
     "generate.typings.android.firestore": "npm run generate.typings.android --nativescript-plugin-firebase:typings=firestore",
     "generate.typings.android.messaging": "npm run generate.typings.android --nativescript-plugin-firebase:typings=messaging",
     "generate.typings.android.storage": "npm run generate.typings.android --nativescript-plugin-firebase:typings=storage",
-    "generate.typings.ios": "cd ../demo && TNS_DEBUG_METADATA_PATH=\"$(pwd)/metadata\" tns build ios && TNS_TYPESCRIPT_DECLARATIONS_PATH=\"$(pwd)/typings\" tns build ios && echo 'Now look for your library typings in demo/typings!'",
-    "package": "cd ../publish && rm -rf ./package && ./pack.sh",
+    "generate.typings.ios": "cd ../demo-ng && TNS_DEBUG_METADATA_PATH=\"$(pwd)/metadata\" tns build ios && TNS_TYPESCRIPT_DECLARATIONS_PATH=\"$(pwd)/typings\" tns build ios && echo 'Now look for your library typings in demo-ng/typings!'",
+    "package": "cd ../publish && rimraf ./package && ./pack.sh",
     "plugin.tscwatch": "npm run tsc -- -w",
     "postinstall": "node postinstall-hooks.js && node scripts/postinstall.js",
     "preparedemo": "npm run tsc && npm run package && cd ../demo && tns plugin remove nativescript-plugin-firebase && tns plugin add ../publish/package/*.tgz && tns install",
@@ -136,5 +135,5 @@
     "tslint.demo": "tslint --config '../tslint.json' '../demo/app/*.ts' --exclude '**/node_modules/**'"
   },
   "typings": "index.d.ts",
-  "version": "5.1.4"
+  "version": "5.3.1"
 }

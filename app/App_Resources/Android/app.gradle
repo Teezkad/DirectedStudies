@@ -8,7 +8,7 @@
 android {  
   defaultConfig {  
     generatedDensities = []
-    applicationId = "org.nativescript.dirproto5"  
+    applicationId = "com.directed.quizroom"  
   }  
   aaptOptions {  
     additionalParameters "--no-version-vectors"  

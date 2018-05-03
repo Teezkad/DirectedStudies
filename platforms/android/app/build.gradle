@@ -198,6 +198,8 @@ dependencies {
     if (project.hasProperty("supportVersion")) {
         supportVer = supportVersion
     }
+
+    compile "com.android.support:multidex:1.0.2"
     compile "com.android.support:support-v4:$supportVer"
     compile "com.android.support:appcompat-v7:$supportVer"
     debugCompile "com.android.support:design:$supportVer"
@@ -272,7 +274,7 @@ task addDependenciesFromAppResourcesLibraries {
             println "\t + adding jar plugin dependency: $jarFileAbsolutePath"
             pluginsJarLibraries.add(jarFile.getAbsolutePath())
         }
-        
+
         project.dependencies.add("compile", jarFiles)
     }
 }
@@ -286,6 +288,7 @@ tasks.whenTaskAdded({ org.gradle.api.DefaultTask currentTask ->
         currentTask.dependsOn(runSbg)
         currentTask.finalizedBy(ensureMetadataOutDir)
         ensureMetadataOutDir.finalizedBy(buildMetadata)
+		buildMetadata.finalizedBy(copyMetadata)
     }
     if (currentTask =~ /assemble.+Debug/ || currentTask =~ /assemble.+Release/) {
         currentTask.finalizedBy("validateAppIdMatch")
@@ -540,3 +543,19 @@ task cleanMdg(type: Delete) {
 
 cleanSbg.dependsOn(cleanMdg)
 clean.dependsOn(cleanSbg)
+
+task copyMetadata {
+  doLast {
+    copy {
+        from "$projectDir/src/main/assets/metadata"
+        def toDir = project.hasProperty("release") ? "release" : "debug";
+        if (new File("$projectDir/build/intermediates/assets").listFiles() != null) {
+          toDir = new File("$projectDir/build/intermediates/assets").listFiles()[0].name
+          if (toDir != 'debug' && toDir != 'release') {
+            toDir += "/release"
+          }
+        }
+        into "$projectDir/build/intermediates/assets/" + toDir + "/metadata"
+    }
+  }
+}

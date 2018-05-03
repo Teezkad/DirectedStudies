@@ -1,4 +1,8 @@
 "use strict";
+/**
+ * This is the firebase.js (web) compatible API.
+ * Use 'const firebase = require("nativescript-plugin-firebase/app")'
+ */
 Object.defineProperty(exports, "__esModule", { value: true });
 var firebase = require("../firebase");
 var auth_1 = require("./auth");

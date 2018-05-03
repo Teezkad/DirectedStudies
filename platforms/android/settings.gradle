@@ -1,4 +1,4 @@
-rootProject.name = "dirproto5"
+rootProject.name = "quizroom"
 include ':app' //,  ':runtime', ":runtime-binding-generator"
 
 //project(':runtime').projectDir = new File('path/to/runtime')

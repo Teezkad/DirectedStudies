@@ -1,4 +1,5 @@
 "use strict";
+var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var firebase_common_1 = require("./firebase-common");
 var appModule = require("tns-core-modules/application");
@@ -8,14 +9,17 @@ var frame = require("tns-core-modules/ui/frame");
 var fs = require("tns-core-modules/file-system");
 firebase_common_1.firebase._launchNotification = null;
 firebase_common_1.firebase._cachedDynamicLink = null;
+// we need to cache and restore the context, otherwise the next invocation is broken
 firebase_common_1.firebase._googleSignInIdToken = null;
 firebase_common_1.firebase._facebookAccessToken = null;
 var fbCallbackManager = null;
 var GOOGLE_SIGNIN_INTENT_ID = 123;
 var REQUEST_INVITE_INTENT_ID = 48;
+// const gson = lazy(() => typeof(com.google.gson) === "undefined" ? null : new com.google.gson.Gson());
 var messagingEnabled = lazy_1.default(function () { return typeof (com.google.firebase.messaging) !== "undefined"; });
 var dynamicLinksEnabled = lazy_1.default(function () { return typeof (com.google.android.gms.appinvite) !== "undefined"; });
 (function () {
+    // note that this means we need to 'require()' the plugin before the app is loaded
     appModule.on(appModule.launchEvent, function (args) {
         if (messagingEnabled()) {
             org.nativescript.plugins.firebase.FirebasePluginLifecycleCallbacks.registerCallbacks(appModule.android.nativeApp);
@@ -24,6 +28,7 @@ var dynamicLinksEnabled = lazy_1.default(function () { return typeof (com.google
         var isLaunchIntent = "android.intent.action.VIEW" === intent.getAction();
         if (!isLaunchIntent && messagingEnabled()) {
             var extras = intent.getExtras();
+            // filter out any rubbish that doesn't have a 'from' key
             if (extras !== null && extras.keySet().contains("from")) {
                 var result_1 = {
                     foreground: false,
@@ -41,6 +46,7 @@ var dynamicLinksEnabled = lazy_1.default(function () { return typeof (com.google
                     firebase_common_1.firebase._launchNotification = result_1;
                 }
                 else {
+                    // add a little delay just to make sure clients alerting this message will see it as the UI needs to settle
                     setTimeout(function () {
                         firebase_common_1.firebase._receivedNotificationCallback(result_1);
                     });
@@ -48,31 +54,60 @@ var dynamicLinksEnabled = lazy_1.default(function () { return typeof (com.google
             }
         }
         else if (isLaunchIntent && dynamicLinksEnabled()) {
-            var getDynamicLinksCallback = new com.google.android.gms.tasks.OnCompleteListener({
-                onComplete: function (task) {
-                    if (task.isSuccessful() && task.getResult() !== null) {
-                        var result_2 = task.getResult();
-                        if (firebase_common_1.firebase._dynamicLinkCallback === null) {
-                            firebase_common_1.firebase._cachedDynamicLink = {
-                                url: result_2.getLink().toString(),
-                                matchConfidence: 1,
-                                minimumAppVersion: result_2.getMinimumAppVersion()
-                            };
+            // let's see if this is part of an email-link authentication flow
+            var firebaseAuth = com.google.firebase.auth.FirebaseAuth.getInstance();
+            var emailLink = "" + intent.getData();
+            if (firebaseAuth.isSignInWithEmailLink(emailLink)) {
+                var rememberedEmail = firebase_common_1.firebase.getRememberedEmailForEmailLinkLogin();
+                if (rememberedEmail !== undefined) {
+                    var emailLinkOnCompleteListener = new com.google.android.gms.tasks.OnCompleteListener({
+                        onComplete: function (task) {
+                            if (task.isSuccessful()) {
+                                var authResult = task.getResult();
+                                firebase_common_1.firebase.notifyAuthStateListeners({
+                                    loggedIn: true,
+                                    user: authResult.getUser()
+                                });
+                            }
                         }
-                        else {
-                            setTimeout(function () {
-                                firebase_common_1.firebase._dynamicLinkCallback({
+                    });
+                    var user = com.google.firebase.auth.FirebaseAuth.getInstance().getCurrentUser();
+                    if (user) {
+                        var authCredential = com.google.firebase.auth.EmailAuthProvider.getCredentialWithLink(rememberedEmail, emailLink);
+                        user.linkWithCredential(authCredential).addOnCompleteListener(emailLinkOnCompleteListener);
+                    }
+                    else {
+                        firebaseAuth.signInWithEmailLink(rememberedEmail, emailLink).addOnCompleteListener(emailLinkOnCompleteListener);
+                    }
+                }
+            }
+            else {
+                var getDynamicLinksCallback = new com.google.android.gms.tasks.OnCompleteListener({
+                    onComplete: function (task) {
+                        if (task.isSuccessful() && task.getResult() !== null) {
+                            var result_2 = task.getResult();
+                            if (firebase_common_1.firebase._dynamicLinkCallback === null) {
+                                firebase_common_1.firebase._cachedDynamicLink = {
                                     url: result_2.getLink().toString(),
                                     matchConfidence: 1,
                                     minimumAppVersion: result_2.getMinimumAppVersion()
+                                };
+                            }
+                            else {
+                                setTimeout(function () {
+                                    firebase_common_1.firebase._dynamicLinkCallback({
+                                        url: result_2.getLink().toString(),
+                                        matchConfidence: 1,
+                                        minimumAppVersion: result_2.getMinimumAppVersion()
+                                    });
                                 });
-                            });
+                            }
                         }
                     }
-                }
-            });
-            var firebaseDynamicLinks = com.google.firebase.dynamiclinks.FirebaseDynamicLinks.getInstance();
-            firebaseDynamicLinks.getDynamicLink(intent).addOnCompleteListener(getDynamicLinksCallback);
+                });
+                var firebaseDynamicLinks = com.google.firebase.dynamiclinks.FirebaseDynamicLinks.getInstance();
+                firebaseDynamicLinks.getDynamicLink(intent).addOnCompleteListener(getDynamicLinksCallback);
+            }
         }
     });
 })();
@@ -150,8 +185,18 @@ firebase_common_1.firebase.toValue = function (val) {
     }
     return returnVal;
 };
+// no longer using Gson as fi Firestore's DocumentReference isn't serialized (also removed it from the dependencies)
 firebase_common_1.firebase.toJsObject = function (javaObj) {
+    // if (gson() !== null) {
+    //   try {
+    //     return JSON.parse(gson().toJson(javaObj)); // this may fail if fi a DocumentReference is encountered
+    //   } catch (ignore) {
+    //     return firebase.toJsObjectLegacy(javaObj);
+    //   }
+    // } else {
+    // fallback for folks not having fetched gson yet in their build for some reason
     return firebase_common_1.firebase.toJsObjectLegacy(javaObj);
+    // }
 };
 firebase_common_1.firebase.toJsObjectLegacy = function (javaObj) {
     if (javaObj === null || typeof javaObj !== "object") {
@@ -168,7 +213,7 @@ firebase_common_1.firebase.toJsObjectLegacy = function (javaObj) {
         case 'java.lang.Double':
             return Number(String(javaObj));
         case 'java.util.Date':
-            return new Date(javaObj);
+            return new Date(javaObj.getTime());
         case 'com.google.firebase.firestore.GeoPoint':
             return {
                 "latitude": javaObj.getLatitude(),
@@ -230,6 +275,7 @@ firebase_common_1.firebase.init = function (arg) {
                 firebase_common_1.firebase.instance = fDatabase.getInstance().getReference();
             }
             if (typeof (com.google.firebase.firestore) !== "undefined") {
+                // Firestore has offline persistence enabled by default
                 if (!arg.persist) {
                     try {
                         com.google.firebase.firestore.FirebaseFirestore.getInstance().setFirestoreSettings(new com.google.firebase.firestore.FirebaseFirestoreSettings.Builder()
@@ -253,6 +299,7 @@ firebase_common_1.firebase.init = function (arg) {
                 });
                 firebaseAuth.addAuthStateListener(firebase_common_1.firebase.authStateListener);
             }
+            // Listen to auth state changes
             if (!firebase_common_1.firebase.authStateListener) {
                 firebase_common_1.firebase.authStateListener = new com.google.firebase.auth.FirebaseAuth.AuthStateListener({
                     onAuthStateChanged: function (fbAuth) {
@@ -265,6 +312,7 @@ firebase_common_1.firebase.init = function (arg) {
                 });
                 firebaseAuth.addAuthStateListener(firebase_common_1.firebase.authStateListener);
             }
+            // Firebase notifications (FCM)
             if (messagingEnabled()) {
                 if (arg.onMessageReceivedCallback !== undefined) {
                     firebase_common_1.firebase.addOnMessageReceivedCallback(arg.onMessageReceivedCallback);
@@ -273,9 +321,11 @@ firebase_common_1.firebase.init = function (arg) {
                     firebase_common_1.firebase.addOnPushTokenReceivedCallback(arg.onPushTokenReceivedCallback);
                 }
             }
+            // Firebase DynamicLink
             if (arg.onDynamicLinkCallback !== undefined) {
                 firebase_common_1.firebase.addOnDynamicLinkReceivedCallback(arg.onDynamicLinkCallback);
             }
+            // Firebase storage
             if (arg.storageBucket) {
                 if (typeof (com.google.firebase.storage) === "undefined") {
                     reject("Uncomment firebase-storage in the plugin's include.gradle first");
@@ -283,6 +333,7 @@ firebase_common_1.firebase.init = function (arg) {
                 }
                 firebase_common_1.firebase.storage = com.google.firebase.storage.FirebaseStorage.getInstance().getReferenceFromUrl(arg.storageBucket);
             }
+            // Facebook
             if (typeof (com.facebook) !== "undefined" && typeof (com.facebook.FacebookSdk) !== "undefined") {
                 com.facebook.FacebookSdk.sdkInitialize(com.tns.NativeScriptApplication.getInstance());
                 fbCallbackManager = com.facebook.CallbackManager.Factory.create();
@@ -292,7 +343,9 @@ firebase_common_1.firebase.init = function (arg) {
                     }
                 });
             }
+            // Firebase AdMob
             if (typeof (com.google.android.gms.ads) !== "undefined" && typeof (com.google.android.gms.ads.MobileAds) !== "undefined") {
+                // init admob
                 com.google.android.gms.ads.MobileAds.initialize(appModule.android.context);
             }
             resolve(firebase_common_1.firebase.instance);
@@ -302,6 +355,7 @@ firebase_common_1.firebase.init = function (arg) {
                 runInit();
             }
             else {
+                // if this is called before application.start() wait for the event to fire
                 appModule.on(appModule.launchEvent, runInit);
             }
         }
@@ -319,7 +373,7 @@ firebase_common_1.firebase.fetchProvidersForEmail = function (email) {
                 return;
             }
             var onCompleteListener = new com.google.android.gms.tasks.OnCompleteListener({
-                onComplete: function (task) {
+                onComplete: function (task /* <ProviderQueryResult> */) {
                     if (!task.isSuccessful()) {
                         reject((task.getException() && task.getException().getReason ? task.getException().getReason() : task.getException()));
                     }
@@ -333,6 +387,32 @@ firebase_common_1.firebase.fetchProvidersForEmail = function (email) {
         }
         catch (ex) {
             console.log("Error in firebase.fetchProvidersForEmail: " + ex);
+            reject(ex);
+        }
+    });
+};
+firebase_common_1.firebase.fetchSignInMethodsForEmail = function (email) {
+    return new Promise(function (resolve, reject) {
+        try {
+            if (typeof (email) !== "string") {
+                reject("A parameter representing an email address is required.");
+                return;
+            }
+            var onCompleteListener = new com.google.android.gms.tasks.OnCompleteListener({
+                onComplete: function (task /* <SignInMethodQueryResult> */) {
+                    if (!task.isSuccessful()) {
+                        reject((task.getException() && task.getException().getReason ? task.getException().getReason() : task.getException()));
+                    }
+                    else {
+                        var signInMethods = task.getResult().getSignInMethods();
+                        resolve(firebase_common_1.firebase.toJsObject(signInMethods));
+                    }
+                }
+            });
+            com.google.firebase.auth.FirebaseAuth.getInstance().fetchSignInMethodsForEmail(email).addOnCompleteListener(onCompleteListener);
+        }
+        catch (ex) {
+            console.log("Error in firebase.fetchSignInMethodsForEmail: " + ex);
             reject(ex);
         }
     });
@@ -365,6 +445,7 @@ firebase_common_1.firebase.addOnMessageReceivedCallback = function (callback) {
                     callback(JSON.parse(notification));
                 }
             }));
+            // if the app was launched from a notification, process it now
             if (firebase_common_1.firebase._launchNotification !== null) {
                 callback(firebase_common_1.firebase._launchNotification);
                 firebase_common_1.firebase._launchNotification = null;
@@ -385,6 +466,7 @@ firebase_common_1.firebase.addOnDynamicLinkReceivedCallback = function (callback
                 return;
             }
             firebase_common_1.firebase._dynamicLinkCallback = callback;
+            // if the app was launched from a dynamic link, process it now
             if (firebase_common_1.firebase._cachedDynamicLink !== null) {
                 callback(firebase_common_1.firebase._cachedDynamicLink);
                 firebase_common_1.firebase._cachedDynamicLink = null;
@@ -436,10 +518,11 @@ firebase_common_1.firebase.getRemoteConfigDefaults = function (properties) {
 firebase_common_1.firebase._isGooglePlayServicesAvailable = function () {
     var activity = appModule.android.foregroundActivity || appModule.android.startActivity;
     var googleApiAvailability = com.google.android.gms.common.GoogleApiAvailability.getInstance();
-    var playServiceStatusSuccess = com.google.android.gms.common.ConnectionResult.SUCCESS;
+    var playServiceStatusSuccess = com.google.android.gms.common.ConnectionResult.SUCCESS; // 0
     var playServicesStatus = googleApiAvailability.isGooglePlayServicesAvailable(activity);
     var available = playServicesStatus === playServiceStatusSuccess;
     if (!available && googleApiAvailability.isUserResolvableError(playServicesStatus)) {
+        // show a dialog offering the user to update (no need to wait for it to finish)
         googleApiAvailability.showErrorDialogFragment(activity, playServicesStatus, 1, new android.content.DialogInterface.OnCancelListener({
             onCancel: function (dialogInterface) {
                 console.log("Canceled");
@@ -448,71 +531,12 @@ firebase_common_1.firebase._isGooglePlayServicesAvailable = function () {
     }
     return available;
 };
-firebase_common_1.firebase.analytics.logEvent = function (arg) {
-    return new Promise(function (resolve, reject) {
-        try {
-            if (arg.key === undefined) {
-                reject("Argument 'key' is missing");
-                return;
-            }
-            var bundle = new android.os.Bundle();
-            if (arg.parameters !== undefined) {
-                for (var p in arg.parameters) {
-                    var param = arg.parameters[p];
-                    if (param.value !== undefined) {
-                        bundle.putString(param.key, param.value);
-                    }
-                }
-            }
-            com.google.firebase.analytics.FirebaseAnalytics.getInstance(appModule.android.currentContext || com.tns.NativeScriptApplication.getInstance()).logEvent(arg.key, bundle);
-            resolve();
-        }
-        catch (ex) {
-            console.log("Error in firebase.analytics.logEvent: " + ex);
-            reject(ex);
-        }
-    });
-};
-firebase_common_1.firebase.analytics.setUserProperty = function (arg) {
-    return new Promise(function (resolve, reject) {
-        try {
-            if (arg.key === undefined) {
-                reject("Argument 'key' is missing");
-                return;
-            }
-            if (arg.value === undefined) {
-                reject("Argument 'value' is missing");
-                return;
-            }
-            com.google.firebase.analytics.FirebaseAnalytics.getInstance(appModule.android.currentContext || com.tns.NativeScriptApplication.getInstance()).setUserProperty(arg.key, arg.value);
-            resolve();
-        }
-        catch (ex) {
-            console.log("Error in firebase.analytics.setUserProperty: " + ex);
-            reject(ex);
-        }
-    });
-};
-firebase_common_1.firebase.analytics.setScreenName = function (arg) {
-    return new Promise(function (resolve, reject) {
-        try {
-            if (arg.screenName === undefined) {
-                reject("Argument 'screenName' is missing");
-                return;
-            }
-            com.google.firebase.analytics.FirebaseAnalytics.getInstance(appModule.android.currentContext || com.tns.NativeScriptApplication.getInstance()).setCurrentScreen(appModule.android.foregroundActivity, arg.screenName, null);
-            resolve();
-        }
-        catch (ex) {
-            console.log("Error in firebase.analytics.setScreenName: " + ex);
-            reject(ex);
-        }
-    });
-};
+// see https://firebase.google.com/docs/admob/android/quick-start
 firebase_common_1.firebase.admob.showBanner = function (arg) {
     return new Promise(function (resolve, reject) {
         try {
             var settings = firebase_common_1.firebase.merge(arg, firebase_common_1.firebase.admob.defaults);
+            // always close a previously opened banner
             if (firebase_common_1.firebase.admob.adView !== null && firebase_common_1.firebase.admob.adView !== undefined) {
                 var parent_1 = firebase_common_1.firebase.admob.adView.getParent();
                 if (parent_1 !== null) {
@@ -523,12 +547,19 @@ firebase_common_1.firebase.admob.showBanner = function (arg) {
             firebase_common_1.firebase.admob.adView.setAdUnitId(settings.androidBannerId);
             var bannerType = firebase_common_1.firebase.admob._getBannerType(settings.size);
             firebase_common_1.firebase.admob.adView.setAdSize(bannerType);
+            // need these to support showing a banner more than once
+            _this.resolve = resolve;
+            _this.reject = reject;
             var BannerAdListener = com.google.android.gms.ads.AdListener.extend({
+                resolve: null,
+                reject: null,
                 onAdLoaded: function () {
-                    resolve();
+                    // firebase.admob.interstitialView.show();
+                    _this.resolve();
                 },
                 onAdFailedToLoad: function (errorCode) {
-                    reject(errorCode);
+                    // console.log('ad error: ' + errorCode);
+                    _this.reject(errorCode);
                 }
             });
             firebase_common_1.firebase.admob.adView.setAdListener(new BannerAdListener());
@@ -549,6 +580,8 @@ firebase_common_1.firebase.admob.showBanner = function (arg) {
             var adViewLayout_1 = new android.widget.RelativeLayout(appModule.android.foregroundActivity);
             adViewLayout_1.addView(firebase_common_1.firebase.admob.adView, relativeLayoutParams);
             var relativeLayoutParamsOuter_1 = new android.widget.RelativeLayout.LayoutParams(android.widget.RelativeLayout.LayoutParams.MATCH_PARENT, android.widget.RelativeLayout.LayoutParams.MATCH_PARENT);
+            // wrapping it in a timeout makes sure that when this function is loaded from
+            // a Page.loaded event 'frame.topmost()' doesn't resolve to 'undefined'
             setTimeout(function () {
                 frame.topmost().currentPage.android.getParent().addView(adViewLayout_1, relativeLayoutParamsOuter_1);
             }, 0);
@@ -566,6 +599,7 @@ firebase_common_1.firebase.admob.showInterstitial = function (arg) {
             var activity = appModule.android.foregroundActivity || appModule.android.startActivity;
             firebase_common_1.firebase.admob.interstitialView = new com.google.android.gms.ads.InterstitialAd(activity);
             firebase_common_1.firebase.admob.interstitialView.setAdUnitId(settings.androidInterstitialId);
+            // Interstitial ads must be loaded before they can be shown, so adding a listener
             var InterstitialAdListener = com.google.android.gms.ads.AdListener.extend({
                 onAdLoaded: function () {
                     firebase_common_1.firebase.admob.interstitialView.show();
@@ -634,6 +668,7 @@ firebase_common_1.firebase.admob._buildAdRequest = function (settings) {
     var builder = new com.google.android.gms.ads.AdRequest.Builder();
     if (settings.testing) {
         builder.addTestDevice(com.google.android.gms.ads.AdRequest.DEVICE_ID_EMULATOR);
+        // This will request test ads on the emulator and device by passing this hashed device ID.
         var activity = appModule.android.foregroundActivity || appModule.android.startActivity;
         var ANDROID_ID = android.provider.Settings.Secure.getString(activity.getContentResolver(), android.provider.Settings.Secure.ANDROID_ID);
         var deviceId = firebase_common_1.firebase.admob._md5(ANDROID_ID);
@@ -643,9 +678,15 @@ firebase_common_1.firebase.admob._buildAdRequest = function (settings) {
             builder.addTestDevice(deviceId);
         }
     }
+    if (settings.keywords !== undefined && settings.keywords.length > 0) {
+        for (var i = 0; i < settings.keywords.length; i++) {
+            builder.addKeyword(settings.keywords[i]);
+        }
+    }
     var bundle = new android.os.Bundle();
     bundle.putInt("nativescript", 1);
     var adextras = new com.google.android.gms.ads.mediation.admob.AdMobExtras(bundle);
+    // builder = builder.addNetworkExtras(adextras);
     return builder.build();
 };
 firebase_common_1.firebase.admob._md5 = function (input) {
@@ -687,7 +728,9 @@ firebase_common_1.firebase.getRemoteConfig = function (arg) {
                 reject("Google Play services is required for this feature, but not available on this device");
                 return;
             }
+            // Get a Remote Config object instance
             var firebaseRemoteConfig = com.google.firebase.remoteconfig.FirebaseRemoteConfig.getInstance();
+            // Enable developer mode to allow for frequent refreshes of the cache
             var remoteConfigSettings = new com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings.Builder()
                 .setDeveloperModeEnabled(arg.developerMode || false)
                 .build();
@@ -707,6 +750,7 @@ firebase_common_1.firebase.getRemoteConfig = function (arg) {
                     var prop = arg.properties[p];
                     var key = prop.key;
                     var value = firebaseRemoteConfig.getString(key);
+                    // we could have the user pass in the type but this seems easier to use
                     result.properties[key] = firebase_common_1.firebase.strongTypeify(value);
                 }
                 resolve(result);
@@ -726,6 +770,7 @@ firebase_common_1.firebase.getRemoteConfig = function (arg) {
                     }
                 }
             });
+            // default 12 hours, just like the SDK does
             var expirationDuration = arg.cacheExpirationSeconds || 43200;
             firebaseRemoteConfig.fetch(expirationDuration)
                 .addOnSuccessListener(onSuccessListener)
@@ -736,6 +781,7 @@ firebase_common_1.firebase.getRemoteConfig = function (arg) {
                 runGetRemoteConfig();
             }
             else {
+                // if this is called before application.start() wait for the event to fire
                 appModule.on(appModule.launchEvent, runGetRemoteConfig);
             }
         }
@@ -795,7 +841,8 @@ firebase_common_1.firebase.logout = function (arg) {
     return new Promise(function (resolve, reject) {
         try {
             com.google.firebase.auth.FirebaseAuth.getInstance().signOut();
-            if (firebase_common_1.firebase._mGoogleApiClient) {
+            // also disconnect from Google otherwise ppl can't connect with a different account
+            if (firebase_common_1.firebase._mGoogleApiClient && firebase_common_1.firebase._mGoogleApiClient.isConnected()) {
                 com.google.android.gms.auth.api.Auth.GoogleSignInApi.revokeAccess(firebase_common_1.firebase._mGoogleApiClient);
             }
             if (typeof (com.facebook) !== "undefined" && typeof (com.facebook.login) !== "undefined") {
@@ -843,6 +890,7 @@ function toLoginResult(user) {
     if (user === null) {
         return false;
     }
+    // for convenience return the result in multiple formats
     var providers = [];
     var providerData = user.getProviderData();
     for (var i = 0; i < providerData.size(); i++) {
@@ -859,6 +907,7 @@ function toLoginResult(user) {
         name: user.getDisplayName(),
         email: user.getEmail(),
         emailVerified: user.isEmailVerified(),
+        // provider: user.getProviderId(), // always 'firebase'
         providers: providers,
         anonymous: user.isAnonymous(),
         isAnonymous: user.isAnonymous(),
@@ -869,6 +918,9 @@ function toLoginResult(user) {
 firebase_common_1.firebase.login = function (arg) {
     return new Promise(function (resolve, reject) {
         try {
+            // need these to support using phone auth more than once
+            _this.resolve = resolve;
+            _this.reject = reject;
             if (!firebase_common_1.firebase._isGooglePlayServicesAvailable()) {
                 reject("Google Play services is required for this feature, but not available on this device");
                 return;
@@ -879,14 +931,15 @@ firebase_common_1.firebase.login = function (arg) {
                 onComplete: function (task) {
                     if (!task.isSuccessful()) {
                         console.log("Logging in the user failed. " + (task.getException() && task.getException().getReason ? task.getException().getReason() : task.getException()));
+                        // also disconnect from Google otherwise ppl can't connect with a different account
                         if (firebase_common_1.firebase._mGoogleApiClient) {
                             com.google.android.gms.auth.api.Auth.GoogleSignInApi.revokeAccess(firebase_common_1.firebase._mGoogleApiClient);
                         }
-                        reject("Logging in the user failed. " + (task.getException() && task.getException().getReason ? task.getException().getReason() : task.getException()));
+                        _this.reject("Logging in the user failed. " + (task.getException() && task.getException().getReason ? task.getException().getReason() : task.getException()));
                     }
                     else {
                         var user = task.getResult().getUser();
-                        resolve(toLoginResult(user));
+                        _this.resolve(toLoginResult(user));
                     }
                 }
             });
@@ -912,13 +965,46 @@ firebase_common_1.firebase.login = function (arg) {
                     firebaseAuth_1.signInWithEmailAndPassword(arg.passwordOptions.email, arg.passwordOptions.password).addOnCompleteListener(onCompleteListener_1);
                 }
             }
+            else if (arg.type === firebase_common_1.firebase.LoginType.EMAIL_LINK) {
+                if (!arg.emailLinkOptions || !arg.emailLinkOptions.email) {
+                    reject("Auth type EMAIL_LINK requires an 'emailLinkOptions.email' argument");
+                    return;
+                }
+                if (!arg.emailLinkOptions.url) {
+                    reject("Auth type EMAIL_LINK requires an 'emailLinkOptions.url' argument");
+                    return;
+                }
+                var actionCodeSettings = com.google.firebase.auth.ActionCodeSettings.newBuilder()
+                    // URL you want to redirect back to. The domain must be whitelisted in the Firebase Console.
+                    .setUrl(arg.emailLinkOptions.url)
+                    .setHandleCodeInApp(true)
+                    .setIOSBundleId(arg.emailLinkOptions.iOS ? arg.emailLinkOptions.iOS.bundleId : appModule.android.context.getPackageName())
+                    .setAndroidPackageName(arg.emailLinkOptions.android ? arg.emailLinkOptions.android.packageName : appModule.android.context.getPackageName(), arg.emailLinkOptions.android ? arg.emailLinkOptions.android.installApp || false : false, arg.emailLinkOptions.android ? arg.emailLinkOptions.android.minimumVersion || "1" : "1")
+                    .build();
+                var onEmailLinkCompleteListener = new com.google.android.gms.tasks.OnCompleteListener({
+                    onComplete: function (task) {
+                        if (!task.isSuccessful()) {
+                            reject((task.getException() && task.getException().getReason ? task.getException().getReason() : task.getException()));
+                        }
+                        else {
+                            // The link was successfully sent.
+                            // Save the email locally so you don't need to ask the user for it again if they open the link on the same device.
+                            firebase_common_1.firebase.rememberEmailForEmailLinkLogin(arg.emailLinkOptions.email);
+                            resolve();
+                        }
+                    }
+                });
+                firebaseAuth_1.sendSignInLinkToEmail(arg.emailLinkOptions.email, actionCodeSettings).addOnCompleteListener(onEmailLinkCompleteListener);
+            }
             else if (arg.type === firebase_common_1.firebase.LoginType.PHONE) {
+                // https://firebase.google.com/docs/auth/android/phone-auth
                 if (!arg.phoneOptions || !arg.phoneOptions.phoneNumber) {
                     reject("Auth type PHONE requires a 'phoneOptions.phoneNumber' argument");
                     return;
                 }
                 var user = com.google.firebase.auth.FirebaseAuth.getInstance().getCurrentUser();
                 if (user && firebase_common_1.firebase._alreadyLinkedToAuthProvider(user, "phone")) {
+                    // skip sending an SMS if user is already linked to the phone-provider
                     resolve(toLoginResult(user));
                     return;
                 }
@@ -927,6 +1013,7 @@ firebase_common_1.firebase.login = function (arg) {
                         firebase_common_1.firebase._verifyPhoneNumberInProgress = false;
                         var user = com.google.firebase.auth.FirebaseAuth.getInstance().getCurrentUser();
                         if (!user || firebase_common_1.firebase._alreadyLinkedToAuthProvider(user, "phone")) {
+                            // the user previously authenticated with phone (or no prompt was required), so sign in and complete
                             firebaseAuth_1.signInWithCredential(phoneAuthCredential).addOnCompleteListener(onCompleteListener_1);
                         }
                         else {
@@ -937,13 +1024,15 @@ firebase_common_1.firebase.login = function (arg) {
                         firebase_common_1.firebase._verifyPhoneNumberInProgress = false;
                         var errorMessage = firebaseException.getMessage();
                         if (errorMessage.indexOf("INVALID_APP_CREDENTIAL") > -1) {
-                            reject("Please upload the SHA1 fingerprint of your debug and release keystores to the Firebase console, see https://github.com/EddyVerbruggen/nativescript-plugin-firebase/blob/master/docs/AUTHENTICATION.md#phone-verification");
+                            _this.reject("Please upload the SHA1 fingerprint of your debug and release keystores to the Firebase console, see https://github.com/EddyVerbruggen/nativescript-plugin-firebase/blob/master/docs/AUTHENTICATION.md#phone-verification");
                         }
                         else {
-                            reject(errorMessage);
+                            _this.reject(errorMessage);
                         }
                     },
                     onCodeSent: function (verificationId, forceResendingToken) {
+                        // If the device has a SIM card auto-verification may occur in the background (eventually calling onVerificationCompleted)
+                        // .. so the prompt would be redundant, but it's recommended by Google not to wait to long before showing the prompt
                         setTimeout(function () {
                             if (firebase_common_1.firebase._verifyPhoneNumberInProgress) {
                                 firebase_common_1.firebase._verifyPhoneNumberInProgress = false;
@@ -962,7 +1051,9 @@ firebase_common_1.firebase.login = function (arg) {
                     }
                 });
                 firebase_common_1.firebase._verifyPhoneNumberInProgress = true;
-                com.google.firebase.auth.PhoneAuthProvider.getInstance().verifyPhoneNumber(arg.phoneOptions.phoneNumber, 60, java.util.concurrent.TimeUnit.SECONDS, appModule.android.foregroundActivity, new OnVerificationStateChangedCallbacks());
+                com.google.firebase.auth.PhoneAuthProvider.getInstance().verifyPhoneNumber(arg.phoneOptions.phoneNumber, 60, // timeout (in seconds, because of the next argument)
+                java.util.concurrent.TimeUnit.SECONDS, appModule.android.foregroundActivity, // or utils.ad.getApplicationContext()
+                new OnVerificationStateChangedCallbacks());
             }
             else if (arg.type === firebase_common_1.firebase.LoginType.CUSTOM) {
                 if (!arg.customOptions || (!arg.customOptions.token && !arg.customOptions.tokenProviderFn)) {
@@ -1026,6 +1117,7 @@ firebase_common_1.firebase.login = function (arg) {
                 }
                 var clientStringId = utils.ad.resources.getStringId("default_web_client_id");
                 var clientId = utils.ad.getApplicationContext().getResources().getString(clientStringId);
+                // Configure Google Sign In
                 var googleSignInOptionsBuilder = new com.google.android.gms.auth.api.signin.GoogleSignInOptions.Builder(com.google.android.gms.auth.api.signin.GoogleSignInOptions.DEFAULT_SIGN_IN)
                     .requestIdToken(clientId)
                     .requestEmail();
@@ -1135,6 +1227,7 @@ firebase_common_1.firebase.reauthenticate = function (arg) {
                         resolve();
                     }
                     else {
+                        // TODO extract error
                         reject("Reathentication failed");
                     }
                 }
@@ -1185,6 +1278,7 @@ firebase_common_1.firebase.resetPassword = function (arg) {
                             resolve();
                         }
                         else {
+                            // TODO extract error
                             reject("Sending password reset email failed");
                         }
                     }
@@ -1213,6 +1307,7 @@ firebase_common_1.firebase.changePassword = function (arg) {
                             resolve();
                         }
                         else {
+                            // TODO extract error
                             reject("Updating password failed");
                         }
                     }
@@ -1242,6 +1337,7 @@ firebase_common_1.firebase.createUser = function (arg) {
                 var firebaseAuth = com.google.firebase.auth.FirebaseAuth.getInstance();
                 var onCompleteListener = new com.google.android.gms.tasks.OnCompleteListener({
                     onComplete: function (task) {
+                        // see https://firebase.google.com/docs/reference/android/com/google/firebase/auth/FirebaseAuth#public-methods
                         if (!task.isSuccessful()) {
                             reject("Creating a user failed. " + (task.getException() && task.getException().getReason ? task.getException().getReason() : task.getException()));
                         }
@@ -1524,6 +1620,7 @@ firebase_common_1.firebase.query = function (updateCallback, path, options) {
                 return;
             }
             var query = void 0;
+            // orderBy
             if (options.orderBy.type === firebase_common_1.firebase.QueryOrderByType.KEY) {
                 query = firebase_common_1.firebase.instance.child(path).orderByKey();
             }
@@ -1544,7 +1641,13 @@ firebase_common_1.firebase.query = function (updateCallback, path, options) {
                 reject("Invalid orderBy.type, use constants like firebase.QueryOrderByType.VALUE");
                 return;
             }
+            // range
             if (options.range && options.range.type) {
+                // https://github.com/EddyVerbruggen/nativescript-plugin-firebase/issues/319
+                // if (options.range.value === undefined || options.range.value === null) {
+                //   reject("Please set range.value");
+                //   return;
+                // }
                 if (options.range.type === firebase_common_1.firebase.QueryRangeType.START_AT) {
                     query = query.startAt(options.range.value);
                 }
@@ -1559,6 +1662,7 @@ firebase_common_1.firebase.query = function (updateCallback, path, options) {
                     return;
                 }
             }
+            // ranges
             if (options.ranges) {
                 for (var i = 0; i < options.ranges.length; i++) {
                     var range = options.ranges[i];
@@ -1581,6 +1685,7 @@ firebase_common_1.firebase.query = function (updateCallback, path, options) {
                     }
                 }
             }
+            // limit
             if (options.limit && options.limit.type) {
                 if (options.limit.value === undefined || options.limit.value === null) {
                     reject("Please set limit.value");
@@ -1603,6 +1708,7 @@ firebase_common_1.firebase.query = function (updateCallback, path, options) {
                         var data = firebase_common_1.firebase.getCallbackData('ValueChanged', snapshot);
                         if (updateCallback)
                             updateCallback(data);
+                        // resolve promise with data in case of single event, see https://github.com/EddyVerbruggen/nativescript-plugin-firebase/issues/126
                         resolve(data);
                     },
                     onCancelled: function (databaseError) {
@@ -1610,6 +1716,7 @@ firebase_common_1.firebase.query = function (updateCallback, path, options) {
                             updateCallback({
                                 error: databaseError.getMessage()
                             });
+                        // see comment at 'onDataChange'
                         resolve({
                             error: databaseError.getMessage()
                         });
@@ -1700,11 +1807,26 @@ firebase_common_1.firebase.uploadFile = function (arg) {
                     reject("localFile argument must be a File object; use file-system module to create one");
                     return;
                 }
+                // using 'putFile' (not 'putBytes') so Firebase can infer the mimetype
                 var localFileUrl = android.net.Uri.fromFile(new java.io.File(arg.localFile.path));
                 var uploadFileTask = storageReference.putFile(localFileUrl)
                     .addOnFailureListener(onFailureListener)
                     .addOnSuccessListener(onSuccessListener)
                     .addOnProgressListener(onProgressListener);
+                /*
+                var error;
+                var contents = arg.localFile.readSync(e => { error = e; });
+        
+                if (error) {
+                  reject("Error reading file " + arg.localFile + ": " + error);
+                  return;
+                }
+        
+                var uploadDataTask = storageReference.putBytes(contents)
+                    .addOnFailureListener(onFailureListener)
+                    .addOnSuccessListener(onSuccessListener)
+                    .addOnProgressListener(onProgressListener);
+                */
             }
             else if (arg.localFullPath) {
                 if (!fs.File.exists(arg.localFullPath)) {
@@ -1736,14 +1858,10 @@ firebase_common_1.firebase.downloadFile = function (arg) {
             }
             var storageReference = storageRef.child(arg.remoteFullPath);
             var onSuccessListener = new com.google.android.gms.tasks.OnSuccessListener({
-                onSuccess: function (downloadTaskSnapshot) {
-                    resolve();
-                }
+                onSuccess: function (downloadTaskSnapshot) { return resolve(); }
             });
             var onFailureListener = new com.google.android.gms.tasks.OnFailureListener({
-                onFailure: function (exception) {
-                    reject("Download failed. " + exception);
-                }
+                onFailure: function (exception) { return reject("Download failed. " + exception); }
             });
             var localFilePath = void 0;
             if (arg.localFile) {
@@ -1908,6 +2026,7 @@ firebase_common_1.firebase.invites.sendInvitation = function (arg) {
             appModule.android.on(appModule.AndroidApplication.activityResultEvent, function (eventData) {
                 if (eventData.requestCode === REQUEST_INVITE_INTENT_ID) {
                     if (eventData.resultCode === android.app.Activity.RESULT_OK) {
+                        // Get the invitation IDs of all sent messages
                         var ids = com.google.android.gms.appinvite.AppInviteInvitation.getInvitationIds(eventData.resultCode, eventData.intent);
                         try {
                             resolve({
@@ -1945,6 +2064,8 @@ firebase_common_1.firebase.invites.getInvitation = function () {
             }
             var onConnectionFailedListener = new com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener({
                 onConnectionFailed: function (connectionResult) {
+                    // we shouldn't reject on connection failure as the invitation link may still be available locally
+                    // reject(connectionResult.getErrorMessage());
                 }
             });
             firebase_common_1.firebase._mGoogleInviteApiClient = new com.google.android.gms.common.api.GoogleApiClient.Builder(com.tns.NativeScriptApplication.getInstance())
@@ -1959,12 +2080,14 @@ firebase_common_1.firebase.invites.getInvitation = function () {
                         reject("Not launched by invitation");
                         return;
                     }
+                    // get the deeplink
                     var deepLinkUri = pendingDynamicLinkData.getLink();
+                    // extract invite
                     var firebaseAppInvite = com.google.firebase.appinvite.FirebaseAppInvite.getInvitation(pendingDynamicLinkData);
                     resolve({
                         deepLink: deepLinkUri === null ? null : deepLinkUri.toString(),
                         matchType: deepLinkUri === null ? null : 1,
-                        invitationId: firebaseAppInvite.getInvitationId()
+                        invitationId: firebaseAppInvite.getInvitationId() // string | null
                     });
                 }
             });
@@ -2010,10 +2133,9 @@ firebase_common_1.firebase.firestore.collection = function (collectionPath) {
 firebase_common_1.firebase.firestore.onDocumentSnapshot = function (docRef, callback) {
     var listener = docRef.addSnapshotListener(new com.google.firebase.firestore.EventListener({
         onEvent: (function (snapshot, exception) {
-            if (exception !== null) {
-                return;
+            if (exception === null) {
+                callback(new firebase_common_1.DocumentSnapshot(snapshot ? snapshot.getId() : null, snapshot.exists(), firebase_common_1.firebase.toJsObject(snapshot.getData())));
             }
-            callback(new firebase_common_1.DocumentSnapshot(snapshot ? snapshot.getId() : null, snapshot.exists(), snapshot ? function () { return firebase_common_1.firebase.toJsObject(snapshot.getData()); } : null));
         })
     }));
     return function () { return listener.remove(); };
@@ -2025,12 +2147,9 @@ firebase_common_1.firebase.firestore.onCollectionSnapshot = function (colRef, ca
                 return;
             }
             var docSnapshots = [];
-            var _loop_1 = function (i) {
-                var documentSnapshot = snapshot.getDocuments().get(i);
-                docSnapshots.push(new firebase_common_1.DocumentSnapshot(documentSnapshot.getId(), true, function () { return firebase_common_1.firebase.toJsObject(documentSnapshot.getData()); }));
-            };
             for (var i = 0; i < snapshot.size(); i++) {
-                _loop_1(i);
+                var documentSnapshot = snapshot.getDocuments().get(i);
+                docSnapshots.push(new firebase_common_1.DocumentSnapshot(documentSnapshot.getId(), true, firebase_common_1.firebase.toJsObject(documentSnapshot.getData())));
             }
             var snap = new firebase_common_1.QuerySnapshot();
             snap.docSnapshots = docSnapshots;
@@ -2205,12 +2324,9 @@ firebase_common_1.firebase.firestore.getCollection = function (collectionPath) {
                     else {
                         var result = task.getResult();
                         var docSnapshots = [];
-                        var _loop_2 = function (i) {
-                            var documentSnapshot = result.getDocuments().get(i);
-                            docSnapshots.push(new firebase_common_1.DocumentSnapshot(documentSnapshot.getId(), true, function () { return firebase_common_1.firebase.toJsObject(documentSnapshot.getData()); }));
-                        };
                         for (var i = 0; i < result.size(); i++) {
-                            _loop_2(i);
+                            var documentSnapshot = result.getDocuments().get(i);
+                            docSnapshots.push(new firebase_common_1.DocumentSnapshot(documentSnapshot.getId(), true, firebase_common_1.firebase.toJsObject(documentSnapshot.getData())));
                         }
                         var snap = new firebase_common_1.QuerySnapshot();
                         snap.docSnapshots = docSnapshots;
@@ -2252,9 +2368,9 @@ firebase_common_1.firebase.firestore.getDocument = function (collectionPath, doc
                         reject(ex && ex.getReason ? ex.getReason() : ex);
                     }
                     else {
-                        var result_3 = task.getResult();
-                        var exists_1 = result_3.exists();
-                        resolve(new firebase_common_1.DocumentSnapshot(exists_1 ? result_3.getId() : null, exists_1, function () { return exists_1 ? firebase_common_1.firebase.toJsObject(result_3.getData()) : null; }));
+                        var result = task.getResult();
+                        var exists = result.exists();
+                        resolve(new firebase_common_1.DocumentSnapshot(exists ? result.getId() : null, exists, firebase_common_1.firebase.toJsObject(result.getData())));
                     }
                 }
             });
@@ -2287,12 +2403,9 @@ firebase_common_1.firebase.firestore._getQuery = function (collectionPath, query
                     else {
                         var result = task.getResult();
                         var docSnapshots = [];
-                        var _loop_3 = function (i) {
-                            var documentSnapshot = result.getDocuments().get(i);
-                            docSnapshots.push(new firebase_common_1.DocumentSnapshot(documentSnapshot.getId(), true, function () { return firebase_common_1.firebase.toJsObject(documentSnapshot.getData()); }));
-                        };
                         for (var i = 0; i < result.size(); i++) {
-                            _loop_3(i);
+                            var documentSnapshot = result.getDocuments().get(i);
+                            docSnapshots.push(new firebase_common_1.DocumentSnapshot(documentSnapshot.getId(), true, firebase_common_1.firebase.toJsObject(documentSnapshot.getData())));
                         }
                         var snap = new firebase_common_1.QuerySnapshot();
                         snap.docSnapshots = docSnapshots;

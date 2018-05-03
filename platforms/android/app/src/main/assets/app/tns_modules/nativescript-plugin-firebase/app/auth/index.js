@@ -4,7 +4,7 @@ var firebase = require("../../firebase");
 var firebase_1 = require("../../firebase");
 var auth;
 (function (auth) {
-    var Auth = (function () {
+    var Auth = /** @class */ (function () {
         function Auth() {
         }
         Auth.prototype.onAuthStateChanged = function (handler) {
@@ -23,6 +23,7 @@ var auth;
                 })
                     .catch(function (err) {
                     reject({
+                        // code: "",
                         message: err
                     });
                 });
@@ -43,6 +44,28 @@ var auth;
                     resolve();
                 }, (function (err) {
                     reject({
+                        // code: "",
+                        message: err
+                    });
+                }));
+            });
+        };
+        Auth.prototype.sendSignInLinkToEmail = function (email, actionCodeSettings) {
+            var _this = this;
+            return new Promise(function (resolve, reject) {
+                firebase.login({
+                    type: firebase_1.LoginType.EMAIL_LINK,
+                    emailLinkOptions: {
+                        email: email,
+                        url: actionCodeSettings.url,
+                    }
+                }).then(function (user) {
+                    _this.currentUser = user;
+                    _this.authStateChangedHandler && _this.authStateChangedHandler(user);
+                    resolve();
+                }, (function (err) {
+                    reject({
+                        // code: "",
                         message: err
                     });
                 }));
@@ -65,6 +88,7 @@ var auth;
                     resolve();
                 }, (function (err) {
                     reject({
+                        // code: "",
                         message: err
                     });
                 }));
@@ -72,6 +96,9 @@ var auth;
         };
         Auth.prototype.fetchProvidersForEmail = function (email) {
             return firebase.fetchProvidersForEmail(email);
+        };
+        Auth.prototype.fetchSignInMethodsForEmail = function (email) {
+            return firebase.fetchSignInMethodsForEmail(email);
         };
         return Auth;
     }());
