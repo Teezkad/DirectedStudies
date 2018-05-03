@@ -12,6 +12,7 @@ import { firestore } from "nativescript-plugin-firebase";
 import * as tabViewModule from "tns-core-modules/ui/tab-view";
 import { SearchBar } from "ui/search-bar";
 import {ActivatedRoute, NavigationExtras} from "@angular/router";
+import { PullToRefresh } from "nativescript-pulltorefresh";
 
 
 
@@ -43,7 +44,7 @@ export class HomeComponent implements OnInit {
     public allClass2;
     public len;
     public leng;
-    public show = [];
+    public exists;
 
     /* ***********************************************************
     * Use the @ViewChild decorator to get a reference to the drawer component.
@@ -85,9 +86,17 @@ export class HomeComponent implements OnInit {
             this.showclasses();
         })
 
-
-
+       var user = firebase.fetchProvidersForEmail("kadiri@gmail.com");
+       console.log("Firebase return for real user is "+ JSON.stringify(user));
+       var user2 = firebase.fetchProvidersForEmail("BHILGYUIK@gmail.com");
+       console.log("Firebase return for fake user is "+ JSON.stringify(user2))
     }
+
+    public refreshMe(args: any) {
+        console.log("refreshing");
+        setTimeout(() => this.ngOnInit(), 2000);
+    }
+
 
     showclasses(){
         console.log("all classes size is  "+ this.leng);
@@ -102,7 +111,7 @@ export class HomeComponent implements OnInit {
                 if (all == my){
                     this.allClass[i].registered = true;
                 } 
-                }
+             }
         }
     }
 
@@ -112,6 +121,7 @@ export class HomeComponent implements OnInit {
         this.routerExtensions.navigate(["/login"], { clearHistory: true } );
       }
       
+
       //delete classroo
       deleteCl(classroom: Classroom) {
           console.log("deleting");
@@ -119,16 +129,18 @@ export class HomeComponent implements OnInit {
           .catch(() => {
             alert("An error occurred while deleting an item from your list.");
           });
-         
       } 
+
 
       navclass(){
            this.routerExtensions.navigate(["/classroom"]);
-      }
+                }
+
 
       navques(){
         this.routerExtensions.navigate(["/search"]);
-   }
+                }
+
 
     inClass(classroom: Classroom, id: string, Cname: string, Prof: string, Year: string, uid: string, ID: number){
          //update the classroom node to include users who registered
@@ -142,20 +154,32 @@ export class HomeComponent implements OnInit {
       });
 
       this.firebaseService.userRegister(id, Cname, Prof, Year, uid, ID);
-
       this.ngOnInit();
     }
+
+
       //to store all available data for each user, use backend service to store the value of each attrinute 
       //for every users
-      
-
       //this is to turn off the delete button 
       navTag(){
         this.routerExtensions.navigate(["/tag"]);
     }
 
+
+    validateClass(id: string, name: string, uid: string){
+        var exists = false;
+        for (var a = 0; a<this.leng; a++){
+            if(id == this.allClass[a].id){
+                var exists = true;
+                console.log("Class exists");
+            }
+        }
+        return exists;
+    }
+
     activateClass(id: string, name: string, uid: string)
     {
+      if( this.validateClass(id,name,uid)){ 
         BackendService.CID = id;
         BackendService.Cname = name;
         console.log(id + " is now active class ID");
@@ -183,13 +207,10 @@ export class HomeComponent implements OnInit {
         this.routerExtensions.navigate(["/search"]);
 
     }
-
-
-
- 
+      }else{
+          alert("Classroom does not exist");
+      }
         }
-
-
 
 
    delete(tag: Tag) {
@@ -198,6 +219,10 @@ export class HomeComponent implements OnInit {
         alert("An error occurred while deleting an item from your list.");
       });
   } 
+
+  deleteClass(room: Classroom){
+this.firebaseService1.delete(room);
+  }
       
 
   public onSubmit(args) {
@@ -220,9 +245,9 @@ export class HomeComponent implements OnInit {
 
             }
         }
-        // this.allClass = this.allClass2;
     }
 }
+
 
 public onClear(args) {
     let searchBar = <SearchBar>args.object;
@@ -236,5 +261,6 @@ public onClear(args) {
         i++;
     });
 }
+//search funtion is buggy :/
 
 }

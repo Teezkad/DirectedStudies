@@ -5,28 +5,44 @@
     <Label class="action-bar-title" text="Home" (tap) = "ngOnInit()"></Label>
 </ActionBar>
 
+<PullToRefresh (refresh)="refreshMe($event)">
     <GridLayout class="page page-content" tkMainContent>
-        <Label class="page-placeholder" ></Label>            
-       
+        <Label class="page-placeholder" ></Label>
+
         <TabView #tabview> 
         <StackLayout class="form" *tabItem="{title: 'Available Classes'}">
                 <Label text = "*If any pages Malfunction click on the ActionBar*"></Label>
                 <!-- <Label class="h2 header" horizontalAlignment = "center" text="List of Classes"></Label> -->
-                <SearchBar row="0" hint="Search Available Classes" (clear)="onClear($event)" (submit)="onSubmit($event)"></SearchBar>
-            <ListView [items]="allClass"  height="500" rowHeight="150">
+                <!-- <SearchBar row="0" hint="Search Available Classes" (clear)="onClear($event)" (submit)="onSubmit($event)"></SearchBar> -->
+            <ListView [items]="allClass"  height="500" HasUnevenRows="true" pullToRefresh="true" pullToRefreshInitiated="refreshMe($event)">
                 <ng-template let-item="item">                  
-                    <StackLayout  rows = "300" columns="auto,*,auto" class = "listview" >
-                            <Label class="classname"  col="1" [text]='"Class Name: " + item.Name'></Label>
-                            <!-- <Label textWrap = "true" class = "classDescription" [text] = '"Description: " + item.Description'></Label>-->
-                           <Label class = "classDescription" [text] = '"Instructor: " + item.Professor'></Label> 
+                    <StackLayout  rows = "auto,*,auto" columns="auto,*,auto" class = "listview" >
+                            <Label horizontalAlignment = "center">
+                                <FormattedString>
+                                    <Span class = "classname font-weight-bold" [text] = "item.Name"></Span>
+                                  </FormattedString>
+                            </Label>
+                            <Label textWrap = "true">
+                                <FormattedString>
+                                    <Span class = "classDescription font-weight-bold" text="Description: " fontAttributes= "Bold"></Span>
+                                    <Span class = "classDescription" [text] = "item.Description"></Span>
+                                  </FormattedString>
+                            </Label>
+                           <Label>
+                            <FormattedString>
+                                <Span class = "classDescription font-weight-bold" text="Professor: " fontAttributes= "Bold"></Span>
+                                <Span class = "classDescription" [text] = "item.Professor"></Span>
+                              </FormattedString>
+                           </Label> 
                             <Label class = "classDescription" [text] = '"Institution: " + item.Institution'></Label>
                             <Label class = "classDescription" [text] = '"Year: " + item.Year'></Label>   
                         <GridLayout>                 
                             <button class = "button-register" horizontalAlignment = "center" *ngIf = "item.registered != true" text=" Register in class" (tap) = "inClass(item, item.id, item.Name, item.Professor, item.Year, item.UID, item.ID)"></button>
                             <button *ngIf = "item.registered == true" text="ENTER CLASSROOM" class="button-view" (tap) = "activateClass(item.id, item.Name, item.UID)"></button>
                         </GridLayout>       
-                            <Image *ngIf = "item.UID == currentUser" class="m-5" col="2" horizontalAlignment="right" width="40" height="40" (tap)="deleteCl(item)" [src]="'~/assets/trash.png'"></Image>
-                        </StackLayout>                 
+                        <Image *ngIf = "item.UID == currentUser" class="m-5" col="2" horizontalAlignment="right" width="40" height="40" (tap)="deleteCl(item)" [src]="'~/assets/trash.png'"></Image>
+  
+                    </StackLayout>                 
                 </ng-template>
             </ListView>
         </StackLayout>
@@ -40,8 +56,10 @@
                                 <StackLayout columns="auto,*,auto">
                                         <Label class="classDescription"  col="1" [text]='item.ClassName + " Year: "+ item.Year'></Label>
                                         <label class = "classDescription" [text] = '"Created by: "+ item.Professor'></label>
-                                        <button class = "button-view" text="View Class" (tap) = "activateClass(item.CID, item.ClassName, item.UID)"></button>
-                                </StackLayout>                 
+                                        <button class = "button-view" text="Enter Class" (tap) = "activateClass(item.CID, item.ClassName, item.UID)"></button>
+                                        <button class = "button-view" text="Unregister Class" (tap) = "deleteClass(item)"></button>
+
+                                    </StackLayout>                 
                             </ng-template>
                         </ListView> 
             <Button class="btn btn-primary" text="Create Class" (tap)="navclass()"></Button>
@@ -49,5 +67,5 @@
         </StackLayout>
         </TabView>
 
-
     </GridLayout>
+</PullToRefresh>

@@ -1,5 +1,5 @@
 <RadDataForm tkExampleTitle tkToggleNavButton [source]="Classroom"></RadDataForm>
-<ActionBar class = "action-bar" title="CREATE TOPICS">
+<ActionBar class = "action-bar" [text]="'CREATE TOPICS FOR' + Cname">
     <NavigationButton text="Back" ios.position="left"></NavigationButton>
 </ActionBar>
 <GridLayout backgroundColor="#CCCCCC">
@@ -7,16 +7,16 @@
         <StackLayout margin="10" verticalAlignment="center">
             <StackLayout class="form" padding="15" backgroundColor="#FFFFFF">
                 <StackLayout class="input-field">
-                    <Label text="Tag Name" class="label font-weight-bold m-b-5"></Label>
+                    <Label text="Topic Name" class="label font-weight-bold m-b-5"></Label>
                     <TextField class="input" [(ngModel)]="tag.name"></TextField>
-                    <FlexboxLayout alignItems="center" justifyContent="space-between">
-                        <Label text = "Only instructors can create questions? "></Label>
-                        <Switch col = "2" width = "50" HorizontalAlignment = "right" #sw1 [checked]="instructor" (checkedChange)="onChange(instructor)"></Switch>
-                        </FlexboxLayout>
                     <StackLayout class="hr-light"></StackLayout>
+                    <GridLayout columns = "auto,*,auto">
+                        <Label col = "1" text = "Only you can create questions? "></Label>
+                        <Switch col = "2" width = "50" HorizontalAlignment = "right" #sw1 [checked]="instructor" (checkedChange)="onChange(instructor)"></Switch>
+                    </GridLayout>
                 </StackLayout>
                 <Button class="btn btn-primary w-full" text="create" (tap)="addTag()"></Button>
             </StackLayout>
         </StackLayout>
     </ScrollView>
-</GridLayout>
+</GridLayout> 

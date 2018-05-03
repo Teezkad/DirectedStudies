@@ -41,7 +41,8 @@ it shouldn't have any other siblings other than the <ActionBar> component.
                         <StackLayout  columns="auto,*,auto" >
                             <label class = "h3 heavy"[text]= '"Topic: " + item.Name'></label>
                             <FlexboxLayout alignItems="center" justifyContent="space-between">
-                            <button *ngIf = "item.instructorOnly !=true" height = "60" width = "150" style = "background-color : #00BCD4; color :white " text = "Create a Question" class="btnIcon" (tap)="createQuestion(item.Name, item.id)"></button>
+                                <button *ngIf = "item.instructorOnly ==true && instructor == true" height = "60" width = "150" style = "background-color : #00BCD4; color :white " text = "Create a Question" class="btnIcon" (tap)="createQuestion(item.Name, item.id)"></button>
+                                <button *ngIf = "item.instructorOnly ==false" height = "60" width = "150" style = "background-color : #00BCD4; color :white " text = "Create a Question" class="btnIcon" (tap)="createQuestion(item.Name, item.id)"></button>
                             <button height = "60" width ="150" style = "background-color : #0091EA; color :white " text="Start Quiz" class="btnIcon" col = "4"(tap) = "navQuiz(item.Name, item.id)"></button>
                         </FlexboxLayout>
                         </StackLayout>                 
@@ -49,4 +50,4 @@ it shouldn't have any other siblings other than the <ActionBar> component.
                 </ListView>
             </StackLayout>
     </GridLayout>
-</RadSideDrawer>
+</RadSideDrawer> 

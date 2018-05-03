@@ -7,21 +7,21 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>421120014004-q7m385r5m9obfgjoed0ran7dg936aal3.apps.googleusercontent.com</string>
+	<string>322940339236-dnl75hmrh14tr7fu0f6hidc4as4dtuok.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.421120014004-q7m385r5m9obfgjoed0ran7dg936aal3</string>
+	<string>com.googleusercontent.apps.322940339236-dnl75hmrh14tr7fu0f6hidc4as4dtuok</string>
 	<key>API_KEY</key>
-	<string>AIzaSyDc-DHMixh7CSV2GKH-nqM3nKGTqIeVVd8</string>
+	<string>AIzaSyAkTKw-nFvfPA_zerg85MlaJf3qmnB9jQg</string>
 	<key>GCM_SENDER_ID</key>
-	<string>421120014004</string>
+	<string>322940339236</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>org.nativescript.dirproto5</string>
+	<string>com.quizroom</string>
 	<key>PROJECT_ID</key>
-	<string>directed-studies</string>
+	<string>quizroom-4493b</string>
 	<key>STORAGE_BUCKET</key>
-	<string>directed-studies.appspot.com</string>
+	<string>quizroom-4493b.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<true></true>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -33,8 +33,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:421120014004:ios:fb2349e7855a610e</string>
+	<string>1:322940339236:ios:f5c5254b1d767009</string>
 	<key>DATABASE_URL</key>
-	<string>https://directed-studies.firebaseio.com</string>
+	<string>https://quizroom-4493b.firebaseio.com</string>
 </dict>
 </plist>

@@ -1,9 +1,0 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var Classroom = /** @class */ (function () {
-    function Classroom() {
-    }
-    return Classroom;
-}());
-exports.Classroom = Classroom;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiQ2xhc3Nyb29tLm1vZGVsLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiQ2xhc3Nyb29tLm1vZGVsLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBRUE7SUFBQTtJQVVBLENBQUM7SUFBRCxnQkFBQztBQUFELENBQUMsQUFWRCxJQVVDO0FBVlksOEJBQVMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQge1VzZXJ9IGZyb20gXCIuL1VzZXIubW9kZWxcIjtcclxuXHJcbmV4cG9ydCBjbGFzcyBDbGFzc3Jvb217XHJcbiAgICBcclxuICAgIHB1YmxpYyBpZDogbnVtYmVyO1xyXG4gICAgcHVibGljIG5hbWU6IHN0cmluZztcclxuICAgIHB1YmxpYyBwcm9mZXNzb3I6IHN0cmluZztcclxuICAgIHB1YmxpYyBpbnN0aXR1dGlvbjogc3RyaW5nO1xyXG4gICAgcHVibGljIG1lbWJlcnM6IFVzZXJbXTtcclxuICAgIHB1YmxpYyBjbGFzc0NvZGU6IHN0cmluZztcclxuICAgIHB1YmxpYyB5ZWFyOiBzdHJpbmc7XHJcbiAgICBwdWJsaWMgVUlEOiBzdHJpbmc7XHJcbn0gIl19

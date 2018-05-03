@@ -14,6 +14,7 @@ import firebase = require("nativescript-plugin-firebase");
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import observableModule = require("data/observable");
 import { BackendService } from "../services/backend.service";
+import { TextField } from "ui/text-field";
 import { DrawerTransitionBase, SlideInOnTopTransition } from "nativescript-pro-ui/sidedrawer";
 import { RadSideDrawerComponent } from "nativescript-pro-ui/sidedrawer/angular";
 
@@ -27,6 +28,13 @@ import { RadSideDrawerComponent } from "nativescript-pro-ui/sidedrawer/angular";
 export class classroomComponent {
 
    public create : Classroom;
+   public classrooms$: Observable<any>;
+   public allClass;
+   public cLength;
+   public validName;
+   public firstTxt;
+   public message;
+
 
    constructor(private routerExtensions: RouterExtensions,
     private firebaseService: FirebaseService,
@@ -35,7 +43,7 @@ export class classroomComponent {
         this.create = new Classroom();
             this.create.id =  Number(new Date());
             this.create.name= "";
-            this.create.professor = "";
+            this.create.professor = BackendService.Uname;
             this.create.institution = "";
             this.create.members= [];
             this.create.classCode = "";
@@ -44,31 +52,50 @@ export class classroomComponent {
 
     }
 
+    ngOnInit(): void {
+        this.classrooms$ = <any>this.firebaseService.getAllClassList();
+        this.classrooms$.subscribe(val => {
+            this.allClass = val;
+            this.cLength = val.length;
+        })
+
+    }
+
+submit(){
+    for(var i =0; i<this.cLength; i++){
+        if(this.allClass[i].Name == this.create.name){
+            this.validName = false;
+        }else{
+            this.validName = true;
+        }
+    }
+
+    this.addClass();
+}
+
 addClass(){
+    if(this.validName == true){
     this.firebaseService.addClassroom(this.create.id, this.create.name, this.create.professor,
         this.create.institution,  this.create.members, this.create.classCode, this.create.year, 
         this.create.UID).then((message:any) => {
-      
             alert(message);
-       
             console.log("Classroom " + this.create.name);
-          }) 
-
-          
-
+          })
           this.routerExtensions.navigate(["/home"]);
+        }else{
+            this.message = "Class name already exists!!";
+        }
 }
+
 
 inClass(classroom: Classroom, id: string, Cname: string, Prof: string, Year: string, uid: string){
     //update the classroom node to include users who registered
      this.firebaseService.registerClassroom(classroom, BackendService.Uid, BackendService.Uname, BackendService.studentNum)
- .then((message:any) => {
- 
-   alert(message);
+    .then((message:any) => {
 
+    alert(message);
    //update the user's node to include a list of classes
 //    this.firebaseService.userRegister(id, Cname, Prof, Year, uid)
-
    console.log("Classroom successfully registered");
  }) 
 }

@@ -32,6 +32,7 @@ export class topicQuestionComponent implements OnInit {
     public requests$: Observable<any>;
     private _sideDrawerTransition: DrawerTransitionBase;
     public creatorId = BackendService.instructor;
+    public isTA = BackendService.TA;
     public tid;
     public topicname;
 
@@ -52,13 +53,32 @@ export class topicQuestionComponent implements OnInit {
     ngOnInit(): void {
         this._sideDrawerTransition = new SlideInOnTopTransition();
         console.log("Tid is "+ this.tid);
-        this.question$ = <any>this.firebaseService1.getTopicQuestions(this.tid);
+        this.question$ = <any>this.firebaseService1.getTopicQuestions(this.tid);       
+    }
 
-       
+    get sideDrawerTransition(): DrawerTransitionBase {
+        return this._sideDrawerTransition;
+    }
+
+    onDrawerButtonTap(): void {
+        this.drawerComponent.sideDrawer.showDrawer();
     }
 
     deleteQuestion(question: Question){
         this.firebaseService1.deleteQuestion(question);
     }
+
+    createQuestion(tname: string, tid: string ){
+        
+        
+        let navigationExtras: NavigationExtras = {
+        queryParams: {
+            "Tid": tid,
+            "Tname": tname
+        }
+      };
+      this.routerExtensions.navigate(["question"], navigationExtras);
+    
+        }
 
 }

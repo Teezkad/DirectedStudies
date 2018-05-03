@@ -61,47 +61,35 @@ register(){
     var id = firebase.getCurrentUser;
      this.firebaseService.login(this.user)
       .then(() => {
+        if(BackendService.token != ""){
         this.isAuthenticating = false;
-        console.log("My uid is"+ BackendService.token);
+        console.log("My token is"+ BackendService.token);
         console.log("Login successful");
-        console.log("Login id is" + id);
+        console.log("Login id statement is" + id);
         this.routerExtensions.navigate(["/home"], { clearHistory: true });
-
+        }else{
+          this.routerExtensions.navigate(["login"]);
+        }
       })
       .catch((message:any) => {
         this.isAuthenticating = false;
       });
   }
 
-//   forgotPassword() {
-//     prompt({
-//       title: "Forgot Password",
-//       message: "Enter the email address you used to register for Giftler to reset your password.",
-//       defaultText: "",
-//       okButtonText: "Ok",
-//       cancelButtonText: "Cancel"
-//     }).then((data) => {
-//       if (data.result) {
-//         this.firebaseService.resetPassword(data.text.trim())
-//           .then((result:any) => {
-//             if(result){
-//               alert(result);
-//             }
-//          });
-//       }
-//     });
-//  }
-  
-toggleDisplay() {
-    this.isLoggingIn = !this.isLoggingIn;
-  }
+  forgotPassword() {
+    prompt({
+      title: "Forgot Password",
+      message: "Enter the email address you used to register for Giftler to reset your password.",
+      defaultText: "",
+      okButtonText: "Ok",
+      cancelButtonText: "Cancel"
+    }).then((data) => {
+      if (data.result) {
+        this.firebaseService.resetPassword(data.text.trim())
+      }
+    });
+ }
 
-
-/* ***********************************************************
-* According to guidelines, if you have a drawer on your page, you should always
-* have a button that opens it. Get a reference to the RadSideDrawer view and
-* use the showDrawer() function to open the app drawer section.
-*************************************************************/
 logOut() {
   this.firebaseService.logout();
   this.routerExtensions.navigate(["/login"], { clearHistory: true } );

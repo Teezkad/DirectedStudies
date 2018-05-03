@@ -145,6 +145,8 @@ C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\tns_modules\n
 C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\tns_modules\nativescript-plugin-firebase\scripts\entitlements-before-prepare.js
 C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\tns_modules\nativescript-plugin-firebase\scripts\postinstall.js
 C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\tns_modules\nativescript-pro-ui\scripts\eula-prompt.js
+C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\tns_modules\nativescript-pulltorefresh\pulltorefresh-common.js
+C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\tns_modules\nativescript-pulltorefresh\pulltorefresh.js
 C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\tns_modules\tns-core-modules\application\application-common.js
 C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\tns_modules\tns-core-modules\application\application.js
 C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\tns_modules\tns-core-modules\application-settings\application-settings-common.js

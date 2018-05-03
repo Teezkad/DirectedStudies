@@ -1,42 +1,48 @@
 <ActionBar class = "action-bar" title="Registration">
     <NavigationButton text="Back" ios.position="left"></NavigationButton>
 </ActionBar>
+<ScrollView>
        
             <StackLayout class="form" padding="15" backgroundColor="#FFFFFF">
 
                 <StackLayout class="input-field">
                     <Label text="First Name" class="label font-weight-bold m-b-5"></Label>
-                    <TextField class="input" [(ngModel)]="register.firstName"></TextField>
+                    <TextField required class="input" [(ngModel)]="register.firstName"></TextField>
                     <StackLayout class="hr-light"></StackLayout>
                 </StackLayout>
                 <StackLayout class="input-field">
                     <Label text="Last Name" class="label font-weight-bold m-b-5"></Label>
-                    <TextField class="input" [(ngModel)]="register.lastName"></TextField>
+                    <TextField required class="input" [(ngModel)]="register.lastName"></TextField>
                     <StackLayout class="hr-light"></StackLayout>
                 </StackLayout>
                 <StackLayout class="input-field">
                         <Label text="Student Number" class="label font-weight-bold m-b-5"></Label>
-                        <TextField class="input" [(ngModel)]="register.studenNum"></TextField>
+                        <TextField required class="input" [(ngModel)]="register.studenNum"></TextField>
                         <StackLayout class="hr-light"></StackLayout>
                     </StackLayout>
                 <StackLayout class="input-field">
                     <Label text="Email" class="label font-weight-bold m-b-5"></Label>
-                    <TextField class="input" [(ngModel)]="user.email"></TextField>
+                    <TextField required class="input" [(ngModel)]="user.email" (textChange)="onTextChange($event)"></TextField>
                     <StackLayout class="hr-light"></StackLayout>
+                    <label *ngIf = "emailTxt == true" text = "email is good" class = "text-primary"></label>
+                    <label *ngIf = "emailTxt == false" text = "email is not formatted properly" class = "text-danger"></label>
                 </StackLayout>
                 <StackLayout class="input-field">
                     <Label text="Password" class="label font-weight-bold m-b-5"></Label>
-                    <TextField secure="true" class="input" [(ngModel)]="user.password"></TextField>
+                    <TextField required secure="true" class="input" [(ngModel)]="user.password" (textChange)="onTextChange1($event)"></TextField>
                     <StackLayout class="hr-light"></StackLayout>
+                    <label *ngIf = "passLen == true" text = "password is good" class = "text-primary"></label>
+                    <label *ngIf = "passLen == false" text = "password is too short" class = "text-danger"></label>
                 </StackLayout>
                 <StackLayout class="input-field">
                         <Label text="Confirm Password" class="label font-weight-bold m-b-5"></Label>
-                        <TextField secure="true" class="input" [(ngModel)]="password1"></TextField>
+                        <TextField required secure="true" class="input" [(ngModel)]="password1" (textChange)="onTextChange2($event)"></TextField>
                         <StackLayout class="hr-light"></StackLayout>
                     </StackLayout>
-                    <Label [text] = "message" class = "text-danger"></Label>
+                    <label *ngIf = "passMatch == true" text = "Password matches" class = "text-primary"></label>
+                    <label *ngIf = "passMatch == false" text = "Password does not match" class = "text-danger"></label>
                 <Button class="btn btn-primary w-full" text="Register" (tap)="signUp()"></Button>
-                <Label (tap)="goBack()" text="Already a member? Login here." class="text-center footnote"></Label>
 
             </StackLayout>
+        </ScrollView>
         

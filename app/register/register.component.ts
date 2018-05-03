@@ -6,6 +6,8 @@ import { ScrollView, ScrollEventData } from "tns-core-modules/ui/scroll-view";
 import {prompt} from "ui/dialogs";
 import firebase = require("nativescript-plugin-firebase");
 import { RouterExtensions } from 'nativescript-angular/router/router-extensions';
+import { TextField } from "ui/text-field";
+
 
 @Component({
   moduleId: module.id,
@@ -20,6 +22,13 @@ import { RouterExtensions } from 'nativescript-angular/router/router-extensions'
     isAuthenticating = false;
     public password1;
     public message = "" ;
+    public firstTx: string = "";
+    public firstTx1: string = "";
+    public firstTx2: string = "";
+    public emailTxt;
+    public passLen;
+    public passMatch;
+
 
 
     constructor(private firebaseService: FirebaseService,
@@ -45,7 +54,7 @@ import { RouterExtensions } from 'nativescript-angular/router/router-extensions'
 
 
  signUp() {
-  if(this.password1 == this.register.password){
+  if(this.passMatch == true && this.emailTxt == true && this.passLen == true){
 
   this.firebaseService.register(this.user, this.user.email, this.register.firstName, this.register.lastName,
     this.register.studenNum, this.register.instructor, this.register.professor)
@@ -67,9 +76,57 @@ import { RouterExtensions } from 'nativescript-angular/router/router-extensions'
       this.routerExtensions.navigate(['login']);
 
     }else{
-      this.message = "Passwords Do Not Match";
+      this.message = "Validate your input";
     }
   }
+
+  public onTextChange(args) {
+    let textField = <TextField>args.object;
+
+    this.firstTx = textField.text;
+    this.validateEmail(this.firstTx);
+}
+
+public onTextChange1(args) {
+  let textField = <TextField>args.object;
+
+  this.firstTx1 = textField.text;
+ var length = this.firstTx1.length;
+
+ if(length < 6){
+  this.passLen = false;
+ }else{
+   this.passLen = true;
+ }
+}
+
+public onTextChange2(args) {
+  let textField = <TextField>args.object;
+
+  this.firstTx2 = textField.text;
+
+  if(this.firstTx2 == this.user.password){
+    this.passMatch = true;
+  }else{
+    this.passMatch = false;
+  }
+
+}
+
+
+
+ validateEmail(email) {
+  var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  var res = re.test(email);
+
+  if(res){
+    this.emailTxt = true;
+  }else{
+    this.emailTxt = false;
+  }
+  
+  
+}
 
 
  goBack(){

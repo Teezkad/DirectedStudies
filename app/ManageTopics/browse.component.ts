@@ -40,6 +40,8 @@ export class BrowseComponent implements OnInit {
     public i = 'a';
     public TA = BackendService.TA;
     public message = "";
+    public quiz$: Observable<any>;
+
 
 
 
@@ -103,10 +105,22 @@ export class BrowseComponent implements OnInit {
     }
 
    delete(tag: Tag) {
+    this.deleteQuestions(tag);
+
     this.firebaseService1.deleteTag(tag)
       .catch(() => {
         alert("An error occurred while deleting an item from your list.");
       });
+  }
+
+  deleteQuestions(tag:Tag){
+    this.quiz$ = <any>this.firebaseService1.getTopicQuestions(tag.id);
+    this.quiz$.subscribe(questions =>{
+        var question = questions;
+        for(var q = 0; q < questions.length; q++){
+            this.firebaseService1.deleteQuestion(question[q]);
+        }
+    });
   }
 
   viewQuestions(tid: string, topicname: string){

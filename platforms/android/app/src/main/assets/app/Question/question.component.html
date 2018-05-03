@@ -13,22 +13,22 @@
                 </StackLayout>
 
                 <GridLayout columns="auto,auto,auto"  >
-                        <TextView col = "0" width = "320" required hint="Enter Option 1" class="m-t-10 question" [(ngModel)]="option1.name" rowSpan="3"></TextView>
+                        <TextField col = "0" width = "320" required hint="Enter Option 1" class="m-t-10 question" [(ngModel)]="option1.name" rowSpan="3"></TextField>
                         <Switch col = "2" width = "50" HorizontalAlignment = "right" #sw1 [checked]="option1.isAnswer" (checkedChange)="onChange1(option1.isAnswer)"></Switch>
                 </GridLayout>
 
                     <GridLayout columns="auto,auto,auto">
-                            <TextView col = "0" width = "320" required hint="Enter Option 2" class="m-t-10 question" [(ngModel)]="option2.name" rowSpan="3"></TextView>
+                            <TextField col = "0" width = "320" required hint="Enter Option 2" class="m-t-10 question" [(ngModel)]="option2.name" rowSpan="3"></TextField>
                             <Switch col = "2" width = "50" HorizontalAlignment = "right" #sw2 [checked]="option2.isAnswer" (checkedChange)="onChange2(option2.isAnswer)"></Switch>
                         </GridLayout>
 
                     <GridLayout columns="auto,auto,auto">
-                            <TextView col="0" width = "320" required hint="Enter Option 3" class="m-t-10 question" [(ngModel)]="option3.name" rowSpan="3"></TextView>
+                            <TextField col="0" width = "320" required hint="Enter Option 3" class="m-t-10 question" [(ngModel)]="option3.name" rowSpan="3"></TextField>
                             <Switch col="2" width = "50" HorizontalAlignment = "right" #sw3 [checked]="option3.isAnswer" (checkedChange)="onChange3(option3.isAnswer)"></Switch>
                         </GridLayout>
 
                     <GridLayout columns="auto,auto,auto" >
-                            <TextView col="0" width = "320" required hint="Enter Option 4" class="m-t-10 question"[(ngModel)]="option4.name" rowSpan="3"></TextView>
+                            <TextField col="0" width = "320" required hint="Enter Option 4" class="m-t-10 question"[(ngModel)]="option4.name" rowSpan="3"></TextField>
                             <Switch col="1" width = "50" HorizontalAlignment = "right" #sw4 [checked]="option4.isAnswer" (checkedChange)="onChange4(option4.isAnswer)"></Switch>
                     </GridLayout>
                     <Button text="Save" class="btn btn-primary" (tap)="submitQuestion()"></Button>

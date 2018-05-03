@@ -24,7 +24,7 @@ C:\Users\kadir\dirproto5\platforms\android\app\build\exploded-dependencies\3\cla
 C:\Users\kadir\dirproto5\platforms\android\app\build\exploded-dependencies\30\classes.jar
 C:\Users\kadir\dirproto5\platforms\android\app\build\exploded-dependencies\31\classes.jar
 C:\Users\kadir\dirproto5\platforms\android\app\build\exploded-dependencies\32\classes.jar
-C:\Users\kadir\dirproto5\platforms\android\app\build\exploded-dependencies\33\gson-2.8.2.jar
+C:\Users\kadir\dirproto5\platforms\android\app\build\exploded-dependencies\33\gson-2.8.4.jar
 C:\Users\kadir\dirproto5\platforms\android\app\build\exploded-dependencies\34\classes.jar
 C:\Users\kadir\dirproto5\platforms\android\app\build\exploded-dependencies\35\classes.jar
 C:\Users\kadir\dirproto5\platforms\android\app\build\exploded-dependencies\36\classes.jar

@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="C:\Users\kadir\.gradle\caches\modules-2\files-2.1\com.squareup.okio\okio\1.6.0\98476622f10715998eacf9240d6b479f12c66143\okio-1.6.0.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="27.0.3"
+        sha1="98476622f10715998eacf9240d6b479f12c66143">
+        <dex dex="C:\Users\kadir\dirproto5\platforms\android\app\build\intermediates\transforms\preDex\release\59.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\Primitives-2017.1.1221-dev-release.aar\a3172d01ce07b7f034c2e7ceffd0afbc\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="27.0.3"
+        sha1="16dfa5cc51cd9a9e2809e48ceb26724a29861fdd">
+        <dex dex="C:\Users\kadir\dirproto5\platforms\android\app\build\intermediates\transforms\preDex\release\44.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\firebase-analytics-impl-11.8.0.aar\c656c491f9a6470130280349975729bc\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="27.0.3"
+        sha1="122de0d704f76d2bb5cb9db66e00fe90a0a41e78">
+        <dex dex="C:\Users\kadir\dirproto5\platforms\android\app\build\intermediates\transforms\preDex\release\22.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\support-v4-26.0.0-alpha1.aar\f8f7fab2f495eb88ab3b715aec63d487\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="27.0.3"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="C:\Users\kadir\dirproto5\platforms\android\app\build\intermediates\transforms\preDex\release\28.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\kadir\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.8.4\d0de1ca9b69e69d1d497ee3c6009d015f64dad57\gson-2.8.4.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="27.0.3"
+        sha1="d0de1ca9b69e69d1d497ee3c6009d015f64dad57">
+        <dex dex="C:\Users\kadir\dirproto5\platforms\android\app\build\intermediates\transforms\preDex\release\34.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\firebase-storage-11.8.0.aar\dae03235c88033604b3a05902056321b\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="27.0.3"
+        sha1="c59cc4d67084879423713a416182208836c0a29f">
+        <dex dex="C:\Users\kadir\dirproto5\platforms\android\app\build\intermediates\transforms\preDex\release\18.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\Gauges-2017.1.1221-dev-release.aar\7571002a0c9370447c5efc4bdf79ac05\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="27.0.3"
+        sha1="556dc4e7734c7445d7310a625fad89c5be6728b2">
+        <dex dex="C:\Users\kadir\dirproto5\platforms\android\app\build\intermediates\transforms\preDex\release\41.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\firebase-database-11.8.0.aar\d10e9e5b9aef5d91e7539bdd7b4f2a24\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="27.0.3"
+        sha1="1b982cc8b5ab6f788690238dbe3ac3bb19f88b1a">
+        <dex dex="C:\Users\kadir\dirproto5\platforms\android\app\build\intermediates\transforms\preDex\release\15.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Android\android-sdk\extras\android\m2repository\com\android\support\support-annotations\26.0.0-alpha1\support-annotations-26.0.0-alpha1.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="27.0.3"
+        sha1="023ee503b631f69511e335a061ea008f8da60f40">
+        <dex dex="C:\Users\kadir\dirproto5\platforms\android\app\build\intermediates\transforms\preDex\release\46.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\play-services-tasks-11.8.0.aar\89203a599f7f4307db2fec99ab17f906\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="27.0.3"
+        sha1="d2af2ef4d987d753f2e8ee2d1480ab964d5c7273">
+        <dex dex="C:\Users\kadir\dirproto5\platforms\android\app\build\intermediates\transforms\preDex\release\25.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\firebase-release.aar\9208a5f974f4d78d3690a20cfa6f597f\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="27.0.3"
+        sha1="fe66404378d7791a232cc3331811b2ce402f44c7">
+        <dex dex="C:\Users\kadir\dirproto5\platforms\android\app\build\intermediates\transforms\preDex\release\36.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\firebase-iid-11.8.0.aar\8ab245c1900aa2c74d3a20100f8bdfaf\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="27.0.3"
+        sha1="264ad23f9752aabecfa41115c52a25a023a08839">
+        <dex dex="C:\Users\kadir\dirproto5\platforms\android\app\build\intermediates\transforms\preDex\release\23.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\cardview-v7-26.0.0-alpha1.aar\8dd02fa53d678e126b23924bd1e5bb66\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="27.0.3"
+        sha1="e176fd06c2ad5b50a2f5cb4de6000a83a7cb48f5">
+        <dex dex="C:\Users\kadir\dirproto5\platforms\android\app\build\intermediates\transforms\preDex\release\3.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\play-services-basement-11.8.0.aar\a66839ba5b5b62e7fe057e7a99a154a7\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="27.0.3"
+        sha1="5ad3911825107d8dd4b017fdecebfd23c08048dd">
+        <dex dex="C:\Users\kadir\dirproto5\platforms\android\app\build\intermediates\transforms\preDex\release\27.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\firebase-database-connection-11.8.0.aar\d45b9520a63aa67e969a00ef86912ab3\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="27.0.3"
+        sha1="ed04a0ae7198b0d5d0e965d6afdb0fe784dcfbee">
+        <dex dex="C:\Users\kadir\dirproto5\platforms\android\app\build\intermediates\transforms\preDex\release\21.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\firebase-firestore-11.8.0.aar\e8314420aa414a84f0321d483b9b5b8d\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="27.0.3"
+        sha1="8c5a80c80167d5e6bfe84309f0787a769fd23f61">
+        <dex dex="C:\Users\kadir\dirproto5\platforms\android\app\build\intermediates\transforms\preDex\release\16.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\Feedback-2017.1.1221-dev-release.aar\3d1afa667bc3e8ed698824dca17e6837\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="27.0.3"
+        sha1="0eed9e468431f447bf63f3a0cee23418e8994411">
+        <dex dex="C:\Users\kadir\dirproto5\platforms\android\app\build\intermediates\transforms\preDex\release\40.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\customtabs-26.0.0-alpha1.aar\8d52a826f5a5b40197ea5165fb82d5cb\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="27.0.3"
+        sha1="aebd345a61f563da0989cbd014479c8bf7bd77ab">
+        <dex dex="C:\Users\kadir\dirproto5\platforms\android\app\build\intermediates\transforms\preDex\release\4.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\firebase-analytics-11.8.0.aar\57f56497f3ea80000bdde9e0437168b4\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="27.0.3"
+        sha1="42c9659c973e311ffdb645ed057e5053e0ab5c78">
+        <dex dex="C:\Users\kadir\dirproto5\platforms\android\app\build\intermediates\transforms\preDex\release\20.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\appcompat-v7-26.0.0-alpha1.aar\605e0774128fefead4693351e91d9241\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="27.0.3"
+        sha1="47471eb19df288158b00b8d9cfa41bce7373f5cc">
+        <dex dex="C:\Users\kadir\dirproto5\platforms\android\app\build\intermediates\transforms\preDex\release\2.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\support-media-compat-26.0.0-alpha1.aar\0e9b1f4df99d219f710f5889c06ef0ad\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="27.0.3"
+        sha1="9935891f23923f39d002087085d9696568a9f657">
+        <dex dex="C:\Users\kadir\dirproto5\platforms\android\app\build\intermediates\transforms\preDex\release\31.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\kadir\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp\okhttp\2.7.2\20f6463eb19ac61960c5d91a094c2f4f0727dc2e\okhttp-2.7.2.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="27.0.3"
+        sha1="20f6463eb19ac61960c5d91a094c2f4f0727dc2e">
+        <dex dex="C:\Users\kadir\dirproto5\platforms\android\app\build\intermediates\transforms\preDex\release\50.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\Input-2017.1.1221-dev-release.aar\ab78d4450a0f3c943d7826d77597f225\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="27.0.3"
+        sha1="ce22401852bd9e460265a9a1567f7cedb6fc91b9">
+        <dex dex="C:\Users\kadir\dirproto5\platforms\android\app\build\intermediates\transforms\preDex\release\42.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\Common-2017.1.1221-dev-release.aar\8026204b60130cb486d4f08248b76a38\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="27.0.3"
+        sha1="9ffa5b2e37c626bd25cfbff4df099cdf068595f9">
+        <dex dex="C:\Users\kadir\dirproto5\platforms\android\app\build\intermediates\transforms\preDex\release\38.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\support-core-ui-26.0.0-alpha1.aar\15b07e6b9c2d07f8c1c8efb78caf8e9a\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="27.0.3"
+        sha1="fcd01fd11233459f546c437ec927e9b61bf7caf1">
+        <dex dex="C:\Users\kadir\dirproto5\platforms\android\app\build\intermediates\transforms\preDex\release\30.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\support-fragment-26.0.0-alpha1.aar\44db47105401abb816438ead0210b207\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="27.0.3"
+        sha1="18d31838aa4fcc768a8a0516e22cc13b94655d89">
+        <dex dex="C:\Users\kadir\dirproto5\platforms\android\app\build\intermediates\transforms\preDex\release\29.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\play-services-appinvite-11.8.0.aar\d1e449507cbf0729d521615c13b07d9c\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="27.0.3"
+        sha1="4e7ca65463655d11456435e37fba9500c070d05e">
+        <dex dex="C:\Users\kadir\dirproto5\platforms\android\app\build\intermediates\transforms\preDex\release\12.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\firebase-common-11.8.0.aar\cd18a20566cc0ca96af58023039f40cf\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="27.0.3"
+        sha1="e6aeff19a2ce1eb896557be73cb9ceb56f8d1cf3">
+        <dex dex="C:\Users\kadir\dirproto5\platforms\android\app\build\intermediates\transforms\preDex\release\24.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\support-core-utils-26.0.0-alpha1.aar\6a9bae838821fd74e268d5f2014cad2d\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="27.0.3"
+        sha1="2e92aa0163544a804a0b34f169ca61801770839a">
+        <dex dex="C:\Users\kadir\dirproto5\platforms\android\app\build\intermediates\transforms\preDex\release\32.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\Data-2017.1.1221-dev-release.aar\2e5e2083f900a56465d6a881ae26b58a\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="27.0.3"
+        sha1="4df8aad66215f497722e05820383f9ff04796fea">
+        <dex dex="C:\Users\kadir\dirproto5\platforms\android\app\build\intermediates\transforms\preDex\release\39.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\nativescript-optimized.aar\d0b3744ba654e8fdc0d132c9fac1abee\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="27.0.3"
+        sha1="0b6d7d548de1d9c9cca297a3ea0071c3a8895712">
+        <dex dex="C:\Users\kadir\dirproto5\platforms\android\app\build\intermediates\transforms\preDex\release\35.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\transition-26.0.0-alpha1.aar\322f6c5c30f32c4c47b60ba289b4e5e0\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="27.0.3"
+        sha1="cddcd0fb93bc70e27325f2f715b2710332004ebb">
+        <dex dex="C:\Users\kadir\dirproto5\platforms\android\app\build\intermediates\transforms\preDex\release\8.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\firebase-dynamic-links-11.8.0.aar\a6fbc32a030544ef3704219f4bf91e6e\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="27.0.3"
+        sha1="e59236507fc1c595cd784ce9aa81c2c04888fd40">
+        <dex dex="C:\Users\kadir\dirproto5\platforms\android\app\build\intermediates\transforms\preDex\release\13.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\List-2017.1.1221-dev-release.aar\3885e7d3219c5fe24739d6e08dd4be60\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="27.0.3"
+        sha1="ae411cd0dd58ad905486a0bc7931ec5adf3a2d13">
+        <dex dex="C:\Users\kadir\dirproto5\platforms\android\app\build\intermediates\transforms\preDex\release\43.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\play-services-base-11.8.0.aar\a59a268f58b62a08ded418120398d518\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="27.0.3"
+        sha1="233d88c6f961d2a84758dfe27b7af61318190c7b">
+        <dex dex="C:\Users\kadir\dirproto5\platforms\android\app\build\intermediates\transforms\preDex\release\14.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\support-compat-26.0.0-alpha1.aar\af10d6f21e9d316ee68e37268f32c2b1\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="27.0.3"
+        sha1="8df0e365e40beb151bc42dee20817721a6cab7b0">
+        <dex dex="C:\Users\kadir\dirproto5\platforms\android\app\build\intermediates\transforms\preDex\release\33.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-26.0.0-alpha1.aar\619ed64dcdb24a3000f20f84a3fd42fa\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="27.0.3"
+        sha1="952944218ecedea1554a513dec0c14d570642843">
+        <dex dex="C:\Users\kadir\dirproto5\platforms\android\app\build\intermediates\transforms\preDex\release\7.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\Chart-2017.1.1221-dev-release.aar\723d7edc184587f96209da914c1a73d2\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="27.0.3"
+        sha1="21ece50b870a8bea45608a6748ad60112d5d9ed1">
+        <dex dex="C:\Users\kadir\dirproto5\platforms\android\app\build\intermediates\transforms\preDex\release\37.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\firebase-crash-11.8.0.aar\47d8b2ac244f4951b5688875124e2572\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="27.0.3"
+        sha1="4b882397288de69e13ff147bdefe584cc6deb055">
+        <dex dex="C:\Users\kadir\dirproto5\platforms\android\app\build\intermediates\transforms\preDex\release\17.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\firebase-config-11.8.0.aar\12f5101a07acfba2aacf38add65abe20\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="27.0.3"
+        sha1="d9a09584e04eb95d247f251d5d498eb57fcf6e41">
+        <dex dex="C:\Users\kadir\dirproto5\platforms\android\app\build\intermediates\transforms\preDex\release\10.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\design-26.0.0-alpha1.aar\917955232f2251dbed67cf7045d5be49\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="27.0.3"
+        sha1="6a022bf00ccd0948a8180c505e8e458bbddd43a6">
+        <dex dex="C:\Users\kadir\dirproto5\platforms\android\app\build\intermediates\transforms\preDex\release\1.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\firebase-auth-11.8.0.aar\4bb8a8f2c2f36773ee00c2e751f1b2e2\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="27.0.3"
+        sha1="c5bc72ad3250d065128d1d7514279be703e57bd0">
+        <dex dex="C:\Users\kadir\dirproto5\platforms\android\app\build\intermediates\transforms\preDex\release\9.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\firebase-storage-common-11.8.0.aar\a3255cecbf587636228ce8d4064a4b2b\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="27.0.3"
+        sha1="08bbb31d3aae0e337647a49575c2d1f1ec7d6996">
+        <dex dex="C:\Users\kadir\dirproto5\platforms\android\app\build\intermediates\transforms\preDex\release\26.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\widgets-release.aar\f27d59241d2f35c33d03fde6d893baa7\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="27.0.3"
+        sha1="217eae4b036f55d412c54c535e40a625ca3c25c6">
+        <dex dex="C:\Users\kadir\dirproto5\platforms\android\app\build\intermediates\transforms\preDex\release\45.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-26.0.0-alpha1.aar\8d52d47c810f3df6d95d602308973055\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="27.0.3"
+        sha1="c4f45092eee6cdf1a5dbd597b2b6819be652ce2e">
+        <dex dex="C:\Users\kadir\dirproto5\platforms\android\app\build\intermediates\transforms\preDex\release\5.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\kadir\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-26.0.0-alpha1.aar\56a9b5483c178450549fa4fdfdf2d67f\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="27.0.3"
+        sha1="88246166d5afb106f532f6e6deae683c66b42c89">
+        <dex dex="C:\Users\kadir\dirproto5\platforms\android\app\build\intermediates\transforms\preDex\release\6.jar" />
+    </item>
+
+</items>

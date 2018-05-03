@@ -28,6 +28,7 @@ export class SearchComponent implements OnInit {
     @ViewChild("drawer") drawerComponent: RadSideDrawerComponent;
 
         public Cname = BackendService.Cname;
+        public instructor = BackendService.instructor;
     public users$: Observable<any>;
     public classrooms$: Observable<any>;
     public tags$: Observable<any>;

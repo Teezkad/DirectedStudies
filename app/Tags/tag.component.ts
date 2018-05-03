@@ -23,6 +23,7 @@ export class Tag {
     public name: string;
     public CID: string;
     public questions: Question [];
+    public Cname = BackendService.Cname;
 }
 
 @Component({

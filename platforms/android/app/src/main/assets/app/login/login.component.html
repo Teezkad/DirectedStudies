@@ -26,6 +26,8 @@
                 </StackLayout>
                 <Button class="btn btn-primary w-full" text="Login" (tap)="submit()"></Button>
                 <Button class="btn btn-primary w-full" text="Register" (tap)="register()"></Button>
+                <Button horizontalAlignment="center" class="btn" text="Forgot password" (tap)="forgotPassword()" [opacity]="isLoggingIn ? 1 : 0"></Button>
+
                 <!-- <Label (tap)="goBack()" text="Already a member? Login here." class="text-center footnote"></Label> -->
             </StackLayout>
         </StackLayout>

@@ -46,6 +46,7 @@ export class FirebaseService {
     }).then((result: any) => {
       this.users$ = <any>this.getMyUserList(BackendService.token);
           BackendService.token = result.uid;
+          console.log("Token is "+ result.uid);
           this.users$.subscribe(val => {
             console.log(BackendService.Uid = JSON.parse( JSON.stringify(val[0].id)));
             console.log("My uid from firebaseservice is"+ BackendService.Uid);
@@ -60,7 +61,7 @@ export class FirebaseService {
         }); 
           return JSON.stringify(result);
       }, (errorMessage: any) => {
-        alert(errorMessage);
+        alert("Login Information is not correct");
       });
   }
 

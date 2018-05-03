@@ -1,37 +1,17 @@
 <ActionBar class="action-bar">
-        <!-- 
-        Use the NavigationButton as a side-drawer button in Android because ActionItems are shown on the right side of the ActionBar
-        -->
-        <NavigationButton ios:visibility="collapsed" icon="res://menu" (tap)="onDrawerButtonTap()"></NavigationButton>
-        <!-- 
-        Use the ActionItem for IOS with position set to left. Using the NavigationButton as a side-drawer button in iOS is not possible, because its function is to always navigate back in the application.
-        -->
-        <ActionItem icon="res://navigation/menu" android:visibility="collapsed" (tap)="onDrawerButtonTap()"
-            ios.position="left">
-        </ActionItem>
-        <Label class="action-bar-title" [text]="'Manage Questions'"></Label>
-    </ActionBar>
-    
-    <RadSideDrawer #drawer showOverNavigation="true" [drawerTransition]="sideDrawerTransition">
-        <!--
-        Use the tkDrawerContent directive to display the content of the app drawer on this page.
-        -->
-        <StackLayout tkDrawerContent>
-            <MyDrawer [selectedPage]="'Browse'"></MyDrawer>
-        </StackLayout>
-        
-        <!--
-        Use the tkMainContent directive to display the content of the page when you have an app drawer.
-        -->
+    <Label class="action-bar-title" [text]=' topicname + "Questions"' (tap) = "ngOnInit()"></Label>
+</ActionBar>
+   
         <GridLayout class="page page-content" tkMainContent>
     
                     <StackLayout *ngIf = "(question$ | async)?.length==0"  class="page page-content">
-                        <label text = "There are no question"></label>
+                        <label text = "There are no questions for this topic"></label>
+                        <button *ngIf = " creatorId ==true " height = "60" width = "150" style = "background-color : rgb(10, 202, 10); color :white " text = "Create a Question" class="btnIcon" (tap)="createQuestion(item.Name, item.id)"></button>
                     </StackLayout>
     
                     <StackLayout>
-                        <Label class="h2 header" col = "2" [text]="topicname + 'Questions'"></Label>
-                            <ListView row = "5" [items]="question$ | async"  height="800">
+                        <Label *ngIf = "(question$ | async)?.length!=0" class="h2 header" col = "2" ></Label>
+                            <ListView row = "5" [items]="question$ | async"  height="600">
                                 <ng-template let-item="item">                  
                                     <StackLayout columns="auto,*,auto">
                                         <Label textWrap = "true" class="h2 header"  col="1" [text]="'Question: ' + item.Name"></Label>
@@ -49,7 +29,7 @@
                             </StackLayout>
                                 </ng-template>
                             </ListView>
+                            <button *ngIf = "creatorId == true || isTA == true" height = "60" width = "150" style = "background-color : rgb(10, 202, 10); color :white " text = "Create a Question" class="btnIcon" (tap)="createQuestion(item.Name, item.id)"></button>
                     </StackLayout>
             </GridLayout>
     
-    </RadSideDrawer>

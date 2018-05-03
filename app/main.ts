@@ -15,7 +15,7 @@ import * as app from "application";
 firebase.init({
   //persist should be set to false as otherwise numbers aren't returned during livesync
   persist: false,
-  storageBucket: 'gs://directed-studies.appspot.com',
+  storageBucket: 'gs://quizroom-4493b.appspot.com',
   onAuthStateChanged: (data: any) => {
     console.log(JSON.stringify(data))
     if (data.loggedIn) {

@@ -64,9 +64,11 @@ export class ScoreComponent implements OnInit {
         this._sideDrawerTransition = new SlideInOnTopTransition();
         this.score$ = <any>this.firebaseService.getUserScore(this.uid, this.tid);
         // this.users$ = <any>this.firebaseService.getRegisteredUsers(BackendService.CID);
+    
         this.score$.subscribe(val => {
             this.graph$ = val;
             this.length = val.length;
+            if(this.length != 0){
             var dated = JSON.stringify(val[0].Date);
             var timestamp = moment(parseInt(dated));
 
@@ -84,7 +86,9 @@ export class ScoreComponent implements OnInit {
                 this.graph$[i].Datetime = time;
             }
             this.getAverage();
+        }
         })
+        
 
 
 }
