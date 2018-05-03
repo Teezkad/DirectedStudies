@@ -70,8 +70,7 @@ export class profileComponent implements OnInit {
           };
           this.routerExtensions.navigate(["Score"], navigationExtras);
     }
-
-    deleteClass(){
-
-    }
+    deleteClass(room: Classroom){
+        this.firebaseService1.deleteMyclass(room);
+          }
 }

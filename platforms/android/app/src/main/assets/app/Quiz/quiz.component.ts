@@ -32,7 +32,7 @@ export class QuizComponent implements OnInit {
     public options = [];
     public question;
     public option = [];
-    public no = 0;
+    public no = 1;
     public length;
     public selectedIndex;
     public score = 0;

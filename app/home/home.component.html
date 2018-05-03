@@ -54,10 +54,10 @@
                         <ListView [items]="myclassrooms$ | async"  height="300">
                             <ng-template let-item="item">                  
                                 <StackLayout columns="auto,*,auto">
-                                        <Label class="classDescription"  col="1" [text]='item.ClassName + " Year: "+ item.Year'></Label>
+                                        <Label class="classDescription"  col="1" [text]='"Class Name: "+item.ClassName + " Year: "+ item.Year'></Label>
                                         <label class = "classDescription" [text] = '"Created by: "+ item.Professor'></label>
                                         <button class = "button-view" text="Enter Class" (tap) = "activateClass(item.CID, item.ClassName, item.UID)"></button>
-                                        <button class = "button-view" text="Unregister Class" (tap) = "deleteClass(item)"></button>
+                                        <Image  class="m-5" col="2" horizontalAlignment="right" width="40" height="40" (tap)="deleteClass(item)" [src]="'~/assets/trash.png'"></Image>
 
                                     </StackLayout>                 
                             </ng-template>

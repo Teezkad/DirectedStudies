@@ -653,7 +653,7 @@ export class FirebaseService {
     return firebase.push(
       "/Questions",
     {"Name": name, "Tags": tags, "Option": options,"UID":BackendService.Uid, "TopicID": TID, 
-    "ClassID": BackendService.CID, "Fixed": false})
+    "ClassID": BackendService.CID, "Fixed": false, "StudentNum": BackendService.studentNum, "By": BackendService.Uname})
     .then(
       function(result:any){
         return 'Question Created and Uploaded';

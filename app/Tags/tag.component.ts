@@ -35,7 +35,7 @@ export class Tag {
 export class tagComponent{
 
    public tag : Tag;
-   public instructor: boolean;
+   public instructor = false;
 
    constructor(private routerExtensions: RouterExtensions,
     private firebaseService: FirebaseService,
@@ -43,7 +43,7 @@ export class tagComponent{
     ) {
         this.tag = new Tag();
             //this.create.id = 0;
-            this.tag.name= "";
+            this.tag.name;
             this.tag.CID= BackendService.CID;
             this.tag.questions= [];
            // this.create.UID = BackendService.token;

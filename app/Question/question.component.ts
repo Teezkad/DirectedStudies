@@ -48,22 +48,22 @@ export class questionComponent{
         })
 
         this.option1 = new Options();
-            this.option1.name = "";
+            this.option1.name;
             this.option1.questionId ;
             this.option1.isAnswer = false;
 
             this.option2 = new Options();
-            this.option2.name = "";
+            this.option2.name;
             this.option2.questionId;
             this.option2.isAnswer = false;
 
             this.option3 = new Options();
-            this.option3.name = "";
+            this.option3.name;
             this.option3.questionId;
             this.option3.isAnswer = false;
 
             this.option4 = new Options();
-            this.option4.name = "";
+            this.option4.name;
             this.option4.questionId ;
             this.option4.isAnswer = false;
 

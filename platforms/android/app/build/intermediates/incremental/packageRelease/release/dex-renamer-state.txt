@@ -1,4 +1,0 @@
-#Thu May 03 09:15:13 PDT 2018
-base.0=C\:\\Users\\kadir\\dirproto5\\platforms\\android\\app\\build\\intermediates\\transforms\\dex\\release\\0
-path.0=classes.dex
-renamed.0=classes.dex

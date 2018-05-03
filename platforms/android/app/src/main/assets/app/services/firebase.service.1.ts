@@ -170,6 +170,11 @@ export class FirebaseService1 {
       .catch(this.handleErrors);
   } 
 
+  deleteMyclass(classroom: Classroom) {
+    return firebase.remove("/Users/"+BackendService.Uid+"/MyClasses/"+classroom.id)
+      .catch(this.handleErrors);
+  } 
+
   deleteQuestion(question: Question){
     return firebase.remove("/Questions/"+question.id+"")
     .catch(this.handleErrors);

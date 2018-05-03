@@ -68,13 +68,13 @@ export class topicQuestionComponent implements OnInit {
         this.firebaseService1.deleteQuestion(question);
     }
 
-    createQuestion(tname: string, tid: string ){
+    createQuestion(){
         
         
         let navigationExtras: NavigationExtras = {
         queryParams: {
-            "Tid": tid,
-            "Tname": tname
+            "Tid": this.tid,
+            "Tname": this.topicname
         }
       };
       this.routerExtensions.navigate(["question"], navigationExtras);

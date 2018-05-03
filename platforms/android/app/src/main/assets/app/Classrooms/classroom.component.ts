@@ -62,11 +62,17 @@ export class classroomComponent {
     }
 
 submit(){
+
+    if(this.cLength == 0){
+        this.validName = true;
+    }
     for(var i =0; i<this.cLength; i++){
         if(this.allClass[i].Name == this.create.name){
             this.validName = false;
-        }else{
+
+        }else if(this.addClass== null || this.allClass[i].Name == this.create.name){
             this.validName = true;
+            console.log("Valid class name");
         }
     }
 
@@ -74,6 +80,7 @@ submit(){
 }
 
 addClass(){
+    console.log("Valid name is " + this.validName);
     if(this.validName == true){
     this.firebaseService.addClassroom(this.create.id, this.create.name, this.create.professor,
         this.create.institution,  this.create.members, this.create.classCode, this.create.year, 

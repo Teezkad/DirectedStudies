@@ -1,5 +1,5 @@
 <ActionBar class="action-bar">
-    <Label class="action-bar-title" [text]=' topicname + "Questions"' (tap) = "ngOnInit()"></Label>
+    <Label class="action-bar-title" [text]=' topicname + " Questions"' (tap) = "ngOnInit()"></Label>
 </ActionBar>
    
         <GridLayout class="page page-content" tkMainContent>
@@ -19,7 +19,7 @@
                                                 <Label *ngIf = "option.isAnswer == false" class = "h4" textWrap = "true" col = "1" [text] = "in + '. '+option.name + '('+option.isAnswer+')' "></Label>
                                                 <Label *ngIf = "option.isAnswer == true; let tru = in" class = "h3" textWrap = "true" col = "1" [text] = "in + '. '+option.name + '('+option.isAnswer+')' "></Label>
                                         </GridLayout>
-                                        <Label class = "h4" [text] = "'For Topic ' + item.Tags+ '. Answer is '+ tru"></Label>
+                                        <Label class = "h4" [text] = "'For Topic ' + item.Tags"></Label>
                                         <Label textWrap = "true" [text] = "'Created by: ' + item.By+ ', Student Number: ' + item.StudentNum"></Label>
                                         <!-- <Label class="h3 header"  col="1" [text]='item.FirstName'></Label> -->
                                 <!-- <Image class="m-5" col="2" horizontalAlignment="right" width="40" height="40" (tap)="delete(item)" [src]="'~/assets/trash.png'"></Image> -->
@@ -29,7 +29,8 @@
                             </StackLayout>
                                 </ng-template>
                             </ListView>
-                            <button *ngIf = "creatorId == true || isTA == true" height = "60" width = "150" style = "background-color : rgb(10, 202, 10); color :white " text = "Create a Question" class="btnIcon" (tap)="createQuestion(item.Name, item.id)"></button>
+                            <button *ngIf = "creatorId == true || isTA == true" height = "60" width = "150" style = "background-color : rgb(10, 202, 10); color :white " text = "Create a Question" class="btnIcon" (tap)="createQuestion()"></button>
                     </StackLayout>
+
             </GridLayout>
     

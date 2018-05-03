@@ -221,7 +221,7 @@ export class HomeComponent implements OnInit {
   } 
 
   deleteClass(room: Classroom){
-this.firebaseService1.delete(room);
+this.firebaseService1.deleteMyclass(room);
   }
       
 
