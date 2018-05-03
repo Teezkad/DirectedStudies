@@ -1,9 +1,9 @@
 {
-	"time": "Wed May 02 2018 20:31:20 GMT-0700 (Pacific Daylight Time)",
+	"time": "Wed May 02 2018 21:20:57 GMT-0700 (Pacific Daylight Time)",
 	"nativePlatformStatus": "3",
 	"bundle": false,
-	"release": true,
-	"changesRequireBuild": true,
+	"release": false,
+	"changesRequireBuild": false,
 	"projectFileHash": "bb01afe67ae7d21c6a0e3ee90872487780ae9144723c01524e9a35a3916041d1",
-	"changesRequireBuildTime": "Wed May 02 2018 20:31:20 GMT-0700 (Pacific Daylight Time)"
+	"changesRequireBuildTime": "Wed May 02 2018 21:02:59 GMT-0700 (Pacific Daylight Time)"
 }
