@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "322940339236",
+    "firebase_url": "https://quizroom-4493b.firebaseio.com",
+    "project_id": "quizroom-4493b",
+    "storage_bucket": "quizroom-4493b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:322940339236:android:98a1bcc0d2522bf3",
+        "android_client_info": {
+          "package_name": "com.directed.quizroom"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "322940339236-11dr708fs5g14so7mbp4e7mu35oau87a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1C6l-CfcDXjEgipJyu_jJcq0wz2zfPQU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
