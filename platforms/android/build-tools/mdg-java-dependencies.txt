@@ -64,4 +64,4 @@ C:\Users\kadir\dirproto5\platforms\android\app\build\exploded-dependencies\66\co
 C:\Users\kadir\dirproto5\platforms\android\app\build\exploded-dependencies\7\classes.jar
 C:\Users\kadir\dirproto5\platforms\android\app\build\exploded-dependencies\8\classes.jar
 C:\Users\kadir\dirproto5\platforms\android\app\build\exploded-dependencies\9\classes.jar
-C:\Users\kadir\dirproto5\platforms\android\app\build\intermediates\classes\debug
+C:\Users\kadir\dirproto5\platforms\android\app\build\intermediates\classes\release
