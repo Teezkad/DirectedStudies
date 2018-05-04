@@ -1,4 +1,9 @@
 {
+<<<<<<< HEAD
 	"prepareTime": "Thu May 03 2018 15:19:03 GMT-0700 (Pacific Daylight Time)",
 	"buildTime": "Thu May 03 2018 15:22:05 GMT-0700 (Pacific Daylight Time)"
+=======
+	"prepareTime": "Sat Apr 07 2018 17:06:58 GMT-0700 (Pacific Daylight Time)",
+	"buildTime": "Sat Apr 07 2018 17:08:48 GMT-0700 (Pacific Daylight Time)"
+>>>>>>> fd2fda5f77cc179161a237313fc4d1e4517647a6
 }

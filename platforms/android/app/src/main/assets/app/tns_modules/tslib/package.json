@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "_args": [
     [
       "tslib@1.9.0",
@@ -6,12 +7,16 @@
     ]
   ],
   "_from": "tslib@1.9.0",
+=======
+  "_from": "tslib",
+>>>>>>> fd2fda5f77cc179161a237313fc4d1e4517647a6
   "_id": "tslib@1.9.0",
   "_inBundle": false,
   "_integrity": "sha512-f/qGG2tUkrISBlQZEjEqoZ3B2+npJjIf04H1wuAv9iA8i04Icp+61KRXxFdha22670NJopsZCIjhC3SnjPRKrQ==",
   "_location": "/tslib",
   "_phantomChildren": {},
   "_requested": {
+<<<<<<< HEAD
     "type": "version",
     "registry": true,
     "raw": "tslib@1.9.0",
@@ -20,8 +25,20 @@
     "rawSpec": "1.9.0",
     "saveSpec": null,
     "fetchSpec": "1.9.0"
+=======
+    "type": "tag",
+    "registry": true,
+    "raw": "tslib",
+    "name": "tslib",
+    "escapedName": "tslib",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+>>>>>>> fd2fda5f77cc179161a237313fc4d1e4517647a6
   },
   "_requiredBy": [
+    "#USER",
+    "/",
     "/@angular/animations",
     "/@angular/common",
     "/@angular/compiler",
@@ -35,7 +52,12 @@
     "/tsutils"
   ],
   "_resolved": "https://registry.npmjs.org/tslib/-/tslib-1.9.0.tgz",
+<<<<<<< HEAD
   "_spec": "1.9.0",
+=======
+  "_shasum": "e37a86fda8cbbaf23a057f473c9f4dc64e5fc2e8",
+  "_spec": "tslib",
+>>>>>>> fd2fda5f77cc179161a237313fc4d1e4517647a6
   "_where": "C:\\Users\\kadir\\dirproto5",
   "author": {
     "name": "Microsoft Corp."

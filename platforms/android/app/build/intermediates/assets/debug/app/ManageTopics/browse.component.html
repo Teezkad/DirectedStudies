@@ -1,0 +1,118 @@
+<ActionBar class="action-bar">
+    <!-- 
+    Use the NavigationButton as a side-drawer button in Android because ActionItems are shown on the right side of the ActionBar
+    -->
+    <NavigationButton ios:visibility="collapsed" icon="res://menu" (tap)="onDrawerButtonTap()"></NavigationButton>
+    <!-- 
+    Use the ActionItem for IOS with position set to left. Using the NavigationButton as a side-drawer button in iOS is not possible, because its function is to always navigate back in the application.
+    -->
+    <ActionItem icon="res://navigation/menu" android:visibility="collapsed" (tap)="onDrawerButtonTap()"
+        ios.position="left">
+    </ActionItem>
+    <Label class="action-bar-title" [text]="'Manage '+ Cname"></Label>
+</ActionBar>
+
+<RadSideDrawer #drawer showOverNavigation="true" [drawerTransition]="sideDrawerTransition">
+    <!--
+    Use the tkDrawerContent directive to display the content of the app drawer on this page.
+    -->
+    <StackLayout tkDrawerContent>
+        <MyDrawer [selectedPage]="'Browse'"></MyDrawer>
+    </StackLayout>
+    
+    <!--
+    Use the tkMainContent directive to display the content of the page when you have an app drawer.
+    -->
+    <GridLayout class="page page-content" tkMainContent>
+        
+            <TabView #tabview>
+                <StackLayout class="form" *tabItem="{title: 'Topics'}">
+
+                    <StackLayout *ngIf = "(tags$ | async)?.length==0"  class="page page-content">
+                        <label text = "There are no Topics for this class yet, Click the button to create"></label>
+                     </StackLayout>
+                 <StackLayout>
+                    <Label class="h2 header" horizontalAlignment = "center" text="All Topics"></Label>
+                <ListView row = "5" [items]="tags$ | async"  height="300">
+                    <ng-template let-item="item">                  
+                        <GridLayout columns="auto,*,auto">
+                                <Label class="h3 header"  col="1" [text]='item.Name'></Label>
+                                <button  col="1" text = "View Questions" horizontalAlignment="center" width="90" height="40" (tap)= "viewQuestions(item.id, item.Name)"></button>
+                            <Image class="m-5" col="2" horizontalAlignment="right" width="40" height="40" (tap)="delete(item)" [src]="'~/assets/trash.png'"></Image>
+                        </GridLayout>                 
+                    </ng-template>
+                </ListView>
+                <button class = "button-primary"  *ngIf = "creatorId == true" text=" Create Topics" (tap) = "navTag()"></button>
+            </StackLayout>
+
+            </StackLayout>
+
+            
+            <StackLayout *tabItem = "{title:'Users'}"  class="form">        
+                <StackLayout *ngIf = "(users$ | async)?.length==0"  class="page page-content">
+                    <label text = "There are no Users in this Classroom"></label>
+                </StackLayout>
+
+                <StackLayout>
+                    <Label class="h2 header" horizontalAlignment = "center" text="Users in Class"></Label>
+                        <ListView *ngIf = "creatorId == true" row = "5" [items]="users$ | async"  height="800" class = "listview">
+                            <ng-template let-item="item" class = "listview">  
+                                <StackLayout>             
+                                <GridLayout columns="auto,*,auto">
+                                    <Label textWrap = "true" class="h3 header"  col="1" [text]='item.FirstName + " " + item.LastName '></Label>
+                                    <!-- <Label class="h3 header"  col="1" [text]='item.FirstName'></Label> -->
+                            <!-- <Image class="m-5" col="2" horizontalAlignment="right" width="40" height="40" (tap)="delete(item)" [src]="'~/assets/trash.png'"></Image> -->
+                                </GridLayout> 
+                        <GridLayout>
+                                <GridLayout>
+                                        <button class = "button-user" text = "View User" (tap) = "viewUser(item.KEY, item.FirstName, item.LastName)"></button>
+                                        <button class = "button-remove" text = "Remove User" (tap) = "removeUser(item.id)"></button>
+                                </GridLayout> 
+                                <GridLayout>
+                                        <button class = "button-upgrade" *ngIf = "item.TA != true" text = "Upgrade User" (tap) = "upgradeUser(item.FirstName, item.LastName, item.id, item.UID)"></button>
+                                        <button class = "button-downgrade" *ngIf = "item.TA == true" text = "Downgrade User" (tap) = "downgradeUser(item.FirstName, item.LastName,item.id, item.TAkey)"></button>
+                                </GridLayout>
+                        </GridLayout> 
+                            </StackLayout>                 
+                            </ng-template>
+                        </ListView>
+                </StackLayout>
+            </StackLayout>
+
+            <StackLayout *tabItem = "{title:'Review Questions'}"  class="form">        
+
+
+                <StackLayout>
+                    <Label class="h2 header" col = "2" horizontalAlignment = "center" text="Review Questions"></Label>
+                    <StackLayout *ngIf = "(requests$ | async)?.length==0"  class="page page-content">
+                            <label text = "There are no question requests"></label>
+                        </StackLayout>
+                        <ListView row = "5" [items]="requests$ | async"  height="800">
+                            <ng-template let-item="item" class = "listview">                  
+                                <StackLayout columns="auto,*,auto">
+                                    <Label textWrap = "true" class="h2 header"  col="1" [text]="'Question: ' + item.Name"></Label>
+                                    <GridLayout *ngFor = "let option of item.Option; let in = index" columns="auto,*,auto" >
+                                            <Label *ngIf = "option.isAnswer == false" class = "h4" textWrap = "true" col = "1" [text] = "in + '. '+option.name + '('+option.isAnswer+')' "></Label>
+                                            <Label *ngIf = "option.isAnswer == true; let tru = in" class = "h3" textWrap = "true" col = "1" [text] = "in + '. '+option.name + '('+option.isAnswer+')' "></Label>
+                                    </GridLayout>
+                                    <Label class = "h4" [text] = "'For Topic ' + item.Tags+ '. Answer is '+ tru"></Label>
+                                    <Label textWrap = "true" [text] = "'Created by: ' + item.By+ ', Student Number: ' + item.StudentNum"></Label>
+                                    <!-- <Label class="h3 header"  col="1" [text]='item.FirstName'></Label> -->
+                            <!-- <Image class="m-5" col="2" horizontalAlignment="right" width="40" height="40" (tap)="delete(item)" [src]="'~/assets/trash.png'"></Image> -->
+                            <StackLayout>
+                                    <button class = "add" width = "90" height = "70" text = "Add Question" (tap) = "addQuestion(item, item.name, item.Tags, item.TopicID, item.options, item.UID)"></button>
+                                    <button  width = "60" height = "70" text = "Suggest Fix"></button>
+                                </StackLayout>   
+                                
+                                
+                        </StackLayout>
+                            </ng-template>
+                        </ListView>
+                </StackLayout>
+            </StackLayout>
+
+
+</TabView>
+    </GridLayout>
+
+</RadSideDrawer>

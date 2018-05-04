@@ -37,6 +37,7 @@ C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\models\Classr
 C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\models\index.js
 C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\models\Options.model.js
 C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\models\Question.js
+C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\models\TA.model.js
 C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\models\User.model.js
 C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\Question\question.component.js
 C:\Users\kadir\dirproto5\platforms\android\app\src\main\assets\app\Question\question.module.js

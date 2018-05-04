@@ -34,7 +34,6 @@ export class HomeComponent implements OnInit {
         ) {   
         } 
 
-    public users$: Observable<any>;
     public classrooms$: Observable<any>;
     public myclassrooms$: Observable<any>;
     public myClass;
@@ -57,6 +56,7 @@ export class HomeComponent implements OnInit {
     /* ***********************************************************
     * Use the sideDrawerTransition property to change the open/close animation of the drawer.
     *************************************************************/
+<<<<<<< HEAD
     ngOnInit(): void {
         BackendService.TA == false;
         BackendService.instructor = false;
@@ -73,6 +73,23 @@ export class HomeComponent implements OnInit {
         console.log("My uid is"+ BackendService.Uid);
         console.log("Login successful");
        
+=======
+   async ngOnInit(){
+        BackendService.TA = false;
+        BackendService.instructor = false;
+        this._sideDrawerTransition = new SlideInOnTopTransition();
+        this.classrooms$ = await <any>this.firebaseService.getAllClassList();
+       
+        if(this.classrooms$ == null){ 
+
+
+        console.log("Returning null observables for all classrooms");
+    }else if (this.myclassrooms$ == null){
+        console.log("Null observables for my classes");
+    }
+    else{
+        this.myclassrooms$ = await <any>this.firebaseService.getMyClassList();
+>>>>>>> fd2fda5f77cc179161a237313fc4d1e4517647a6
 
         this.myclassrooms$.subscribe( my =>{ 
             this.len = my.length;
@@ -85,11 +102,14 @@ export class HomeComponent implements OnInit {
             this.leng = clas.length;
             this.showclasses();
         })
+<<<<<<< HEAD
 
        var user = firebase.fetchProvidersForEmail("kadiri@gmail.com");
        console.log("Firebase return for real user is "+ JSON.stringify(user));
        var user2 = firebase.fetchProvidersForEmail("BHILGYUIK@gmail.com");
        console.log("Firebase return for fake user is "+ JSON.stringify(user2))
+=======
+>>>>>>> fd2fda5f77cc179161a237313fc4d1e4517647a6
     }
 
     public refreshMe(args: any) {
@@ -105,6 +125,7 @@ export class HomeComponent implements OnInit {
             this.ngOnInit();
         }
         for (var i = 0; i< this.leng; i++){
+            this.allClass1 = this.allClass1;
             var all = JSON.parse(JSON.stringify(this.allClass1[i].ID));
             for (var j = 0; j < this.len; j++){
                 var my = JSON.parse(JSON.stringify(this.myClass[j].ID));
@@ -152,9 +173,13 @@ export class HomeComponent implements OnInit {
    
         console.log("Classroom successfully registered");
       });
+<<<<<<< HEAD
 
       this.firebaseService.userRegister(id, Cname, Prof, Year, uid, ID);
       this.ngOnInit();
+=======
+      this.ngOnInit(); 
+>>>>>>> fd2fda5f77cc179161a237313fc4d1e4517647a6
     }
 
 
@@ -211,6 +236,7 @@ export class HomeComponent implements OnInit {
           alert("Classroom does not exist");
       }
         }
+<<<<<<< HEAD
 
 
    delete(tag: Tag) {
@@ -223,6 +249,9 @@ export class HomeComponent implements OnInit {
   deleteClass(room: Classroom){
 this.firebaseService1.deleteMyclass(room);
   }
+=======
+ 
+>>>>>>> fd2fda5f77cc179161a237313fc4d1e4517647a6
       
 
   public onSubmit(args) {
