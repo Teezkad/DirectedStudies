@@ -21,6 +21,7 @@ https://www.dropbox.com/s/2men406irkm7nty/StudentQuizAndProfile.mp4?dl=0
 https://www.dropbox.com/s/jjjjwr1571zwl5m/TAnavigationOf%20The%20App.mp4?dl=0
 -       Instructors and TAs can review questions students submitted to check if they are appropriate
 https://www.dropbox.com/s/ohsdck1cesdg1w4/ReviewQuestionsAndSendMessage.mp4?dl=0
-
+-       Students recieve message from question reviewed by instructors and fix the question
+https://www.dropbox.com/s/sagrls2p233d5dg/studentrecievemessage.mp4?dl=0
 
 
